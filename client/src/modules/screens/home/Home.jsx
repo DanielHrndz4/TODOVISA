@@ -1,10 +1,11 @@
 import React from "react";
 import NavbarWithMegaMenu from "../navbar/Navbar";
 import About from "./About";
+import VIPRO from "./VIPRO";
 
 export default function Home() {
   return (
-    <main className="h-full w-full">
+    <main className="h-full w-full absolute">
       <NavbarWithMegaMenu />
       <div className="flex flex-col">
         <div
@@ -25,7 +26,12 @@ export default function Home() {
             <h1 className="text-white">TEXTO ALTERNATIVO TODOVISA</h1>
           </div>
         </div>
+
+        {/* About section */}
         <About></About>
+        <hr className="my-8"/>
+        {/* VIPRO form section */}
+        <VIPRO></VIPRO>
       </div>
     </main>
   );
