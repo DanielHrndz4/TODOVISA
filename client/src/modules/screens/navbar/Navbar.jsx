@@ -28,7 +28,8 @@ import {
   TagIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
- 
+import { Link } from "react-router-dom";
+
 const navListMenuItems = [
   {
     title: "Products",
@@ -76,7 +77,7 @@ const navListMenuItems = [
     icon: TagIcon,
   },
 ];
- 
+
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -110,7 +111,7 @@ function NavListMenu() {
       </a>
     ),
   );
- 
+
   return (
     <React.Fragment>
       <Menu
@@ -130,15 +131,13 @@ function NavListMenu() {
               Resources
               <ChevronDownIcon
                 strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
+                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""
+                  }`}
               />
               <ChevronDownIcon
                 strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
+                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""
+                  }`}
               />
             </ListItem>
           </Typography>
@@ -155,19 +154,21 @@ function NavListMenu() {
     </React.Fragment>
   );
 }
- 
+
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Home</ListItem>
-      </Typography>
+      <Link to="/">
+        <Typography
+          as="a"
+          href="#"
+          variant="small"
+          color="blue-gray"
+          className="font-medium"
+        >
+          <ListItem className="flex items-center gap-2 py-2 pr-4">Home</ListItem>
+        </Typography>
+      </Link>
       <NavListMenu />
       <Typography
         as="a"
@@ -183,38 +184,46 @@ function NavList() {
     </List>
   );
 }
- 
+
 export default function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = React.useState(false);
- 
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false),
     );
   }, []);
- 
+
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-4 py-2">
-      <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5 lg:ml-2"
-        >
-          Material Tailwind
-        </Typography>
-        <div className="hidden lg:block">
-          <NavList />
-        </div>
-        <div className="hidden gap-2 lg:flex">
-          <Button variant="text" size="sm" color="blue-gray">
-            Log In
-          </Button>
-          <Button variant="gradient" size="sm">
-            Sign In
-          </Button>
+    <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-4 rounded-none fixed top-0 left-0 right-0 z-50" >
+      <div className="w-[80%] m-auto flex items-center justify-between text-blue-gray-900">
+        <Link to="/">
+          <Typography
+            as="a"
+            href="#"
+            variant="h6"
+            className="mr-4 cursor-pointer py-1.5 lg:ml-2"
+          >
+            TODOVISA
+          </Typography>
+        </Link>
+        <div className="flex flex-row gap-8">
+          <div className="hidden lg:block">
+            <NavList />
+          </div>
+          <div className="hidden gap-4 lg:flex">
+            <Link to="/signin">
+              <Button variant="text" size="md" color="black">
+                Iniciar sesión
+              </Button>
+            </Link>
+            <Link to="signup">
+              <Button variant="gradient" size="md">
+                Registrarse
+              </Button>
+            </Link>
+          </div>
         </div>
         <IconButton
           variant="text"

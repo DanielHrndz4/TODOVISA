@@ -16,7 +16,7 @@ export default function Login() {
         <Fade cascade damping={0.1} className="w-auto px-28 h-full">
           <div className="flex flex-col h-screen py-8">
             <div className="m-auto">
-              <h1>TODO VISA</h1>
+            <Link to="/"><h1>TODO VISA</h1></Link>
             </div>
             <Card
               color="transparent"

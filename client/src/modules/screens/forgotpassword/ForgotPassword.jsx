@@ -11,7 +11,7 @@ export default function ForgotPassword() {
         <main className="rounded-[30px] bg-gray-200 flex flex-row flex-grow items-center justify-center min-h-screen">
       <div className="flex flex-col h-screen py-8">
         <div className="m-auto ">
-          <h1>TODO VISA</h1>
+        <Link to="/"><h1>TODO VISA</h1></Link>
         </div>
         <Fade cascade damping={0.1} className="w-auto px-28 h-full">
           <Card
