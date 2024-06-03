@@ -1,16 +1,19 @@
 import React from "react";
-import GoogleMapReact from 'google-map-react';
-import { Slide, Fade } from "react-awesome-reveal"
+import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { Slide, Fade } from "react-awesome-reveal";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-export default function YourComponent() {
+export default function MapComponent() {
   const defaultProps = {
     center: {
       lat: 10.99835602,
       lng: 77.01502627
     },
     zoom: 11
+  };
+
+  const position = {
+    lat: 10.99835602,
+    lng: 77.01502627
   };
 
   return (
@@ -24,7 +27,6 @@ export default function YourComponent() {
           <span>2</span>
           <span>3</span>
           <span>4</span>
-
         </div>
       </div>
 
@@ -32,17 +34,11 @@ export default function YourComponent() {
         <div className="w-full h-full flex flex-col mx-auto text-black">
           <h1 className="text-3xl font-bold text-center pb-8">Nuestra ubicación</h1>
           <div style={{ height: '300px', width: '100%' }}>
-            <GoogleMapReact
-              bootstrapURLKeys={{ key: "" }}
-              defaultCenter={defaultProps.center}
-              defaultZoom={defaultProps.zoom}
-            >
-              <AnyReactComponent
-                lat={59.955413}
-                lng={30.337844}
-                text="My Marker"
-              />
-            </GoogleMapReact>
+            <APIProvider apiKey={'AIzaSyCkW8tRmEUc7bTe9UKossrKpVb-kmxQ18g'}>
+              <Map defaultCenter={defaultProps.center} defaultZoom={defaultProps.zoom}>
+                <Marker position={position} />
+              </Map>
+            </APIProvider>
           </div>
         </div>
       </Fade>

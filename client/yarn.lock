@@ -857,6 +857,11 @@
   resolved "https://registry.npmjs.org/@types/estree/-/estree-1.0.5.tgz"
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
 
+"@types/google.maps@^3.54.10":
+  version "3.55.9"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.55.9.tgz#3bbe1d044d9b999392a359fb37b0de2545ac53c4"
+  integrity sha512-phaOMtezbT3NaXPKiI3m0OosUS7Nly0auw3Be5s/CgMWLVoDAUP1Yb/Ld0TRoRp8ibrlT4VqM5kmzfvUA0UNLQ==
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.6"
   resolved "https://registry.npmjs.org/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.6.tgz"
@@ -949,6 +954,14 @@
   integrity sha512-Yy19y6O2GJq8f7CHf7L0nxL8bf4PZCPaVOCgJrusOeFHY1LvHgYXnmnXg6N5iwAnbgbZCDjo60SiM6IPJi9C5g==
   dependencies:
     "@use-gesture/core" "10.3.1"
+
+"@vis.gl/react-google-maps@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@vis.gl/react-google-maps/-/react-google-maps-1.0.2.tgz#ae3d0f443d5d92ce6c7ecc78a941920e7a5fafed"
+  integrity sha512-/hmaX2J+IuRC+TgnRpWhd5biQlb88zsYUZ5y/mRpcBsAtNr/ZTHtXGjlAWbvE+z56ldjaboCie7IeKg+5lKNww==
+  dependencies:
+    "@types/google.maps" "^3.54.10"
+    fast-deep-equal "^3.1.3"
 
 "@vitejs/plugin-react@^4.2.1":
   version "4.3.0"

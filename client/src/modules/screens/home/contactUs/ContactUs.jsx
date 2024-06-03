@@ -5,7 +5,7 @@ import Map from "../../../components/map/Map";
 
 export default function ContactUs() {
     return (
-        <div className="flex flex-col h-full mb-4">
+        <div className="flex flex-col h-full bg-TVsecondaryColor" id="contactus">
             <h1 className="w-full pt-4 pb-8 text-4xl font-bold text-center">Contáctanos</h1>
             <div className="flex flex-row gap-12 h-full z-100 relative w-full lg:w-[85%] m-auto">
                 <div className="w-full lg:w-1/2 flex justify-center items-end flex-col py-8">

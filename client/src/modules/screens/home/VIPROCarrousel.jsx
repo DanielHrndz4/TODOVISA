@@ -44,7 +44,7 @@ function VIPROCarrousel() {
   };
 
   return (
-    <div className="w-full bg-TVsecondaryColor py-8">
+    <div className="w-full bg-TVsecondaryColor py-8" id="services">
       <div className="slider-container w-[90%] mx-auto">
       <Slider {...settings} className="flex gap-4">
         <Fade><div className="mx-2">
