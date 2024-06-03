@@ -1,9 +1,20 @@
 import React from "react";
 import NavbarWithMegaMenu from "../navbar/Navbar";
 import About from "./About";
-import VIPRO from "./VIPRO";
+import VIPROCarrousel from "./VIPROCarrousel";
+import Footer from "../footer/Footer";
+import { FloatingWhatsApp } from 'react-floating-whatsapp'
+import ContactUs from "./contactUs/ContactUs";
 
 export default function Home() {
+  const WAsettings = {
+    phoneNumber: "50371985205",
+    accountName: "Todovisa",
+    placeholder: "Escribe un mensaje",
+    avatar: "/img/logo/todovisaLogo.jpg",
+    chatMessage: "¡Hola! 👋 \nBienvenido a Todovisa.\n¿En qué podemos ayudarte hoy? 😊",
+    statusMessage: "En linea"
+  };
   return (
     <main className="h-full w-full absolute">
       <NavbarWithMegaMenu />
@@ -29,9 +40,19 @@ export default function Home() {
 
         {/* About section */}
         <About></About>
-        <hr className="my-8"/>
-        {/* VIPRO form section */}
-        <VIPRO></VIPRO>
+        <hr className="my-8" />
+        {/* VIPROCarrousel section */}
+        <VIPROCarrousel></VIPROCarrousel>
+        <hr className="my-8" />
+        {/* Contact Us form */}
+        <ContactUs></ContactUs>
+        <hr className="my-8" />
+        {/* Footer section */}
+        <Footer></Footer>
+
+        <FloatingWhatsApp
+          {...WAsettings}
+        />
       </div>
     </main>
   );
