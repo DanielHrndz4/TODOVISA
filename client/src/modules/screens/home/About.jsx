@@ -12,9 +12,9 @@ export default function About() {
                 <Fade className="w-full flex flex-col py-8 mx-auto text-black">
                 <div className="w-full flex flex-col py-8 mx-auto text-black">
                     <div className="w-[90%] py-8 px-6">
-                    <div className="py-4"><h1 className="text-3xl">Title</h1></div>
-                    <div className="py-4"><h2 className="text-2xl">Subtitle</h2></div>
-                    <div className="pb-6"><p className="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident corporis vel eum laudantium eveniet sapiente! Quisquam iusto voluptatum provident eos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod suscipit animi saepe nostrum tempore magnam eaque consequatur doloremque, cum ipsum!</p></div>
+                    <div className="py-4"><h1 className="text-3xl">Abre las puertas a un mundo de posibilidades</h1></div>
+                    <div className="py-4"><h2 className="text-2xl">Simplificamos el proceso de solicitud de visa para que puedas cumplir tus sueños de viajar.</h2></div>
+                    <div className="pb-6"><p className="text-justify">Somos un equipo de expertos en visas con una amplia experiencia en el proceso de solicitud de visas para todo tipo de destinos. Nos apasiona ayudar a las personas a cumplir sus sueños de viajar y explorar el mundo.</p></div>
                     <div className="grid grid-cols-2">
                         <span>1</span>
                         <span>2</span>

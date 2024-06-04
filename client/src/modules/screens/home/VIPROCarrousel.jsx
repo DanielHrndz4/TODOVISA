@@ -44,71 +44,71 @@ function VIPROCarrousel() {
   };
 
   return (
-    <div className="w-full bg-TVsecondaryColor py-8" id="services">
+    <div className="w-full bg-TVBlue py-10" id="services">
       <div className="slider-container w-[90%] mx-auto">
       <Slider {...settings} className="flex gap-4">
         <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred">Accion</Button>
           </div>
         </div></Fade>
         

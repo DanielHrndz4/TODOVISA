@@ -95,7 +95,7 @@ function NavListMenu() {
           <div>
             <Typography
               variant="h6"
-              color="blue-gray"
+              color="white"
               className="flex items-center text-sm font-bold"
             >
               {title}
@@ -122,7 +122,7 @@ function NavList() {
         as="a"
         href="#about"
         variant="small"
-        color="blue-gray"
+        color="white"
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
@@ -134,7 +134,7 @@ function NavList() {
         as="a"
         href="#services"
         variant="small"
-        color="blue-gray"
+        color="white"
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
@@ -145,7 +145,7 @@ function NavList() {
         as="a"
         href="#services"
         variant="small"
-        color="blue-gray"
+        color="white"
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
@@ -156,7 +156,7 @@ function NavList() {
         as="a"
         href="#contactus"
         variant="small"
-        color="blue-gray"
+        color="white"
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
@@ -178,8 +178,8 @@ export default function NavbarWithMegaMenu() {
   }, []);
 
   return (
-    <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-4 rounded-none fixed top-0 left-0 right-0 z-50">
-      <div className="w-[80%] m-auto flex items-center justify-between text-blue-gray-900">
+    <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVred">
+      <div className="w-[80%] m-auto flex items-center justify-between text-white">
         <Link to="/">
           <Typography
             as="a"
@@ -187,7 +187,7 @@ export default function NavbarWithMegaMenu() {
             variant="h6"
             className="mr-4 cursor-pointer py-1.5 lg:ml-2"
           >
-            TODOVISA
+            <img src="/img/logo/todovisa.png" alt="" className="w-[90px]"/>
           </Typography>
         </Link>
         <div className="flex flex-row gap-8">
@@ -196,12 +196,12 @@ export default function NavbarWithMegaMenu() {
           </div>
           <div className="hidden gap-4 lg:flex">
             <Link to="/signin">
-              <Button variant="text" size="md" color="black">
+              <Button variant="text" size="md" color="white" className="shadowbtn">
                 Iniciar sesión
               </Button>
             </Link>
             <Link to="signup">
-              <Button variant="gradient" size="md">
+              <Button variant="gradient" size="md" className="shadowbtn">
                 Registrarse
               </Button>
             </Link>
@@ -209,7 +209,7 @@ export default function NavbarWithMegaMenu() {
         </div>
         <IconButton
           variant="text"
-          color="blue-gray"
+          color="white"
           className="lg:hidden"
           onClick={() => setOpenNav(!openNav)}
         >
@@ -223,7 +223,7 @@ export default function NavbarWithMegaMenu() {
       <Collapse open={openNav}>
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
+          <Button variant="outlined" size="sm" color="white" fullWidth>
             Log In
           </Button>
           <Button variant="gradient" size="sm" fullWidth>

@@ -3,20 +3,16 @@ import { Typography } from "@material-tailwind/react";
 export default function Footer() {
   let currentYear = new Date().getFullYear();
   return (
-    <footer className="w-full bg-TVsecondaryColor p-10 mt-4">
+    <footer className="w-full bg-TVBlue p-10 pt-8 mt-4">
       <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-around">
-        <img
-          src="https://docs.material-tailwind.com/img/logo-ct-dark.png"
-          alt="logo-ct"
-          className="w-10"
-        />
+      <img src="/img/logo/todovisa.png" alt="" className="w-[150px]"/>
         <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
           <li>
             <Typography
               as="a"
               href="#about"
-              color="blue-gray"
-              className="font-bold transition-colors hover:text-blue-500 focus:text-blue-500"
+              color="white"
+              className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
               Sobre nosotros
             </Typography>
@@ -25,8 +21,8 @@ export default function Footer() {
             <Typography
               as="a"
               href="#services"
-              color="blue-gray"
-              className="font-bold transition-colors hover:text-blue-500 focus:text-blue-500"
+              color="white"
+              className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
               Servicios
             </Typography>
@@ -35,8 +31,8 @@ export default function Footer() {
             <Typography
               as="a"
               href="#"
-              color="blue-gray"
-              className="font-bold transition-colors hover:text-blue-500 focus:text-blue-500"
+              color="white"
+              className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
               VIPRO
             </Typography>
@@ -45,14 +41,14 @@ export default function Footer() {
             <Typography
               as="a"
               href="#contactus"
-              color="blue-gray"
-              className="font-bold transition-colors hover:text-blue-500 focus:text-blue-500"
+              color="white"
+              className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
               Contáctanos
             </Typography>
           </li>
           <li>
-            <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
+            <div className="flex gap-4 text-white sm:justify-center">
               <Typography
                 as="a"
                 href="#"
@@ -107,9 +103,9 @@ export default function Footer() {
           </li>
         </ul>
       </div>
-      <hr className="my-6 border-TVsecondaryColor" />
+      <hr className="my-6 border-TVBlue" />
       <hr className="my-8 border-blue-gray-50" />
-      <Typography color="blue-gray" className="text-center font-bold">
+      <Typography color="white" className="text-center font-bold">
         &copy; {currentYear} TodoVisa S.A de C.V
       </Typography>
     </footer>

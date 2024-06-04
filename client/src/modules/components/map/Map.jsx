@@ -17,24 +17,27 @@ export default function MapComponent() {
   };
 
   return (
-    <div className="w-full flex flex-col pb-8 m-auto text-black">
+    <div className="w-full flex-col pb-8 m-auto text-white flex justify-center">
       <div className="w-full pb-8 px-6">
-        <div className="pb-4">
+        <div className="pb-4 w-full text-center">
           <h1 className="text-3xl">Horarios de atención</h1>
         </div>
-        <div className="grid grid-cols-1">
-          <span>1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>4</span>
+        <div class="grid grid-cols-1">
+          <span>Lunes: 8:30 a.m. – 6:00 p.m.</span>
+          <span>Martes: 8:30 a.m. – 6:00 p.m.</span>
+          <span>Miércoles: 8:30 a.m. – 6:00 p.m.</span>
+          <span>Jueves: 8:30 a.m. – 6:00 p.m.</span>
+          <span>Viernes: 8:30 a.m. – 6:0  p.m.</span>
+          <span>Sábado: 9:00 a.m. – 5:00 p.m.</span>
+          <span>Domingo: Cerrado</span>
         </div>
       </div>
 
       <Fade bottom>
-        <div className="w-full h-full flex flex-col mx-auto text-black">
-          <h1 className="text-3xl font-bold text-center pb-8">Nuestra ubicación</h1>
+        <div className="w-full h-full flex flex-col mx-auto text-white">
+          <h1 className="text-3xl font-bold text-center pb-8">Visítanos</h1>
           <div style={{ height: '300px', width: '100%' }}>
-            <APIProvider apiKey={'AIzaSyCkW8tRmEUc7bTe9UKossrKpVb-kmxQ18g'}>
+            <APIProvider apiKey={'AIzaSyCkW8tRmEUc7bTe9UKossrKpVb-kmxQ18g'} className="w-full">
               <Map defaultCenter={defaultProps.center} defaultZoom={defaultProps.zoom}>
                 <Marker position={position} />
               </Map>

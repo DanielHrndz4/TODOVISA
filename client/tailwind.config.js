@@ -9,8 +9,9 @@ module.exports = withMT({
   theme: {
     extend: {
       colors: {
-        "TVDarkBlue": '#151832', 
+        "TVBlue": '#113E5F', 
         "TVsecondaryColor": '#cccccc',
+        'TVred': '#B6122A'
       },
     },
   },

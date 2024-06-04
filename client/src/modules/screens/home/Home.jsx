@@ -35,20 +35,22 @@ export default function Home() {
             justifyContent: "center", // Center content horizontally if needed
           }}
         >
-          <div className="h-full w-full flex items-center justify-center">
-            <h1 className="text-white">TEXTO ALTERNATIVO TODOVISA</h1>
+          <div className="h-full w-full flex items-center justify-center flex-col gap-4">
+            <h1 className="text-white text-3xl">
+              ¡Abre las puertas al mundo!</h1>
+            <h1 className="text-white text-5xl">Todo Visa</h1>
           </div>
         </div>
 
         {/* About section */}
         <About></About>
-        <hr className="my-8" />
+        <hr className="my-8 bg-white" />
         {/* VIPROCarrousel section */}
         <VIPROCarrousel></VIPROCarrousel>
-        <hr className="my-8" />
+        <hr className="my-8 bg-white" />
         {/* VIPRO form section */}
         <About></About>
-        <hr className="my-8" />
+        <hr className="my-8 bg-white" />
         {/* Contact Us form */}
         <ContactUs></ContactUs>
         {/* Footer section */}
