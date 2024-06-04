@@ -176,9 +176,11 @@ export default function NavbarWithMegaMenu() {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+  
+  const colorRD = "#B6122A"
 
   return (
-    <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVred">
+    <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVBlue">
       <div className="w-[80%] m-auto flex items-center justify-between text-white">
         <Link to="/">
           <Typography
@@ -196,12 +198,12 @@ export default function NavbarWithMegaMenu() {
           </div>
           <div className="hidden gap-4 lg:flex">
             <Link to="/signin">
-              <Button variant="text" size="md" color="white" className="shadowbtn">
+              <Button variant="gradietrent" size="md" className="bg-TVred">
                 Iniciar sesión
               </Button>
             </Link>
             <Link to="signup">
-              <Button variant="gradient" size="md" className="shadowbtn">
+              <Button variant="gradietrent" size="md" className="bg-TVred">
                 Registrarse
               </Button>
             </Link>

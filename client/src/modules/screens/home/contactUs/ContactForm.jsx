@@ -44,7 +44,7 @@ export default function ContactForm() {
           </div>
 
         </div>
-        <Button className="mt-6" fullWidth>
+        <Button className="mt-6 bg-TVred" fullWidth>
           Enviar correo
         </Button>
       </form>
