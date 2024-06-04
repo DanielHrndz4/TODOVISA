@@ -20,5 +20,5 @@
 .shadowbtn {
   -webkit-box-shadow: 5px 7px 24px -1px rgba(0, 0, 0, 0.72);
   -moz-box-shadow: 5px 7px 24px -1px rgba(0, 0, 0, 0.72);
-  box-shadow: 5px 7px 24px -1px rgba(0, 0, 0, 0.72);
+  box-shadow: 5px 7px 13px -1px rgba(0, 0, 0, 0.72);
 }

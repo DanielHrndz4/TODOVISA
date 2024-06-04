@@ -198,12 +198,12 @@ export default function NavbarWithMegaMenu() {
           </div>
           <div className="hidden gap-4 lg:flex">
             <Link to="/signin">
-              <Button variant="gradietrent" size="md" className="bg-TVred">
+              <Button size="md" className="shadowbtn bg-transparent">
                 Iniciar sesión
               </Button>
             </Link>
             <Link to="signup">
-              <Button variant="gradietrent" size="md" className="bg-TVred">
+              <Button variant="gradietrent" size="md" className="shadowbtn bg-TVred">
                 Registrarse
               </Button>
             </Link>

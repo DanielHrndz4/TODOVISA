@@ -52,7 +52,7 @@ function VIPROCarrousel() {
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
@@ -60,7 +60,7 @@ function VIPROCarrousel() {
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
@@ -68,7 +68,7 @@ function VIPROCarrousel() {
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
@@ -76,7 +76,7 @@ function VIPROCarrousel() {
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
@@ -84,7 +84,7 @@ function VIPROCarrousel() {
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
@@ -92,7 +92,7 @@ function VIPROCarrousel() {
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
@@ -100,7 +100,7 @@ function VIPROCarrousel() {
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
           </div>
         </div></Fade>
         <Fade><div className="mx-2">
@@ -108,7 +108,7 @@ function VIPROCarrousel() {
             <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
             <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred">Accion</Button>
+            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
           </div>
         </div></Fade>
         
