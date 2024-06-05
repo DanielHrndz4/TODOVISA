@@ -86,7 +86,7 @@ const VIPROForm = () => {
             name="control-hooks"
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            className='w-full py-10 px-24 bg-white rounded-lg'
+            className='w-full py-10 px-24 bg-white rounded-lg shadow'
         >
             {questionList(form)}
             <Form.Item
