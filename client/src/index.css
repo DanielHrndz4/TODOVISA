@@ -22,3 +22,32 @@
   -moz-box-shadow: 5px 7px 24px -1px rgba(0, 0, 0, 0.72);
   box-shadow: 5px 7px 13px -1px rgba(0, 0, 0, 0.72);
 }
+
+@font-face {
+  font-family: 'Crawling';
+  src: url('./assets/fonts/Crawling.otf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'DevantHorgen';
+  src: url('./assets/fonts/DevantHorgen.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+*{
+  font-family:'Montserrat', 'Helvetica Neue', Helvetica,;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.full-height {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

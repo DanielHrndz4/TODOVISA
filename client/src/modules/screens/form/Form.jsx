@@ -116,7 +116,7 @@ const VIPROForm = () => {
                             ]}
                             hasFeedback
                             validateStatus="warning"
-                            initialValue={null} // Establecer el valor inicial a null para los campos opcionales
+                            initialValue={null} 
                         >
                             <Input />
                         </Form.Item>

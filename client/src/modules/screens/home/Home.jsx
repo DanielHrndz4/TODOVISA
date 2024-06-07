@@ -35,10 +35,10 @@ export default function Home() {
             justifyContent: "center", // Center content horizontally if needed
           }}
         >
-          <div className="h-full w-full flex items-center justify-center flex-col gap-4">
-            <h1 className="text-white text-3xl">
+          <div className="h-full w-full flex items-center justify-center flex-col gap-4 font-semibold [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)]">
+            <h1 className="text-white text-4xl">
               ¡Abre las puertas al mundo!</h1>
-            <h1 className="text-white text-5xl">Todo Visa</h1>
+            <h1 className="text-white text-7xl">Todo Visa</h1>
           </div>
         </div>
 

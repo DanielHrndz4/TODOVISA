@@ -11,7 +11,7 @@ export default function Carrousel() {
       loop={true}
       className="rounded-xl"
       navigation={({ setActiveIndex, activeIndex, length }) => (
-        <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+        <div className="">
           {new Array(length).fill("").map((_, i) => (
             <span
               key={i}
@@ -27,7 +27,7 @@ export default function Carrousel() {
       <img
         src="/public/img/LRP/visa1.jpg"
         alt=""
-        className="flex w-full h-screen object-cover"
+        className="flex w-full h-full min-h-screen object-cover"
       />
       <img
         src="/public/img/LRP/visa2.jpg"
