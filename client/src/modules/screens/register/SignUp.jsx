@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from "react";
 
-export default function Login() {
+export default function Register() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -34,7 +34,7 @@ export default function Login() {
               variant="h6"
               className="mr-4 cursor-pointer py-1.5 lg:ml-2"
             >
-              <img src="/img/logo/todovisa.png" alt="" className="w-[90px]" />
+              <img src="/img/logo/todovisa.png" alt="" className="w-[100px]" />
             </Typography>
           </Link>
           <div className="m-auto">

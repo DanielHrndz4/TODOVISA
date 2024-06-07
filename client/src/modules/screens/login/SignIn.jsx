@@ -29,7 +29,7 @@ export default function Login() {
               variant="h6"
               className="mr-4 cursor-pointer py-1.5 lg:ml-2"
             >
-              <img src="/img/logo/todovisa.png" alt="" className="w-[90px]" />
+              <img src="/img/logo/todovisa.png" alt="" className="w-[100px]" />
             </Typography>
           </Link>
           <div className="m-auto">
