@@ -139,7 +139,7 @@ export default function Login() {
             </Card>
           </Fade>
         </div>
-        <div className="w-full" style={{ backgroundImage: 'url("/public/img/LRP/visa3.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        <div className="w-full" style={{ backgroundImage: 'url("/img/LRP/visa3.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
       </main>
     </Fade>
   );
