@@ -156,7 +156,7 @@ const VIPROForm = () => {
                             Acepto los
                         </span>
                     </Checkbox>
-                    <strong onClick={handlePopUp} className='font-semibold text-lg hover:text-TVBlue cursor-pointer'>Términos y condiciones</strong>
+                    <strong onClick={handlePopUp} className='font-semibold text-lg hover:text-black text-TVred cursor-pointer'>Términos y condiciones</strong>
                 </Form.Item>
             </Form.Item>
             <Form.Item className='min-w-[60%] w-[60%] mx-auto'>
