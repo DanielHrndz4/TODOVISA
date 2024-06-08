@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import questions from '../../../assets/data/questions.data';
 import { Button, Form, Input, Select, Space, Checkbox } from 'antd';
 import handleClickPopUp from '../../components/popup/PopUp';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Typography } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -13,6 +19,12 @@ const layout = {
         span: 24,
     },
 };
+
+const handlePopUp = () => {
+    const html = '<h1 class="text-Black font-semibold text-3xl pt-4 pb-5">Términos y condiciones</h1><div class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis est sed hic aliquam, esse assumenda molestiae maiores laudantium consequuntur itaque tempora? Corrupti ea odit consequuntur et commodi rerum dolor odio magnam tempora fugiat ducimus tempore temporibus pariatur repudiandae, vitae esse unde. Illo quisquam, ut cum facere deserunt accusantium voluptatibus minus inventore, corrupti repellat sed quas ad maxime! Numquam, vitae assumenda.Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis est sed hic aliquam, esse assumenda molestiae maiores laudantium consequuntur itaque tempora? Corrupti ea odit consequuntur et commodi rerum dolor odio magnam tempora fugiat ducimus tempore temporibus pariatur repudiandae, vitae esse unde. Illo quisquam, ut cum facere deserunt accusantium voluptatibus minus inventore, corrupti repellat sed quas ad maxime! Numquam, vitae assumenda.</div><p class="pt-4 font-bold w-full text-left">(Texto opcional)</p>';
+    const btn = '¡Entendido!';
+    handleClickPopUp(html, btn)
+}
 
 const questionList = (form) => {
     return questions.map((question) => {
@@ -60,8 +72,14 @@ const questionList = (form) => {
     });
 };
 
+
+
 const VIPROForm = () => {
     const [form] = Form.useForm();
+
+    const location = useLocation();
+    const pathSegments = location.pathname.split('/');
+    const country = pathSegments[pathSegments.length - 1];
 
     const onFinish = (values) => {
         console.log(values);
@@ -89,7 +107,12 @@ const VIPROForm = () => {
             onFinishFailed={onFinishFailed}
             className='w-full py-10 px-24 bg-white rounded-lg shadow'
         >
-            <h1 className='text-center text-5xl text-black pb-4 font-bold'>Formulario VIPRO</h1>
+            <Link to="/">
+                <Typography color="black" className="mb-4 font-normal w-full mx-1 text-black text-lg cursor-pointer [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.4)]">
+                    <FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Regresar al inicio
+                </Typography>
+            </Link>
+            <h1 className='text-center text-5xl text-black pb-4 font-bold'>VIPRO <span className='capitalize'>{country == "estadosunidos" ? "Estados Unidos": country}</span></h1>
             <p className='py-6'><strong>(Texto opcional)</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad dignissimos fugit fugiat sit possimus quibusdam libero est voluptate aperiam pariatur?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate vero illo beatae, blanditiis esse odio aspernatur molestias tenetur repellat libero.</p>
             {questionList(form)}
             <Form.Item
@@ -116,7 +139,7 @@ const VIPROForm = () => {
                             ]}
                             hasFeedback
                             validateStatus="warning"
-                            initialValue={null} 
+                            initialValue={null}
                         >
                             <Input />
                         </Form.Item>
@@ -133,7 +156,7 @@ const VIPROForm = () => {
                             Acepto los
                         </span>
                     </Checkbox>
-                    <strong onClick={handleClickPopUp} className='font-semibold text-lg hover:text-TVBlue cursor-pointer'>Términos y condiciones</strong>
+                    <strong onClick={handlePopUp} className='font-semibold text-lg hover:text-TVBlue cursor-pointer'>Términos y condiciones</strong>
                 </Form.Item>
             </Form.Item>
             <Form.Item className='min-w-[60%] w-[60%] mx-auto'>

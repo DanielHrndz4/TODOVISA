@@ -143,7 +143,7 @@ function NavList() {
       </Typography>
       <Typography
         as="a"
-        href="#services"
+        href="#vipro"
         variant="small"
         color="white"
         className="font-medium"

@@ -6,17 +6,11 @@ import Footer from "../footer/Footer";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
 import ContactUs from "./contactUs/ContactUs";
 import { Fade } from "react-awesome-reveal";
+import { WAsettings } from "../../../assets/data/ws.data";
+import VIPRO from "./VIPRO";
 
 export default function Home() {
-  const WAsettings = {
-    phoneNumber: "50371985205",
-    accountName: "Todovisa",
-    placeholder: "Escribe un mensaje",
-    avatar: "/img/logo/todovisaLogo.jpg",
-    chatMessage:
-      "¡Hola! 👋 \nBienvenido a Todovisa.\n¿En qué podemos ayudarte hoy? 😊",
-    statusMessage: "En linea",
-  };
+
   return (
     <main className="h-full w-full absolute">
       <NavbarWithMegaMenu />
@@ -24,12 +18,12 @@ export default function Home() {
         <div
           className="relative mt-12 mb-4" // Adjust based on the height of the navbar
           style={{
-            backgroundImage: "url('/img/background/bgmain.png')",
+            backgroundImage: "url('/img/background/bgmain4.jpg')", 
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            minHeight: "30rem", // Ensure it covers at least 30rem height
+            minHeight: "35rem", // Ensure it covers at least 30rem height
             width: "100%",
-            backgroundPosition: "right",
+            backgroundPosition: "center",
             display: "flex", // Ensure the child div can stretch to full height
             alignItems: "center", // Center content vertically if needed
             justifyContent: "center", // Center content horizontally if needed
@@ -49,7 +43,7 @@ export default function Home() {
         <VIPROCarrousel></VIPROCarrousel>
         <hr className="my-8 bg-white" />
         {/* VIPRO form section */}
-        <About></About>
+        <VIPRO></VIPRO>
         <hr className="my-8 bg-white" />
         {/* Contact Us form */}
         <ContactUs></ContactUs>

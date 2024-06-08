@@ -2,12 +2,28 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {
-  Button
-} from "@material-tailwind/react";
-import {Fade} from "react-awesome-reveal"
+import countrys from "../../../assets/data/carrousel.data";
+import { Button } from "@material-tailwind/react";
+import { Fade } from "react-awesome-reveal";
+import { Link } from "react-router-dom";
 
-function VIPROCarrousel() {
+function VIPROCarrousel() { 
+
+  const carrouselData = () => {
+    return countrys.map((country, index) => (
+      <Fade key={index}>
+        <div className="mx-2">
+          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
+            <img src={country.img} alt={country.country} className="max-h-[13rem] w-full h-[13rem] rounded-md" />
+            <h1 className="text-xl lg:text-2xl font-semibold pt-2">{country.country}</h1>
+            <p className="py-2 text-justify">{country.description}</p>
+            <Link to={country.uri}><Button className="font-semibold w-full bg-TVred shadowbtn">Ver más</Button></Link>
+          </div>
+        </div>
+      </Fade>
+    ));
+  }
+
   const settings = {
     dots: false,
     infinite: true,
@@ -46,74 +62,10 @@ function VIPROCarrousel() {
   return (
     <div className="w-full bg-TVBlue py-10" id="services">
       <div className="slider-container w-[90%] mx-auto">
-      <Slider {...settings} className="flex gap-4">
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="font-semibold w-full bg-TVred shadowbtn">Accion</Button>
-          </div>
-        </div></Fade>
-        
-      </Slider>
-    </div>
+        <Slider {...settings} className="flex gap-4">
+          {carrouselData()}
+        </Slider>
+      </div>
     </div>
   );
 }

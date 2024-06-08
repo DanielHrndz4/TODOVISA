@@ -1,121 +1,55 @@
+import { Button } from "@material-tailwind/react";
 import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import {
-  Button
-} from "@material-tailwind/react";
-import {Fade} from "react-awesome-reveal"
+import { Slide, Fade } from "react-awesome-reveal"
+import handleClickPopUp from "../../components/popup/PopUpPayVIPRO";
 
-function Responsive() {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
-  return (
-    <div className="w-full bg-TVsecondaryColor py-8">
-      <div className="slider-container w-[90%] mx-auto">
-      <Slider {...settings} className="flex gap-4">
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
-          </div>
-        </div></Fade>
-        <Fade><div className="mx-2">
-          <div className="w-[90%] m-auto bg-white p-4 rounded-md">
-            <img src="/img/VIPRO/viprobackground.png" alt="" className="max-h-[15rem] w-full h-full rounded-md"/>
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">Canada</h1>
-            <p className="py-2 text-justify">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi cupiditate accusantium fugit dolorum</p>
-            <Button className="w-full">Accion</Button>
-          </div>
-        </div></Fade>
-        
-      </Slider>
-    </div>
-    </div>
-  );
+const handlePopUp = () => {
+    const html = `
+        <div id="popupContainer" class="popup-container">
+            <div class="w-full">
+                <h2 class="pt-4 pb-8" style="font-size: 1.5rem; font-weight: 600;" className="font-semibold">Selecciona una opción:</h2>
+                <div class="w-full grid grid-cols-2 gap-4">
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="estadosunidos"> Estados Unidos</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="canada"> Canadá</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="mexico"> México</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="england"> Inglaterra</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="china"> China</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="australia"> Australia</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="india"> India</div>
+                </div>
+                <p class="text-justify pt-8">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad delectus vero blanditiis repellat aliquid nesciunt, adipisci officia minus debitis sunt? <strong>Se pueden agregar los términos y condiciones </strong></p>
+                <h1 class="font-bold text-3xl pt-6">$11.99</h1>
+            </div>
+        </div>
+    `;
+    const btn = 'Proceder a la compra';
+    handleClickPopUp(html, btn);
 }
 
-export default Responsive;
+export default function VIPRO() {
+    return (
+        <div className="flex flex-col h-full mb-4" id="vipro">
+            <div className="min-h-[55%] h-[55%] absolute"></div>
+            <div className="flex flex-row gap-4 h-full z-100 relative w-full lg:w-[80%] m-auto">
+                <Fade className="w-full flex flex-col py-8 mx-auto text-black">
+                    <div className="w-full flex flex-col py-8 mx-auto text-black">
+                        <div className="w-full py-8 px-6">
+                            <div className="pb-6 pt-4"><h1 className="text-5xl text-center text-TVBlue font-bold">VIPRO Formulario</h1></div>
+                            <div className="py-4">
+                                <h2 className="text-2xl text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. <strong>Subtitulo opcional</strong></h2>
+                                <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
+                            </div>
+                            <div className="pb-6"><p className="text-justify lg:text-lg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate nulla consectetur maxime quae aliquam harum obcaecati alias dolores, assumenda natus excepturi hic iusto! Quibusdam minus repudiandae, deserunt dolore laboriosam hic eum magni numquam natus, laborum rem vero nesciunt accusantium libero. <strong>parrafo</strong></p></div>
+                            <div className="lg:text-lg">
+                                <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={handlePopUp}>Realizar Formulario</Button>
+                            </div>
+                        </div>
+                    </div>
+                </Fade>
+                <div className="w-full flex justify-center items-end flex-col py-8">
+                    <Slide className="w-[90%]"><img src="/img/VIPRO/viproform.png" alt="" /></Slide>
+                </div>
+            </div>
+        </div>
+    );
+}
