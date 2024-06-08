@@ -5,7 +5,7 @@ export default function About() {
     return (
         <div className="flex flex-col h-full mb-4" id="about">
             <div className="min-h-[55%] h-[55%] absolute"></div>
-            <div className="flex flex-row gap-4 h-full z-100 relative w-full lg:w-[85%] m-auto">
+            <div className="flex flex-row gap-4 h-full z-100 relative w-full lg:w-[80%] m-auto">
                 <div className="w-full flex justify-center items-end flex-col py-8">
                     <Slide className="w-[90%]"><img src="/img/about/about.png" alt="" /></Slide>
                 </div>
