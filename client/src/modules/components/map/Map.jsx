@@ -59,8 +59,8 @@ export default function MapComponent() {
         <div className="border-2 border-white p-2 rounded-full w-[55px] h-[55px] flex justify-center items-center shadowbtn">
           <FontAwesomeIcon icon={faClock} size="2x" className="w-full m-auto text-white"/>
         </div>
-        <span className="pl-4 text-xl flex items-center justify-center text-white">
-          <strong className="mr-3">Horarios: </strong> Lunes a Viernes: de 8:30am - 6:00pm, Sabados: 9:00am - 5:00pm, Domingos cerrados
+        <span className="pl-4 text-xl flex items-center justify-center text-white flex-row">
+          Lunes a Viernes: 8:30am - 6:00pm, Sabados: 9:00am - 5:00pm, Domingos:  Cerrados
         </span>
       </div>
       </Fade>
