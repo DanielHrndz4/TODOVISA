@@ -1,6 +1,8 @@
 import React from "react";
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
-import { Slide, Fade } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faPhone, faClock } from '@fortawesome/free-solid-svg-icons';
 
 export default function MapComponent() {
   const defaultProps = {
@@ -17,35 +19,51 @@ export default function MapComponent() {
   };
 
   return (
-    <div className="w-full flex-col pb-8 m-auto text-white flex justify-center">
-      <div className="w-full pb-8 px-6">
-        <div className="pb-4 w-full text-center">
-          <h1 className="text-3xl font-bold text-center">Horarios de atención</h1>
-        </div>
-        <div class="grid grid-cols-2 m-auto justify-evently w-[75%] pt-4">
-          <span className="m-auto">Lunes: 8:30 a.m. – 6:00 p.m.</span>
-          <span className="m-auto">Martes: 8:30 a.m. – 6:00 p.m.</span>
-          <span className="m-auto">Miércoles: 8:30 a.m. – 6:00 p.m.</span>
-          <span className="m-auto">Jueves: 8:30 a.m. – 6:00 p.m.</span>
-          <span className="m-auto">Viernes: 8:30 a.m. – 6:0  p.m.</span>
-          <span className="m-auto">Sábado: 9:00 a.m. – 5:00 p.m.</span>
-          <span className="m-auto">Domingo: Cerrado</span>
-        </div>
-      </div>
-
-      <Fade bottom>
-        <div className="w-full h-full flex flex-col mx-auto text-white">
-          <h1 className="text-3xl font-bold text-center pb-4">Visítanos</h1>
-          <p className="pt-4 pb-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate voluptate eaque, tempore quibusdam maxime sint eum dolores laboriosam accusamus mollitia!</p>
-          <div style={{ height: '300px', width: '100%' }}>
-            <APIProvider apiKey={'AIzaSyCkW8tRmEUc7bTe9UKossrKpVb-kmxQ18g'} className="w-full">
-              <Map defaultCenter={defaultProps.center} defaultZoom={defaultProps.zoom}>
-                <Marker position={position} />
-              </Map>
-            </APIProvider>
+    <>
+      <div className="w-full h-full flex-row pb-8 mx-auto text-white flex">
+        <Fade bottom className="w-full">
+          <div className="w-full h-full flex flex-row mx-auto text-white">
+            <div style={{ height: '250px', width: '100%' }}>
+              <APIProvider apiKey={'AIzaSyCkW8tRmEUc7bTe9UKossrKpVb-kmxQ18g'} className="w-full">
+                <Map defaultCenter={defaultProps.center} defaultZoom={defaultProps.zoom}>
+                  <Marker position={position} />
+                </Map>
+              </APIProvider>
+            </div>
           </div>
+        </Fade>
+
+      </div>
+      <Fade>
+      <div className="w-full flex">
+        <div className="border-2 border-white p-2 rounded-full w-[55px] h-[55px] flex justify-center items-center shadowbtn">
+          <FontAwesomeIcon icon={faLocationDot} size="2x" className="w-full m-auto text-white"/>
         </div>
+        <a href="https://www.google.com/maps/dir//67+Avenida+Sur+Local+%231,+San+Salvador/@13.6970016,-89.2252546,18z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8f6331d77b1013e3:0xbfa86a56cf477af7!2m2!1d-89.2246802!2d13.6971043?entry=ttu" className="flex justify-center items-center ">
+        <span className="pl-4 text-xl flex items-center justify-center text-white hover:text-TVred hover:underline">
+          67 Avenida Sur Local #1, San Salvador
+        </span>
+        </a>
+      </div>
       </Fade>
-    </div>
+      <Fade>
+      <div className="w-full flex mt-4">
+        <div className="border-2 border-white p-2 rounded-full w-[55px] h-[55px] flex justify-center items-center shadowbtn">
+          <FontAwesomeIcon icon={faPhone} size="2x" className="w-full m-auto text-white"/>
+        </div>
+        <span className="pl-4 text-xl flex items-center justify-center text-white">
+          +503 2245-4027
+        </span>
+      </div>
+      <div className="w-full flex mt-4">
+        <div className="border-2 border-white p-2 rounded-full w-[55px] h-[55px] flex justify-center items-center shadowbtn">
+          <FontAwesomeIcon icon={faClock} size="2x" className="w-full m-auto text-white"/>
+        </div>
+        <span className="pl-4 text-xl flex items-center justify-center text-white">
+          <strong className="mr-3">Horarios: </strong> Lunes a Viernes: de 8:30am - 6:00pm, Sabados: 9:00am - 5:00pm, Domingos cerrados
+        </span>
+      </div>
+      </Fade>
+    </>
   );
 }
