@@ -4,4 +4,3 @@ dist
 dist-ssr
 .env
 .vercel
-request.rest
