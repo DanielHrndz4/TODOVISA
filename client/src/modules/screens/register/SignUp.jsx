@@ -184,7 +184,7 @@ export default function Register() {
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
                         id="grid-first-name"
                         type="text"
-                        placeholder="Jane"
+                        placeholder=""
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
@@ -203,7 +203,7 @@ export default function Register() {
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
                         id="grid-last-name"
                         type="text"
-                        placeholder="Doe"
+                        placeholder=""
                         name="lastname"
                         value={formData.lastname}
                         onChange={handleChange}
@@ -224,7 +224,7 @@ export default function Register() {
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
                         id="grid-email"
                         type="email"
-                        placeholder="name@email.com"
+                        placeholder=""
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
@@ -246,7 +246,7 @@ export default function Register() {
                           className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
                           id="grid-password"
                           type={showPassword ? "text" : "password"} // Usar el estado showPassword para cambiar dinámicamente entre text y password
-                          placeholder="******"
+                          placeholder=""
                           name="password"
                           value={formData.password}
                           onChange={handleChange}
@@ -275,7 +275,7 @@ export default function Register() {
                           className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
                           id="grid-repeatpassword"
                           type={showRepeatPassword ? "text" : "password"} // Usar el estado showRepeatPassword para cambiar dinámicamente entre text y password
-                          placeholder="******"
+                          placeholder=""
                           name="repeatpassword"
                           value={repeatPassword.repeatpassword}
                           onChange={handleChangeVerifyPassword}
@@ -341,7 +341,7 @@ export default function Register() {
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
                         id="grid-tel"
                         type="tel"
-                        placeholder="+503 00000000"
+                        placeholder=""
                         name="tel"
                         value={formData.tel}
                         onChange={handleChange}
