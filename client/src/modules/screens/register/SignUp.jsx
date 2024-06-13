@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import handleClickPopUp from "../../components/popup/PopUp";
 import MuiAlert from "@material-ui/lab/Alert";
 import country from "../../../assets/data/countrys.data";
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function Register() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -255,7 +256,7 @@ export default function Register() {
                           className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
                           onClick={toggleShowPassword}
                         >
-                          {showPassword ? "Ocultar" : "Mostrar"}
+                          <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                         </div>
                       </div>
                     </div>
@@ -284,7 +285,7 @@ export default function Register() {
                           className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
                           onClick={toggleShowRepeatPassword}
                         >
-                          {showRepeatPassword ? "Ocultar" : "Mostrar"}
+                          <FontAwesomeIcon icon={showRepeatPassword ? faEye : faEyeSlash} />
                         </div>
                       </div>
                     </div>
