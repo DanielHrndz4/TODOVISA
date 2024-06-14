@@ -9,14 +9,14 @@ require('dotenv').config();
 const SECRET_KEY = process.env.SECRET_KEY;
 
 router.post('/signin', (req, res) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
   userSchema
     .findOne({ email: email, password: password })
     .then((user) => {
       if (user) {
         const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
         res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' });
-        res.json({ message: 'Logged in successfully' });
+        res.json({ message: 'Logged in successfully', token });
       } else {
         res.status(401).json({ message: 'Credenciales inválidas' });
       }
