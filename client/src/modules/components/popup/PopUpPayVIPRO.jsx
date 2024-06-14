@@ -11,9 +11,8 @@ const handleClickPopUpPay = (html, btn) => {
             const selectedOption = document.querySelector('input[name="option"]:checked');
             if (selectedOption) {
                 const selectedValue = selectedOption.value;
-                // Navegar a otra página con el valor marcado como parámetro de consulta
                 window.location.href = `vipro/${selectedValue}`;
-                // window.location.href = `otra_pagina.html?opcion=${encodeURIComponent(selectedValue)}`;
+                
             }
         }
     });

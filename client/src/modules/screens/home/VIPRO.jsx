@@ -2,20 +2,24 @@ import { Button } from "@material-tailwind/react";
 import React from "react";
 import { Slide, Fade } from "react-awesome-reveal"
 import handleClickPopUp from "../../components/popup/PopUpPayVIPRO";
+import Cookies from "js-cookie"
+import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
 
 const handlePopUp = () => {
-    const html = `
+    const jwtToken = Cookies.get('jwt');
+    if (jwtToken) {
+        const html = `
         <div id="popupContainer" class="popup-container">
             <div class="w-full">
                 <h2 class="pt-4 pb-8" style="font-size: 1.5rem; font-weight: 600;" className="font-semibold">Selecciona una opción:</h2>
                 <div class="w-full grid grid-cols-2 gap-4">
                     <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="estadosunidos"> Estados Unidos</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="canada"> Canadá</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="mexico"> México</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="england"> Inglaterra</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="china"> China</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="australia"> Australia</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="india"> India</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="canada"> Canadá</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="mexico"> México</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="england"> Inglaterra</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="china"> China</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="australia"> Australia</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="india"> India</div>
                 </div>
                 <p class="text-justify pt-8">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad delectus vero blanditiis repellat aliquid nesciunt, adipisci officia minus debitis sunt? <strong>Se pueden agregar los términos y condiciones </strong></p>
                 <h1 class="font-bold text-3xl pt-6">$11.99</h1>
@@ -24,6 +28,18 @@ const handlePopUp = () => {
     `;
     const btn = 'Proceder a la compra';
     handleClickPopUp(html, btn);
+    }else{
+        const html = `
+        <div id="popupContainer" class="popup-container">
+            <div class="w-full">
+                <h2 class="pt-2 pb-2" style="font-size: 3rem; font-weight: 600;" className="font-semibold">Oops...</h2>
+                <p class="text-center pt-2">Debes iniciar sesión para ejecutar esta acción.</strong></p>
+            </div>
+        </div>
+    `;
+    const btn = 'Aceptar';
+        handleClickPopUpSignUp('error', html, btn)
+    } 
 }
 
 export default function VIPRO() {

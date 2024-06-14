@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import handleClickPopUp from "../../components/popup/PopUp";
+import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
 import MuiAlert from "@material-ui/lab/Alert";
 import country from "../../../assets/data/countrys.data";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -102,8 +102,10 @@ export default function Register() {
 
       if (response.ok) {
         const data = await response.json();
-        handleClickPopUp("Usuario registrado con éxito", "Aceptar");
+        handleClickPopUpSignUp("success", "<h1 class='text-black pb-4 text-2xl font-semibold'>Registro Exitoso</h1><p class='text-justify'>Inicia sesión para disfrutar de los servicios de Todovisa.</p>", "Aceptar");
         navigateTo("/signin");
+      } else if (response.status == 400) {
+        handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold'>Registro Fallido</h1><p class='py-2 text-justify'>El correo electrónico <strong class='text-black'>${formData.email}</strong> ya se encuentra en uso.</p> <p class='text-justify'>Por favor, prueba con una dirección de correo diferente para completar tu registro.</p>`, "Aceptar");
       } else {
         const errorData = await response.json();
         console.error("Error:", errorData.message || response.statusText);
@@ -353,7 +355,7 @@ export default function Register() {
                     className="mt-6 bg-TVred shadowbtn"
                     fullWidth
                     type="submit"
-                    rounded={isActiveBtn}
+                    disabled={isActiveBtn}
                   >
                     {signInText}
                   </Button>
@@ -367,7 +369,7 @@ export default function Register() {
                   <Button
                     className="mt-6 bg-black shadowbtn text-white flex items-center justify-center"
                     fullWidth
-                    rounded={isActiveBtn}
+                    disabled={isActiveBtn}
                   >
                     <FontAwesomeIcon
                       icon={faGoogle}

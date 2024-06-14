@@ -8,12 +8,21 @@ import ContactUs from "./contactUs/ContactUs";
 import { Fade } from "react-awesome-reveal";
 import { WAsettings } from "../../../assets/data/ws.data";
 import VIPRO from "./VIPRO";
+import Cookies from 'js-cookie';
+import LoginUserNavbar from "../navbar/LoginUserNavbar";
 
 export default function Home() {
-
+  const tokenExist = () => {
+    const jwtToken = Cookies.get('jwt');
+    if(jwtToken){
+      return <LoginUserNavbar />
+    }else{
+      return <NavbarWithMegaMenu />
+    }
+  }
   return (
     <main className="h-full w-full absolute">
-      <NavbarWithMegaMenu />
+      {tokenExist()}
       <div className="flex flex-col">
         <div
           className="relative mt-12 mb-4" // Adjust based on the height of the navbar

@@ -5,6 +5,8 @@ import { FloatingWhatsApp } from "react-floating-whatsapp";
 import { Fade } from "react-awesome-reveal";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { WAsettings } from "../../../assets/data/ws.data";
+import Cookies from "js-cookie"; 
+import LoginUserNavbar from "../navbar/LoginUserNavbar";
 
 export default function CountryScreen() {
   const location = useLocation();
@@ -34,7 +36,6 @@ export default function CountryScreen() {
   };
 
   useEffect(() => {
-    // Redirigir si el contenido del país no está disponible
     if (!getCountryContent()) {
       navigateTo("/country/canada");
     }
@@ -61,9 +62,19 @@ export default function CountryScreen() {
         return "";
     }
   };
+
+  const tokenExist = () => {
+    const jwtToken = Cookies.get('jwt');
+    if(jwtToken){
+      return <LoginUserNavbar />
+    }else{
+      return <NavbarWithMegaMenu />
+    }
+  }
+
   return (
     <main className="h-full w-full absolute">
-      <NavbarWithMegaMenu />
+      {tokenExist()}
       <div className="flex flex-col">
         <div
           className="relative mt-12 mb-4"

@@ -2,7 +2,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const userSchema = require('../models/user.schema');
 const router = express.Router();
-const authenticateJWT = require('../authenticate/authenticateJWT')
+const authenticateJWT = require('../authenticate/authenticateJWT');
+const Form = require('../models/form.schema');
 
 require('dotenv').config();
 
@@ -62,6 +63,28 @@ router.post('/signup', (req, res) => {
     })
 });
 
+router.post('/forms', async (req, res) => {
+  const { email, formData } = req.body;
+
+  try {
+      // Verificar si el usuario existe por su correo electrónico
+      const user = await User.findOne({ email });
+      if (!user) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+
+      // Añadir el email al formData
+      formData.email = email;
+
+      // Crear y guardar el nuevo formulario
+      const newForm = new Form(formData);
+      await newForm.save();
+      res.status(201).json(newForm);
+  } catch (error) {
+      console.error('Error al crear el formulario:', error);
+      res.status(500).json({ message: 'Error en el servidor' });
+  }
+});
 
 router.get('/protected-route', authenticateJWT, (req, res) => {
   res.send('This is a protected route');
