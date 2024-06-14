@@ -30,23 +30,30 @@ router.post('/signin', (req, res) => {
 router.post('/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
 
-  const newUser = new userSchema({
-    name: name,
-    lastname: lastname,
-    email: email,
-    password: password,
-    country: country,
-    tel: tel
-  });
+  userSchema.findOne({ email: email})
+  .then((existUser)=>{
+    if(existUser){
+      return res.status(400).json({message: `{El usuario con email: ${email} ya se encuentra registrado}`})
+    }
 
-  newUser.save()
-    .then((user) => {
-      res.status(200).json({ message: "Register successfully" });
-    })
-    .catch((error) => {
-      console.error(error.message);
-      res.status(500).json({ message: 'Server error' });
+    const newUser = new userSchema({
+      name: name,
+      lastname: lastname,
+      email: email,
+      password: password,
+      country: country,
+      tel: tel
     });
+  
+    newUser.save()
+      .then((user) => {
+        res.status(200).json({ message: "Usuario registrado exitosamente" });
+      })
+      .catch((error) => {
+        console.error(error.message);
+        res.status(500).json({ message: 'Server error' });
+      });
+  })
 });
 
 
