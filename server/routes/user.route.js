@@ -14,7 +14,7 @@ router.post('/signin', (req, res) => {
     .findOne({ email: email, password: password })
     .then((user) => {
       if (user) {
-        const token = jwt.sign({ username: user.email }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
         res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' });
         res.json({ message: 'Logged in successfully' });
       } else {
