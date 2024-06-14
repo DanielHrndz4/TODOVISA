@@ -16,7 +16,13 @@ router.post('/signin', (req, res) => {
       if (user) {
         const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
         res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' });
-        res.json({ message: 'Logged in successfully', token });
+        res.json({
+          message: 'Inicio de sesion exitoso', token, user: {
+            email: user.email,
+            name: user.name,
+            country: user.country
+          }
+        });
       } else {
         res.status(401).json({ message: 'Credenciales inválidas' });
       }
@@ -30,30 +36,30 @@ router.post('/signin', (req, res) => {
 router.post('/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
 
-  userSchema.findOne({ email: email})
-  .then((existUser)=>{
-    if(existUser){
-      return res.status(400).json({message: `{El usuario con email: ${email} ya se encuentra registrado}`})
-    }
+  userSchema.findOne({ email: email })
+    .then((existUser) => {
+      if (existUser) {
+        return res.status(400).json({ message: `{El usuario con email: ${email} ya se encuentra registrado}` })
+      }
 
-    const newUser = new userSchema({
-      name: name,
-      lastname: lastname,
-      email: email,
-      password: password,
-      country: country,
-      tel: tel
-    });
-  
-    newUser.save()
-      .then((user) => {
-        res.status(200).json({ message: "Usuario registrado exitosamente" });
-      })
-      .catch((error) => {
-        console.error(error.message);
-        res.status(500).json({ message: 'Server error' });
+      const newUser = new userSchema({
+        name: name,
+        lastname: lastname,
+        email: email,
+        password: password,
+        country: country,
+        tel: tel
       });
-  })
+
+      newUser.save()
+        .then((user) => {
+          res.status(200).json({ message: "Usuario registrado exitosamente" });
+        })
+        .catch((error) => {
+          console.error(error.message);
+          res.status(500).json({ message: 'Server error' });
+        });
+    })
 });
 
 
@@ -62,7 +68,7 @@ router.get('/protected-route', authenticateJWT, (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    res.send('Hello World')
+  res.send('Hello World')
 })
 
 module.exports = router;
