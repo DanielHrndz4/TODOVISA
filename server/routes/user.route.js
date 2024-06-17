@@ -5,8 +5,11 @@ const router = express.Router();
 const authenticateJWT = require('../authenticate/authenticateJWT');
 const Form = require('../models/form.schema');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
+
+app.use(cookieParser());
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -20,8 +23,8 @@ router.post('/signin', (req, res) => {
         if (isPasswordValid) {
           const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
           res
-          .cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' })
-          .json({
+          .cookie('jwt', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'Strict', maxAge: 1000 * 60 * 60 })
+          .send({
             message: 'Inicio de sesion exitoso', token, user: {
               email: user.email,
               name: user.name,
