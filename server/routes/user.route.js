@@ -31,7 +31,7 @@ router.post('/signin', async (req, res) => {
     const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
 
     // Configura la cookie JWT en la respuesta
-    res.json({
+    res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' }).json({
       message: 'Inicio de sesión exitoso',
       token,
       user: {
