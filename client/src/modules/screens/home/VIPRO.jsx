@@ -5,9 +5,8 @@ import handleClickPopUp from "../../components/popup/PopUpPayVIPRO";
 import Cookies from "js-cookie"
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
 
-const handlePopUp = () => {
-    const jwtToken = Cookies.get('jwt');
-    if (jwtToken) {
+const handlePopUp = (jwt) => {
+    if (jwt) {
         const html = `
         <div id="popupContainer" class="popup-container">
             <div class="w-full">
@@ -42,7 +41,7 @@ const handlePopUp = () => {
     } 
 }
 
-export default function VIPRO() {
+export default function VIPRO(props) {
     return (
         <div className="flex flex-col h-full mb-4" id="vipro">
             <div className="min-h-[55%] h-[55%] absolute"></div>
@@ -57,7 +56,7 @@ export default function VIPRO() {
                             </div>
                             <div className="pb-6"><p className="text-justify lg:text-lg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate nulla consectetur maxime quae aliquam harum obcaecati alias dolores, assumenda natus excepturi hic iusto! Quibusdam minus repudiandae, deserunt dolore laboriosam hic eum magni numquam natus, laborum rem vero nesciunt accusantium libero. <strong>parrafo</strong></p></div>
                             <div className="lg:text-lg">
-                                <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={handlePopUp}>Realizar Formulario</Button>
+                                <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp(props.jwt)}>Realizar Formulario</Button>
                             </div>
                         </div>
                     </div>

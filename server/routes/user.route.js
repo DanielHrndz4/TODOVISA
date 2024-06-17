@@ -5,41 +5,48 @@ const router = express.Router();
 const authenticateJWT = require('../authenticate/authenticateJWT');
 const Form = require('../models/form.schema');
 const bcrypt = require('bcrypt');
+const cors = require('cors')
 
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-router.post('/signin', (req, res) => {
+// Endpoint para iniciar sesión
+router.post('/signin', async (req, res) => {
   const { email, password } = req.body;
-  userSchema
-    .findOne({ email: email })
-    .then((user) => {
-      if (user) {
-        const isPasswordValid = bcrypt.compareSync(password, user.password)
-        if (isPasswordValid) {
-          const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
-          res
-          .cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' })
-          .json({
-            message: 'Inicio de sesion exitoso', token, user: {
-              email: user.email,
-              name: user.name,
-              country: user.country
-            }
-          });
-        }else{
-          res.status(401).json({ message: 'La contraseña es incorrecta' });
-        }
-      } else {
-        res.status(401).json({ message: 'Credenciales inválidas' });
+
+  try {
+    const user = await userSchema.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({ message: 'Credenciales inválidas' });
+    }
+
+    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'La contraseña es incorrecta' });
+    }
+
+    // Genera y firma el token JWT
+    const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
+
+    // Configura la cookie JWT en la respuesta
+    res.json({
+      message: 'Inicio de sesión exitoso',
+      token,
+      user: {
+        email: user.email,
+        name: user.name,
+        country: user.country
       }
-    })
-    .catch((error) => {
-      console.error(error.message);
-      res.status(500).json({ message: 'Server error' });
     });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
 });
+
 
 router.post('/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;

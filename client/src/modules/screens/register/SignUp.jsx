@@ -82,13 +82,15 @@ export default function Register() {
 
   const submitForm = async (e) => {
     e.preventDefault();
+  
     if (formData.password !== repeatPassword.repeatpassword) {
-      setErrorMessage("Las contraseñas deben ser iguales idénticas.");
+      setErrorMessage("Las contraseñas deben ser idénticas.");
       return; // Detener el envío del formulario si las contraseñas no coinciden
     }
+  
     try {
       setIsActiveBtn(true); // Activar el estado de botón activo
-
+  
       const response = await fetch(
         "https://todovisa.onrender.com/api/signup",
         {
@@ -99,25 +101,27 @@ export default function Register() {
           body: JSON.stringify(formData),
         }
       );
-
+  
       if (response.ok) {
         const data = await response.json();
+        setErrorMessage(''); // Limpiar cualquier mensaje de error previo
         handleClickPopUpSignUp("success", "<h1 class='text-black pb-4 text-2xl font-semibold'>Registro Exitoso</h1><p class='text-justify'>Inicia sesión para disfrutar de los servicios de Todovisa.</p>", "Aceptar");
         navigateTo("/signin");
-      } else if (response.status == 400) {
-        handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold'>Registro Fallido</h1><p class='py-2 text-justify'>El correo electrónico <strong class='text-black'>${formData.email}</strong> ya se encuentra en uso.</p> <p class='text-justify'>Por favor, prueba con una dirección de correo diferente para completar tu registro.</p>`, "Aceptar");
       } else {
         const errorData = await response.json();
-        console.error("Error:", errorData.message || response.statusText);
         setErrorMessage(errorData.message || "Error al registrar.");
       }
     } catch (error) {
-      console.error("Error:", error);
-      setErrorMessage("Error al conectar con el servidor.");
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("Error al registrar.");
+      }
     } finally {
       setIsActiveBtn(false); // Desactivar el estado de botón activo después de la petición
     }
   };
+  
 
   useEffect(() => {
     if (isActiveBtn) {
@@ -292,13 +296,6 @@ export default function Register() {
                       </div>
                     </div>
                   </div>
-                  {errorMessage && (
-                    <div>
-                      <Alert severity="error">
-                        {errorMessage}
-                      </Alert>
-                    </div>
-                  )}
                   <div className="flex flex-wrap -mx-3 mt-4 mb-2">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                       <Typography
@@ -351,6 +348,13 @@ export default function Register() {
                       />
                     </div>
                   </div>
+                  {errorMessage && (
+                    <div className="my-4">
+                      <Alert severity="error">
+                        {errorMessage}
+                      </Alert>
+                    </div>
+                  )}
                   <Button
                     className="mt-6 bg-TVred shadowbtn"
                     fullWidth
