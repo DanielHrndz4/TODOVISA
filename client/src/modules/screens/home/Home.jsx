@@ -20,6 +20,7 @@ export default function Home() {
         "https://todovisa.onrender.com/api/protected-route",
         {
           method: 'GET',
+          credentials: 'include', // Asegura que las cookies se incluyan en la solicitud
           headers: {
             'Content-Type': 'application/json'
           }
