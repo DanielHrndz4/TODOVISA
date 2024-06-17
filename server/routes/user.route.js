@@ -4,6 +4,7 @@ const userSchema = require('../models/user.schema');
 const router = express.Router();
 const authenticateJWT = require('../authenticate/authenticateJWT');
 const Form = require('../models/form.schema');
+const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
@@ -12,18 +13,24 @@ const SECRET_KEY = process.env.SECRET_KEY;
 router.post('/signin', (req, res) => {
   const { email, password } = req.body;
   userSchema
-    .findOne({ email: email, password: password })
+    .findOne({ email: email })
     .then((user) => {
       if (user) {
-        const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
-        res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' });
-        res.json({
-          message: 'Inicio de sesion exitoso', token, user: {
-            email: user.email,
-            name: user.name,
-            country: user.country
-          }
-        });
+        const isPasswordValid = bcrypt.compareSync(password, user.password)
+        if (isPasswordValid) {
+          const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
+          res
+          .cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' })
+          .json({
+            message: 'Inicio de sesion exitoso', token, user: {
+              email: user.email,
+              name: user.name,
+              country: user.country
+            }
+          });
+        }else{
+          res.status(401).json({ message: 'La contraseña es incorrecta' });
+        }
       } else {
         res.status(401).json({ message: 'Credenciales inválidas' });
       }
@@ -43,27 +50,29 @@ router.post('/signup', (req, res) => {
         return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` })
       }
 
-      if(name.length < 5){
-        return res.status(400).json({message: "El nombre del usuario es muy corto"})
-      }
-      
-      if(password.length < 8){
-        return res.status(400).json({message: "La contraseña debe ser minimo de 8 caracteres"})
-      }
-      
-      if(country.length < 5){
-        return res.status(400).json({message: "El nombre del pais no es valido"})
+      if (name.length < 5) {
+        return res.status(400).json({ message: "El nombre del usuario es muy corto" })
       }
 
-      if(tel.length < 10){
-        return res.status(400).json({message: "Numero de telefono no valido"})
+      if (password.length < 8) {
+        return res.status(400).json({ message: "La contraseña debe ser minimo de 8 caracteres" })
       }
+
+      if (country.length < 5) {
+        return res.status(400).json({ message: "El nombre del pais no es valido" })
+      }
+
+      if (tel.length < 10) {
+        return res.status(400).json({ message: "Numero de telefono no valido" })
+      }
+
+      const hashedPassword = bcrypt.hashSync(password, 10);
 
       const newUser = new userSchema({
         name: name,
         lastname: lastname,
         email: email,
-        password: password,
+        password: hashedPassword,
         country: country,
         tel: tel
       });
@@ -83,22 +92,22 @@ router.post('/forms', authenticateJWT, async (req, res) => {
   const { email, formData } = req.body;
 
   try {
-      // Verificar si el usuario existe por su correo electrónico
-      const user = await User.findOne({ email });
-      if (!user) {
-          return res.status(404).json({ message: 'Usuario no encontrado' });
-      }
+    // Verificar si el usuario existe por su correo electrónico
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
 
-      // Añadir el email al formData
-      formData.email = email;
+    // Añadir el email al formData
+    formData.email = email;
 
-      // Crear y guardar el nuevo formulario
-      const newForm = new Form(formData);
-      await newForm.save();
-      res.status(201).json(newForm);
+    // Crear y guardar el nuevo formulario
+    const newForm = new Form(formData);
+    await newForm.save();
+    res.status(201).json(newForm);
   } catch (error) {
-      console.error('Error al crear el formulario:', error);
-      res.status(500).json({ message: 'Error en el servidor' });
+    console.error('Error al crear el formulario:', error);
+    res.status(500).json({ message: 'Error en el servidor' });
   }
 });
 
