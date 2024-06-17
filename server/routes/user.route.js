@@ -19,9 +19,7 @@ router.post('/signin', (req, res) => {
         const isPasswordValid = bcrypt.compareSync(password, user.password)
         if (isPasswordValid) {
           const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
-          res
-          .cookie('jwt', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'Strict', maxAge: 1000 * 60 * 60 })
-          .send({
+          res.json({
             message: 'Inicio de sesion exitoso', token, user: {
               email: user.email,
               name: user.name,
@@ -66,7 +64,7 @@ router.post('/signup', (req, res) => {
         return res.status(400).json({ message: "Numero de telefono no valido" })
       }
 
-      const hashedPassword = bcrypt.hashSync(password, 10);
+      const hashedPassword = bcrypt.hashSync(password, process.env.SALT);
 
       const newUser = new userSchema({
         name: name,
