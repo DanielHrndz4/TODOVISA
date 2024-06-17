@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 
-app.use(cookieParser());
+router.use(cookieParser());
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
