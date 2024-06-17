@@ -5,11 +5,8 @@ const router = express.Router();
 const authenticateJWT = require('../authenticate/authenticateJWT');
 const Form = require('../models/form.schema');
 const bcrypt = require('bcrypt');
-const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
-
-router.use(cookieParser());
 
 const SECRET_KEY = process.env.SECRET_KEY;
 

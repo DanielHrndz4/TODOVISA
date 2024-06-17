@@ -11,6 +11,8 @@ const PORT = process.env.PORT || 3333;
 
 // Conectar a la base de datos
 connectDB();
+
+app.use(cookieParser())
 app.use(cors());
 app.use(express.json());
 
