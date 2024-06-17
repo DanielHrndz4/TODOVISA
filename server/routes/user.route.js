@@ -40,7 +40,23 @@ router.post('/signup', (req, res) => {
   userSchema.findOne({ email: email })
     .then((existUser) => {
       if (existUser) {
-        return res.status(400).json({ message: `{El usuario con email: ${email} ya se encuentra registrado}` })
+        return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` })
+      }
+
+      if(name.length < 5){
+        return res.status(400).json({message: "El nombre del usuario es muy corto"})
+      }
+      
+      if(password.length < 8){
+        return res.status(400).json({message: "La contraseña debe ser minimo de 8 caracteres"})
+      }
+      
+      if(country.length < 5){
+        return res.status(400).json({message: "El nombre del pais no es valido"})
+      }
+
+      if(tel.length < 10){
+        return res.status(400).json({message: "Numero de telefono no valido"})
       }
 
       const newUser = new userSchema({
@@ -63,7 +79,7 @@ router.post('/signup', (req, res) => {
     })
 });
 
-router.post('/forms', async (req, res) => {
+router.post('/forms', authenticateJWT, async (req, res) => {
   const { email, formData } = req.body;
 
   try {
