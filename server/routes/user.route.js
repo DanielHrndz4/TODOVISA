@@ -19,7 +19,9 @@ router.post('/signin', (req, res) => {
         const isPasswordValid = bcrypt.compareSync(password, user.password)
         if (isPasswordValid) {
           const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
-          res.json({
+          res
+          .cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' })
+          .json({
             message: 'Inicio de sesion exitoso', token, user: {
               email: user.email,
               name: user.name,
