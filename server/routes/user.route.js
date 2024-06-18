@@ -11,14 +11,6 @@ require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-// Configura CORS para permitir peticiones desde http://localhost:5173
-const corsOptions = {
-  origin: 'http://localhost:5173',
-  credentials: true
-};
-
-router.use(cors(corsOptions)); // Aplica el middleware CORS globalmente
-
 // Middleware para analizar el cuerpo de las solicitudes JSON
 router.use(express.json());
 
