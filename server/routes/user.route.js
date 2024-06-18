@@ -12,7 +12,7 @@ require('dotenv').config();
 const SECRET_KEY = process.env.SECRET_KEY;
 
 // Endpoint para iniciar sesión
-router.post('/signin', async (req, res) => {
+router.post('/signin', cors({ origin: 'http://localhost:5173', credentials: true }), async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -48,7 +48,7 @@ router.post('/signin', async (req, res) => {
 });
 
 
-router.post('/signup', (req, res) => {
+router.post('/signup', cors({ origin: 'http://localhost:5173', credentials: true }), (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
 
   userSchema.findOne({ email: email })
