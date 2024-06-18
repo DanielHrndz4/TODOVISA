@@ -20,7 +20,7 @@ export default function Home() {
         "http://localhost:3366/api/protected-route",
         {
           method: 'GET',
-          credentials: 'include', // Asegura que las cookies se incluyan en la solicitud
+          credentials: 'include', 
           headers: {
             'Content-Type': 'application/json'
           }
@@ -28,8 +28,10 @@ export default function Home() {
       );
   
       if (response.ok) {
+        console.log(response)
         setJwtToken(true);
       } else {
+        console.log(response)
         setJwtToken(false); // Handle cases where the response is not OK
       }
     } catch (err) {

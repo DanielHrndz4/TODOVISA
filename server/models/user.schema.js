@@ -24,6 +24,9 @@ const userSchema = mongoose.Schema({
     tel:{
         type: String,
         required: true
+    },
+    vipro:{
+        type: Boolean
     }
 })
 

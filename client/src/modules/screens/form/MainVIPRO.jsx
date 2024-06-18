@@ -1,41 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import VIPROForm from "./Form";
 import { useNavigate } from "react-router-dom";
 
 export default function MainVIPRO() {
   const navigateTo = useNavigate();
   const [isBoolean, setIsBoolean] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Estado para manejar la carga
 
   const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://todovisa.onrender.com/api/protected-route",
-        {
-          method: "GET",
-          credentials: "include", // Asegura que las cookies se incluyan en la solicitud
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    const userFromStorage = JSON.parse(sessionStorage.getItem('user'));
+    if (!userFromStorage) {
+      navigateTo('/');
+    } else {
+      const email = userFromStorage.email;
+      try {
+        const response = await fetch(
+          "http://localhost:3366/api/vipro/validation",
+          {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email })
+          }
+        );
 
-      if (response.ok) {
-        setIsBoolean(true);
-      } else {
+        if (response.ok) {
+          const data = await response.json();
+          const { vipro } = data.user;
+          setIsBoolean(vipro);
+        } else {
+          navigateTo("/");
+        }
+      } catch (err) {
+        console.error("Server error", err);
         navigateTo("/");
+      } finally {
+        setIsLoading(false); // Finaliza la carga
       }
-    } catch (err) {
-      navigateTo("/");
     }
   };
 
-  fetchData();
+  useEffect(() => {
+    fetchData();
+  }, []); // Llama a fetchData solo cuando el componente se monta
+
+  if (isLoading) {
+    return  // Muestra un mensaje de carga mientras se verifica la sesión
+  }
+
   return (
     <main className="w-full h-full bg-TVBlue">
-      {isBoolean && (
+      {isBoolean ? (
         <div className="w-full lg:w-[60%] m-auto py-8">
-          <VIPROForm></VIPROForm>
+          <VIPROForm />
         </div>
+      ) : (
+        navigateTo("/")
       )}
     </main>
   );

@@ -18,7 +18,7 @@ function App(){
         <Route exact path="/signin" element={<Login></Login>} />
         <Route exact path="/forgotpassword" element={<ForgotPassword></ForgotPassword>} />
         <Route exact path="/" element={<Home></Home>} />
-        <Route exact path="/vipro/:country" element={<MainVIPRO></MainVIPRO>} />
+        <Route exact path="/vipro/:country/" element={<MainVIPRO></MainVIPRO>} />
         <Route exact path="/country/:country" element={<CountryScreen></CountryScreen>} />
       </Routes>
     </Router>

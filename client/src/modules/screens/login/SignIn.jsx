@@ -6,16 +6,22 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function Login() {
   const [signInText, setSignInText] = useState("Inicia sesión");
   const [isActiveBtn, setIsActiveBtn] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
   const navigateTo = useNavigate();
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +33,7 @@ export default function Login() {
 
   const submitFormSignIn = async (e) => {
     e.preventDefault();
-  
+
     try {
       setIsActiveBtn(true);
       const response = await fetch(
@@ -38,9 +44,9 @@ export default function Login() {
           body: JSON.stringify(formData)
         }
       );
-  
+
       if (response.ok) {
-        const { token, user } = await response.json(); 
+        const { token, user } = await response.json();
         const expires = new Date(new Date().getTime() + 60 * 60 * 1000); // 1 hora from now
         Cookies.set('jwt', token, { expires: expires, secure: true, sameSite: 'Strict' });
         sessionStorage.setItem('user', JSON.stringify(user));
@@ -67,7 +73,7 @@ export default function Login() {
   return (
     <Fade cascade damping={0.1} className="w-full h-full">
       <main className="bg-TVBlue flex flex-row h-full w-full">
-        <div className="flex flex-col py-12 w-[50%]">
+        <div className="flex flex-col py-16 w-[50%]">
           <Link to="/" className="flex justify-center items-center py-4">
             <Typography
               as="a"
@@ -100,12 +106,22 @@ export default function Login() {
                       <input className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent" id="grid-email" type="email" name="email" value={formData.email} onChange={handleChange} required />
                     </div>
                   </div>
-                  <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full px-3">
-                      <Typography variant="h6" color="blue-gray" className="text-white">
-                        Contraseña
-                      </Typography>
-                      <input className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent" id="grid-password" type="password" name="password" value={formData.password} onChange={handleChange} required />
+                  <div className="relative">
+                    <input
+                      className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-10 leading-tight focus:outline-none focus:bg-transparent"
+                      id="grid-password"
+                      type={showPassword ? "text" : "password"} // Usar el estado showPassword para cambiar dinámicamente entre text y password
+                      placeholder=""
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                    <div
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
+                      onClick={toggleShowPassword}
+                    >
+                      <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                     </div>
                   </div>
                   <Link to="/forgotpassword">
