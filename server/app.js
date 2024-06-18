@@ -1,10 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./database/database');
-const authenticateJWT = require('./authenticate/authenticateJWT');
 const userRoute = require('./routes/user.route')
 const app = express();
 const PORT = process.env.PORT || 3333;

@@ -92,13 +92,11 @@ export default function Register() {
       setIsActiveBtn(true); // Activar el estado de botón activo
   
       const response = await fetch(
-        "https://todovisa.onrender.com/api/signup",
+        "http://localhost:3366/api/signup",
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
         }
       );
   

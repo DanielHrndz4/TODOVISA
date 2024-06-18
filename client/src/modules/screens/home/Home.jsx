@@ -17,7 +17,7 @@ export default function Home() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://todovisa.onrender.com/api/protected-route",
+        "http://localhost:3366/api/protected-route",
         {
           method: 'GET',
           credentials: 'include', // Asegura que las cookies se incluyan en la solicitud
