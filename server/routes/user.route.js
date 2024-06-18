@@ -5,14 +5,25 @@ const router = express.Router();
 const authenticateJWT = require('../authenticate/authenticateJWT');
 const Form = require('../models/form.schema');
 const bcrypt = require('bcrypt');
-const cors = require('cors')
+const cors = require('cors');
 
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
+// Configura CORS para permitir peticiones desde http://localhost:5173
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  credentials: true
+};
+
+router.use(cors(corsOptions)); // Aplica el middleware CORS globalmente
+
+// Middleware para analizar el cuerpo de las solicitudes JSON
+router.use(express.json());
+
 // Endpoint para iniciar sesión
-router.post('/signin', cors({ origin: 'http://localhost:5173/signin', credentials: true }), async (req, res) => {
+router.post('/signin', async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -47,83 +58,83 @@ router.post('/signin', cors({ origin: 'http://localhost:5173/signin', credential
   }
 });
 
-
-router.post('/signup', cors({ origin: 'http://localhost:5173/signup', credentials: true }), (req, res) => {
+// Endpoint para registrar usuario
+router.post('/signup', async (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
 
-  userSchema.findOne({ email: email })
-    .then((existUser) => {
-      if (existUser) {
-        return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` })
-      }
+  try {
+    const existUser = await userSchema.findOne({ email });
 
-      if (name.length < 5) {
-        return res.status(400).json({ message: "El nombre del usuario es muy corto" })
-      }
+    if (existUser) {
+      return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` });
+    }
 
-      if (password.length < 8) {
-        return res.status(400).json({ message: "La contraseña debe ser minimo de 8 caracteres" })
-      }
+    if (name.length < 5) {
+      return res.status(400).json({ message: "El nombre del usuario es muy corto" });
+    }
 
-      if (country.length < 5) {
-        return res.status(400).json({ message: "El nombre del pais no es valido" })
-      }
+    if (password.length < 8) {
+      return res.status(400).json({ message: "La contraseña debe ser mínimo de 8 caracteres" });
+    }
 
-      if (tel.length < 10) {
-        return res.status(400).json({ message: "Numero de telefono no valido" })
-      }
+    if (country.length < 5) {
+      return res.status(400).json({ message: "El nombre del país no es válido" });
+    }
 
-      const hashedPassword = bcrypt.hashSync(password, process.env.SALT);
+    if (tel.length < 10) {
+      return res.status(400).json({ message: "Número de teléfono no válido" });
+    }
 
-      const newUser = new userSchema({
-        name: name,
-        lastname: lastname,
-        email: email,
-        password: hashedPassword,
-        country: country,
-        tel: tel
-      });
+    const hashedPassword = bcrypt.hashSync(password, process.env.SALT);
 
-      newUser.save()
-        .then((user) => {
-          res.status(200).json({ message: "Usuario registrado exitosamente" });
-        })
-        .catch((error) => {
-          console.error(error.message);
-          res.status(500).json({ message: 'Server error' });
-        });
-    })
+    const newUser = new userSchema({
+      name: name,
+      lastname: lastname,
+      email: email,
+      password: hashedPassword,
+      country: country,
+      tel: tel
+    });
+
+    await newUser.save();
+    res.status(200).json({ message: "Usuario registrado exitosamente" });
+    
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
 });
 
+// Endpoint para guardar formulario
 router.post('/forms', authenticateJWT, async (req, res) => {
   const { email, formData } = req.body;
 
   try {
-    // Verificar si el usuario existe por su correo electrónico
-    const user = await User.findOne({ email });
+    const user = await userSchema.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
 
-    // Añadir el email al formData
     formData.email = email;
 
-    // Crear y guardar el nuevo formulario
     const newForm = new Form(formData);
     await newForm.save();
     res.status(201).json(newForm);
+
   } catch (error) {
     console.error('Error al crear el formulario:', error);
     res.status(500).json({ message: 'Error en el servidor' });
   }
 });
 
+// Ruta protegida
 router.get('/protected-route', authenticateJWT, (req, res) => {
   res.status(200).json("Acceso permitido");
 });
 
+// Ruta raíz
 router.get('/', (req, res) => {
-  res.send('Hello World')
-})
+  res.send('Hello World');
+});
 
 module.exports = router;
