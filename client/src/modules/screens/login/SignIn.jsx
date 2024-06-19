@@ -11,6 +11,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 export default function Login() {
   const [signInText, setSignInText] = useState("Inicia sesión");
   const [isActiveBtn, setIsActiveBtn] = useState(false);
+  const [signInValue, setSignInValue] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -18,6 +19,32 @@ export default function Login() {
   });
   const [errorMessage, setErrorMessage] = useState('');
   const navigateTo = useNavigate();
+
+  const fetchDataToken = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3366/api/verify-token",
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (response.ok) {
+        console.log(true)
+        setSignInValue(true);
+      } else {
+        setSignInValue(false);
+      }
+    } catch (err) {
+      setSignInValue(false);
+    }
+  };
+
+  fetchDataToken()
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -70,9 +97,9 @@ export default function Login() {
     setSignInText(isActiveBtn ? "Cargando..." : "Inicia sesión");
   }, [isActiveBtn]);
 
-  return (
-    <Fade cascade damping={0.1} className="w-full h-full">
-      <main className="bg-TVBlue flex flex-row h-full w-full">
+  const withoutSignin = () => {
+    return (
+      <>
         <div className="flex flex-col py-16 w-[50%]">
           <Link to="/" className="flex justify-center items-center py-4">
             <Typography
@@ -164,6 +191,31 @@ export default function Login() {
           </Fade>
         </div>
         <div className="w-full" style={{ backgroundImage: 'url("/img/LRP/visa3.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+      </>
+    )
+  }
+
+  const withSignin = () => {
+    return (
+      <div className="h-screen flex flex-col justify-center items-center m-auto gap-4">
+        <div className="bg-white py-16 px-20 rounded-lg shadow flex flex-col gap-6">
+          <div className="flex flex-col gap-3 text-center">
+            <h1 className="text-3xl font-semibold">Ya tienes una sesion iniciada</h1>
+            <p className="text-xl">Cierra sesión para registrarte o iniciar sesión con otro usuario.</p>
+          </div>
+          <Link to='/'>
+            <div className="flex flex-row">
+              <Button className="bg-TVred shadowbtn py-6 px4 m-auto flex justify-center items-center">Regresar al Inicio</Button>
+            </div>
+          </Link>
+        </div>
+      </div>
+    )
+  }
+  return (
+    <Fade cascade damping={0.1} className="w-full h-full">
+      <main className="bg-TVBlue flex flex-row h-full w-full">
+        {signInValue ? withSignin() : withoutSignin()}
       </main>
     </Fade>
   );

@@ -12,6 +12,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function Register() {
   const [errorMessage, setErrorMessage] = useState(null);
+  const [signUpValue, setSignUpValue] = useState(null);
   const [isActiveBtn, setIsActiveBtn] = useState(false);
   const [signInText, setSignInText] = useState("Regístrate");
   const [repeatPassword, setRepeatPassword] = useState({ repeatpassword: "" });
@@ -30,6 +31,32 @@ export default function Register() {
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
+
+  const fetchDataToken = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3366/api/verify-token",
+        {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (response.ok) {
+        console.log(true)
+        setSignUpValue(true);
+      } else {
+        setSignUpValue(false);
+      }
+    } catch (err) {
+      setSignUpValue(false);
+    }
+  };
+
+  fetchDataToken()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -119,7 +146,6 @@ export default function Register() {
       setIsActiveBtn(false); // Desactivar el estado de botón activo después de la petición
     }
   };
-  
 
   useEffect(() => {
     if (isActiveBtn) {
@@ -129,10 +155,10 @@ export default function Register() {
     }
   }, [isActiveBtn]);
 
-  return (
-    <Fade cascade damping={0.1} className="w-full h-full">
-      <main className="bg-TVBlue flex flex-row h-full w-full">
-        <div className="flex flex-col py-12 w-[50%]">
+  const withoutSignup = () =>{
+    return(
+      <>
+      <div className="flex flex-col py-12 w-[50%]">
           <Link to="/" className="flex justify-center items-center py-4">
             <Typography
               as="a"
@@ -404,6 +430,32 @@ export default function Register() {
             backgroundPosition: "center",
           }}
         ></div>
+      </>
+    )
+  }
+
+  const withSignup = () => {
+    return (
+      <div className="h-screen flex flex-col justify-center items-center m-auto gap-4">
+        <div className="bg-white py-16 px-20 rounded-lg shadow flex flex-col gap-6">
+          <div className="flex flex-col gap-3 text-center">
+            <h1 className="text-3xl font-semibold">Ya tienes una sesion iniciada</h1>
+            <p className="text-xl">Cierra sesión para registrarte o iniciar sesión con otro usuario.</p>
+          </div>
+          <Link to='/'>
+            <div className="flex flex-row">
+              <Button className="bg-TVred shadowbtn py-6 px4 m-auto flex justify-center items-center">Regresar al Inicio</Button>
+            </div>
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <Fade cascade damping={0.1} className="w-full h-full">
+      <main className="bg-TVBlue flex flex-row h-full w-full">
+        {signUpValue ? withSignup() : withoutSignup()}
       </main>
     </Fade>
   );

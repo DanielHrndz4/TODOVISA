@@ -90,6 +90,14 @@ router.get('/protected-route', authenticateJWT, (req, res) => {
   res.send('This is a protected route');
 });
 
+router.get('/verify-token', authenticateJWT, (req, res) =>{
+  try{
+    res.status(200).json({message: 'Ya tienes un inicio de sesion activo'});
+  }catch(e){
+    res.status(500).json({message: 'Error del servidor'});
+  }
+})
+
 router.post('/vipro', authenticateJWT, async (req, res) => {
   const email = req.body.email;
   
@@ -142,7 +150,26 @@ router.post('/vipro/validation', authenticateJWT, (req, res) => {
     });
 });
 
+router.post('/vipro-eeuu', authenticateJWT, async (req, res) => {
+  const { email, questions } = req.body;
 
+  try {
+      // Crea un nuevo formulario usando el modelo Form
+      const newForm = new Form({
+          email: email,
+          questions: questions
+      });
+
+      // Guarda el formulario en la base de datos
+      const savedForm = await newForm.save();
+      console.log('Formulario guardado:', savedForm);
+
+      res.status(200).json({ message: "Formulario registrado exitosamente" });
+  } catch (error) {
+      console.error('Error al guardar el formulario:', error.message);
+      res.status(500).json({ message: 'Error al guardar el formulario' });
+  }
+});
 
 router.get('/', (req, res) => {
   res.send('Hello World')
