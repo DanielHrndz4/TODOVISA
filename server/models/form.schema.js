@@ -6,18 +6,21 @@ const formSchema = new mongoose.Schema({
         required: true
     },
     questions: [{
-        pregunta: {
+        question: {
             type: String,
             required: true
         },
-        tipo_pregunta: {
+        type_question: {
             type: String,
-            enum: ['abierta', 'cerrada'], // Asegúrate de ajustar según tus necesidades
+            enum: ['abierta', 'cerrada', 'textarea', 'number'], // Asegúrate de ajustar según tus necesidades
             required: true
         },
-        respuestas: [{
+        response: [{
             type: String
-        }]
+        }],
+        user_response:{
+            type: String,
+        }
     }]
 });
 

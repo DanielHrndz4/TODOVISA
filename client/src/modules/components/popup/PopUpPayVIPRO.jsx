@@ -50,7 +50,7 @@ const handleClickPopUpPay = (html, btn) => {
                                     window.location.href = `vipro/${selectedValue}`;
                                 } catch (error) {
                                     console.error('Error en la solicitud:', error);
-                                    alert('Error al guardar el formulario. Inténtalo de nuevo más tarde.');
+                                    window.location.href = `/`;
                                 }
                             };
                             

@@ -34,6 +34,25 @@ router.post('/signin', (req, res) => {
     });
 });
 
+router.post('/show-form-eeuu', authenticateJWT, (req, res) => {
+  const email = req.body.email;
+  Form.findOne({ email: email})
+    .then((user) =>{
+      if(user){
+        return res.status(200).json({ message: 'Formulario encontrado', user:{
+          email: user.email,
+          questions: user.questions
+        }});
+      }else{
+        return res.status(404).json({ message: 'El usuario no tiene un formulario creado'});
+      }
+    })
+    .catch((error) => {
+      console.error(error.message)
+      res.status(500).json({message: 'Error del servidor'})
+    });
+});
+
 router.post('/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
 
@@ -154,22 +173,31 @@ router.post('/vipro-eeuu', authenticateJWT, async (req, res) => {
   const { email, questions } = req.body;
 
   try {
-      // Crea un nuevo formulario usando el modelo Form
-      const newForm = new Form({
-          email: email,
-          questions: questions
-      });
+    // Check if a form with the given email already exists
+    const existingForm = await Form.findOne({ email: email });
 
-      // Guarda el formulario en la base de datos
-      const savedForm = await newForm.save();
-      console.log('Formulario guardado:', savedForm);
+    if (existingForm) {
+      return res.status(200).json({ message: 'El usuario tiene un formulario pendiente' });
+    }
 
-      res.status(200).json({ message: "Formulario registrado exitosamente" });
+    // If no form exists, create a new one
+    const newForm = new Form({
+      email: email,
+      questions: questions
+    });
+
+    // Save the new form to the database
+    const savedForm = await newForm.save();
+    console.log('Formulario guardado:', savedForm);
+
+    return res.status(200).json({ message: 'Formulario registrado exitosamente' });
+
   } catch (error) {
-      console.error('Error al guardar el formulario:', error.message);
-      res.status(500).json({ message: 'Error al guardar el formulario' });
+    console.error('Error al guardar el formulario:', error.message);
+    return res.status(500).json({ message: 'Error al guardar el formulario' });
   }
 });
+
 
 router.get('/', (req, res) => {
   res.send('Hello World')
