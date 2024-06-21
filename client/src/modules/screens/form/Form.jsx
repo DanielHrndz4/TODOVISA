@@ -5,6 +5,7 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Typography } from "@material-tailwind/react";
+import handleClickPopUpSaveForm from "../../components/popup/PopUpSaveForm";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -62,54 +63,102 @@ const VIPROForm = () => {
   const questionList = (form) => {
     let count = 1;
     return questions.map((question, index) => (
-      <Form.Item
-        key={index}
-        name={question.question}
-        label={<div className="text-lg">{`${count++}. ${question.question}`}</div>}
-        rules={[
-          {
-            required: true,
-            message: "Please enter a value",
-          },
-        ]}
-        className="w-full font-bold py-2"
-        hasFeedback
-        validateTrigger="onFinish"
-      >
-        {question.type_question === "abierta" && <Input size="large" />}
-        {question.type_question === "number" && <Input type="number" size="large" />}
-        {/* {question.type === "checkbox" && <Checkbox.Group options={question.response} />} */}
-        {question.type_question === "textarea" && <TextArea allowClear size="large" />}
-        {/* {question.type === "tel" && <Input size="large" />} */}
-        {/* {question.type === "email" && <Input size="large" />} */}
-        {question.type_question === "cerrada" && (
-          <Select placeholder="Selecciona una opción" allowClear size="large">
-            {question.response.map((option, idx) => (
-              <Option key={idx} value={option}>
-                {option}
-              </Option>
-            ))}
-          </Select>
-        )}
-      </Form.Item>
+      <>
+        <div className="text-lg font-semibold text-justify">{`${count++}. ${question.question}`}</div>
+        <Form.Item
+          key={index}
+          name={question.question}
+          rules={[
+            {
+              required: question.user_response == "" ? true : false,
+              message: "Please enter a value",
+            },
+          ]}
+          className="w-full font-bold py-2"
+          hasFeedback
+          validateTrigger="onFinish"
+        >
+          {question.type_question === "abierta" && <Input style={{ color: 'black' }} size="large" placeholder={question.user_response} value={question.user_response} />}
+          {question.type_question === "number" && <Input type="number" size="large" placeholder={question.user_response} value={question.user_response} />}
+          {question.type_question === "textarea" && <TextArea allowClear size="large" placeholder={question.user_response} value={question.user_response} />}
+          {question.type_question === "cerrada" && (
+            <Select placeholder={question.user_response == "" ? "Selecciona una opción" : question.user_response} allowClear size="large" value={question.user_response}>
+              {question.response.map((option, idx) => (
+                <Option key={idx} value={option}>
+                  {option}
+                </Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
+      </>
     ));
   };
 
-  const onFinish = (values) => {
-    console.log(values);
+  const onFinish = async () => {
+    try {
+      const response = await fetch('http://localhost:3366/api/update-form-eeuu', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, questions }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al actualizar el formulario');
+      }
+
+      const responseData = await response.json();
+      console.log('Formulario actualizado:', responseData);
+      const fetchData = async () => {
+        try {
+            const response = await fetch(
+                "http://localhost:3366/api/vipro-finish",
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                }
+            );
+            if (response.ok) {
+                console.log(response);
+                navigateTo('/')
+            } else {
+                console.log(response);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    fetchData(); 
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
   };
 
-  const onFinishFailed = ({ errorFields }) => {
-    form.setFields(
-      errorFields.map((field) => ({
-        ...field,
-        validateStatus: field.errors[0] === "Field empty" ? "success" : "warning",
-      }))
-    );
+  const onFinishFailed = async (email, questions) => {
+    const html = `<div>Seguro que quieres guardar</div>`
+    handleClickPopUpSaveForm(html, email, questions)
   };
 
   const onReset = () => {
     form.resetFields();
+  };
+
+  const handleValuesChange = (changedValues, allValues) => {
+    const changedQuestionIndex = questions.findIndex(q => q.question in changedValues);
+
+    if (changedQuestionIndex !== -1) {
+      const updatedQuestions = [...questions];
+      updatedQuestions[changedQuestionIndex].user_response = changedValues[questions[changedQuestionIndex].question];
+      setQuestions(updatedQuestions);
+      console.log(email)
+      console.log(questions);
+    }
   };
 
   const location = useLocation();
@@ -122,7 +171,8 @@ const VIPROForm = () => {
       form={form}
       name="control-hooks"
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinishFailed={() => onFinishFailed(email, questions)}
+      onValuesChange={handleValuesChange}
       className="w-full py-10 px-24 bg-white rounded-lg shadow"
     >
       <Link to="/">
@@ -139,7 +189,7 @@ const VIPROForm = () => {
         aspernatur molestias tenetur repellat libero.
       </p>
       {questionList(form)}
-      
+
       <Form.Item className="min-w-[60%] w-[60%] mx-auto">
         <div className="flex flex-row justify-around">
           <Button htmlType="submit" className="w-[45%] py-5 bg-TVred shadow border-0 text-white font-semibold">

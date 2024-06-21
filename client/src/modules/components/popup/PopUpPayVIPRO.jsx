@@ -14,58 +14,31 @@ const handleClickPopUpPay = (html, btn) => {
                 const userFromStorage = JSON.parse(sessionStorage.getItem('user'));
                 const email = userFromStorage.email;
 
-                const fetchData = async () => {
+                const createForm = async (email, questions, selectedValue) => {
                     try {
-                        const response = await fetch(
-                            "http://localhost:3366/api/vipro",
-                            {
-                                method: 'POST',
-                                credentials: 'include',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ email })
-                            }
-                        );
-
-                        if (response.ok) {
-                            console.log(response);
-                            const createForm = async (email, questions, selectedValue) => {
-                                try {
-                                    const response = await fetch('http://localhost:3366/api/vipro-eeuu', {
-                                        method: 'POST',
-                                        credentials: 'include',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify({ email, questions }),
-                                    });
-                            
-                                    if (!response.ok) {
-                                        throw new Error('Error al guardar el formulario');
-                                    }
-                            
-                                    const responseData = await response.json();
-                                    console.log('Respuesta del servidor:', responseData);
-                            
-                                    // Redirige a la página vipro con el valor seleccionado
-                                    window.location.href = `vipro/${selectedValue}`;
-                                } catch (error) {
-                                    console.error('Error en la solicitud:', error);
-                                    window.location.href = `/`;
-                                }
-                            };
-                            
-                            createForm(email, questions, selectedValue)
-                        } else {
-                            console.log(response);
-                            window.location.href = `/`;
+                        const response = await fetch('http://localhost:3366/api/vipro-eeuu', {
+                            method: 'POST',
+                            credentials: 'include',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ email, questions }),
+                        });
+                
+                        if (!response.ok) {
+                            throw new Error('Error al guardar el formulario');
                         }
-                    } catch (err) {
-                        console.error(err);
+                
+                        const responseData = await response.json();
+                        window.location.href = `vipro/${selectedValue}`;
+                        console.log('Respuesta del servidor:', responseData);
+                    } catch (error) {
+                        console.error('Error en la solicitud:', error);
                         window.location.href = `/`;
                     }
                 };
-
-                fetchData(); // Llama a fetchData directamente
+                
+                createForm(email, questions, selectedValue)// Llama a fetchData directamente
             }
         }
     });

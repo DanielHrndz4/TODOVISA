@@ -36,22 +36,44 @@ router.post('/signin', (req, res) => {
 
 router.post('/show-form-eeuu', authenticateJWT, (req, res) => {
   const email = req.body.email;
-  Form.findOne({ email: email})
-    .then((user) =>{
-      if(user){
-        return res.status(200).json({ message: 'Formulario encontrado', user:{
-          email: user.email,
-          questions: user.questions
-        }});
-      }else{
-        return res.status(404).json({ message: 'El usuario no tiene un formulario creado'});
+  Form.findOne({ email: email })
+    .then((user) => {
+      if (user) {
+        return res.status(200).json({
+          message: 'Formulario encontrado', user: {
+            email: user.email,
+            questions: user.questions
+          }
+        });
+      } else {
+        return res.status(404).json({ message: 'El usuario no tiene un formulario creado' });
       }
     })
     .catch((error) => {
       console.error(error.message)
-      res.status(500).json({message: 'Error del servidor'})
+      res.status(500).json({ message: 'Error del servidor' })
     });
 });
+
+router.post('/update-form-eeuu', authenticateJWT, async (req, res) => {
+  const { email, questions } = req.body;
+
+  try {
+    const form = await Form.findOneAndUpdate({
+      email: email,
+      questions: questions
+    })
+  
+    if (form) {
+      res.status(200).json({message: 'Formulario guardado con exito'})
+    }else{
+      res.status(400).json({message: 'Datos no actualizados'})
+    }
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({message: 'Error del servidor'})
+  }
+})
 
 router.post('/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
@@ -109,21 +131,41 @@ router.get('/protected-route', authenticateJWT, (req, res) => {
   res.send('This is a protected route');
 });
 
-router.get('/verify-token', authenticateJWT, (req, res) =>{
-  try{
-    res.status(200).json({message: 'Ya tienes un inicio de sesion activo'});
-  }catch(e){
-    res.status(500).json({message: 'Error del servidor'});
+router.get('/verify-token', authenticateJWT, (req, res) => {
+  try {
+    res.status(200).json({ message: 'Ya tienes un inicio de sesion activo' });
+  } catch (e) {
+    res.status(500).json({ message: 'Error del servidor' });
   }
 })
 
 router.post('/vipro', authenticateJWT, async (req, res) => {
   const email = req.body.email;
-  
+
   try {
     const user = await userSchema.findOneAndUpdate(
       { email: email },
       { vipro: true },
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    res.status(200).json({ message: 'Usuario actualizado a VIP', user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
+});
+
+router.post('/vipro-finish', authenticateJWT, async (req, res) => {
+  const email = req.body.email;
+
+  try {
+    const user = await userSchema.findOneAndUpdate(
+      { email: email },
+      { vipro: false },
     );
 
     if (!user) {
