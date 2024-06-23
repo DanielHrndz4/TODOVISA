@@ -51,10 +51,10 @@ export default function Home() {
 
   return (
     <Fade duration={1000} triggerOnce > {/* Añade la animación de fade */}
-      <main className="h-full w-full absolute">
+      <main className="h-full w-full overflow-auto lg:absolute">
         {jwtToken ? <LoginUserNavbar /> : <NavbarWithMegaMenu />}
-        <div className="flex flex-col">
-          <div className="backgroundgradient">
+        <div className="flex flex-col w-full">
+          <div className="backgroundgradient w-full">
           <div
             className="relative mt-12 mb-4" // Adjust based on the height of the navbar
             style={{
@@ -70,8 +70,8 @@ export default function Home() {
             }}
           >
             <div className="h-full w-full flex items-center justify-center flex-col gap-4 font-semibold [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] ">
-              <h1 className="text-white text-4xl">¡Abre las puertas al mundo!</h1>
-              <h1 className="text-white text-7xl">Todo Visa</h1>
+              <h1 className="text-white text-2xl text-center lg:text-4xl">¡Abre las puertas al mundo!</h1>
+              <h1 className="text-white text-5xl text-center lg:text-7xl">Todo Visa</h1>
             </div>
           </div>
           </div>

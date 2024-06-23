@@ -45,13 +45,13 @@ export default function VIPRO(props) {
     return (
         <div className="flex flex-col h-full mb-4" id="vipro">
             <div className="min-h-[55%] h-[55%] absolute"></div>
-            <div className="flex flex-row gap-4 h-full z-100 relative w-full lg:w-[80%] m-auto">
-                <Fade className="w-full flex flex-col py-8 mx-auto text-black">
-                    <div className="w-full flex flex-col py-8 mx-auto text-black">
-                        <div className="w-full py-8 px-6">
-                            <div className="pb-6 pt-4"><h1 className="text-5xl text-center text-TVBlue font-bold">VIPRO Formulario</h1></div>
+            <div className="flex flex-col lg:flex-row gap-4 h-full z-100 relative w-full lg:w-[80%] m-auto">
+                <Fade className="w-full flex flex-col lg:py-8 mx-auto text-black">
+                    <div className="w-full flex flex-col lg:py-8 mx-auto text-black">
+                        <div className="w-full lg:py-8 px-6">
+                            <div className="pb-4 lg:pb-6 pt-4"><h1 className="text-3xl lg:text-5xl text-center text-TVBlue font-bold">VIPRO Formulario</h1></div>
                             <div className="py-4">
-                                <h2 className="text-2xl text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. <strong>Subtitulo opcional</strong></h2>
+                                <h2 className="text-xl lg:text-2xl text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. <strong>Subtitulo opcional</strong></h2>
                                 <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
                             </div>
                             <div className="pb-6"><p className="text-justify lg:text-lg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate nulla consectetur maxime quae aliquam harum obcaecati alias dolores, assumenda natus excepturi hic iusto! Quibusdam minus repudiandae, deserunt dolore laboriosam hic eum magni numquam natus, laborum rem vero nesciunt accusantium libero. <strong>parrafo</strong></p></div>

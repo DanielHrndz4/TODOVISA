@@ -14,7 +14,7 @@ function VIPROCarrousel() {
       <Fade key={index}>
         <div className="mx-2">
           <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src={country.img} alt={country.country} className="max-h-[13rem] w-full h-[13rem] rounded-md" />
+            <img src={country.img} alt={country.country} className="max-h-[13rem] w-full h-[11rem] lg:h-[13rem] rounded-md" />
             <h1 className="text-xl lg:text-2xl font-semibold pt-2">{country.country}</h1>
             <p className="py-2 text-justify">{country.description}</p>
             <Link to={country.uri}><Button className="font-semibold w-full bg-TVred shadowbtn">Ver más</Button></Link>
@@ -60,7 +60,7 @@ function VIPROCarrousel() {
   };
 
   return (
-    <div className="w-full bg-TVBlue py-10" id="services">
+    <div className="w-full bg-TVBlue px-4 lg:px-0 py-4 lg:py-10" id="services">
       <div className="slider-container w-[90%] mx-auto">
         <Slider {...settings} className="flex gap-4">
           {carrouselData()}

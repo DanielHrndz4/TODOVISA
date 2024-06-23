@@ -111,8 +111,6 @@ function NavListMenu() {
       </a>
     )
   );
-
- 
 }
 
 function NavList() {
@@ -148,9 +146,7 @@ function NavList() {
         color="white"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-        VIPRO
-        </ListItem>
+        <ListItem className="flex items-center gap-2 py-2 pr-4">VIPRO</ListItem>
       </Typography>
       <Typography
         as="a"
@@ -176,12 +172,12 @@ export default function NavbarWithMegaMenu() {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
-  
-  const colorRD = "#B6122A"
+
+  const colorRD = "#B6122A";
 
   return (
-    <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVBlue">
-      <div className="w-[80%] m-auto flex items-center justify-between text-white">
+    <Navbar className="max-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVBlue">
+      <div className="max-w-[80%] m-auto flex items-center justify-between text-white">
         <Link to="/">
           <Typography
             as="a"
@@ -189,7 +185,7 @@ export default function NavbarWithMegaMenu() {
             variant="h6"
             className="mr-4 cursor-pointer py-1.5 lg:ml-2"
           >
-            <img src="/img/logo/todovisa.png" alt="" className="w-[90px]"/>
+            <img src="/img/logo/todovisa.png" alt="" className="w-[90px]" />
           </Typography>
         </Link>
         <div className="flex flex-row gap-8">
@@ -203,7 +199,11 @@ export default function NavbarWithMegaMenu() {
               </Button>
             </Link>
             <Link to="signup">
-              <Button variant="gradietrent" size="md" className="shadowbtn bg-TVred">
+              <Button
+                variant="gradietrent"
+                size="md"
+                className="shadowbtn bg-TVred"
+              >
                 Registrarse
               </Button>
             </Link>
@@ -224,13 +224,21 @@ export default function NavbarWithMegaMenu() {
       </div>
       <Collapse open={openNav}>
         <NavList />
-        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Button variant="outlined" size="sm" color="white" fullWidth>
-            Log In
-          </Button>
-          <Button variant="gradient" size="sm" fullWidth>
-            Sign In
-          </Button>
+        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden pb-4">
+          <Link to="/signin">
+            <Button size="md" className="shadowbtn bg-transparent">
+              Iniciar sesión
+            </Button>
+          </Link>
+          <Link to="signup">
+            <Button
+              variant="gradietrent"
+              size="md"
+              className="shadowbtn bg-TVred"
+            >
+              Registrarse
+            </Button>
+          </Link>
         </div>
       </Collapse>
     </Navbar>
