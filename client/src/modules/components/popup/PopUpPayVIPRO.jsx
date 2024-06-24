@@ -48,30 +48,18 @@ const handleClickPopUpPay = (html, btn) => {
                                     console.log('Respuesta del servidor:', responseData);
                                 } catch (error) {
                                     console.error('Error en la solicitud:', error);
-<<<<<<< HEAD
-                                    window.location.href = `/`;
-=======
                                     window.location.href = '/';
->>>>>>> e6d47d6 (add: responsive design)
                                 }
                             };
                             
                             createForm(email, questions, selectedValue)
                         } else {
                             console.log(response);
-<<<<<<< HEAD
                             window.location.href = `/`;
                         }
                     } catch (err) {
                         console.error(err);
                         window.location.href = `/`;
-=======
-                            window.location.href = '/';
-                        }
-                    } catch (err) {
-                        console.error(err);
-                        window.location.href = '/';
->>>>>>> e6d47d6 (add: responsive design)
                     }
                 };
 
