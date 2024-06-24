@@ -71,7 +71,7 @@ export default function Home() {
           >
             <div className="h-full w-full flex items-center justify-center flex-col gap-4 font-semibold [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] ">
               <h1 className="text-white text-2xl text-center lg:text-4xl">¡Abre las puertas al mundo!</h1>
-              <h1 className="text-white text-5xl text-center lg:text-7xl">Todo Visa</h1>
+              <h1 className="text-white text-5xl text-center lg:text-7xl">TODO VISA</h1>
             </div>
           </div>
           </div>
