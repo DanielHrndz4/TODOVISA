@@ -43,7 +43,7 @@ const handlePopUp = (jwt) => {
 
 export default function VIPRO(props) {
     return (
-        <div className="flex flex-col h-full mb-4" id="vipro">
+        <div className="flex flex-col h-full lg:mb-4" id="vipro">
             <div className="min-h-[55%] h-[55%] absolute"></div>
             <div className="flex flex-col lg:flex-row gap-4 h-full z-100 relative w-full lg:w-[80%] m-auto">
                 <Fade className="w-full flex flex-col lg:py-8 mx-auto text-black">
@@ -62,7 +62,7 @@ export default function VIPRO(props) {
                     </div>
                 </Fade>
                 <div className="w-full flex justify-center items-end flex-col py-8">
-                    <Slide className="w-[90%]"><img src="/img/VIPRO/viproform.png" alt="" /></Slide>
+                    <Slide className="w-[90%] m-auto lg:m-none"><img src="/img/VIPRO/viproform.png" alt="" /></Slide>
                 </div>
             </div>
         </div>

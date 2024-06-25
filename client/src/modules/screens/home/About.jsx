@@ -3,9 +3,9 @@ import { Slide, Fade } from "react-awesome-reveal"
 
 export default function About() {
     return (
-        <div className="flex flex-col h-full mb-4" id="about">
+        <div className="flex flex-col h-full lg:mb-4" id="about">
             <div className="min-h-[55%] h-[55%] absolute"></div>
-            <div className="flex flex-col lg:flex-row lg:gap-4 h-full z-100 relative w-full lg:w-[85%] m-auto">
+            <div className="flex flex-col-reverse gap-4 mt-4 lg:flex-row lg:gap-4 h-full z-100 relative w-full lg:w-[85%] m-auto">
                 <div className="w-full flex justify-center items-center lg:items-end flex-col py-8">
                     <Slide className="w-[85%]"><img src="/img/about/about.png" alt="" /></Slide>
                 </div>
