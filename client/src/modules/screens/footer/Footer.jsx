@@ -30,7 +30,7 @@ export default function Footer() {
           <li>
             <Typography
               as="a"
-              href="#"
+              href="#vipro"
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >

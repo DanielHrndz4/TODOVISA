@@ -100,8 +100,8 @@ export default function Login() {
   const withoutSignin = () => {
     return (
       <>
-        <div className="flex flex-col py-16 w-[50%]">
-          <Link to="/" className="flex justify-center items-center py-4">
+        <div className="flex flex-col py-16 w-full lg:w-[50%]">
+          <Link to="/" className="flex justify-center items-center py-4 lg:py-4">
             <Typography
               as="a"
               href="#"
@@ -133,6 +133,9 @@ export default function Login() {
                       <input className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent" id="grid-email" type="email" name="email" value={formData.email} onChange={handleChange} required />
                     </div>
                   </div>
+                  <Typography variant="h6" color="blue-gray" className="text-white">
+                        Contraseña
+                      </Typography>
                   <div className="relative">
                     <input
                       className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-10 leading-tight focus:outline-none focus:bg-transparent"
@@ -190,7 +193,7 @@ export default function Login() {
             </Card>
           </Fade>
         </div>
-        <div className="w-full" style={{ backgroundImage: 'url("/img/LRP/visa3.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        <div className="w-full hidden lg:block" style={{ backgroundImage: 'url("/img/LRP/visa3.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
       </>
     )
   }
@@ -214,7 +217,7 @@ export default function Login() {
   }
   return (
     <Fade cascade damping={0.1} className="w-full h-full">
-      <main className="bg-TVBlue flex flex-row h-full w-full">
+      <main className="bg-TVBlue flex flex-col lg:flex-row h-full w-full">
         {signInValue ? withSignin() : withoutSignin()}
       </main>
     </Fade>

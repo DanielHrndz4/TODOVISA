@@ -158,7 +158,7 @@ export default function Register() {
   const withoutSignup = () =>{
     return(
       <>
-      <div className="flex flex-col py-12 w-[50%]">
+      <div className="flex flex-col py-12 w-full lg:w-[50%]">
           <Link to="/" className="flex justify-center items-center py-4">
             <Typography
               as="a"
@@ -423,7 +423,7 @@ export default function Register() {
           </Fade>
         </div>
         <div
-          className="w-full"
+          className="w-full hidden lg:block"
           style={{
             backgroundImage: 'url("/img/LRP/visa3.jpg")',
             backgroundSize: "cover",
@@ -454,7 +454,7 @@ export default function Register() {
 
   return (
     <Fade cascade damping={0.1} className="w-full h-full">
-      <main className="bg-TVBlue flex flex-row h-full w-full">
+      <main className="bg-TVBlue flex flex-col lg:flex-row h-full w-full">
         {signUpValue ? withSignup() : withoutSignup()}
       </main>
     </Fade>
