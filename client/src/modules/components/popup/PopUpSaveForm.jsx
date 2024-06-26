@@ -5,7 +5,10 @@ const handleClickPopUpSaveForm = (html, email, questions) => {
         icon: 'warning',
         html: html,
         confirmButtonText: 'Aceptar!',
-        confirmButtonColor: '#B6122A'
+        confirmButtonColor: '#B6122A',
+        showCancelButton: true,
+        cancelButtonText: "Cancelar!",
+        cancelButtonColor: '#113E5F',
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire({

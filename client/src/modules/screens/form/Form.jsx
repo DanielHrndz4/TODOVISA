@@ -16,8 +16,10 @@ const layout = {
 
 const VIPROForm = () => {
   const [questions, setQuestions] = useState([]);
+  const [termsMessage, setTermsMessage] = useState("");
   const [form] = Form.useForm();
   const navigateTo = useNavigate();
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const userFromStorage = JSON.parse(sessionStorage.getItem('user'));
   const email = userFromStorage ? userFromStorage.email : null;
@@ -55,7 +57,7 @@ const VIPROForm = () => {
   }, [email]);
 
   const handlePopUp = () => {
-    const html = '<h1 class="text-Black font-semibold text-3xl pt-4 pb-5">Términos y condiciones</h1><div class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis est sed hic aliquam, esse assumenda molestiae maiores laudantium consequuntur itaque tempora? Corrupti ea odit consequuntur et commodi rerum dolor odio magnam tempora fugiat ducimus tempore temporibus pariatur repudiandae, vitae esse unde. Illo quisquam, ut cum facere deserunt accusantium voluptatibus minus inventore, corrupti repellat sed quas ad maxime! Numquam, vitae assumenda.Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis est sed hic aliquam, esse assumenda molestiae maiores laudantium consequuntur itaque tempora? Corrupti ea odit consequuntur et commodi rerum dolor odio magnam tempora fugiat ducimus tempore temporibus pariatur repudiandae, vitae esse unde. Illo quisquam, ut cum facere deserunt accusantium voluptatibus minus inventore, corrupti repellat sed quas ad maxime! Numquam, vitae assumenda.</div><p class="pt-4 font-bold w-full text-left">(Texto opcional)</p>';
+    const html = '<h1 class="text-Black font-semibold text-3xl pt-4 pb-5">Términos y condiciones</h1><div class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis est sed hic aliquam, esse assumenda molestiae mayores laudantium consequuntur itaque tempora? Corrupti ea odit consequuntur et commodi rerum dolor odio magnam tempora fugiat ducimus tempore temporibus pariatur repudiandae, vitae esse unde. Illo quisquam, ut cum facere deserunt accusantium voluptatibus minus inventore, corrupti repellat sed quas ad maxime! Numquam, vitae assumenda.Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis est sed hic aliquam, esse assumenda molestiae maiores laudantium consequuntur itaque tempora? Corrupti ea odit consequuntur et commodi rerum dolor odio magnam tempora fugiat ducimus tempore temporibus pariatur repudiandae, vitae esse unde. Illo quisquam, ut cum facere deserunt accusantium voluptatibus minus inventore, corrupti repellat sed quas ad maxime! Numquam, vitae assumenda.</div><p class="pt-4 font-bold w-full text-left">(Texto opcional)</p>';
     const btn = "¡Entendido!";
     handleClickPopUp(html, btn);
   };
@@ -64,14 +66,14 @@ const VIPROForm = () => {
     let count = 1;
     return questions.map((question, index) => (
       <>
-        <div className="text-lg font-semibold text-justify">{`${count++}. ${question.question}`}</div>
+        <div className="text-lg font-semibold ">{`${count++}. ${question.question}`}</div>
         <Form.Item
           key={index}
           name={question.question}
           rules={[
             {
               required: question.user_response == "" ? true : false,
-              message: "Please enter a value",
+              message: "Este campo es obligatorio. Por favor, ingresa un valor.",
             },
           ]}
           className="w-full font-bold py-2"
@@ -96,6 +98,11 @@ const VIPROForm = () => {
   };
 
   const onFinish = async () => {
+    if (!termsAccepted) {
+      setTermsMessage("Debes aceptar los términos y condiciones antes de guardar el formulario.");
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:3366/api/update-form-eeuu', {
         method: 'POST',
@@ -114,36 +121,47 @@ const VIPROForm = () => {
       console.log('Formulario actualizado:', responseData);
       const fetchData = async () => {
         try {
-            const response = await fetch(
-                "http://localhost:3366/api/vipro-finish",
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
-                }
-            );
-            if (response.ok) {
-                console.log(response);
-                navigateTo('/')
-            } else {
-                console.log(response);
+          const response = await fetch(
+            "http://localhost:3366/api/vipro-finish",
+            {
+              method: 'POST',
+              credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email })
             }
+          );
+          if (response.ok) {
+            console.log(response);
+            navigateTo('/')
+          } else {
+            console.log(response);
+          }
         } catch (err) {
-            console.error(err);
+          console.error(err);
         }
-    };
+      };
 
-    fetchData(); 
+      fetchData();
     } catch (error) {
       console.error('Error en la solicitud:', error);
     }
   };
 
   const onFinishFailed = async (email, questions) => {
-    const html = `<div>Seguro que quieres guardar</div>`
-    handleClickPopUpSaveForm(html, email, questions)
+    if (!termsAccepted) {
+      setTermsMessage("Debes aceptar los términos y condiciones antes de guardar el formulario.");
+      return;
+    } else {
+      const html = `<div>Seguro que quieres guardar</div>`
+      handleClickPopUpSaveForm(html, email, questions)
+    }
   };
+
+  const handleClickTermsAndCondition = () => {
+    const html = `<h1 class='pt-4 pb-6 font-semibold text-2xl'>Terminos y condiciones</h1><div class='text-justify'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae iusto recusandae dicta eaque et esse quos! Dolore laboriosam pariatur tempora aspernatur, ipsa iusto itaque quia, blanditiis enim inventore molestias illum neque earum labore asperiores suscipit atque cupiditate nulla quaerat odit!</div>`
+    const btn = "Acepto";
+    handleClickPopUp(html, btn)
+  }
 
   const onReset = () => {
     form.resetFields();
@@ -173,15 +191,15 @@ const VIPROForm = () => {
       onFinish={onFinish}
       onFinishFailed={() => onFinishFailed(email, questions)}
       onValuesChange={handleValuesChange}
-      className="w-full py-10 px-24 bg-white rounded-lg shadow"
+      className="w-full py-6 lg:py-10 px-6 lg:px-24 bg-white rounded-lg shadow"
     >
       <Link to="/">
         <Typography color="black" className="mb-4 font-normal w-full mx-1 text-black text-lg cursor-pointer [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.4)]">
           <FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Regresar al inicio
         </Typography>
       </Link>
-      <h1 className="text-center text-5xl text-black pb-4 font-bold">
-        VIPRO <span className="capitalize">{country === "estadosunidos" ? "Estados Unidos" : country}</span>
+      <h1 className="text-center text-4xl lg:pt-4 pt-3 lg:text-5xl text-black pb-4 font-bold flex flex-col">
+        Formulario de solicitud de VISA<span className="capitalize font-semibold pt-2 lg:pt-0">{country === "estadosunidos" ? "Estados Unidos" : country}</span>
       </h1>
       <p className="py-6">
         <strong>(Texto opcional)</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad dignissimos fugit fugiat sit possimus quibusdam
@@ -190,7 +208,18 @@ const VIPROForm = () => {
       </p>
       {questionList(form)}
 
-      <Form.Item className="min-w-[60%] w-[60%] mx-auto">
+      <div className="pb-6 pt-2">
+        <div className="pb-2 font-semibold">
+          <Checkbox checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} color="red" />
+          <span className="pl-2">Acepto los </span>
+          <span className="hover:text-TVBlue hover:cursor-pointer text-TVred underline" onClick={handleClickTermsAndCondition}>Términos y condiciones</span>
+        </div>
+        <div className="font-semibold text-TVred">
+          {!termsAccepted && termsMessage}
+        </div>
+      </div>
+
+      <Form.Item className="lg:min-w-[60%] lg:w-[60%] min-w-full w-full mx-auto">
         <div className="flex flex-row justify-around">
           <Button htmlType="submit" className="w-[45%] py-5 bg-TVred shadow border-0 text-white font-semibold">
             Enviar formulario

@@ -193,9 +193,9 @@ export default function LoginUserNavbar() {
         const user = JSON.parse(sessionStorage.getItem('user'));
         if (user) {
             return (
-                <div className="flex flex-col">
+                <div className="flex flex-col px-3 pt-6 lg:pt-0">
                     <h1 className="capitalize">{user.name}</h1>
-                    <h1 className="font-semibold text-center">{user.country}</h1>
+                    <h1 className="font-semibold lg:text-center">{user.country}</h1>
                 </div>
             );
         } else {
@@ -216,13 +216,13 @@ export default function LoginUserNavbar() {
                         <img src="/img/logo/todovisa.png" alt="" className="w-[90px]" />
                     </Typography>
                 </Link>
-                <div className="flex flex-row gap-8">
-                    <div className="hidden h-full lg:flex lg:flex-row justify-center items-center">
+                <div className="flex flex-row lg:justify-center lg:items-center gap-8">
+                    <div className="hidden h-full lg:flex lg:flex-row">
                         <NavList />
                     </div>
-                        {getUserName()}
-                    <div className="hidden gap-4 lg:flex">
+                    <div className="hidden gap-4 lg:flex lg:justify-center lg:items-center">
                         <Menu>
+                            {getUserName()}
                             <MenuHandler>
                                 <img
                                     src="https://ionicframework.com/docs/img/demos/avatar.svg"
@@ -251,6 +251,8 @@ export default function LoginUserNavbar() {
                 </IconButton>
             </div>
             <Collapse open={openNav}>
+                {getUserName()}
+
                 <NavList />
                 <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
                     <div className="hidden gap-4 lg:flex">

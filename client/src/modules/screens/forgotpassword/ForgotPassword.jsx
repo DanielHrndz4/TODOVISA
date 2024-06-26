@@ -63,7 +63,7 @@ export default function Login() {
                       <Typography variant="h6" color="white" className="text-white">
                         Correo electrónico
                       </Typography>
-                      <input className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-trasnparent" id="grid-email" type="email" placeholder="name@email.com" name="email" value={formData.email} onChange={handleChange} />
+                      <input className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-trasnparent" id="grid-email" type="email" name="email" value={formData.email} onChange={handleChange} />
                       {/* <p className="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> */}
                     </div>
                   </div>
