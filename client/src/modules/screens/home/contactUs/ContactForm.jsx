@@ -8,7 +8,7 @@ import {
 
 export default function ContactForm() {
   return (
-    <Card color="white" shadow={true} className="max-w-xl h-full mx-auto  lg:px-16 lg:py-8 flex justify-center shadow">
+    <Card color="white" shadow={true} className="max-w-xl h-full mx-auto px-4 py-6  lg:px-16 lg:py-8 flex justify-center shadow">
       <Typography variant="h4" color="blue-gray">
         Escribenos
       </Typography>

@@ -35,34 +35,34 @@ export default function MapComponent() {
 
       </div>
       <Fade>
-      <div className="w-full flex">
-        <div className="border-2 border-white p-2 rounded-full w-[55px] h-[55px] flex justify-center items-center shadowbtn">
-          <FontAwesomeIcon icon={faLocationDot} size="2x" className="w-full m-auto text-white"/>
+        <div className="w-full flex lg:px-0 px-6">
+          <div className="border-2 border-white p-2 rounded-full lg:w-[55px] lg:h-[55px] min-w-[45px] h-[45px] flex justify-center items-center shadowbtn">
+            <FontAwesomeIcon icon={faLocationDot} size="x lg:2x" className="w-full m-auto text-white" />
+          </div>
+          <a href="https://www.google.com/maps/dir//67+Avenida+Sur+Local+%231,+San+Salvador/@13.6970016,-89.2252546,18z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8f6331d77b1013e3:0xbfa86a56cf477af7!2m2!1d-89.2246802!2d13.6971043?entry=ttu" className="flex justify-center items-center ">
+            <span className="pl-4 lg:text-xl text-lg flex items-center justify-center text-white hover:text-TVred hover:underline">
+              67 Avenida Sur Local #1, San Salvador
+            </span>
+          </a>
         </div>
-        <a href="https://www.google.com/maps/dir//67+Avenida+Sur+Local+%231,+San+Salvador/@13.6970016,-89.2252546,18z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8f6331d77b1013e3:0xbfa86a56cf477af7!2m2!1d-89.2246802!2d13.6971043?entry=ttu" className="flex justify-center items-center ">
-        <span className="pl-4 text-xl flex items-center justify-center text-white hover:text-TVred hover:underline">
-          67 Avenida Sur Local #1, San Salvador
-        </span>
-        </a>
-      </div>
       </Fade>
       <Fade>
-      <div className="w-full flex mt-4">
-        <div className="border-2 border-white p-2 rounded-full w-[55px] h-[55px] flex justify-center items-center shadowbtn">
-          <FontAwesomeIcon icon={faPhone} size="2x" className="w-full m-auto text-white"/>
+        <div className="w-full flex mt-4  lg:px-0 px-6">
+          <div className="border-2 border-white p-2 rounded-full lg:w-[55px] lg:h-[55px] min-w-[45px] h-[45px] flex justify-center items-center shadowbtn">
+            <FontAwesomeIcon icon={faPhone} size="x lg:2x" className="w-full m-auto text-white" />
+          </div>
+          <span className="pl-4 lg:text-xl text-lg flex items-center justify-center text-white">
+            +503 2245-4027
+          </span>
         </div>
-        <span className="pl-4 text-xl flex items-center justify-center text-white">
-          +503 2245-4027
-        </span>
-      </div>
-      <div className="w-full flex mt-4">
-        <div className="border-2 border-white p-2 rounded-full w-[55px] h-[55px] flex justify-center items-center shadowbtn">
-          <FontAwesomeIcon icon={faClock} size="2x" className="w-full m-auto text-white"/>
+        <div className="w-full flex mt-4  lg:px-0 px-6">
+          <div className="border-2 border-white p-2 rounded-full lg:w-[55px] lg:h-[55px] min-w-[45px] h-[45px] flex justify-center items-center shadowbtn">
+            <FontAwesomeIcon icon={faClock} size="x lg:2x" className="w-full m-auto text-white" />
+          </div>
+          <span className="pl-4 lg:text-xl text-lg flex items-center justify-center text-white flex-row">
+            Lunes a Viernes: 8:30am - 6:00pm, Sabados: 9:00am - 5:00pm, Domingos:  Cerrados
+          </span>
         </div>
-        <span className="pl-4 text-xl flex items-center justify-center text-white flex-row">
-          Lunes a Viernes: 8:30am - 6:00pm, Sabados: 9:00am - 5:00pm, Domingos:  Cerrados
-        </span>
-      </div>
       </Fade>
     </>
   );

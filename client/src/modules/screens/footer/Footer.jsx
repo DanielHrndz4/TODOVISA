@@ -3,10 +3,10 @@ import { Typography } from "@material-tailwind/react";
 export default function Footer() {
   let currentYear = new Date().getFullYear();
   return (
-    <footer className="w-full bg-TVBlue p-10 pt-8 mt-4">
-      <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-around">
-      <img src="/img/logo/todovisa.png" alt="" className="w-[150px]"/>
-        <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
+    <footer className="w-full bg-TVBlue lg:p-10 p-6 pt-8 mt-4">
+      <div className="flex flex-col lg:flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-around">
+        <img src="/img/logo/todovisa.png" alt="" className="lg:w-[150px] w-[120px] py-4" />
+        <ul className="flex lg:flex-row flex-col flex-wrap items-center gap-y-4 lg:gap-y-2 gap-x-8">
           <li>
             <Typography
               as="a"
