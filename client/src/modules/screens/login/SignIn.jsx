@@ -21,25 +21,8 @@ export default function Login() {
   const navigateTo = useNavigate();
 
   const fetchDataToken = async () => {
-    try {
-      const response = await fetch(
-        "https://todovisa.onrender.com/api/verify-token",
-        {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      );
-
-      if (response.ok) {
-        setSignInValue(true);
-      } else {
-        setSignInValue(false);
-      }
-    } catch (err) {
-      setSignInValue(false);
+    if (Cookies.get('jwt')) {
+      setSignInValue(true);
     }
   };
 

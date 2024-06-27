@@ -29,7 +29,7 @@ import {
     UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import Cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 
 const navListMenuItems = [
     {
@@ -184,7 +184,7 @@ export default function LoginUserNavbar() {
     };
 
     const handleLogout = () => {
-        Cookie.remove('jwt');
+        Cookies.remove('jwt');
         sessionStorage.removeItem('user');
         window.location.reload();
     };

@@ -123,7 +123,7 @@ router.get('/protected-route', (req, res) => {
   res.send('This is a protected route');
 });
 
-router.get('/verify-token', authenticateJWT, (req, res) => {
+router.get('/verify-token', (req, res) => {
   try {
     res.status(200).json({ message: 'Ya tienes un inicio de sesión activo' });
   } catch (e) {
@@ -131,7 +131,7 @@ router.get('/verify-token', authenticateJWT, (req, res) => {
   }
 });
 
-router.post('/vipro', authenticateJWT, async (req, res) => {
+router.post('/vipro', async (req, res) => {
   const email = req.body.email;
 
   try {
@@ -148,7 +148,7 @@ router.post('/vipro', authenticateJWT, async (req, res) => {
   }
 });
 
-router.post('/vipro-finish', authenticateJWT, async (req, res) => {
+router.post('/vipro-finish', async (req, res) => {
   const email = req.body.email;
 
   try {
@@ -165,7 +165,7 @@ router.post('/vipro-finish', authenticateJWT, async (req, res) => {
   }
 });
 
-router.post('/vipro/validation', authenticateJWT, (req, res) => {
+router.post('/vipro/validation', (req, res) => {
   const email = req.body.email;
 
   if (!email || email.trim() === '') {
@@ -190,7 +190,7 @@ router.post('/vipro/validation', authenticateJWT, (req, res) => {
     });
 });
 
-router.post('/vipro-eeuu', authenticateJWT, async (req, res) => {
+router.post('/vipro-eeuu', async (req, res) => {
   const { email, questions } = req.body;
 
   try {
