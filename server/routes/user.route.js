@@ -16,9 +16,9 @@ router.post('/signin', (req, res) => {
     .then((user) => {
       if (user) {
         const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
-        res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'Strict' });
+        res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'None' });
         res.json({
-          message: 'Inicio de sesion exitoso', token, user: {
+          message: 'Inicio de sesión exitoso', token, user: {
             email: user.email,
             name: user.name,
             country: user.country
@@ -50,8 +50,8 @@ router.post('/show-form-eeuu', authenticateJWT, (req, res) => {
       }
     })
     .catch((error) => {
-      console.error(error.message)
-      res.status(500).json({ message: 'Error del servidor' })
+      console.error(error.message);
+      res.status(500).json({ message: 'Error del servidor' });
     });
 });
 
@@ -59,21 +59,18 @@ router.post('/update-form-eeuu', authenticateJWT, async (req, res) => {
   const { email, questions } = req.body;
 
   try {
-    const form = await Form.findOneAndUpdate({
-      email: email,
-      questions: questions
-    })
-  
+    const form = await Form.findOneAndUpdate({ email: email }, { questions: questions });
+
     if (form) {
-      res.status(200).json({message: 'Formulario guardado con exito'})
-    }else{
-      res.status(400).json({message: 'Datos no actualizados'})
+      res.status(200).json({ message: 'Formulario guardado con éxito' });
+    } else {
+      res.status(400).json({ message: 'Datos no actualizados' });
     }
   } catch (error) {
-    console.error(error)
-    res.status(500).json({message: 'Error del servidor'})
+    console.error(error);
+    res.status(500).json({ message: 'Error del servidor' });
   }
-})
+});
 
 router.post('/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
@@ -81,7 +78,7 @@ router.post('/signup', (req, res) => {
   userSchema.findOne({ email: email })
     .then((existUser) => {
       if (existUser) {
-        return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` })
+        return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` });
       }
 
       const newUser = new userSchema({
@@ -101,23 +98,19 @@ router.post('/signup', (req, res) => {
           console.error(error.message);
           res.status(500).json({ message: 'Server error' });
         });
-    })
+    });
 });
 
 router.post('/forms', async (req, res) => {
   const { email, formData } = req.body;
 
   try {
-    // Verificar si el usuario existe por su correo electrónico
-    const user = await User.findOne({ email });
+    const user = await userSchema.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
 
-    // Añadir el email al formData
     formData.email = email;
-
-    // Crear y guardar el nuevo formulario
     const newForm = new Form(formData);
     await newForm.save();
     res.status(201).json(newForm);
@@ -133,20 +126,17 @@ router.get('/protected-route', authenticateJWT, (req, res) => {
 
 router.get('/verify-token', authenticateJWT, (req, res) => {
   try {
-    res.status(200).json({ message: 'Ya tienes un inicio de sesion activo' });
+    res.status(200).json({ message: 'Ya tienes un inicio de sesión activo' });
   } catch (e) {
     res.status(500).json({ message: 'Error del servidor' });
   }
-})
+});
 
 router.post('/vipro', authenticateJWT, async (req, res) => {
   const email = req.body.email;
 
   try {
-    const user = await userSchema.findOneAndUpdate(
-      { email: email },
-      { vipro: true },
-    );
+    const user = await userSchema.findOneAndUpdate({ email: email }, { vipro: true });
 
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
@@ -163,10 +153,7 @@ router.post('/vipro-finish', authenticateJWT, async (req, res) => {
   const email = req.body.email;
 
   try {
-    const user = await userSchema.findOneAndUpdate(
-      { email: email },
-      { vipro: false },
-    );
+    const user = await userSchema.findOneAndUpdate({ email: email }, { vipro: false });
 
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
@@ -182,7 +169,6 @@ router.post('/vipro-finish', authenticateJWT, async (req, res) => {
 router.post('/vipro/validation', authenticateJWT, (req, res) => {
   const email = req.body.email;
 
-  // Validar el correo electrónico antes de hacer la consulta a la base de datos
   if (!email || email.trim() === '') {
     return res.status(400).json({ message: 'El correo electrónico es requerido' });
   }
@@ -197,13 +183,7 @@ router.post('/vipro/validation', authenticateJWT, (req, res) => {
         return res.status(401).json({ message: 'Credenciales inválidas' });
       }
 
-      // Enviar la respuesta correcta si el usuario es encontrado y tiene vipro válido
-      res.status(200).json({
-        message: 'Inicio de sesión exitoso',
-        user: {
-          vipro: user.vipro,
-        }
-      });
+      res.status(200).json({ message: 'Inicio de sesión exitoso', user: { vipro: user.vipro } });
     })
     .catch((error) => {
       console.error(error.message);
@@ -215,20 +195,13 @@ router.post('/vipro-eeuu', authenticateJWT, async (req, res) => {
   const { email, questions } = req.body;
 
   try {
-    // Check if a form with the given email already exists
     const existingForm = await Form.findOne({ email: email });
 
     if (existingForm) {
       return res.status(200).json({ message: 'El usuario tiene un formulario pendiente' });
     }
 
-    // If no form exists, create a new one
-    const newForm = new Form({
-      email: email,
-      questions: questions
-    });
-
-    // Save the new form to the database
+    const newForm = new Form({ email: email, questions: questions });
     const savedForm = await newForm.save();
     console.log('Formulario guardado:', savedForm);
 
@@ -240,9 +213,8 @@ router.post('/vipro-eeuu', authenticateJWT, async (req, res) => {
   }
 });
 
-
 router.get('/', (req, res) => {
-  res.send('Hello World')
-})
+  res.send('Hello World');
+});
 
 module.exports = router;

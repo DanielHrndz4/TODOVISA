@@ -34,7 +34,6 @@ export default function Login() {
       );
 
       if (response.ok) {
-        console.log(true)
         setSignInValue(true);
       } else {
         setSignInValue(false);
@@ -44,7 +43,9 @@ export default function Login() {
     }
   };
 
-  fetchDataToken()
+  useEffect(() => {
+    fetchDataToken();
+  }, []);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -74,7 +75,7 @@ export default function Login() {
 
       if (response.ok) {
         const { token, user } = await response.json();
-        const expires = new Date(new Date().getTime() + 60 * 60 * 1000); // 1 hora from now
+        const expires = new Date(new Date().getTime() + 60 * 60 * 1000); // 1 hour from now
         Cookies.set('jwt', token, { expires: expires, secure: true, sameSite: 'Strict' });
         sessionStorage.setItem('user', JSON.stringify(user));
         navigateTo("/");
@@ -134,13 +135,13 @@ export default function Login() {
                     </div>
                   </div>
                   <Typography variant="h6" color="blue-gray" className="text-white">
-                        Contraseña
-                      </Typography>
+                    Contraseña
+                  </Typography>
                   <div className="relative">
                     <input
                       className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-10 leading-tight focus:outline-none focus:bg-transparent"
                       id="grid-password"
-                      type={showPassword ? "text" : "password"} // Usar el estado showPassword para cambiar dinámicamente entre text y password
+                      type={showPassword ? "text" : "password"}
                       placeholder=""
                       name="password"
                       value={formData.password}
@@ -215,6 +216,7 @@ export default function Login() {
       </div>
     )
   }
+
   return (
     <Fade cascade damping={0.1} className="w-full h-full">
       <main className="bg-TVBlue flex flex-col lg:flex-row h-full w-full">
