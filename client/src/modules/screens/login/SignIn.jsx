@@ -26,10 +26,10 @@ export default function Login() {
         "https://todovisa.onrender.com/api/verify-token",
         {
           method: 'GET',
-          headers: new Headers({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        })
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
       );
 
@@ -68,6 +68,7 @@ export default function Login() {
         "https://todovisa.onrender.com/api/signin",
         {
           method: 'POST',
+          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         }
