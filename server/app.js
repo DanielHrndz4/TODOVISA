@@ -7,7 +7,7 @@ const app = express();
 const cors = require('cors');
 const session = require('express-session');
 const PORT = process.env.PORT || 3333;
-
+const SECRET_KEY = process.env.SECRET_KEY;
 // Conectar a la base de datos
 connectDB();
 
@@ -20,7 +20,7 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: 'your_secret_key', // Replace with your secret key
+  secret: SECRET_KEY, // Replace with your secret key
   resave: false,
   saveUninitialized: true,
   cookie: {
