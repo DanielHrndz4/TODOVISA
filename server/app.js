@@ -14,9 +14,9 @@ connectDB();
 // Configura CORS para permitir cualquier origen
 app.use(cors({
   origin: true,
-  credentials: true,
+  credentials: true, // Permite el envío de cookies
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(cookieParser())
