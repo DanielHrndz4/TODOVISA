@@ -13,7 +13,7 @@ connectDB();
 
 // Configura CORS para permitir cualquier origen
 app.use(cors({
-  origin: 'https://todovisa.onrender.com/api/protected-route',
+  origin: 'https://todovisa.onrender.com/api',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

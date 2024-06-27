@@ -68,7 +68,6 @@ export default function Login() {
         "https://todovisa.onrender.com/api/signin",
         {
           method: 'POST',
-          credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         }
