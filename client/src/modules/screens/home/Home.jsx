@@ -8,21 +8,28 @@ import ContactUs from "./contactUs/ContactUs";
 import { Fade } from "react-awesome-reveal";
 import { WAsettings } from "../../../assets/data/ws.data";
 import VIPRO from "./VIPRO";
+import Cookies from 'js-cookie';
 import LoginUserNavbar from "../navbar/LoginUserNavbar";
 
 export default function Home() {
   const [jwtToken, setJwtToken] = useState(false);
   const [loading, setLoading] = useState(true); // Nuevo estado para controlar la carga
-
+  function getJwtFromCookie() {
+    return Cookies.get('jwt');
+  }
+  
+  // Example usage
   const fetchData = async () => {
     try {
+      const token = getJwtFromCookie();
       const response = await fetch(
         "https://todovisa.onrender.com/api/protected-route",
         {
           method: 'GET',
-          // credentials: 'include', 
+          credentials: 'include', 
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           }
         }
       );

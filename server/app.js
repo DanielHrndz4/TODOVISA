@@ -12,12 +12,12 @@ const SECRET_KEY = process.env.SECRET_KEY;
 connectDB();
 
 // Configura CORS para permitir cualquier origen
-// app.use(cors({
-//   origin: 'https://todovisa.onrender.com',
-//   credentials: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
+app.use(cors({
+  origin: 'https://todovisa.onrender.com',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // app.use(session({
 //   secret: SECRET_KEY, // Replace with your secret key
