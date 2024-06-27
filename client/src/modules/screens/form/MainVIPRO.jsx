@@ -15,7 +15,7 @@ export default function MainVIPRO() {
       const email = userFromStorage.email;
       try {
         const response = await fetch(
-          "http://localhost:3366/api/vipro/validation",
+          "https://todovisa.onrender.com/api/vipro/validation",
           {
             method: "POST",
             credentials: "include",

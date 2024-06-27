@@ -28,7 +28,7 @@ const VIPROForm = () => {
     if (email) {
       const createForm = async (email) => {
         try {
-          const response = await fetch('http://localhost:3366/api/show-form-eeuu', {
+          const response = await fetch('https://todovisa.onrender.com/api/show-form-eeuu', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -104,7 +104,7 @@ const VIPROForm = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3366/api/update-form-eeuu', {
+      const response = await fetch('https://todovisa.onrender.com/api/update-form-eeuu', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -122,7 +122,7 @@ const VIPROForm = () => {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            "http://localhost:3366/api/vipro-finish",
+            "https://todovisa.onrender.com/api/vipro-finish",
             {
               method: 'POST',
               credentials: 'include',

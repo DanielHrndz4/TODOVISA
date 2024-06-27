@@ -23,7 +23,7 @@ export default function Login() {
   const fetchDataToken = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3366/api/verify-token",
+        "https://todovisa.onrender.com/api/verify-token",
         {
           method: 'GET',
           credentials: 'include',
@@ -64,7 +64,7 @@ export default function Login() {
     try {
       setIsActiveBtn(true);
       const response = await fetch(
-        "http://localhost:3366/api/signin",
+        "https://todovisa.onrender.com/api/signin",
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

@@ -17,7 +17,7 @@ const handleClickPopUpPay = (html, btn) => {
                 const fetchData = async () => {
                     try {
                         const response = await fetch(
-                            "http://localhost:3366/api/vipro",
+                            "https://todovisa.onrender.com/api/vipro",
                             {
                                 method: 'POST',
                                 credentials: 'include',
@@ -30,7 +30,7 @@ const handleClickPopUpPay = (html, btn) => {
                             console.log(response);
                             const createForm = async (email, questions, selectedValue) => {
                                 try {
-                                    const response = await fetch('http://localhost:3366/api/vipro-eeuu', {
+                                    const response = await fetch('https://todovisa.onrender.com/api/vipro-eeuu', {
                                         method: 'POST',
                                         credentials: 'include',
                                         headers: {

@@ -35,7 +35,7 @@ export default function Register() {
   const fetchDataToken = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3366/api/verify-token",
+        "https://todovisa.onrender.com/api/verify-token",
         {
           method: 'GET',
           credentials: 'include',
@@ -119,7 +119,7 @@ export default function Register() {
       setIsActiveBtn(true); // Activar el estado de botón activo
   
       const response = await fetch(
-        "http://localhost:3366/api/signup",
+        "https://todovisa.onrender.com/api/signup",
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
