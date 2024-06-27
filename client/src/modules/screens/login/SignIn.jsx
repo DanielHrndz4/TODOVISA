@@ -26,7 +26,6 @@ export default function Login() {
         "https://todovisa.onrender.com/api/verify-token",
         {
           method: 'GET',
-          credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
           }
