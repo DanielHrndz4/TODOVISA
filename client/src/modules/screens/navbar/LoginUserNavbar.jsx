@@ -185,7 +185,7 @@ export default function LoginUserNavbar() {
 
     const handleLogout = () => {
         Cookies.remove('jwt');
-        sessionStorage.removeItem('user');
+        Cookies.remove('user');
         window.location.reload();
     };
 

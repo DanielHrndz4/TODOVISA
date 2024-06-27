@@ -5,6 +5,7 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Typography } from "@material-tailwind/react";
+import Cookies from 'js-cookie'
 import handleClickPopUpSaveForm from "../../components/popup/PopUpSaveForm";
 
 const { Option } = Select;
@@ -21,8 +22,9 @@ const VIPROForm = () => {
   const navigateTo = useNavigate();
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const userFromStorage = JSON.parse(sessionStorage.getItem('user'));
-  const email = userFromStorage ? userFromStorage.email : null;
+  const user = Cookies.get('user');
+  const userData = JSON.parse(user);
+  const email = userData ? userData.email : null;
 
   useEffect(() => {
     if (email) {
@@ -30,7 +32,6 @@ const VIPROForm = () => {
         try {
           const response = await fetch('https://todovisa.onrender.com/api/show-form-eeuu', {
             method: 'POST',
-            credentials: 'include',
             headers: {
               'Content-Type': 'application/json',
             },
@@ -46,7 +47,7 @@ const VIPROForm = () => {
           console.log('Respuesta del servidor:', responseData.user.questions);
         } catch (error) {
           console.error('Error en la solicitud:', error);
-          navigateTo('/');
+          // navigateTo('/');
         }
       };
 
@@ -104,44 +105,45 @@ const VIPROForm = () => {
     }
 
     try {
-      const response = await fetch('https://todovisa.onrender.com/api/update-form-eeuu', {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, questions }),
-      });
+      if (user) {
+        const response = await fetch('https://todovisa.onrender.com/api/update-form-eeuu', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, questions }),
+        });
 
-      if (!response.ok) {
-        throw new Error('Error al actualizar el formulario');
-      }
-
-      const responseData = await response.json();
-      console.log('Formulario actualizado:', responseData);
-      const fetchData = async () => {
-        try {
-          const response = await fetch(
-            "https://todovisa.onrender.com/api/vipro-finish",
-            {
-              method: 'POST',
-              credentials: 'include',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email })
-            }
-          );
-          if (response.ok) {
-            console.log(response);
-            navigateTo('/')
-          } else {
-            console.log(response);
-          }
-        } catch (err) {
-          console.error(err);
+        if (!response.ok) {
+          throw new Error('Error al actualizar el formulario');
         }
-      };
 
-      fetchData();
+        const responseData = await response.json();
+        console.log('Formulario actualizado:', responseData);
+        const fetchData = async () => {
+          try {
+            const response = await fetch(
+              "https://todovisa.onrender.com/api/vipro-finish",
+              {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+              }
+            );
+            if (response.ok) {
+              console.log(response);
+              navigateTo('/')
+            } else {
+              console.log(response);
+            }
+          } catch (err) {
+            console.error(err);
+          }
+        };
+
+        fetchData();
+      }
     } catch (error) {
       console.error('Error en la solicitud:', error);
     }

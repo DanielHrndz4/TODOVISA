@@ -33,7 +33,7 @@ router.post('/signin', (req, res) => {
     });
 });
 
-router.post('/show-form-eeuu', authenticateJWT, (req, res) => {
+router.post('/show-form-eeuu', (req, res) => {
   const email = req.body.email;
   Form.findOne({ email: email })
     .then((user) => {

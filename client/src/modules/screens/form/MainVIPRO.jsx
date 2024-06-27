@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VIPROForm from "./Form";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie'
 
 export default function MainVIPRO() {
   const navigateTo = useNavigate();
@@ -8,17 +9,17 @@ export default function MainVIPRO() {
   const [isLoading, setIsLoading] = useState(true); // Estado para manejar la carga
 
   const fetchData = async () => {
-    const userFromStorage = JSON.parse(sessionStorage.getItem('user'));
-    if (!userFromStorage) {
+    const user = Cookies.get('user');
+    const userData = JSON.parse(user);
+    if (!user) {
       navigateTo('/');
     } else {
-      const email = userFromStorage.email;
+      const email = userData.email;
       try {
         const response = await fetch(
           "https://todovisa.onrender.com/api/vipro/validation",
           {
             method: "POST",
-            credentials: "include",
             headers: {
               "Content-Type": "application/json",
             },
