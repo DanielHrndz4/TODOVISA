@@ -16,7 +16,6 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const token = Cookies.get('jwt');
       const response = await fetch(
         "https://todovisa.onrender.com/api/protected-route",
         {
