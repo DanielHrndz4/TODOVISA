@@ -91,7 +91,7 @@ export default function CountryScreen() {
           }}
         >
           <div className="h-full w-full flex items-center justify-center flex-col gap-4 font-semibold [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)]">
-            <h1 className="text-white text-8xl capitalize">{getCountry()}</h1>
+            <h1 className="text-white text-5xl lg:text-8xl capitalize">{getCountry()}</h1>
           </div>
         </div>
 
