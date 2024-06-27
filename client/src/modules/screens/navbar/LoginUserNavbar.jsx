@@ -190,12 +190,13 @@ export default function LoginUserNavbar() {
     };
 
     const getUserName = () => {
-        const user = JSON.parse(sessionStorage.getItem('user'));
+        const user = Cookies.get('user');
         if (user) {
+            const userData = JSON.parse(user);
             return (
                 <div className="flex flex-col px-3 pt-6 lg:pt-0">
-                    <h1 className="capitalize">{user.name}</h1>
-                    <h1 className="font-semibold lg:text-center">{user.country}</h1>
+                    <h1 className="capitalize">{userData.name}</h1>
+                    <h1 className="font-semibold lg:text-center">{userData.country}</h1>
                 </div>
             );
         } else {

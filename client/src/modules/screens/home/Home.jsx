@@ -9,6 +9,7 @@ import { Fade } from "react-awesome-reveal";
 import { WAsettings } from "../../../assets/data/ws.data";
 import VIPRO from "./VIPRO";
 import LoginUserNavbar from "../navbar/LoginUserNavbar";
+import Cookies from 'js-cookie';
 
 export default function Home() {
   const [jwtToken, setJwtToken] = useState(false);
@@ -16,23 +17,25 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        "https://todovisa.onrender.com/api/protected-route",
-        {
-          method: 'GET',
-          credentials: 'include', 
-          headers: {
-            'Content-Type': 'application/json',
+      if(Cookies.get('jwt')){
+        const response = await fetch(
+          "https://todovisa.onrender.com/api/protected-route",
+          {
+            method: 'GET',
+            credentials: 'include', 
+            headers: {
+              'Content-Type': 'application/json',
+            }
           }
+        );
+    
+        if (response.ok) {
+          console.log(response)
+          setJwtToken(true);
+        } else {
+          console.log(response)
+          setJwtToken(false); // Handle cases where the response is not OK
         }
-      );
-  
-      if (response.ok) {
-        console.log(response)
-        setJwtToken(true);
-      } else {
-        console.log(response)
-        setJwtToken(false); // Handle cases where the response is not OK
       }
     } catch (err) {
       setJwtToken(false); // Set token to false to indicate potential issues
