@@ -48,7 +48,7 @@ export default function VIPRO(props) {
             <div className="flex flex-col lg:flex-row gap-4 h-full z-100 relative w-full lg:w-[80%] m-auto">
                 <Fade className="w-full flex flex-col lg:py-8 mx-auto text-black">
                     <div className="w-full flex flex-col lg:py-8 mx-auto text-black">
-                        <div className="w-full lg:py-8 px-6">
+                        <div className="w-full lg:py-8 sm:px-20 px-6">
                             <div className="pb-4 lg:pb-6 pt-4"><h1 className="text-3xl lg:text-5xl text-center text-TVBlue font-bold">VIPRO Formulario</h1></div>
                             <div className="py-4">
                                 <h2 className="text-xl lg:text-2xl text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. <strong>Subtitulo opcional</strong></h2>
@@ -62,7 +62,7 @@ export default function VIPRO(props) {
                     </div>
                 </Fade>
                 <div className="w-full flex justify-center items-end flex-col py-8">
-                    <Slide className="w-[90%] m-auto lg:m-none"><img src="/img/VIPRO/viproform.png" alt="" /></Slide>
+                    <Slide className="w-[90%] sm:w-[75%] lg:w-[90%]  m-auto lg:m-none"><img src="/img/VIPRO/viproform.png" alt="" /></Slide>
                 </div>
             </div>
         </div>

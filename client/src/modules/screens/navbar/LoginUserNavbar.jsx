@@ -122,7 +122,7 @@ function NavList() {
             <Typography
                 as="a"
                 href="#about"
-                variant="small"
+                variant="small sm:large"
                 color="white"
                 className="font-medium"
             >
@@ -134,7 +134,7 @@ function NavList() {
             <Typography
                 as="a"
                 href="#services"
-                variant="small"
+                variant="small sm:large"
                 color="white"
                 className="font-medium"
             >
@@ -145,7 +145,7 @@ function NavList() {
             <Typography
                 as="a"
                 href="#vipro"
-                variant="small"
+                variant="small sm:large"
                 color="white"
                 className="font-medium"
             >
@@ -156,7 +156,7 @@ function NavList() {
             <Typography
                 as="a"
                 href="#contactus"
-                variant="small"
+                variant="small sm:large"
                 color="white"
                 className="font-medium"
             >
@@ -196,7 +196,7 @@ export default function LoginUserNavbar() {
             return (
                 <div className="flex flex-col px-3 pt-6 lg:pt-0">
                     <h1 className="capitalize">{userData.name}</h1>
-                    <h1 className="font-semibold lg:text-center">{userData.country}</h1>
+                    <h1 className="font-semibold lg:text-center text-lg">{userData.country}</h1>
                 </div>
             );
         } else {
