@@ -33,26 +33,8 @@ export default function Register() {
   }
 
   const fetchDataToken = async () => {
-    try {
-      const response = await fetch(
-        "https://todovisa.onrender.com/api/verify-token",
-        {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      );
-
-      if (response.ok) {
-        console.log(true)
-        setSignUpValue(true);
-      } else {
-        setSignUpValue(false);
-      }
-    } catch (err) {
-      setSignUpValue(false);
+    if (Cookies.get('jwt')) {
+      setSignInValue(true);
     }
   };
 
