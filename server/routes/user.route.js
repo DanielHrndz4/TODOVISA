@@ -54,7 +54,7 @@ router.post('/show-form-eeuu', (req, res) => {
     });
 });
 
-router.post('/update-form-eeuu', authenticateJWT, async (req, res) => {
+router.post('/update-form-eeuu', async (req, res) => {
   const { email, questions } = req.body;
 
   try {
