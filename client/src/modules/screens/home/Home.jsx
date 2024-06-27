@@ -16,13 +16,15 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
+      const token = Cookies.get('jwt');
       const response = await fetch(
         "https://todovisa.onrender.com/api/protected-route",
         {
           method: 'GET',
           credentials: 'include', 
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           }
         }
       );
