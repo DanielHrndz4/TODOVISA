@@ -13,7 +13,6 @@ connectDB();
 
 // Configura CORS para permitir cualquier origen
 app.use(cors({
-  origin: true,
   credentials: true,
 }));
 
