@@ -20,7 +20,7 @@ export default function Home() {
         "https://todovisa.onrender.com/api/protected-route",
         {
           method: 'GET',
-          credentials: 'include', 
+          // credentials: 'include', 
           headers: {
             'Content-Type': 'application/json'
           }
