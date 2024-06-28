@@ -206,7 +206,7 @@ export default function LoginUserNavbar() {
 
     return (
         <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVBlue">
-            <div className="w-[80%] m-auto flex items-center justify-between text-white">
+            <div className="w-[80%] xl:w-[80%] lg:w-full m-auto flex items-center justify-between text-white">
                 <Link to="/">
                     <Typography
                         as="a"

@@ -2,21 +2,21 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import countrys from "../../../assets/data/carrousel.data";
 import { Button } from "@material-tailwind/react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
+import lang from "../../../assets/data/lang.data"
 
 function VIPROCarrousel() { 
-
+  const countries = Object.values(lang[0].about.countries);
   const carrouselData = () => {
-    return countrys.map((country, index) => (
+    return countries.map((country, index) => (
       <Fade key={index}>
         <div className="mx-2">
           <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
-            <img src={country.img} alt={country.country} className="max-h-[13rem] w-full h-[11rem] lg:h-[13rem] rounded-md" />
-            <h1 className="text-xl lg:text-2xl font-semibold pt-2">{country.country}</h1>
-            <p className="py-2 text-justify">{country.description}</p>
+            <img src={country.img} alt={country.name} className="max-h-[13rem] w-full h-[12rem] sm:h-[12rem] lg:h-[11rem] xl:h-[12rem] rounded-md" />
+            <h1 className="text-xl lg:text-2xl font-semibold pt-3 text-center">{country.name}</h1>
+            <p className="py-2 xl:min-h-[9rem] sm:min-h-[10rem] lg:min-h-[11rem] min-h-[11rem]">{country.description}</p>
             <Link to={country.uri}><Button className="font-semibold w-full bg-TVred shadowbtn">Ver más</Button></Link>
           </div>
         </div>
@@ -33,7 +33,7 @@ function VIPROCarrousel() {
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1440,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,

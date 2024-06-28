@@ -4,6 +4,7 @@ import { Slide, Fade } from "react-awesome-reveal"
 import handleClickPopUp from "../../components/popup/PopUpPayVIPRO";
 import Cookies from "js-cookie"
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
+import lang from "../../../assets/data/lang.data"
 
 const handlePopUp = () => {
     if (Cookies.get('jwt')) {
@@ -45,23 +46,23 @@ export default function VIPRO(props) {
     return (
         <div className="flex flex-col h-full lg:mb-4" id="vipro">
             <div className="min-h-[55%] h-[55%] absolute"></div>
-            <div className="flex flex-col lg:flex-row gap-4 h-full z-100 relative w-full lg:w-[80%] m-auto">
-                <Fade className="w-full flex flex-col lg:py-8 mx-auto text-black">
+            <div className="flex flex-col lg:px-7 lg:flex-row gap-4 h-full z-100 relative w-full lg:w-full xl:w-[80%] m-auto">
+                <Fade className="w-full flex flex-col lg:py-0 xl:py-8 mx-auto text-black">
                     <div className="w-full flex flex-col lg:py-8 mx-auto text-black">
-                        <div className="w-full lg:py-8 sm:px-20 px-6">
-                            <div className="pb-4 lg:pb-6 pt-4"><h1 className="text-3xl lg:text-5xl text-center text-TVBlue font-bold">VIPRO Formulario</h1></div>
+                        <div className="w-full lg:py-0 xl:py-8 lg:px-7 sm:px-20 px-6">
+                            <div className="pb-4 lg:pb-6 pt-4"><h1 className="text-4xl lg:text-3xl xl:text-5xl text-center text-TVBlue font-bold">VIPRO Formulario</h1></div>
                             <div className="py-4">
-                                <h2 className="text-xl lg:text-2xl text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. <strong>Subtitulo opcional</strong></h2>
+                                <h2 className="text-xl lg:text-lg xl:text-2xl text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. <strong>Subtitulo opcional</strong></h2>
                                 <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
                             </div>
-                            <div className="pb-6"><p className="text-justify lg:text-lg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate nulla consectetur maxime quae aliquam harum obcaecati alias dolores, assumenda natus excepturi hic iusto! Quibusdam minus repudiandae, deserunt dolore laboriosam hic eum magni numquam natus, laborum rem vero nesciunt accusantium libero. <strong>parrafo</strong></p></div>
+                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate nulla consectetur maxime quae aliquam harum obcaecati alias dolores, assumenda natus excepturi hic iusto! Quibusdam minus repudiandae, deserunt dolore laboriosam hic eum magni numquam natus, laborum rem vero nesciunt accusantium libero. <strong>parrafo</strong></p></div>
                             <div className="lg:text-lg">
                                 <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp()}>Realizar Formulario</Button>
                             </div>
                         </div>
                     </div>
                 </Fade>
-                <div className="w-full flex justify-center items-end flex-col py-8">
+                <div className="w-full flex justify-center items-end flex-col lg:py-2 xl:py-8 py-8">
                     <Slide className="w-[90%] sm:w-[75%] lg:w-[90%]  m-auto lg:m-none"><img src="/img/VIPRO/viproform.png" alt="" /></Slide>
                 </div>
             </div>

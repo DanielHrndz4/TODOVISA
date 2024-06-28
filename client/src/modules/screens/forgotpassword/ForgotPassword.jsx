@@ -26,7 +26,7 @@ export default function Login() {
 
           <div className="m-auto">
           </div>
-          <Fade cascade damping={0.1} className="w-auto lg:px-28 h-full">
+          <Fade cascade damping={0.1} className="w-auto xl:px-28 h-full">
 
             <Card
               color="transparent"
@@ -46,7 +46,7 @@ export default function Login() {
                   </Typography>
                 </Link>
                 <Link to="/signin">
-                  <Typography color="black" className="mb-1 font-normal w-full mx-1 text-white text-xl [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.4)]">
+                  <Typography color="black" className="mb-1 font-normal w-full mx-1 text-white text-lg xl:text-xl [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.4)]">
                     <FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Regresar al inicio de sesión
                   </Typography>
                 </Link>

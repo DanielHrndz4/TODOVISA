@@ -177,7 +177,7 @@ export default function NavbarWithMegaMenu() {
 
   return (
     <Navbar className="max-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVBlue">
-      <div className="max-w-[80%] m-auto flex items-center justify-between text-white">
+      <div className="max-w-[80%] xl:max-w-[80%] lg:max-w-full m-auto flex items-center justify-between text-white">
         <Link to="/">
           <Typography
             as="a"
