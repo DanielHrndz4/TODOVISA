@@ -10,11 +10,13 @@ import { WAsettings } from "../../../assets/data/ws.data";
 import VIPRO from "./VIPRO";
 import LoginUserNavbar from "../navbar/LoginUserNavbar";
 import Cookies from 'js-cookie';
+import lang from "../../../assets/data/lang.data";
 
 export default function Home() {
+  const bannerText = lang[0].banner
   const [jwtToken, setJwtToken] = useState(false);
   const [loading, setLoading] = useState(true); // Nuevo estado para controlar la carga
-
+  console.log(bannerText);
   const fetchData = async () => {
     try {
       if(Cookies.get('jwt')){
@@ -73,8 +75,8 @@ export default function Home() {
             }}
           >
             <div className="h-full w-full flex items-center justify-center flex-col gap-4 font-semibold [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] ">
-              <h1 className="text-white text-2xl text-center sm:text-4xl">¡Abre las puertas al mundo!</h1>
-              <h1 className="text-white text-5xl text-center sm:text-7xl">TODO VISA</h1>
+              <h1 className="text-white text-2xl text-center sm:text-4xl">{bannerText.title}</h1>
+              <h1 className="text-white text-5xl text-center sm:text-7xl">{bannerText.todovisa}</h1>
             </div>
           </div>
           </div>
