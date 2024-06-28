@@ -16,7 +16,7 @@ function VIPROCarrousel() {
           <div className="w-[90%] m-auto bg-white p-4 rounded-md shadow my-12">
             <img src={country.img} alt={country.name} className="max-h-[13rem] w-full h-[12rem] sm:h-[12rem] lg:h-[11rem] xl:h-[12rem] rounded-md" />
             <h1 className="text-xl lg:text-2xl font-semibold pt-3 text-center">{country.name}</h1>
-            <p className="py-2 xl:min-h-[9rem] sm:min-h-[10rem] lg:min-h-[11rem] min-h-[11rem]">{country.description}</p>
+            <p className="py-2 xl:min-h-[9rem] sm:min-h-[10rem] lg:min-h-[11rem] min-h-[10rem]">{country.description}</p>
             <Link to={country.uri}><Button className="font-semibold w-full bg-TVred shadowbtn">Ver más</Button></Link>
           </div>
         </div>
