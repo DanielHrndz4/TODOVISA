@@ -43,6 +43,7 @@ const handlePopUp = () => {
 }
 
 export default function VIPRO(props) {
+    const viproSection = lang[0].VIPRO
     return (
         <div className="flex flex-col h-full lg:mb-4" id="vipro">
             <div className="min-h-[55%] h-[55%] absolute"></div>
@@ -50,14 +51,14 @@ export default function VIPRO(props) {
                 <Fade className="w-full flex flex-col lg:py-0 xl:py-8 mx-auto text-black">
                     <div className="w-full flex flex-col lg:py-8 mx-auto text-black">
                         <div className="w-full lg:py-0 xl:py-8 lg:px-7 sm:px-20 px-6">
-                            <div className="pb-4 lg:pb-6 pt-4"><h1 className="text-4xl lg:text-3xl xl:text-5xl text-center text-TVBlue font-bold">VIPRO Formulario</h1></div>
+                            <div className="pb-4 lg:pb-6 pt-4"><h1 className="text-4xl lg:text-3xl xl:text-5xl text-center text-TVBlue font-bold">{viproSection.title}</h1></div>
                             <div className="py-4">
-                                <h2 className="text-xl lg:text-lg xl:text-2xl text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. <strong>Subtitulo opcional</strong></h2>
+                                <h2 className="text-xl lg:text-lg xl:text-2xl text-black">{viproSection.subtitle.title} <strong>{viproSection.subtitle.strong}</strong></h2>
                                 <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
                             </div>
-                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate nulla consectetur maxime quae aliquam harum obcaecati alias dolores, assumenda natus excepturi hic iusto! Quibusdam minus repudiandae, deserunt dolore laboriosam hic eum magni numquam natus, laborum rem vero nesciunt accusantium libero. <strong>parrafo</strong></p></div>
+                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{viproSection.text}</p></div>
                             <div className="lg:text-lg">
-                                <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp()}>Realizar Formulario</Button>
+                                <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp()}>{viproSection.button}</Button>
                             </div>
                         </div>
                     </div>

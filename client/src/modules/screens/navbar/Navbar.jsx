@@ -29,6 +29,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import lang from "../../../assets/data/lang.data";
 
 const navListMenuItems = [
   {
@@ -78,6 +79,8 @@ const navListMenuItems = [
   },
 ];
 
+const navText = lang[0].navbar
+
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -113,6 +116,14 @@ function NavListMenu() {
   );
 }
 
+const handleLang = (lang) => {
+  if (localStorage.getItem('lang') !== null) {
+    localStorage.removeItem('lang');
+  }
+  localStorage.setItem('lang', lang);
+  location.reload();
+}
+
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
@@ -124,7 +135,7 @@ function NavList() {
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Sobre nosotros
+          {navText.about}
         </ListItem>
       </Typography>
       <NavListMenu />
@@ -136,7 +147,7 @@ function NavList() {
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Servicios
+          {navText.service}
         </ListItem>
       </Typography>
       <Typography
@@ -146,7 +157,7 @@ function NavList() {
         color="white"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">VIPRO</ListItem>
+        <ListItem className="flex items-center gap-2 py-2 pr-4">{navText.VIPRO}</ListItem>
       </Typography>
       <Typography
         as="a"
@@ -156,7 +167,32 @@ function NavList() {
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Contáctanos
+          {navText.Contact}
+        </ListItem>
+      </Typography>
+      <Typography
+        as="a"
+        variant="small"
+        color="white"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          <Menu>
+            <MenuHandler>
+              <div>{navText.lang.name}</div>
+            </MenuHandler>
+            <MenuList className="bg-TVBlue border-white">
+              {Object.values(lang[0].navbar.lang.lang_name).map((lang, index) => (
+                <MenuItem
+                  key={index}
+                  className="text-white font-normal hover:bg-TVBlue text-center hover:text-black hover:font-semibold"
+                  onClick={() => handleLang(lang.name)}
+                >
+                  <div className="flex flex-row items-center"><img src={lang.img} alt={`${lang.name}`} className="w-[20px] h-[20px]" /><span className="px-4">{lang.name}</span></div>
+                </MenuItem>
+              ))}
+            </MenuList>
+          </Menu>
         </ListItem>
       </Typography>
     </List>
@@ -195,7 +231,7 @@ export default function NavbarWithMegaMenu() {
           <div className="hidden gap-4 lg:flex">
             <Link to="/signin">
               <Button size="md" className="shadowbtn bg-transparent">
-                Iniciar sesión
+                {navText.signin}
               </Button>
             </Link>
             <Link to="signup">
@@ -204,7 +240,7 @@ export default function NavbarWithMegaMenu() {
                 size="md"
                 className="shadowbtn bg-TVred"
               >
-                Registrarse
+                {navText.signup}
               </Button>
             </Link>
           </div>
@@ -227,7 +263,7 @@ export default function NavbarWithMegaMenu() {
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden pb-4">
           <Link to="/signin">
             <Button size="md" className="shadowbtn bg-transparent">
-              Iniciar sesión
+              {navText.signin}
             </Button>
           </Link>
           <Link to="signup">
@@ -236,7 +272,7 @@ export default function NavbarWithMegaMenu() {
               size="md"
               className="shadowbtn bg-TVred"
             >
-              Registrarse
+              {navText.signup}
             </Button>
           </Link>
         </div>

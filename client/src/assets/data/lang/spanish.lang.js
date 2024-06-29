@@ -6,6 +6,23 @@ const spanish = [
             "service": "Servicios",
             "VIPRO": "VIPRO",
             "Contact": "Contáctanos",
+            "lang": {
+                "name": "Idioma",
+                "lang_name": {
+                    "spanish": {
+                        "name": "Español",
+                        "img": "./public/img/lang/spanish.png"
+                    },
+                    "english": {
+                        "name": "Inglés",
+                        "img": "./public/img/lang/english.png"
+                    },
+                    "Portuguese": {
+                        "name": "Portugués",
+                        "img": "./public/img/lang/portuguese.png"
+                    }
+                }
+            },
             "signin": "Iniciar sesión",
             "signup": "Registrarse"
         },
@@ -70,6 +87,16 @@ const spanish = [
                     "uri": "/country/india"
                 }
             }
+        },
+        "VIPRO": {
+            "title": "VIPRO Formulario",
+            "subtitle": {
+                "title": "¿Estás listo para sacar tu visa?",
+                "strong": "No te preocupes, estamos aquí para ayudarte"
+            },
+            "text": "Este formulario te ayudará a saber qué tan preparado estás para obtener tu visa. No te preocupes si no tienes toda la información a la mano, estamos aquí para guiarte en cada paso del proceso. Simplemente haz clic en el botón y responde las preguntas necesarias para evaluar tu preparación. Toda tu información será tratada con la máxima confidencialidad y utilizada únicamente para este propósito.",
+                
+            "button": "Realizar Formulario"
         }
     }
 ];

@@ -30,6 +30,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
+import lang from "../../../assets/data/lang.data";
 
 const navListMenuItems = [
     {
@@ -79,6 +80,8 @@ const navListMenuItems = [
     },
 ];
 
+const loginNav = lang[0].navbar
+
 function NavListMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -127,7 +130,7 @@ function NavList() {
                 className="font-medium"
             >
                 <ListItem className="flex items-center gap-2 py-2 pr-4">
-                    Sobre nosotros
+                    {loginNav.about}
                 </ListItem>
             </Typography>
             <NavListMenu />
@@ -139,7 +142,7 @@ function NavList() {
                 className="font-medium"
             >
                 <ListItem className="flex items-center gap-2 py-2 pr-4">
-                    Servicios
+                    {loginNav.service}
                 </ListItem>
             </Typography>
             <Typography
@@ -150,7 +153,7 @@ function NavList() {
                 className="font-medium"
             >
                 <ListItem className="flex items-center gap-2 py-2 pr-4">
-                    VIPRO
+                    {loginNav.VIPRO}
                 </ListItem>
             </Typography>
             <Typography
@@ -161,7 +164,7 @@ function NavList() {
                 className="font-medium"
             >
                 <ListItem className="flex items-center gap-2 py-2 pr-4">
-                    Contáctanos
+                    {loginNav.Contact}
                 </ListItem>
             </Typography>
         </List>
