@@ -1,4 +1,4 @@
-const questions = [
+const questionsSpanish = [
     { "question": "Nombre completo", "type_question": "abierta", "response": [""], "user_response": "" },
     { "question": "Posee pasaporte vigente", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "" },
     { "question": "Número de pasaporte", "type_question": "abierta", "response": [""], "user_response": "" },
@@ -59,5 +59,5 @@ const questions = [
     { "question": "Que paises ha visitado anteriormente?", "type_question": "abierta", "response": [""], "user_response": "" }
 ];
 
-export default questions;
+export default questionsSpanish;
 

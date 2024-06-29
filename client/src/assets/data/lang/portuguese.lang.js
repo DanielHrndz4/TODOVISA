@@ -1,12 +1,12 @@
 const portuguese = [
     {
         "navbar": {
-            "about": "Sobre Nós",
+            "about": "Sobre nós",
             "service": "Serviços",
             "VIPRO": "VIPRO",
             "Contact": "Contate-nos",
             "lang": {
-                "name": "Linguagem",
+                "name": "Idioma",
                 "lang_name": {
                     "spanish": {
                         "name": "Espanhol",
@@ -26,16 +26,16 @@ const portuguese = [
             "signup": "Cadastrar-se"
         },
         "banner": {
-            "title": "Desbloqueie o Mundo!",
+            "title": "Abra as Portas para o Mundo!",
             "todovisa": "TODO VISA"
         },
         "about": {
-            "title": "Abra as portas para um mundo de possibilidades!",
-            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate nulla consectetur maxime quae aliquam harum obcaecati alias dolores, assumenda natus excepturi hic iusto! Quibusdam minus repudiandae, deserunt dolore laboriosam hic eum magni numquam natus, laborum rem vero nesciunt accusantium libero. parágrafo",
+            "title": "Descubra Novos Horizontes com Oportunidades Infinitas!",
+            "description": "Explore um universo de possibilidades conosco! Seja você buscando crescimento, aventura ou inovação, nossa plataforma é projetada para abrir portas para inúmeras oportunidades. Junte-se a uma comunidade onde as ideias florescem e os sonhos se tornam realidade. Juntos, quebraremos barreiras e redefiniremos o sucesso. Vamos embarcar nesta jornada em direção a um futuro mais brilhante, onde cada passo te aproxima de alcançar todo o seu potencial.",
             "countries": {
                 "usa": {
                     "name": "Estados Unidos",
-                    "description": "País na América do Norte, conhecido por sua diversidade cultural, economia poderosa e influências na política e tecnologia mundial.",
+                    "description": "País na América do Norte, conhecido por sua diversidade cultural, poderosa economia e influências globais na política e tecnologia.",
                     "img": "/img/carrousel/estadosunidos.jpg",
                     "uri": "/country/estadosunidos"
                 },
@@ -52,8 +52,8 @@ const portuguese = [
                     "uri": "/country/mexico"
                 },
                 "uk": {
-                    "name": "Reino Unido",
-                    "description": "Parte do Reino Unido, famoso por sua rica história, contribuições para a literatura e ciência, e sua monarquia. Destaca-se por cidades icônicas como Londres.",
+                    "name": "Inglaterra",
+                    "description": "Parte do Reino Unido, famosa por sua rica história, contribuições para a literatura e ciência, e sua monarquia. Destaque para cidades icônicas como Londres.",
                     "img": "/img/carrousel/inglaterra.jpg",
                     "uri": "/country/inglaterra"
                 },
@@ -65,13 +65,13 @@ const portuguese = [
                 },
                 "australia": {
                     "name": "Austrália",
-                    "description": "País na Oceania, famoso por sua fauna única, paisagens naturais impressionantes como a Grande Barreira de Corais e um estilo de vida tranquilo.",
+                    "description": "País na Oceania, famoso por sua fauna única, impressionantes paisagens naturais como a Grande Barreira de Coral e um estilo de vida relaxado.",
                     "img": "/img/carrousel/australia.jpg",
                     "uri": "/country/australia"
                 },
                 "india": {
                     "name": "Índia",
-                    "description": "País no sul da Ásia, conhecido por sua diversidade cultural, riqueza histórica e espiritualidade. Lar de monumentos importantes como o Taj Mahal.",
+                    "description": "País no Sul da Ásia, conhecido por sua diversidade cultural, rica história e espiritualidade. Lar de monumentos importantes como o Taj Mahal.",
                     "img": "/img/carrousel/india.jpg",
                     "uri": "/country/india"
                 }
@@ -80,10 +80,10 @@ const portuguese = [
         "VIPRO": {
             "title": "Formulário VIPRO",
             "subtitle": {
-                "title": "Você está pronto para solicitar seu visto?",
+                "title": "Você está pronto para obter seu visto?",
                 "strong": "Não se preocupe, estamos aqui para ajudar"
             },
-            "text": "Este formulário ajudará você a determinar o quanto você está preparado para obter seu visto. Não se preocupe se você não tiver todas as informações em mãos; estamos aqui para orientá-lo em cada etapa do processo. Simplesmente clique no botão e responda às perguntas necessárias para avaliar sua preparação. Todas as suas informações serão tratadas com a máxima confidencialidade e usadas apenas para esse fim.",
+            "text": "Este formulário ajudará você a saber o quão preparado está para obter seu visto. Não se preocupe se você não tiver todas as informações em mãos, estamos aqui para guiá-lo em cada etapa do processo. Basta clicar no botão e responder às perguntas necessárias para avaliar sua preparação. Todas as suas informações serão tratadas com a máxima confidencialidade e utilizadas apenas para este propósito.",
             "button": "Preencher Formulário"
         }
     }

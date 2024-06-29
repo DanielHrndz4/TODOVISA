@@ -33,8 +33,8 @@ const spanish = [
         },
         "about":
         {
-            "title": "Abre las puertas a un mundo de posibilidades!",
-            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate nulla consectetur maxime quae aliquam harum obcaecati alias dolores, assumenda natus excepturi hic iusto! Quibusdam minus repudiandae, deserunt dolore laboriosam hic eum magni numquam natus, laborum rem vero nesciunt accusantium libero. parrafo",
+            "title": "¡Descubre Nuevos Horizontes con Oportunidades Sin Fin!",
+            "description": "¡Explora un universo de posibilidades con nosotros! Ya sea que busques crecimiento, aventura o innovación, nuestra plataforma está diseñada para abrirte puertas a innumerables oportunidades. Únete a una comunidad donde las ideas florecen y los sueños se hacen realidad. Juntos, romperemos barreras y redefiniremos el éxito. Emprendamos este viaje hacia un futuro más brillante, donde cada paso te acerque a alcanzar tu máximo potencial.",
             "countries":
             {
                 "usa":

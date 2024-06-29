@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import questions from '../../../assets/data/questions.data';
+import langVIPRO from '../../../assets/data/viproLang.data';
 import Cookies from 'js-cookie';
 
 const handleClickPopUpPay = (html, btn) => {
@@ -37,14 +37,14 @@ const handleClickPopUpPay = (html, btn) => {
                         const responseData = await response.json();
 
                         // Crear el formulario y redireccionar
-                        const createForm = async (email, questions, selectedValue) => {
+                        const createForm = async (email, langVIPRO, selectedValue) => {
                             try {
                                 const response = await fetch('https://todovisa.onrender.com/api/vipro-eeuu', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
                                     },
-                                    body: JSON.stringify({ email, questions }),
+                                    body: JSON.stringify({ email, langVIPRO }),
                                 });
 
                                 if (!response.ok) {
@@ -61,7 +61,7 @@ const handleClickPopUpPay = (html, btn) => {
                             }
                         };
 
-                        createForm(email, questions, selectedValue);
+                        createForm(email, langVIPRO, selectedValue);
                     } catch (error) {
                         console.error('Error en la solicitud principal:', error);
                         window.location.href = `/`;
