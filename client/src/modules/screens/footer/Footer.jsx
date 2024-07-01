@@ -1,7 +1,9 @@
 import { Typography } from "@material-tailwind/react";
+import lang from "../../../assets/data/lang.data";
 
 export default function Footer() {
   let currentYear = new Date().getFullYear();
+  const footer = lang[0].footer;
   return (
     <footer className="w-full bg-TVBlue lg:p-10 p-6 pt-8 mt-4">
       <div className="flex flex-col lg:flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-around">
@@ -14,7 +16,7 @@ export default function Footer() {
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
-              Sobre nosotros
+              {footer.about}
             </Typography>
           </li>
           <li>
@@ -24,7 +26,7 @@ export default function Footer() {
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
-              Servicios
+              {footer.service}
             </Typography>
           </li>
           <li>
@@ -34,7 +36,7 @@ export default function Footer() {
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
-              VIPRO
+              {footer.VIPRO}
             </Typography>
           </li>
           <li>
@@ -44,7 +46,7 @@ export default function Footer() {
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
-              Contáctanos
+              {footer.Contact}
             </Typography>
           </li>
           <li>

@@ -29,15 +29,16 @@ const handlePopUp = () => {
     const btn = 'Proceder a la compra';
     handleClickPopUp(html, btn);
     }else{
+        const popupWithoutLogin = lang[0].popupWithoutLogin
         const html = `
         <div id="popupContainer" class="popup-container">
             <div class="w-full">
-                <h2 class="pt-2 pb-2" style="font-size: 3rem; font-weight: 600;" className="font-semibold">Oops...</h2>
-                <p class="text-center pt-2">Debes iniciar sesión para ejecutar esta acción.</strong></p>
+                <h2 class="pt-2 pb-2" style="font-size: 3rem; font-weight: 600;" className="font-semibold">${popupWithoutLogin.title}</h2>
+                <p class="text-center pt-2">${popupWithoutLogin.description}</strong></p>
             </div>
         </div>
     `;
-    const btn = 'Aceptar';
+    const btn = popupWithoutLogin.button;
         handleClickPopUpSignUp('error', html, btn)
     } 
 }

@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import langVIPRO from '../../../assets/data/viproLang.data';
+import questions from '../../../assets/data/viproLang.data';
 import Cookies from 'js-cookie';
 
 const handleClickPopUpPay = (html, btn) => {
@@ -30,21 +30,16 @@ const handleClickPopUpPay = (html, btn) => {
                         if (!response.ok) {
                             throw new Error('Error al procesar la solicitud');
                         }
-
-                        // Si llegamos aquí, la primera solicitud fue exitosa
-                        console.log('Respuesta del servidor:', response);
-
-                        const responseData = await response.json();
-
-                        // Crear el formulario y redireccionar
-                        const createForm = async (email, langVIPRO, selectedValue) => {
+                        console.log(localStorage.getItem('lang'))
+                        console.log(questions)
+                        const createForm = async (email, questions, selectedValue) => {
                             try {
                                 const response = await fetch('https://todovisa.onrender.com/api/vipro-eeuu', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
                                     },
-                                    body: JSON.stringify({ email, langVIPRO }),
+                                    body: JSON.stringify({ email, questions }),
                                 });
 
                                 if (!response.ok) {
@@ -52,8 +47,7 @@ const handleClickPopUpPay = (html, btn) => {
                                 }
 
                                 console.log('Respuesta del servidor al guardar el formulario:', response);
-
-                                // Redireccionar solo si se completó correctamente el formulario
+                    
                                 window.location.href = `vipro/${selectedValue}`;
                             } catch (error) {
                                 console.error('Error en la solicitud para guardar el formulario:', error);
@@ -61,14 +55,14 @@ const handleClickPopUpPay = (html, btn) => {
                             }
                         };
 
-                        createForm(email, langVIPRO, selectedValue);
+                        createForm(email, questions, selectedValue);
                     } catch (error) {
                         console.error('Error en la solicitud principal:', error);
                         window.location.href = `/`;
                     }
                 };
 
-                fetchData(); // Llama a fetchData directamente
+                fetchData(); 
             }
         }
     });

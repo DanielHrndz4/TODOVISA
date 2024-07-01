@@ -97,6 +97,38 @@ const spanish = [
             "text": "Este formulario te ayudará a saber qué tan preparado estás para obtener tu visa. No te preocupes si no tienes toda la información a la mano, estamos aquí para guiarte en cada paso del proceso. Simplemente haz clic en el botón y responde las preguntas necesarias para evaluar tu preparación. Toda tu información será tratada con la máxima confidencialidad y utilizada únicamente para este propósito.",
                 
             "button": "Realizar Formulario"
+        },
+        "contact":{
+            "title": "Contáctanos",
+            "form": {
+                "title": "Escribenos",
+                "subtitle": "Estamos aquí para ayudarte, ¡cuéntanos cómo podemos asistirte!",
+                "name": "Nombre completo",
+                "email": "Correo electrónico",
+                "body": "Escribe tu mensaje",
+                "button": "Enviar correo"
+            },
+            "info": {
+                "location": "67 Avenida Sur Local #1, San Salvador",
+                "schedule": "Lunes a Viernes: 8:30am - 6:00pm, Sabados: 9:00am - 5:00pm, Domingos: Cerrados"
+            }
+        },
+        "footer": {
+            "about": "Sobre nosotros",
+            "service": "Servicios",
+            "VIPRO": "VIPRO",
+            "Contact": "Contáctanos",
+            "copi": "© 2024 TodoVisa S.A de C.V"
+        },
+        "popupWithoutLogin":{
+            "title": "Oops...",
+            "description": "Debes iniciar sesión para ejecutar esta acción.",
+            "button": "Aceptar!"
+        },
+        "whatsapp": {
+            "status": "En linea",
+            "message": "¡Hola! 👋 \nBienvenido a Todovisa. \n¿En qué podemos ayudarte hoy?",
+            "placeholder": "Escribe un mensaje"
         }
     }
 ];

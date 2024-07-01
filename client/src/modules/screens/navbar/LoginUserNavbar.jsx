@@ -119,6 +119,17 @@ function NavListMenu() {
 
 }
 
+const navText = lang[0].navbar
+
+const handleLang = (lang) => {
+    if (localStorage.getItem('lang') !== null) {
+        localStorage.removeItem('lang');
+    }
+    localStorage.setItem('lang', lang);
+    location.reload();
+}
+
+
 function NavList() {
     return (
         <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
@@ -165,6 +176,34 @@ function NavList() {
             >
                 <ListItem className="flex items-center gap-2 py-2 pr-4">
                     {loginNav.Contact}
+                </ListItem>
+            </Typography>
+            <Typography
+                as="a"
+                variant="small"
+                color="white"
+                className="font-medium"
+            >
+                <ListItem className="flex items-center gap-2 py-2 pr-4">
+                    <Menu>
+                        <MenuHandler>
+                            <div>{navText.lang.name}</div>
+                        </MenuHandler>
+                        <MenuList className="bg-TVBlue border-white">
+                            {Object.values(lang[0].navbar.lang.lang_name).map((langItem, index, array) => (
+                                <MenuItem
+                                    key={index}
+                                    className={`text-white font-normal hover:bg-TVBlue text-center hover:text-black hover:font-semibold py-2 ${index === array.length - 1 ? 'border-b-0' : 'border-b-[1px]'} rounded-none py-3`}
+                                    onClick={() => handleLang(langItem.name)}
+                                >
+                                    <div className="flex flex-row items-center">
+                                        <img src={langItem.img} alt={`${langItem.name}`} className="w-[20px] h-[20px]" />
+                                        <span className="px-4">{langItem.name}</span>
+                                    </div>
+                                </MenuItem>
+                            ))}
+                        </MenuList>
+                    </Menu>
                 </ListItem>
             </Typography>
         </List>
