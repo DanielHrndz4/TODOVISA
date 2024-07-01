@@ -11,15 +11,15 @@ const portuguese = [
                 "lang_name": {
                     "spanish": {
                         "name": "Espanhol",
-                        "img": "./public/img/lang/spanish.png"
+                        "img": "/img/lang/spanish.png"
                     },
                     "english": {
                         "name": "Inglês",
-                        "img": "./public/img/lang/english.png"
+                        "img": "/img/lang/english.png"
                     },
                     "Portuguese": {
                         "name": "Português",
-                        "img": "./public/img/lang/portuguese.png"
+                        "img": "/img/lang/portuguese.png"
                     }
                 }
             },
