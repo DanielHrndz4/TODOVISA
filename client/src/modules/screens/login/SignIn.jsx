@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import lang from "../../../assets/data/lang.data";
 
 export default function Login() {
   const [signInText, setSignInText] = useState("Inicia sesión");
@@ -183,16 +184,17 @@ export default function Login() {
   }
 
   const withSignin = () => {
+    const withSession = lang[0].with_session
     return (
       <div className="h-screen flex flex-col justify-center items-center m-auto gap-4">
         <div className="bg-white py-16 px-20 rounded-lg shadow flex flex-col gap-6">
           <div className="flex flex-col gap-3 text-center">
-            <h1 className="text-3xl font-semibold">Ya tienes una sesion iniciada</h1>
-            <p className="text-xl">Cierra sesión para registrarte o iniciar sesión con otro usuario.</p>
+            <h1 className="text-3xl font-semibold">{withSession.title}</h1>
+            <p className="text-xl">{withSession.subtitle}</p>
           </div>
           <Link to='/'>
             <div className="flex flex-row">
-              <Button className="bg-TVred shadowbtn py-6 px4 m-auto flex justify-center items-center">Regresar al Inicio</Button>
+              <Button className="bg-TVred shadowbtn py-6 px4 m-auto flex justify-center items-center">{withSession.button}</Button>
             </div>
           </Link>
         </div>

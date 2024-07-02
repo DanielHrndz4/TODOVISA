@@ -156,7 +156,7 @@ const VIPROForm = () => {
       setTermsMessage(viproInfo.warning);
       return;
     } else {
-      const html = `<div>Seguro que quieres guardar</div>`
+      const html = `<div>${viproInfo.alert_save}</div>`
       handleClickPopUpSaveForm(html, email, questions)
     }
   };

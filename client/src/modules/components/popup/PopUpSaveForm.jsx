@@ -1,19 +1,21 @@
 import Swal from 'sweetalert2';
+import lang from '../../../assets/data/lang.data';
 
+const buttonText = lang[0].form
 const handleClickPopUpSaveForm = (html, email, questions) => {
     Swal.fire({
         icon: 'warning',
         html: html,
-        confirmButtonText: 'Aceptar!',
+        confirmButtonText: buttonText.button,
         confirmButtonColor: '#B6122A',
         showCancelButton: true,
-        cancelButtonText: "Cancelar!",
+        cancelButtonText: buttonText.button2,
         cancelButtonColor: '#113E5F',
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire({
-                title: 'Guardando formulario',
-                html: 'Por favor espera...',
+                title: buttonText.save,
+                html: buttonText.wait,
                 showConfirmButton: false,  
                 allowOutsideClick: false,
                 onBeforeOpen: () => {
@@ -35,8 +37,6 @@ const handleClickPopUpSaveForm = (html, email, questions) => {
                       throw new Error('Error al actualizar el formulario');
                     }
               
-                    const responseData = await response.json();
-                    console.log('Formulario actualizado:', responseData);
                     window.location.href = '/';
                   } catch (error) {
                     console.error('Error en la solicitud:', error);

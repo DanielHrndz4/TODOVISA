@@ -141,10 +141,19 @@ const portuguese = [
             "reload_form": "Redefinir formulário",
             "terms_and_conditions": "<strong>1. Aceitação dos Termos</strong><br><br> Ao acessar e utilizar este formulário de solicitação de visto, você concorda em cumprir com estes termos e condições. Se você não concorda com algum destes termos, não utilize este formulário.<br><br><strong>2. Uso do Formulário</strong><br><br>Este formulário é destinado apenas para uso pessoal e não comercial. Você se compromete a fornecer informações precisas e completas ao preencher o formulário.<br><br><strong>3. Privacidade das Informações</strong><br><br>Todas as informações fornecidas neste formulário serão usadas exclusivamente para processar sua solicitação de visto. Não compartilharemos suas informações com terceiros sem seu consentimento, exceto quando exigido por lei.<br><br><strong>4. Limitação de Responsabilidade</strong><br><br>Não garantimos que o uso do formulário será ininterrupto ou livre de erros. Não seremos responsáveis por quaisquer danos resultantes do uso deste formulário, incluindo, mas não se limitando a, danos diretos, indiretos, incidentais, punitivos e consequentes.<br><br><strong>5. Modificações dos Termos</strong><br><br>Reservamo-nos o direito de modificar estes termos e condições a qualquer momento. As modificações serão publicadas nesta página e o uso continuado do formulário constituirá a aceitação dos termos modificados.<br><br><strong>6. Lei Aplicável</strong><br><br>Estes termos e condições serão regidos e interpretados de acordo com as leis do país onde a solicitação de visto é processada, sem dar efeito a quaisquer princípios sobre conflitos de leis.<br><br><strong>7. Contato</strong><br><br>Se você tiver alguma dúvida sobre estes termos e condições, por favor, entre em contato conosco através de nossos canais de atendimento ao cliente.",
             "button": "Aceitar!",
+            "button2": "Cancelar!",
             "warning": "Você deve aceitar os termos e condições antes de salvar o formulário.",
+            "alert_save": "Tem certeza que deseja salvar?",
             "obligatory_field": "Este campo é obrigatório. Por favor, insira um valor.",
-            "select_option": "Selecione uma opção"
-        }
+            "select_option": "Selecione uma opção",
+            "save": "Salvando formulário",
+            "wait": "Por favor, aguarde..."
+        },
+        "with_session": {
+            "title": "Você já tem uma sessão ativa",
+            "subtitle": "Faça logout para se registrar ou fazer login com outro usuário.",
+            "button": "Voltar para o início"
+          }
     }
 ];
 
