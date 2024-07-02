@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Configura CORS para permitir cualquier origen
 app.use(cors({
-  origin: "http://localhost:5173/" || "https://todovisa.vercel.app/",
+  origin: true,
   credentials: true, // Permite el envío de cookies
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
