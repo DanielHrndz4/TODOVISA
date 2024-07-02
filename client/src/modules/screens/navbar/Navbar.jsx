@@ -116,13 +116,20 @@ function NavListMenu() {
   );
 }
 
-const handleLang = (lang) => {
-  if (localStorage.getItem('lang') !== null) {
-    localStorage.removeItem('lang');
+const handleLang = (lang) => {  
+  localStorage.removeItem('lang');
+  if (lang === 'Spanish' || lang === 'Español' || lang === 'Espanhol') {
+    localStorage.setItem('lang', "Español");
+  } else if (lang === 'Inglés' || lang === 'English' || lang === 'Inglês') {
+    localStorage.setItem('lang', "English");
+  } else if (lang === 'Portugués' || lang === 'Portuguese' || lang === 'Português') {
+    localStorage.setItem('lang', "Portugués");
+  } else {
+    localStorage.setItem('lang', 'Español');
   }
-  localStorage.setItem('lang', lang);
+  console.log(localStorage.getItem('lang'));
   location.reload();
-}
+};
 
 function NavList() {
   return (

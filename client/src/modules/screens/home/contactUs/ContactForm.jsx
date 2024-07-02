@@ -10,7 +10,7 @@ import lang from "../../../../assets/data/lang.data";
 export default function ContactForm() {
   const contactForm = lang[0].contact.form
   return (
-    <Card color="white" shadow={true} className="max-w-xl sm:max-w-3xl lg:max-w-xl h-full mx-auto sm:px-10 sm:py-8 px-4 py-6 lg:px-8 lg:py-6 xl:px-16 xl:py-8 flex justify-center shadow">
+    <Card color="white" shadow={true} className="max-w-xl sm:max-w-3xl lg:max-w-xl h-full mx-auto sm:px-10 sm:py-8 px-8 py-6 lg:px-8 lg:py-6 xl:px-16 xl:py-8 flex justify-center shadow">
       <Typography variant="h4" color="blue-gray">
       {contactForm.title}
       </Typography>
@@ -21,7 +21,7 @@ export default function ContactForm() {
         <div className="mb-1 flex flex-col gap-6">
         <Typography variant="h6" color="blue-gray" className="-mb-3">
             {contactForm.name} 
-          </Typography>
+          </Typography> 
           <Input
             size="lg"
             placeholder=""
