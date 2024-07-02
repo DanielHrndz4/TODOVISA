@@ -60,7 +60,7 @@ export default function Login() {
       if (response.ok) {
         const { token, user } = await response.json();
         const expires = new Date(new Date().getTime() + 60 * 60 * 1000); // 1 hour from now
-        Cookies.set('jwt', token, { expires: expires, secure: true, sameSite: 'Strict' });
+        Cookies.set('jwt', token, { expires: expires, secure: true, sameSite: 'Strict', httpOnly: true });
         Cookies.set('user', JSON.stringify(user), { expires: expires, secure: true, sameSite: 'Strict' });
         navigateTo("/");
       } else if (response.status === 401) {
