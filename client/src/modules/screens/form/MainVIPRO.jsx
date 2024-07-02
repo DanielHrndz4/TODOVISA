@@ -10,6 +10,9 @@ export default function MainVIPRO() {
 
   const fetchData = async () => {
     const user = Cookies.get('user');
+    if(user === undefined){
+      navigateTo('/');
+    }
     const userData = JSON.parse(user);
     if (!user) {
       navigateTo('/');

@@ -130,6 +130,20 @@ const spanish = [
             "status": "En linea",
             "message": "¡Hola! 👋 \nBienvenido a Todovisa. \n¿En qué podemos ayudarte hoy?",
             "placeholder": "Escribe un mensaje"
+        },
+        "form": {
+            "return": " Regresar al inicio",
+            "title": "Formulario de solicitud de VISA",
+            "description": "A continuación, encontrará el formulario de solicitud de visa que deberá completar para procesar su solicitud. Le pedimos que llene todos los campos con la información más precisa y actualizada posible. Esto nos permitirá evaluar su solicitud de manera eficiente y rápida.",
+            "acept": "Acepto los ",
+            "terms": "Términos y condiciones",
+            "send_form": "Enviar formulario",
+            "reload_form": "Reiniciar formulario",
+            "terms_and_conditions": "<strong>1. Aceptación de los Términos</strong><br><br>Al acceder y utilizar este formulario de solicitud de visa, usted acepta cumplir con estos términos y condiciones. Si no está de acuerdo con alguno de estos términos, no utilice este formulario.<br><br><strong>2. Uso del Formulario</strong><br><br>Este formulario está destinado únicamente para uso personal y no comercial. Usted se compromete a proporcionar información precisa y completa al completar el formulario.<br><br><strong>3. Privacidad de la Información</strong><br><br>Toda la información proporcionada en este formulario se utilizará exclusivamente para procesar su solicitud de visa. No compartiremos su información con terceros sin su consentimiento, excepto cuando sea requerido por la ley.<br><br><strong>4. Limitación de Responsabilidad</strong><br><br>No garantizamos que el uso del formulario sea ininterrumpido o libre de errores. No seremos responsables de ningún daño que resulte del uso de este formulario, incluidos, entre otros, daños directos, indirectos, incidentales, punitivos y consecuentes.<br><br><strong>5. Modificaciones de los Términos</strong><br><br>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones se publicarán en esta página y su uso continuado del formulario constituirá la aceptación de los términos modificados.<br><br><strong>6. Ley Aplicable</strong><br><br>Estos términos y condiciones se regirán e interpretarán de acuerdo con las leyes del país donde se procesa la solicitud de visa, sin dar efecto a ninguna disposición sobre conflictos de leyes.<br><br><strong>7. Contacto</strong><br><br>Si tiene alguna pregunta sobre estos términos y condiciones, por favor contacte con nosotros a través de nuestros canales de atención al cliente.",
+            "button": "Aceptar!",
+            "warning": "Debes aceptar los términos y condiciones antes de guardar el formulario.",
+            "obligatory_field": "Este campo es obligatorio. Por favor, ingresa un valor.",
+            "select_option": "Selecciona una opción"
         }
     }
 ];
