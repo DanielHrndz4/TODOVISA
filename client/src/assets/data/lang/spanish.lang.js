@@ -102,7 +102,8 @@ const spanish = [
             "title": "Contáctanos",
             "form": {
                 "title": "Escribenos",
-                "subtitle": "Estamos aquí para ayudarte, ¡cuéntanos cómo podemos asistirte!",
+                "subtitle": "Estamos aquí para ayudarte.",
+                "subtitle2": "¡Cuéntanos cómo podemos asistirte!",
                 "name": "Nombre completo",
                 "email": "Correo electrónico",
                 "body": "Escribe tu mensaje",

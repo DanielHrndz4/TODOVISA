@@ -102,7 +102,8 @@ const portuguese = [
             "title": "Contate-nos",
             "form": {
                 "title": "Contate-nos",
-                "subtitle": "Estamos aqui para ajudá-lo, nos conte como podemos lhe assistir!",
+                "subtitle": "Estamos aqui para ajudá-lo.",
+                "subtitle2": "Nos conte como podemos lhe assistir!",
                 "name": "Nome completo",
                 "email": "Correio eletrônico",
                 "body": "Escreva sua mensagem",

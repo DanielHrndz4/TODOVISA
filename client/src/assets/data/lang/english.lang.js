@@ -102,7 +102,8 @@ const english = [
             "title": "Contact Us",
             "form": {
                 "title": "Contact Us",
-                "subtitle": "We're here to help you, tell us how we can assist you!",
+                "subtitle": "We're here to help you.",
+                "subtitle2": "Tell us how we can assist you!",
                 "name": "Full Name",
                 "email": "Email",
                 "body": "Write your message",

@@ -14,10 +14,11 @@ export default function ContactForm() {
       <Typography variant="h4" color="blue-gray">
       {contactForm.title}
       </Typography>
-      <Typography color="gray" className="mt-1 font-normal">
-        {contactForm.subtitle}
+      <Typography color="gray" className="mt-3 font-normal">
+        {contactForm.subtitle} <br />
+        {contactForm.subtitle2}
       </Typography>
-      <form className="mt-6 mb-2 w-80 max-w-screen-lg sm:w-96">
+      <form className="mt-4 mb-2 w-80 max-w-screen-lg sm:w-96">
         <div className="mb-1 flex flex-col gap-6">
         <Typography variant="h6" color="blue-gray" className="-mb-3">
             {contactForm.name} 
