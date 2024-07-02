@@ -119,7 +119,7 @@ router.post('/forms', async (req, res) => {
   }
 });
 
-router.get('/protected-route', authenticateJWT, (req, res) => {
+router.get('/protected-route', (req, res) => {
   res.send('This is a protected route');
 });
 
