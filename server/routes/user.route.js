@@ -138,6 +138,7 @@ router.get('/protected-route',
     try {
       const token = req.cookies.jwt;
       const validPayload = jwt.verify(token, SECRET_KEY)
+      console.log(token);
       console.log(validPayload);
       next();
     } catch (error) {
