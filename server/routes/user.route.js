@@ -126,14 +126,14 @@ router.post('/forms', async (req, res) => {
 
 router.get('/protected-route'
   , (req, res, next) => {
+    const token = req.cookies.jwt;
     try {
-      const token = req.cookies.jwt;
       const validPayload = jwt.verify(token, SECRET_KEY);
       console.log(validPayload);
       next();
     } catch (error) {
       console.log(error);
-      res.status(400).json({ ok: false, message: "Invalid token" });
+      res.status(400).json({ ok: false, message: "Invalid token", token: token});
     }
   }
   , (req, res) => {
