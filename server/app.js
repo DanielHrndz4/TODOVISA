@@ -50,7 +50,7 @@ routerSign.post('/api/signin', (req, res) => {
     .then((user) => {
       if (user) {
         const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
-        res.cookie('jwt', token, { httpOnly: true }); // Añadir el token a la cookie
+        res.cookies('jwt', token, { httpOnly: true }); // Añadir el token a la cookie
         res.json({
           message: 'Inicio de sesión exitoso', 
           user: {
