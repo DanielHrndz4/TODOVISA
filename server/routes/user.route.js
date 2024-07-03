@@ -3,10 +3,12 @@ const jwt = require('jsonwebtoken');
 const userSchema = require('../models/user.schema');
 const router = express.Router();
 const Form = require('../models/form.schema');
-
+const cookieParser = require('cookie-parser')
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
+
+router(cookieParser())
 
 const authenticate = (req, res, next) => {
   const token = req.cookies.jwt; // Obtener el token JWT de la cookie 'jwt'
