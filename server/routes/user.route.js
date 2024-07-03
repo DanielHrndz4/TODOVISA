@@ -138,8 +138,7 @@ router.get('/protected-route',
     try {
       const token = req.cookies.jwt;
       const validPayload = jwt.verify(token, SECRET_KEY)
-      console.log(token);
-      console.log(validPayload);
+      console.log(`Token: ${token} || Payload: ${validPayload}`);
       next();
     } catch (error) {
       res.status(400).json({ ok: false, message: "invalid token" })
