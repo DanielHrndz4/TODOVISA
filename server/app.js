@@ -14,8 +14,8 @@ connectDB();
 
 app.use(express.json());
 app.use(cookieParser());
-
-
+app.disable('x-powered-by');
+app.use(cors());
 
 app.use('/api', userRoute);
 
