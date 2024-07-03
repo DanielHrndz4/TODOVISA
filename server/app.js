@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 // Configuración CORS
 const corsOptions = {
-  origin: "https://todovisa.vercel.app/",
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']

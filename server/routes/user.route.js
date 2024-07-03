@@ -24,8 +24,6 @@ const authenticate = (req, res, next) => {
 
 // Rutas de usuario
 router.post('/signin', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.herader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const { email, password } = req.body;
   userSchema
     .findOne({ email: email, password: password })
