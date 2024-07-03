@@ -33,6 +33,7 @@ router.post('/signin', (req, res) => {
     .then((user) => {
       if (user) {
         const token = jwt.sign({ useremail: user.email }, SECRET_KEY);
+        console.log(token)
         res.json({
           message: 'Inicio de sesión exitoso', token, user: {
             email: user.email,
