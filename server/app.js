@@ -14,12 +14,20 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser())
 
-app.use(cors({
-  origin: ['http://localhost:3366', 'https://todovisa.onrender.com'], // Permitir el origen local y el de producción
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (process.env.NODE_ENV === 'production') {
+      callback(null, ['https://todovisa.onrender.com']);
+    } else {
+      callback(null, ['http://localhost:3366']);
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
-}));
+};
+
+app.use(cors(corsOptions));
 
 app.use('/api', userRoute);
 
