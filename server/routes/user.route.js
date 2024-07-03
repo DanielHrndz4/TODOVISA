@@ -25,6 +25,7 @@ const authenticate = (req, res, next) => {
 // Rutas de usuario
 router.post('/signin', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.herader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const { email, password } = req.body;
   userSchema
     .findOne({ email: email, password: password })
@@ -32,7 +33,7 @@ router.post('/signin', (req, res) => {
       if (user) {
         const token = jwt.sign({ useremail: user.email }, SECRET_KEY);
         console.log(token);
-        res.cookie("jwt", token, {secure: true, sameSite: 'None' });
+        res.cookie("jwt", token, { secure: true, sameSite: 'None' });
         res.json({
           message: 'Inicio de sesión exitoso',
           token,
@@ -138,9 +139,8 @@ router.get('/protected-route'
     }
   }
   , (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.json({message: 'This is a protected route'});
-});
+    res.json({ message: 'This is a protected route' });
+  });
 
 router.get('/verify-token', (req, res) => {
   try {
