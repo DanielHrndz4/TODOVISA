@@ -133,7 +133,7 @@ router.get('/protected-route'
       next();
     } catch (error) {
       console.log(error);
-      res.status(400).json({ ok: false, message: "Invalid token", token: token});
+      res.status(400).json({ ok: false, message: token});
     }
   }
   , (req, res) => {
