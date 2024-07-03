@@ -3,35 +3,9 @@ const jwt = require('jsonwebtoken');
 const userSchema = require('../models/user.schema');
 const router = express.Router();
 const Form = require('../models/form.schema');
-const cookieParser = require('cookie-parser');
-const authenticate = require('../app')
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
-
-router.post('/signin', (req, res) => {
-  const { email, password } = req.body;
-  userSchema
-    .findOne({ email: email, password: password })
-    .then((user) => {
-      if (user) {
-        const token = jwt.sign({ useremail: user.email }, SECRET_KEY, { expiresIn: '1h' });
-        res.json({
-          message: 'Inicio de sesión exitoso', token, user: {
-            email: user.email,
-            name: user.name,
-            country: user.country
-          }
-        });
-      } else {
-        res.status(401).json({ message: 'Credenciales inválidas' });
-      }
-    })
-    .catch((error) => {
-      console.error(error.message);
-      res.status(500).json({ message: 'Server error' });
-    });
-});
 
 router.post('/show-form-eeuu', (req, res) => {
   const email = req.body.email;
@@ -69,35 +43,6 @@ router.post('/update-form-eeuu', async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Error del servidor' });
   }
-});
-
-router.post('/signup', (req, res) => {
-  const { name, lastname, email, password, country, tel } = req.body;
-
-  userSchema.findOne({ email: email })
-    .then((existUser) => {
-      if (existUser) {
-        return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` });
-      }
-
-      const newUser = new userSchema({
-        name: name,
-        lastname: lastname,
-        email: email,
-        password: password,
-        country: country,
-        tel: tel
-      });
-
-      newUser.save()
-        .then((user) => {
-          res.status(200).json({ message: "Usuario registrado exitosamente" });
-        })
-        .catch((error) => {
-          console.error(error.message);
-          res.status(500).json({ message: 'Server error' });
-        });
-    });
 });
 
 router.post('/forms', async (req, res) => {
