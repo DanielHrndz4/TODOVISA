@@ -17,6 +17,7 @@ const authenticate = (req, res, next) => {
     console.log(validPayload);
     next();
   } catch (error) {
+    console.log(error);
     res.status(400).json({ ok: false, message: "Invalid token" });
   }
 };
@@ -124,7 +125,19 @@ router.post('/forms', async (req, res) => {
   }
 });
 
-router.get('/protected-route', authenticate, (req, res) => {
+router.get('/protected-route'
+  , (req, res, next) => {
+    try {
+      const token = req.cookies.jwt;
+      const validPayload = jwt.verify(token, SECRET_KEY);
+      console.log(validPayload);
+      next();
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ ok: false, message: "Invalid token" });
+    }
+  }
+  , (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.json({message: 'This is a protected route'});
 });
