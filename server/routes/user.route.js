@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const userSchema = require('../models/user.schema');
 const router = express.Router();
 const Form = require('../models/form.schema');
-
+const cookieParser = require('cookie-parser')
 
 require('dotenv').config();
 
@@ -133,9 +133,23 @@ router.post('/forms', async (req, res) => {
   }
 });
 
-router.get('/protected-route', authenticate, (req, res) => {
-  res.send('This is a protected route');
-});
+router.get('/protected-route',
+  (req, res, next) => {
+    console.log(req.cookies.jwt)
+    try {
+      const token = req.cookies.jwt;
+      const validPayload = jwt.verify(token, SECRET_KEY)
+      console.log(validPayload);
+      next();
+    } catch (error) {
+      const token = req.cookies.jwt;
+      console.log(token)
+      res.status(400).json({ ok: false, message: "invalid token" })
+    }
+  }, 
+  (req, res) => {
+    res.send('This is a protected route');
+  });
 
 router.get('/verify-token', (req, res) => {
   try {
