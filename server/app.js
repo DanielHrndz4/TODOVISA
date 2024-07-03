@@ -14,6 +14,14 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser())
 
+// Configura CORS para permitir cualquier origen
+app.use(cors({
+  origin: true,
+  credentials: true, // Permite el envío de cookies
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use('/api', userRoute);
 
 app.listen(PORT, () => {
