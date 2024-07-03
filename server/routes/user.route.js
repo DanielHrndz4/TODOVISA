@@ -34,6 +34,7 @@ router.post('/signin', (req, res) => {
       if (user) {
         const token = jwt.sign({ useremail: user.email }, SECRET_KEY);
         console.log(token)
+        res.cookie("jwt", token);
         res.json({
           message: 'Inicio de sesión exitoso', token, user: {
             email: user.email,
