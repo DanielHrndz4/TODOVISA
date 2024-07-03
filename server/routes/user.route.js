@@ -124,7 +124,8 @@ router.post('/forms', async (req, res) => {
 });
 
 router.get('/protected-route', authenticate, (req, res) => {
-  res.send('This is a protected route');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.json({message: 'This is a protected route'});
 });
 
 router.get('/verify-token', (req, res) => {
