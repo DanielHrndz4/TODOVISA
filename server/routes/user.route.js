@@ -4,25 +4,20 @@ const userSchema = require('../models/user.schema');
 const router = express.Router();
 const Form = require('../models/form.schema');
 
+
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
 const authenticate = (req, res, next) => {
-  const token = req.cookies.jwt; // Obtener el token JWT de la cookie 'jwt'
-
-  if (!token) {
-    return res.sendStatus(401); // Si no hay token, devolver no autorizado
-  }
-
-  jwt.verify(token, SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return res.sendStatus(403); // Si hay un error al verificar el token, devolver prohibido
-    }
-
-    req.user = decoded; // Añadir los datos decodificados al objeto `req` para su uso posterior
+  try {
+    const token = req.cookies.jwt; // Obtener el token JWT de la cookie 'jwt'
+    const validPayload = jwt.verify(token, SECRET_KEY)
+    console.log(validPayload);
     next();
-  });
+  } catch (error) {
+    res.status(400).json({ ok: false, message: "invalid token" })
+  }
 };
 
 
@@ -138,7 +133,7 @@ router.post('/forms', async (req, res) => {
   }
 });
 
-router.get('/protected-route',authenticate, (req, res) => {
+router.get('/protected-route', authenticate, (req, res) => {
   res.send('This is a protected route');
 });
 
