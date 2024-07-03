@@ -3,12 +3,10 @@ const jwt = require('jsonwebtoken');
 const userSchema = require('../models/user.schema');
 const router = express.Router();
 const Form = require('../models/form.schema');
-const cookieParser = require('cookie-parser')
 
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
-router(cookieParser());
 
 const authenticate = (req, res, next) => {
   const token = req.cookies.jwt; // Obtener el token JWT de la cookie 'jwt'
@@ -22,7 +20,7 @@ const authenticate = (req, res, next) => {
       return res.sendStatus(403); // Si hay un error al verificar el token, devolver prohibido
     }
 
-    req.user = decoded; 
+    req.user = decoded; // Añadir los datos decodificados al objeto `req` para su uso posterior
     next();
   });
 };

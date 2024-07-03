@@ -11,8 +11,8 @@ const SECRET_KEY = process.env.SECRET_KEY;
 // Conectar a la base de datos
 connectDB();
 
-app.use(cookieParser())
 app.use(express.json());
+app.use(cookieParser())
 
 // Configura CORS para permitir cualquier origen
 app.use(cors({
