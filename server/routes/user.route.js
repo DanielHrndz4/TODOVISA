@@ -126,16 +126,15 @@ router.post('/forms', async (req, res) => {
 
 router.get('/protected-route'
   , (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-  
-    if (token == null) return res.sendStatus(401);
-  
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403);
-      req.user = user;
+    const token = req.cookies.jwt;
+    try {
+      const validPayload = jwt.verify(token, SECRET_KEY);
+      console.log(validPayload);
       next();
-    });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ ok: false, message: token});
+    }
   }
   , (req, res) => {
     res.json({ message: 'This is a protected route' });
