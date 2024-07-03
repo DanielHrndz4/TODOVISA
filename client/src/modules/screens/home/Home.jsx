@@ -20,8 +20,8 @@ export default function Home() {
     try {
       if(Cookies.get('jwt')){
         const response = await fetch(
-          "https://100.20.92.101/api/protected-route",
-          // "http://localhost:3366/api/protected-route", 
+          // "https://todovisa.onrender.com/api/protected-route",
+          "http://localhost:3366/api/protected-route", 
           {
             method: 'GET',
             credentials: 'include',
