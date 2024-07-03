@@ -16,15 +16,15 @@ export default function Home() {
   const bannerText = lang[0].banner
   const [jwtToken, setJwtToken] = useState(false);
   const [loading, setLoading] = useState(true); // Nuevo estado para controlar la carga
-  console.log(bannerText);
   const fetchData = async () => {
     try {
       if(Cookies.get('jwt')){
         const response = await fetch(
           "https://todovisa.onrender.com/api/protected-route",
+          // "http://localhost:3366/api/protected-route", 
           {
             method: 'GET',
-            credentials: 'include', 
+            credentials: 'include',
             headers: {
               'Content-Type': 'application/json',
             }
