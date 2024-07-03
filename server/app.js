@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const connectDB = require('./database/database');
 const userRoute = require('./routes/user.route')
 const app = express();
+const routerSign = express.Router();
 const cors = require('cors');
 const session = require('express-session');
 const PORT = process.env.PORT || 3333;
@@ -31,7 +32,6 @@ const authenticate = (req, res, next) => {
   });
 };
 
-// Configura CORS para permitir cualquier origen
 app.use(cors({
   origin: true,
   credentials: true, // Permite el envío de cookies
@@ -39,7 +39,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.post('/api/signin', (req, res) => {
+routerSign.post('/api/signin', (req, res) => {
   const { email, password } = req.body;
   userSchema
     .findOne({ email: email, password: password })
@@ -63,7 +63,7 @@ app.post('/api/signin', (req, res) => {
     });
 });
 
-app.post('/api/signup', (req, res) => {
+routerSign.post('/api/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
 
   userSchema.findOne({ email: email })
