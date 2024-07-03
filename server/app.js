@@ -39,6 +39,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+app.use(authenticate)
+
 app.use('/api', userRoute);
 
 app.listen(PORT, () => {
