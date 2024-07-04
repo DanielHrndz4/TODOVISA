@@ -15,22 +15,21 @@ import lang from "../../../assets/data/lang.data";
 export default function Home() {
   const bannerText = lang[0].banner
   const [jwtToken, setJwtToken] = useState(false);
-  const [loading, setLoading] = useState(true); // Nuevo estado para controlar la carga
+  const [loading, setLoading] = useState(true); 
+  const cookieJWT = Cookies.get('jwt')
   const fetchData = async () => {
     try {
-      if(Cookies.get('jwt')){
+      if (cookieJWT) {
         const response = await fetch(
-          //"http://localhost:3366/api/protected-route", 
+          // "http://localhost:3366/api/protected-route", 
           "https://todovisa.onrender.com/api/protected-route",
           {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-            }
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({jwt: cookieJWT})
           }
         );
-    
+
         if (response.ok) {
           console.log(response)
           setJwtToken(true);
@@ -60,25 +59,25 @@ export default function Home() {
         {jwtToken ? <LoginUserNavbar /> : <NavbarWithMegaMenu />}
         <div className="flex flex-col w-full">
           <div className="backgroundgradient w-full">
-          <div
-            className="relative mt-12 mb-4" // Adjust based on the height of the navbar
-            style={{
-              backgroundImage: "url('/img/background/bgmain4.jpg')",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              minHeight: "40rem", // Ensure it covers at least 30rem height
-              width: "100%",
-              backgroundPosition: "center",
-              display: "flex", // Ensure the child div can stretch to full height
-              alignItems: "center", // Center content vertically if needed
-              justifyContent: "center", // Center content horizontally if needed
-            }}
-          >
-            <div className="h-full w-full flex items-center justify-center flex-col gap-4 font-semibold [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] ">
-              <h1 className="text-white text-2xl text-center sm:text-4xl">{bannerText.title}</h1>
-              <h1 className="text-white text-5xl text-center sm:text-7xl">{bannerText.todovisa}</h1>
+            <div
+              className="relative mt-12 mb-4" // Adjust based on the height of the navbar
+              style={{
+                backgroundImage: "url('/img/background/bgmain4.jpg')",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                minHeight: "40rem", // Ensure it covers at least 30rem height
+                width: "100%",
+                backgroundPosition: "center",
+                display: "flex", // Ensure the child div can stretch to full height
+                alignItems: "center", // Center content vertically if needed
+                justifyContent: "center", // Center content horizontally if needed
+              }}
+            >
+              <div className="h-full w-full flex items-center justify-center flex-col gap-4 font-semibold [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] ">
+                <h1 className="text-white text-2xl text-center sm:text-4xl">{bannerText.title}</h1>
+                <h1 className="text-white text-5xl text-center sm:text-7xl">{bannerText.todovisa}</h1>
+              </div>
             </div>
-          </div>
           </div>
 
           {/* About section */}

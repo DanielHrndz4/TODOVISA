@@ -18,6 +18,7 @@ export default function Login() {
     email: '',
     password: '',
   });
+  const cookieJWT = Cookies.get('jwt');
   const [errorMessage, setErrorMessage] = useState('');
   const navigateTo = useNavigate();
 
@@ -26,6 +27,39 @@ export default function Login() {
       setSignInValue(true);
     }
   };
+
+  const deleteExpiredTokens = async () => {
+    try {
+      // Obtener el token JWT de las cookies
+      const cookieJWT = Cookies.get('jwt');
+  
+      if (cookieJWT) {
+        // Realizar una solicitud POST para eliminar el token en el servidor
+        const response = await fetch(
+          "http://localhost:3366/api/logout", // Cambia la URL según tu configuración
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ jwt: cookieJWT })
+          }
+        );
+  
+        if (response.ok) {
+          // Si la solicitud es exitosa, eliminar las cookies
+          Cookies.remove('jwt');
+          Cookies.remove('user');
+          // Recargar la página para aplicar los cambios
+          window.location.reload();
+        } else {
+          console.error('Error al eliminar el token en el servidor');
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  
+
 
   useEffect(() => {
     fetchDataToken();
@@ -49,6 +83,7 @@ export default function Login() {
     try {
       setIsActiveBtn(true);
       const response = await fetch(
+        // "http://localhost:3366/api/signin",
         "https://todovisa.onrender.com/api/signin",
         {
           method: 'POST',
@@ -58,10 +93,11 @@ export default function Login() {
       );
 
       if (response.ok) {
-        const { token, user } = await response.json();
-        const expires = new Date(new Date().getTime() + 60 * 60 * 1000); // 1 hour from now
-        Cookies.set('jwt', token, { expires: expires});
-        Cookies.set('user', JSON.stringify(user), { expires: expires, secure: true, sameSite: 'Strict' });
+        const { token, payload } = await response.json();
+        console.log(payload);
+        const expires = new Date(new Date().getTime() + 60 * 60 * 1000); 
+        Cookies.set('jwt', token, { expires:expires, secure: true, sameSite: 'Strict' });
+        Cookies.set('user', JSON.stringify(payload), { expires:expires, secure: true, sameSite: 'Strict' });
         navigateTo("/");
       } else if (response.status === 401) {
         handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold'>Credenciales inválidas</h1><p class='py-2 text-justify'>Por favor, verifica tus credenciales e intenta nuevamente.</p>`, "Aceptar");

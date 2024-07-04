@@ -121,20 +121,20 @@ function NavListMenu() {
 
 const navText = lang[0].navbar
 
-const handleLang = (lang) => {  
+const handleLang = (lang) => {
     localStorage.removeItem('lang');
     if (lang === 'Spanish' || lang === 'Español' || lang === 'Espanhol') {
-      localStorage.setItem('lang', "Español");
+        localStorage.setItem('lang', "Español");
     } else if (lang === 'Inglés' || lang === 'English' || lang === 'Inglês') {
-      localStorage.setItem('lang', "English");
+        localStorage.setItem('lang', "English");
     } else if (lang === 'Portugués' || lang === 'Portuguese' || lang === 'Português') {
-      localStorage.setItem('lang', "Portugués");
+        localStorage.setItem('lang', "Portugués");
     } else {
-      localStorage.setItem('lang', 'Español');
+        localStorage.setItem('lang', 'Español');
     }
     console.log(localStorage.getItem('lang'));
     location.reload();
-  };
+};
 
 function NavList() {
     return (
@@ -230,11 +230,31 @@ export default function LoginUserNavbar() {
     const handleAvatarClick = () => {
         setOpenAvatarMenu(!openAvatarMenu);
     };
-
     const handleLogout = () => {
-        Cookies.remove('jwt');
-        Cookies.remove('user');
-        window.location.reload();
+        const cookieJWT = Cookies.get('jwt')
+        const fetchData = async () => {
+            try {
+                if (cookieJWT) {
+                    const response = await fetch(
+                        // "https://todovisa.onrender.com/api/protected-route",
+                        "http://localhost:3366/api/logout",
+                        {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ jwt: cookieJWT })
+                        }
+                    );
+                    if (response.ok) {
+                        Cookies.remove('jwt');
+                        Cookies.remove('user');
+                    }
+                    window.location.reload();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchData();
     };
 
     const getUserName = () => {
