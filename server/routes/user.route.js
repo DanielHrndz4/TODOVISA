@@ -4,50 +4,83 @@ const userSchema = require('../models/user.schema');
 const router = express.Router();
 const Form = require('../models/form.schema');
 const cookieParser = require('cookie-parser');
+const jwtSchema = require('../models/jwt.schema');
+const crypto = require('crypto');
 
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-// Middleware de autenticación
-const authenticate = (req, res, next) => {
-  try {
-    const token = req.cookies.jwt;
-    const validPayload = jwt.verify(token, SECRET_KEY);
-    console.log(validPayload);
-    next();
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ ok: false, message: "Invalid token" });
-  }
-};
+function createToken(payload) {
+  const header = {
+    alg: 'HS256',
+    typ: 'JWT'
+  };
+
+  const base64Header = Buffer.from(JSON.stringify(header)).toString('base64').replace(/=/g, '');
+  const base64Payload = Buffer.from(JSON.stringify(payload)).toString('base64').replace(/=/g, '');
+
+  const signature = crypto.createHmac('sha256', SECRET_KEY)
+    .update(`${base64Header}.${base64Payload}`)
+    .digest('base64')
+    .replace(/=/g, '');
+
+  return `${base64Header}.${base64Payload}.${signature}`;
+}
 
 // Rutas de usuario
 router.post('/signin', (req, res) => {
   const { email, password } = req.body;
+
   userSchema
     .findOne({ email: email, password: password })
     .then((user) => {
-      if (user) {
-        const token = jwt.sign({ useremail: user.email }, SECRET_KEY);
-        console.log(token);
-        res.cookie("jwt", token, { secure: true, sameSite: 'None' });
-        res.json({
-          message: 'Inicio de sesión exitoso',
-          token,
-          user: {
-            email: user.email,
-            name: user.name,
-            country: user.country
-          }
-        });
-      } else {
-        res.status(401).json({ message: 'Credenciales inválidas' });
+      if (!user) {
+        return res.status(401).json({ message: 'Credenciales inválidas' });
       }
+
+      const payload = {
+        email: user.email,
+        name: user.name,
+        country: user.country
+      };
+      const token = createToken(payload);
+
+      return jwtSchema.findOne({ email }).then((existUser) => {
+        if (existUser) {
+          return res.status(400).json({ message: `El usuario con email: ${email} ya tiene un token activo` });
+        } 
+
+        const newToken = new jwtSchema({ email, name: user.name, country: user.country, jwt: token });
+        return newToken.save().then(() => {
+          res.cookie('jwt', token, { secure: true, sameSite: 'None' });
+          return res.status(200).json({
+            message: 'Inicio de sesión exitoso',
+            token,
+            payload,
+          });
+        });
+      });
     })
     .catch((error) => {
       console.error(error.message);
       res.status(500).json({ message: 'Server error' });
+    });
+});
+
+router.post('/jwt', (req, res) => {
+  const { jwt } = req.body;
+  jwtSchema.findOne({ jwt: jwt })
+    .then((response) => {
+      if (response) {
+        return res.status(200).json({ message: response });
+      } else {
+        return res.status(400).json({ message: "Token invalido" });
+      }
+    })
+    .catch((err) => {
+      console.error(err.message);
+      res.status(500).json({ message: 'Error del servidor' });
     });
 });
 
@@ -107,6 +140,19 @@ router.post('/signup', (req, res) => {
     });
 });
 
+router.post('/logout', (req, res) => {
+  const jwt = req.body.jwt;
+  jwtSchema.deleteOne({jwt: jwt})
+  .then((response) => {
+    if(response){
+      return res.status(200).json({ message: "Cerrando sesion"})
+    }else{
+      return res.status(400).json({ message: "Ocurrio un error" });
+    }
+  }).catch((error) => {
+    res.status(500).json(error)
+  })
+})
 router.post('/forms', async (req, res) => {
   const { email, formData } = req.body;
   try {
@@ -124,20 +170,20 @@ router.post('/forms', async (req, res) => {
   }
 });
 
-router.get('/protected-route'
-  , (req, res, next) => {
-    const token = req.cookies.jwt;
-    try {
-      const validPayload = jwt.verify(token, SECRET_KEY);
-      console.log(validPayload);
-      next();
-    } catch (error) {
-      console.log(error);
-      res.status(400).json({ ok: false, message: token});
-    }
-  }
-  , (req, res) => {
-    res.json({ message: 'This is a protected route' });
+router.post('/protected-route',
+  (req, res) =>{
+    const jwt = req.body.jwt
+    console.log(jwt)
+    jwtSchema.findOne({ jwt: jwt}).then((response) =>{
+      if (response){
+        return res.status(200).json(response)
+      }else{
+        return res.status(400).json(response);
+      }
+    })
+    .catch((err) =>{
+      res.status(500).console.error(err);
+    })
   });
 
 router.get('/verify-token', (req, res) => {
