@@ -11,46 +11,30 @@ import VIPRO from "./VIPRO";
 import LoginUserNavbar from "../navbar/LoginUserNavbar";
 import Cookies from 'js-cookie';
 import lang from "../../../assets/data/lang.data";
+import fetchData from "../../../assets/data/validation/token.validation";
 
 export default function Home() {
   const bannerText = lang[0].banner
   const [jwtToken, setJwtToken] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const cookieJWT = Cookies.get('jwt')
-  const fetchData = async () => {
-    try {
-      if (cookieJWT) {
-        const response = await fetch(
-          // "http://localhost:3366/api/protected-route", 
-          "https://todovisa.onrender.com/api/protected-route",
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({jwt: cookieJWT})
-          }
-        );
 
-        if (response.ok) {
-          console.log(response)
-          setJwtToken(true);
-        } else {
-          console.log(response)
-          setJwtToken(false); // Handle cases where the response is not OK
-        }
-      }
-    } catch (err) {
-      setJwtToken(false); // Set token to false to indicate potential issues
-    } finally {
-      setLoading(false); // Indicar que la carga ha terminado
-    }
-  };
 
   useEffect(() => {
-    fetchData();
-  }, []); // Empty dependency array ensures fetch only runs on initial render
+    if (cookieJWT) {
+      const validateJWT = async () => {
+        if (cookieJWT) {
+          const validation = await fetchData(cookieJWT);
+          setJwtToken(validation)
+        }
+      };
+      validateJWT();
+    }
+    setLoading(false);
+  }, []);
 
   if (loading) {
-    return // Mostrar un indicador de carga mientras se espera la respuesta del fetch
+    return
   }
 
   return (

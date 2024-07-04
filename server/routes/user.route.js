@@ -173,7 +173,6 @@ router.post('/forms', async (req, res) => {
 router.post('/protected-route',
   (req, res) =>{
     const jwt = req.body.jwt
-    console.log(jwt)
     jwtSchema.findOne({ jwt: jwt}).then((response) =>{
       if (response){
         return res.status(200).json(response)
@@ -252,7 +251,6 @@ router.post('/vipro-eeuu', async (req, res) => {
     }
     const newForm = new Form({ email: email, questions });
     const savedForm = await newForm.save();
-    console.log('Formulario guardado:', savedForm);
     return res.status(200).json({ message: 'Formulario registrado exitosamente' });
   } catch (error) {
     console.error('Error al guardar el formulario:', error.message);

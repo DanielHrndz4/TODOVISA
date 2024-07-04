@@ -186,14 +186,14 @@ function NavList() {
             </Typography>
             <Typography
                 as="a"
-                variant="small"
+                variant="small sm:large"
                 color="white"
                 className="font-medium"
             >
                 <ListItem className="flex items-center gap-2 py-2 pr-4">
                     <Menu>
                         <MenuHandler>
-                            <div>{navText.lang.name}</div>
+                            <div className="font-medium">{navText.lang.name}</div>
                         </MenuHandler>
                         <MenuList className="bg-TVBlue border-white">
                             {Object.values(lang[0].navbar.lang.lang_name).map((langItem, index, array) => (
