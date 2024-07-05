@@ -1,8 +1,8 @@
 const fetchData = async (cookieJWT) => {
     try {
         const response = await fetch(
-            // "https://todovisa.onrender.com/api/protected-route",
-            "http://localhost:3366/api/protected-route", 
+            // "http://localhost:3366/api/protected-route", 
+            "https://todovisa.onrender.com/api/protected-route",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
