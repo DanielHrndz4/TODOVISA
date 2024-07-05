@@ -21,7 +21,7 @@ const handlePopUp = () => {
                     <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="australia"> Australia</div>
                     <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="india"> India</div>
                 </div>
-                <p class="text-justify pt-8">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad delectus vero blanditiis repellat aliquid nesciunt, adipisci officia minus debitis sunt? <strong>Se pueden agregar los términos y condiciones </strong></p>
+                <p class="text-justify pt-8">Para continuar con su selección, asegúrese de revisar las opciones disponibles. Algunos destinos están deshabilitados temporalmente debido a restricciones actuales o falta de disponibilidad de servicios. Es posible que estas opciones se habiliten en el futuro, así que le recomendamos estar atento a las actualizaciones. <strong>Se pueden agregar los términos y condiciones </strong> específicos para cada destino seleccionado. Si tiene alguna duda o necesita asistencia, no dude en contactarnos.</p>
                 <h1 class="font-bold text-3xl pt-6">$11.99</h1>
             </div>
         </div>
