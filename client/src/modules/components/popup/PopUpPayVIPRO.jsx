@@ -24,16 +24,13 @@ const handleClickPopUpPay = (html, btn) => {
                         const validation = await fetchData(cookieJWT);
                         if (validation) {
                             const createForm = async (email, questions, selectedValue) => {
-                                if(selectedValue == "estadosunidos"){
-                                    setCountry("Estados Unidos")
-                                }
                                 try {
                                     const response = await fetch('https://todovisa.onrender.com/api/vipro-eeuu', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',
                                         },
-                                        body: JSON.stringify({ email, country: country, questions }),
+                                        body: JSON.stringify({ email, country: selectedValue, questions }),
                                     });
 
                                     if (!response.ok) {
