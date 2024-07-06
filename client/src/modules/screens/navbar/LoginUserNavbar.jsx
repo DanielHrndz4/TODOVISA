@@ -236,8 +236,8 @@ export default function LoginUserNavbar() {
             try {
                 if (cookieJWT) {
                     const response = await fetch(
-                        // "https://todovisa.onrender.com/api/protected-route",
-                        "http://localhost:3366/api/logout",
+                        // "http://localhost:3366/api/logout",
+                        "https://todovisa.onrender.com/api/logout",
                         {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },

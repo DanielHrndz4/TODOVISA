@@ -126,6 +126,11 @@ const spanish = [
             "description": "Debes iniciar sesión para ejecutar esta acción.",
             "button": "Aceptar!"
         },
+        "popupWithLogin":{
+            "title": "Selecciona una opción:",
+            "description": "Para continuar con su selección, asegúrese de revisar las opciones disponibles. Algunos destinos están deshabilitados temporalmente debido a restricciones actuales o falta de disponibilidad de servicios. Es posible que estas opciones se habiliten en el futuro, así que le recomendamos estar atento a las actualizaciones.",
+            "button": "Proceder a la compra"
+        },
         "whatsapp": {
             "status": "En linea",
             "message": "¡Hola! 👋 \nBienvenido a Todovisa. \n¿En qué podemos ayudarte hoy?",

@@ -6,29 +6,31 @@ import Cookies from "js-cookie"
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
 import lang from "../../../assets/data/lang.data"
 
-const handlePopUp = () => {
-    if (Cookies.get('jwt')) {
+const handlePopUp = (validate) => {
+    const countries = lang[0].about.countries
+    const popupWithLoginText = lang[0].popupWithLogin
+    if (Cookies.get('jwt') && validate) {
         const html = `
         <div id="popupContainer" class="popup-container">
             <div class="w-full">
-                <h2 class="pt-4 pb-8" style="font-size: 1.5rem; font-weight: 600;" className="font-semibold">Selecciona una opción:</h2>
+                <h2 class="pt-4 pb-8" style="font-size: 1.5rem; font-weight: 600;" className="font-semibold">${popupWithLoginText.title}</h2>
                 <div class="w-full grid grid-cols-2 gap-4">
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="estadosunidos"> Estados Unidos</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="canada"> Canadá</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="mexico"> México</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="england"> Inglaterra</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="china"> China</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="australia"> Australia</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="india"> India</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="estadosunidos"> ${countries.usa.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="canada"> ${countries.canada.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="mexico"> ${countries.mexico.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="england"> ${countries.uk.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="china"> ${countries.china.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="australia"> ${countries.australia.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="india"> ${countries.india.name}</div>
                 </div>
-                <p class="text-justify pt-8">Para continuar con su selección, asegúrese de revisar las opciones disponibles. Algunos destinos están deshabilitados temporalmente debido a restricciones actuales o falta de disponibilidad de servicios. Es posible que estas opciones se habiliten en el futuro, así que le recomendamos estar atento a las actualizaciones. <strong>Se pueden agregar los términos y condiciones </strong> específicos para cada destino seleccionado. Si tiene alguna duda o necesita asistencia, no dude en contactarnos.</p>
+                <p class="text-justify pt-8">${popupWithLoginText.description}</p>
                 <h1 class="font-bold text-3xl pt-6">$11.99</h1>
             </div>
         </div>
     `;
-    const btn = 'Proceder a la compra';
-    handleClickPopUp(html, btn);
-    }else{
+        const btn = popupWithLoginText.button;
+        handleClickPopUp(html, btn);
+    } else {
         const popupWithoutLogin = lang[0].popupWithoutLogin
         const html = `
         <div id="popupContainer" class="popup-container">
@@ -38,9 +40,9 @@ const handlePopUp = () => {
             </div>
         </div>
     `;
-    const btn = popupWithoutLogin.button;
+        const btn = popupWithoutLogin.button;
         handleClickPopUpSignUp('error', html, btn)
-    } 
+    }
 }
 
 export default function VIPRO(props) {
@@ -59,7 +61,7 @@ export default function VIPRO(props) {
                             </div>
                             <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{viproSection.text}</p></div>
                             <div className="lg:text-lg">
-                                <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp()}>{viproSection.button}</Button>
+                                <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp(props.validation)}>{viproSection.button}</Button>
                             </div>
                         </div>
                     </div>

@@ -95,7 +95,6 @@ const english = [
                 "strong": "Don't worry, we're here to help you"
             },
             "text": "This form will help you assess how prepared you are to obtain your visa. Don't worry if you don't have all the information at hand, we're here to guide you through every step of the process. Simply click the button and answer the necessary questions to assess your readiness. All your information will be treated with the utmost confidentiality and used solely for this purpose.",
-
             "button": "Complete Form"
         },
         "contact": {
@@ -125,6 +124,11 @@ const english = [
             "title": "Oops...",
             "description": "You must sign in to perform this action.",
             "button": "Accept!"
+        },
+        "popupWithLogin": {
+            "title": "Select an option:",
+            "description": "To continue with your selection, make sure to review the available options. Some destinations are temporarily disabled due to current restrictions or lack of service availability. These options may be enabled in the future, so we recommend staying updated.",
+            "button": "Proceed to purchase"
         },
         "whatsapp": {
             "status": "Online",

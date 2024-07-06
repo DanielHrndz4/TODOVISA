@@ -71,7 +71,7 @@ export default function Home() {
           <VIPROCarrousel></VIPROCarrousel>
           <hr className="my-8 bg-white" />
           {/* VIPRO form section */}
-          <VIPRO jwt={jwtToken}></VIPRO>
+          <VIPRO validation={jwtToken}></VIPRO>
           <hr className="my-8 bg-white" />
           {/* Contact Us form */}
           <ContactUs></ContactUs>
