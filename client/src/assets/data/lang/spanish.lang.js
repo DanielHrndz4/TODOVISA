@@ -158,6 +158,46 @@ const spanish = [
             "title": "Ya tienes una sesion iniciada",
             "subtitle": "Cierra sesión para registrarte o iniciar sesión con otro usuario.",
             "button": "Regresar al inicio"
+        },
+        "signin":{
+            "title": "Iniciar Sesión",
+            "subtitle": "¡Encantado de conocerte! Ingresa tus datos para iniciar sesión.",
+            "email": "Correo electrónico",
+            "password": "Contraseña",
+            "forgot_password": "¿Olvidaste tu contraseña?",
+            "button": {
+                "loading_text": "Cargando...",
+                "default_text": "Inicia sesión"
+            },
+            "or_signin": "O inicia sesión con",
+            "account": "¿Aún no tienes una cuenta?",
+            "signup": "Regístrate"
+        },
+        "signup":{
+            "title": "Regístrate",
+            "subtitle": "¡Encantado de conocerte! Ingresa tus datos para registrarte.",
+            "name": "Nombres",
+            "last_name": "Apellidos",
+            "email": "Correo electrónico",
+            "password": "Contraseña",
+            "repeat_password": "Repite la Contraseña",
+            "button": {
+                "loading_text": "Cargando...",
+                "default_text": "Registrarse"
+            },
+            "country": "País",
+            "select_country": "Selecciona tu país",
+            "phone_number": "Número de teléfono",
+            "or_signup": "O regístrate con",
+            "account": "¿Ya tienes una cuenta?",
+            "signin": "Inicia sesión"
+        },
+        "forgot_password": {
+            "return": "Regresar al inicio de sesión",
+            "title": "¿Olvidaste tu contraseña?",
+            "description": "No te preocupes, nos pasa a todos. Ingrese su correo electrónico a continuación para recuperar su contraseña",
+            "email": "Correo electrónico",
+            "button": "Enviar al correo"
         }
     }
 ];

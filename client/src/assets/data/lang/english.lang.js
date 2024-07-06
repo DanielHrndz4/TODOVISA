@@ -157,6 +157,46 @@ const english = [
             "title": "You already have an active session",
             "subtitle": "Log out to register or sign in with another user.",
             "button": "Return to home"
+        },
+        "signin": {
+            "title": "Sign In",
+            "subtitle": "Nice to meet you! Enter your details to sign in.",
+            "email": "Email",
+            "password": "Password",
+            "forgot_password": "Forgot your password?",
+            "button": {
+                "loading_text": "Loading...",
+                "default_text": "Sign In"
+            },
+            "or_signin": "Or sign in with",
+            "account": "Don't have an account yet?",
+            "signup": "Sign Up"
+        },
+        "signup": {
+            "title": "Sign Up",
+            "subtitle": "Nice to meet you! Enter your details to sign up.",
+            "name": "First Name",
+            "last_name": "Last Name",
+            "email": "Email",
+            "password": "Password",
+            "repeat_password": "Repeat Password",
+            "button": {
+                "loading_text": "Loading...",
+                "default_text": "Sign Up"
+            },
+            "country": "Country",
+            "select_country": "Select your country",
+            "phone_number": "Phone Number",
+            "or_signup": "Or sign up with",
+            "account": "Already have an account?",
+            "signin": "Sign In"
+        },
+        "forgot_password": {
+            "return": "Return to login",
+            "title": "Forgot your password?",
+            "description": "Don't worry, it happens to all of us. Enter your email below to recover your password.",
+            "email": "Email",
+            "button": "Send to email"
         }
     }
 ];

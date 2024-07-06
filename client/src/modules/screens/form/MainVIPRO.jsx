@@ -2,15 +2,20 @@ import React, { useState, useEffect } from "react";
 import VIPROForm from "./Form";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
+import fetchData from "../../../assets/data/validation/token.validation";
 
 export default function MainVIPRO() {
   const navigateTo = useNavigate();
   const [isBoolean, setIsBoolean] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Estado para manejar la carga
 
-  const fetchData = async () => {
+  const validationData = async () => {
     const user = Cookies.get('user');
-    if(user === undefined){
+    const validation = await fetchData(Cookies.get('jwt'))
+    if (!validation) {
+      navigateTo('/');
+    }
+    if (user === undefined) {
       navigateTo('/');
     }
     const userData = JSON.parse(user);
@@ -41,28 +46,28 @@ export default function MainVIPRO() {
         console.error("Server error", err);
         navigateTo("/");
       } finally {
-        setIsLoading(false); // Finaliza la carga
+        setIsLoading(false);
       }
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []); // Llama a fetchData solo cuando el componente se monta
+    validationData();
+  }, []); // Llama a validationData solo cuando el componente se monta
 
   if (isLoading) {
     return  // Muestra un mensaje de carga mientras se verifica la sesión
   }
 
   return (
-    <main className="w-full h-full bg-TVBlue">
-      {isBoolean ? (
-        <div className="w-full lg:w-[60%] m-auto py-8">
+    <>
+      {
+        isBoolean ? (
           <VIPROForm />
-        </div>
-      ) : (
-        navigateTo("/")
-      )}
-    </main>
+        ) : (
+          navigateTo("/")
+        )
+      }
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
 import questions from '../../../assets/data/viproLang.data';
 import Cookies from 'js-cookie';
+import fetchData from '../../../assets/data/validation/token.validation';
 
 const handleClickPopUpPay = (html, btn) => {
     Swal.fire({
@@ -15,54 +16,42 @@ const handleClickPopUpPay = (html, btn) => {
                 const user = Cookies.get('user');
                 const userData = JSON.parse(user);
                 const email = userData.email;
+                const cookieJWT = Cookies.get('jwt')
+                const validateJWT = async () => {
+                    if (cookieJWT) {
+                        const validation = await fetchData(cookieJWT);
+                        if (validation) {
+                            const createForm = async (email, questions, country) => {
+                                try {
+                                    const response = await fetch('https://todovisa.onrender.com/api/vipro-eeuu', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({ email, country, questions }),
+                                    });
 
-                const fetchData = async () => {
-                    try {
-                        const response = await fetch(
-                            "https://todovisa.onrender.com/api/vipro",
-                            {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ email })
-                            }
-                        );
+                                    if (!response.ok) {
+                                        throw new Error('Error al guardar el formulario');
+                                    }
 
-                        if (!response.ok) {
-                            throw new Error('Error al procesar la solicitud');
-                        }
-                        console.log(localStorage.getItem('lang'))
-                        console.log(questions)
-                        const createForm = async (email, questions, selectedValue) => {
-                            try {
-                                const response = await fetch('https://todovisa.onrender.com/api/vipro-eeuu', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify({ email, questions }),
-                                });
+                                    console.log('Respuesta del servidor al guardar el formulario:', response);
 
-                                if (!response.ok) {
-                                    throw new Error('Error al guardar el formulario');
+                                    window.location.href = `vipro/${country}`;
+                                } catch (error) {
+                                    console.error('Error en la solicitud para guardar el formulario:', error);
+                                    window.location.href = `/`;
                                 }
-
-                                console.log('Respuesta del servidor al guardar el formulario:', response);
-                    
-                                window.location.href = `vipro/${selectedValue}`;
-                            } catch (error) {
-                                console.error('Error en la solicitud para guardar el formulario:', error);
-                                window.location.href = `/`;
-                            }
-                        };
-
-                        createForm(email, questions, selectedValue);
-                    } catch (error) {
-                        console.error('Error en la solicitud principal:', error);
+                            };
+                            createForm(email, questions, selectedValue);
+                        } else {
+                            window.location.href = `/`;
+                        }
+                    }else{
                         window.location.href = `/`;
                     }
                 };
-
-                fetchData(); 
+                validateJWT();
             }
         }
     });

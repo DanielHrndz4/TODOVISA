@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import lang from "../../../assets/data/lang.data";
 
 export default function Register() {
+  const signupText = lang[0].signup
   const [errorMessage, setErrorMessage] = useState(null);
   const [signUpValue, setSignUpValue] = useState(null);
   const [isActiveBtn, setIsActiveBtn] = useState(false);
@@ -85,7 +86,7 @@ export default function Register() {
   useEffect(() => {
     if (repeatPassword.repeatpassword !== "" || formData.password !== "") {
       if (formData.password !== repeatPassword.repeatpassword) {
-        setErrorMessage("Las contraseñas deben ser idénticas.");
+        setErrorMessage("Las contraseñas deben ser iguales.");
       } else {
         setErrorMessage("");
       }
@@ -96,15 +97,15 @@ export default function Register() {
 
   const submitForm = async (e) => {
     e.preventDefault();
-  
+
     if (formData.password !== repeatPassword.repeatpassword) {
-      setErrorMessage("Las contraseñas deben ser idénticas.");
-      return; // Detener el envío del formulario si las contraseñas no coinciden
+      setErrorMessage("Las contraseñas deben ser iguales.");
+      return;
     }
-  
+
     try {
-      setIsActiveBtn(true); // Activar el estado de botón activo
-  
+      setIsActiveBtn(true);
+
       const response = await fetch(
         "https://todovisa.onrender.com/api/signup",
         {
@@ -113,10 +114,10 @@ export default function Register() {
           body: JSON.stringify(formData)
         }
       );
-  
+
       if (response.ok) {
         const data = await response.json();
-        setErrorMessage(''); // Limpiar cualquier mensaje de error previo
+        setErrorMessage('');
         handleClickPopUpSignUp("success", "<h1 class='text-black pb-4 text-2xl font-semibold'>Registro Exitoso</h1><p class='text-justify'>Inicia sesión para disfrutar de los servicios de Todovisa.</p>", "Aceptar");
         navigateTo("/signin");
       } else {
@@ -136,16 +137,16 @@ export default function Register() {
 
   useEffect(() => {
     if (isActiveBtn) {
-      setSignInText("Cargando..."); // Cambiar texto de botón cuando isActiveBtn es true
+      setSignInText(signupText.button.loading_text);
     } else {
-      setSignInText("Registrarse"); // Restaurar texto original del botón cuando isActiveBtn es false
+      setSignInText(signupText.button.default_text);
     }
   }, [isActiveBtn]);
 
-  const withoutSignup = () =>{
-    return(
+  const withoutSignup = () => {
+    return (
       <>
-      <div className="flex flex-col py-12 w-full lg:w-[50%]">
+        <div className="flex flex-col py-12 w-full lg:w-[50%]">
           <Link to="/" className="flex justify-center items-center py-4">
             <Typography
               as="a"
@@ -176,13 +177,13 @@ export default function Register() {
                   variant="h2"
                   className="pb-4 pt-2 text-white text-center [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.4)] w-80 max-w-screen-lg sm:w-96"
                 >
-                  Regístrate
+                  {signupText.title}
                 </Typography>
                 <Typography
                   color="gray"
                   className="mt-1 font-normal text-white w-80 max-w-screen-lg sm:w-96"
                 >
-                  ¡Encantado de conocerte! Ingresa tus datos para registrarte.
+                  {signupText.subtitle}
                 </Typography>
                 <form
                   className="mt-6 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -195,7 +196,7 @@ export default function Register() {
                         color="blue-gray"
                         className="text-white"
                       >
-                        Nombres
+                        {signupText.name}
                       </Typography>
                       <input
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
@@ -214,7 +215,7 @@ export default function Register() {
                         color="blue-gray"
                         className="text-white"
                       >
-                        Apellidos
+                        {signupText.last_name}
                       </Typography>
                       <input
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
@@ -235,7 +236,7 @@ export default function Register() {
                         color="blue-gray"
                         className="text-white"
                       >
-                        Correo electrónico
+                        {signupText.email}
                       </Typography>
                       <input
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
@@ -256,7 +257,7 @@ export default function Register() {
                         color="blue-gray"
                         className="text-white"
                       >
-                        Contraseña
+                        {signupText.password}
                       </Typography>
                       <div className="relative">
                         <input
@@ -285,7 +286,7 @@ export default function Register() {
                         color="blue-gray"
                         className="text-white"
                       >
-                        Repite la Contraseña
+                        {signupText.repeat_password}
                       </Typography>
                       <div className="relative">
                         <input
@@ -314,7 +315,7 @@ export default function Register() {
                         color="blue-gray"
                         className="text-white"
                       >
-                        País
+                        {signupText.country}
                       </Typography>
                       <select
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
@@ -325,7 +326,7 @@ export default function Register() {
                         required
                       >
                         <option value="" disabled>
-                          Selecciona tu país
+                          {signupText.select_country}
                         </option>
                         {country.map((country, index) => (
                           <option
@@ -345,7 +346,7 @@ export default function Register() {
                         color="blue-gray"
                         className="text-white"
                       >
-                        Número de teléfono
+                        {signupText.phone_number}
                       </Typography>
                       <input
                         className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
@@ -377,7 +378,7 @@ export default function Register() {
                   <div className="w-full flex flex-row items-center my-8">
                     <hr className="flex-grow h-0.5 bg-gray-300" />
                     <h1 className="mx-4 [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] text-white font-medium text-md">
-                      O regístrate con
+                      {signupText.or_signup}
                     </h1>
                     <hr className="flex-grow h-0.5 bg-gray-300" />
                   </div>
@@ -396,12 +397,12 @@ export default function Register() {
                     color="white"
                     className="mt-4 text-center font-medium text-md"
                   >
-                    ¿Ya tienes una cuenta?{" "}
+                    {signupText.account}{" "}
                     <Link
                       to="/signin"
                       className="font-medium text-white hover:text-TVred [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] hover:underline"
                     >
-                      Inicia sesión
+                      {signupText.signin}
                     </Link>
                   </Typography>
                 </form>

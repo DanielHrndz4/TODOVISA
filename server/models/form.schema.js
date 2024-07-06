@@ -5,6 +5,9 @@ const formSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    country: {
+        type: String,
+    },
     questions: [{
         question: {
             type: String,

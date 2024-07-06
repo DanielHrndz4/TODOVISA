@@ -21,45 +21,12 @@ export default function Login() {
   const cookieJWT = Cookies.get('jwt');
   const [errorMessage, setErrorMessage] = useState('');
   const navigateTo = useNavigate();
-
+  const signinText = lang[0].signin
   const fetchDataToken = async () => {
-    if (Cookies.get('jwt')) {
+    if (cookieJWT) {
       setSignInValue(true);
     }
   };
-
-  const deleteExpiredTokens = async () => {
-    try {
-      // Obtener el token JWT de las cookies
-      const cookieJWT = Cookies.get('jwt');
-  
-      if (cookieJWT) {
-        // Realizar una solicitud POST para eliminar el token en el servidor
-        const response = await fetch(
-          "http://localhost:3366/api/logout", // Cambia la URL según tu configuración
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ jwt: cookieJWT })
-          }
-        );
-  
-        if (response.ok) {
-          // Si la solicitud es exitosa, eliminar las cookies
-          Cookies.remove('jwt');
-          Cookies.remove('user');
-          // Recargar la página para aplicar los cambios
-          window.location.reload();
-        } else {
-          console.error('Error al eliminar el token en el servidor');
-        }
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  
-
 
   useEffect(() => {
     fetchDataToken();
@@ -94,7 +61,6 @@ export default function Login() {
 
       if (response.ok) {
         const { token, payload } = await response.json();
-        console.log(payload);
         const expires = new Date(new Date().getTime() + 60 * 60 * 1000); 
         Cookies.set('jwt', token, { expires:expires, secure: true, sameSite: 'Strict' });
         Cookies.set('user', JSON.stringify(payload), { expires:expires, secure: true, sameSite: 'Strict' });
@@ -115,7 +81,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    setSignInText(isActiveBtn ? "Cargando..." : "Inicia sesión");
+    setSignInText(isActiveBtn ? signinText.button.loading_text : signinText.button.default_text);
   }, [isActiveBtn]);
 
   const withoutSignin = () => {
@@ -140,22 +106,22 @@ export default function Login() {
             >
               <div className="w-full flex flex-col justify-center items-center">
                 <Typography variant="h2" className="pb-4 pt-2 text-white text-center [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.4)] w-80 max-w-screen-lg sm:w-96">
-                  Iniciar Sesión
+                  {signinText.title}
                 </Typography>
                 <Typography color="gray" className="mt-1 font-normal text-white w-80 max-w-screen-lg sm:w-96">
-                  ¡Encantado de conocerte! Ingresa tus datos para iniciar sesión.
+                  {signinText.subtitle}
                 </Typography>
                 <form className="mt-6 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={submitFormSignIn}>
                   <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3">
                       <Typography variant="h6" color="blue-gray" className="text-white">
-                        Correo electrónico
+                        {signinText.email}
                       </Typography>
                       <input className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent" id="grid-email" type="email" name="email" value={formData.email} onChange={handleChange} required />
                     </div>
                   </div>
                   <Typography variant="h6" color="blue-gray" className="text-white">
-                    Contraseña
+                    {signinText.password}
                   </Typography>
                   <div className="relative">
                     <input
@@ -181,7 +147,7 @@ export default function Login() {
                       className="-mt-5 text-right font-normal"
                     >
                       <a href="#" className="font-medium text-white hover:text-TVred [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] hover:underline">
-                        ¿Olvidaste tu contraseña?
+                        {signinText.forgot_password}
                       </a>
                     </Typography>
                   </Link>
@@ -190,7 +156,7 @@ export default function Login() {
                   </Button>
                   <div className="w-full flex flex-row items-center my-8">
                     <hr className="flex-grow h-0.5 bg-gray-300" />
-                    <h1 className="mx-4 [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] text-white font-medium text-md">O inicia sesión con</h1>
+                    <h1 className="mx-4 [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] text-white font-medium text-md">{signinText.or_signin}</h1>
                     <hr className="flex-grow h-0.5 bg-gray-300" />
                   </div>
                   <Button className="mt-6 bg-black shadowbtn text-white flex items-center justify-center" fullWidth>
@@ -201,10 +167,10 @@ export default function Login() {
                     color="white"
                     className="mt-4 text-center font-medium text-md"
                   >
-                    ¿Aún no tienes una cuenta?{" "}
+                    {signinText.account}{" "}
                     <Link to="/signup">
                       <a href="#" className="font-medium text-white hover:text-TVred [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] hover:underline">
-                        Regístrate
+                        {signinText.signup}
                       </a>
                     </Link>
                   </Typography>

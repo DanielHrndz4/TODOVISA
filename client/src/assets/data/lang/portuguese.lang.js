@@ -158,6 +158,46 @@ const portuguese = [
             "title": "Você já tem uma sessão ativa",
             "subtitle": "Faça logout para se registrar ou fazer login com outro usuário.",
             "button": "Voltar para o início"
+        },
+        "signin": {
+            "title": "Iniciar Sessão",
+            "subtitle": "Prazer em conhecê-lo! Insira seus dados para iniciar sessão.",
+            "email": "Correio eletrônico",
+            "password": "Senha",
+            "forgot_password": "Esqueceu sua senha?",
+            "button": {
+                "loading_text": "Carregando...",
+                "default_text": "Iniciar Sessão"
+            },
+            "or_signin": "Ou inicie sessão com",
+            "account": "Ainda não tem uma conta?",
+            "signup": "Cadastre-se"
+        },
+        "signup": {
+            "title": "Cadastrar-se",
+            "subtitle": "Prazer em conhecê-lo! Insira seus dados para se cadastrar.",
+            "name": "Nome",
+            "last_name": "Sobrenome",
+            "email": "Correio eletrônico",
+            "password": "Senha",
+            "repeat_password": "Repita a Senha",
+            "button": {
+                "loading_text": "Carregando...",
+                "default_text": "Cadastrar-se"
+            },
+            "country": "País",
+            "select_country": "Selecione seu país",
+            "phone_number": "Número de telefone",
+            "or_signup": "Ou cadastre-se com",
+            "account": "Já tem uma conta?",
+            "signin": "Iniciar Sessão"
+        },
+        "forgot_password": {
+            "return": "Voltar para o login",
+            "title": "Esqueceu sua senha?",
+            "description": "Não se preocupe, isso acontece com todos nós. Insira seu email abaixo para recuperar sua senha.",
+            "email": "Correio eletrônico",
+            "button": "Enviar para o email"
         }
     }
 ];
