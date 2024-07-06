@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import questions from '../../../assets/data/viproLang.data';
 import Cookies from 'js-cookie';
 import fetchData from '../../../assets/data/validation/token.validation';
+import { useState } from 'react';
 
 const handleClickPopUpPay = (html, btn) => {
     Swal.fire({
@@ -9,6 +10,7 @@ const handleClickPopUpPay = (html, btn) => {
         confirmButtonText: btn,
         confirmButtonColor: '#B6122A'
     }).then((result) => {
+        const [country, setCountry] = useState("")
         if (result.isConfirmed) {
             const selectedOption = document.querySelector('input[name="option"]:checked');
             if (selectedOption) {
@@ -21,7 +23,14 @@ const handleClickPopUpPay = (html, btn) => {
                     if (cookieJWT) {
                         const validation = await fetchData(cookieJWT);
                         if (validation) {
-                            const createForm = async (email, questions, country) => {
+                            const createForm = async (email, questions, selectedValue) => {
+                                switch (selectedValue) {
+                                    case "estadosunidos":
+                                        setCountry("Estados Unidos")
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 try {
                                     const response = await fetch('https://todovisa.onrender.com/api/vipro-eeuu', {
                                         method: 'POST',
@@ -37,7 +46,7 @@ const handleClickPopUpPay = (html, btn) => {
 
                                     console.log('Respuesta del servidor al guardar el formulario:', response);
 
-                                    window.location.href = `vipro/${country}`;
+                                    window.location.href = `vipro/${selectedValue}`;
                                 } catch (error) {
                                     console.error('Error en la solicitud para guardar el formulario:', error);
                                     window.location.href = `/`;
