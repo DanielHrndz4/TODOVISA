@@ -249,7 +249,7 @@ router.post('/vipro-eeuu', async (req, res) => {
     if (existingForm) {
       return res.status(200).json({ message: 'El usuario tiene un formulario pendiente' });
     }
-    const newForm = new Form({ email: email, vipro_country: country, questions });
+    const newForm = new Form({ email: email, country: country, questions });
     const savedForm = await newForm.save();
     return res.status(200).json({ message: 'Formulario registrado exitosamente' });
   } catch (error) {
