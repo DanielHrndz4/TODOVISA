@@ -33,7 +33,7 @@ const handleClickPopUpPay = (html, btn) => {
                                         headers: {
                                             'Content-Type': 'application/json',
                                         },
-                                        body: JSON.stringify({ email, country, questions }),
+                                        body: JSON.stringify({ email, country: country, questions }),
                                     });
 
                                     if (!response.ok) {
