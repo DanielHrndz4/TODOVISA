@@ -6,6 +6,7 @@ const Form = require('../models/form.schema');
 const cookieParser = require('cookie-parser');
 const jwtSchema = require('../models/jwt.schema');
 const crypto = require('crypto');
+const FormResponseSchema = require('../models/form_response.schema');
 
 require('dotenv').config();
 
@@ -153,6 +154,7 @@ router.post('/logout', (req, res) => {
     res.status(500).json(error)
   })
 })
+
 router.post('/forms', async (req, res) => {
   const { email, formData } = req.body;
   try {
@@ -258,8 +260,20 @@ router.post('/vipro-eeuu', async (req, res) => {
   }
 });
 
-router.get('/', (req, res) => {
-  res.send('Hello World');
-});
+router.post('/form_response', async (req,res)=>{
+  const {country, questions} = req.body;
+  try{
+    const existingFormResponse = await FormResponseSchema.findOne({country});
+    if(existingFormResponse){
+      return res.status(200).json({ message: 'El formulario no se guardo, consulte con su administrador' });
+    }
+    const newFormResponse = new FormResponseSchema({country:country, questions: questions})
+    const savedFormResponse = await newFormResponse.save();
+    return res.status(200).json({message: 'Formulario guardado con exito!'})
+  }catch(error){
+    console.error('Error al guardar el formulario:', error.message);
+    return res.status(500).json({ message: 'Error al guardar el formulario' });
+  }
+})
 
 module.exports = router;
