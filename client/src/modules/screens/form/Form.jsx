@@ -62,41 +62,41 @@ const VIPROForm = () => {
   }, [email]);
 
 
-  const questionList = (form) => {
-    let count = 1;
-    return questions.map((question, index) => (
-      <>
-        <div className="text-lg font-semibold ">{`${count++}. ${question.question}`}</div>
-        <Form.Item
-          key={index}
-          name={question.question}
-          rules={[
-            {
-              required: question.user_response == "" ? true : false,
-              message: viproInfo.obligatory_field,
-            },
-          ]}
-          className="w-full font-bold py-2"
-          hasFeedback
-          validateTrigger="onFinish"
-        >
-          {question.type_question === "abierta" && <Input style={{ color: 'black' }} size="large" placeholder={question.user_response} value={question.user_response} />}
-          {question.type_question === "number" && <Input type="number" size="large" placeholder={question.user_response} value={question.user_response} />}
-          {question.type_question === "textarea" && <TextArea allowClear size="large" placeholder={question.user_response} value={question.user_response} />}
-          {question.type_question === "cerrada" && (
-            <Select placeholder={question.user_response == "" ? viproInfo.select_option
-              : question.user_response} allowClear size="large" value={question.user_response}>
-              {question.response.map((option, idx) => (
-                <Option key={idx} value={option}>
-                  {option}
-                </Option>
-              ))}
-            </Select>
-          )}
-        </Form.Item>
-      </>
-    ));
-  };
+  // const questionList = (form) => {
+  //   let count = 1;
+  //   return questions.map((question, index) => (
+  //     <>
+  //       <div className="text-lg font-semibold ">{`${count++}. ${question.question}`}</div>
+  //       <Form.Item
+  //         key={index}
+  //         name={question.question}
+  //         rules={[
+  //           {
+  //             required: question.user_response == "" ? true : false,
+  //             message: viproInfo.obligatory_field,
+  //           },
+  //         ]}
+  //         className="w-full font-bold py-2"
+  //         hasFeedback
+  //         validateTrigger="onFinish"
+  //       >
+  //         {question.type_question === "abierta" && <Input style={{ color: 'black' }} size="large" placeholder={question.user_response} value={question.user_response} />}
+  //         {question.type_question === "number" && <Input type="number" size="large" placeholder={question.user_response} value={question.user_response} />}
+  //         {question.type_question === "textarea" && <TextArea allowClear size="large" placeholder={question.user_response} value={question.user_response} />}
+  //         {question.type_question === "cerrada" && (
+  //           <Select placeholder={question.user_response == "" ? viproInfo.select_option
+  //             : question.user_response} allowClear size="large" value={question.user_response}>
+  //             {question.response.map((option, idx) => (
+  //               <Option key={idx} value={option}>
+  //                 {option}
+  //               </Option>
+  //             ))}
+  //           </Select>
+  //         )}
+  //       </Form.Item>
+  //     </>
+  //   ));
+  // };
 
   const onFinish = async () => {
     if (!termsAccepted) {
@@ -217,7 +217,54 @@ const VIPROForm = () => {
               <p className="py-6">
                 {viproInfo.description}
               </p>
-              {questionList(form)}
+              {Object.keys(categorizedQuestions).map((category, idx) => (
+              <div key={idx}>
+                <Typography color="black" className="mb-6 font-semibold text-xl ms:text-2xl lg:text-2xl xl:text-3xl pt-4 text-center">
+                  {category}
+                </Typography>
+                {categorizedQuestions[category].map((question, qIdx) => (
+                  <div key={qIdx} className="my-4">
+                    <div className="text-lg font-semibold">{`${qIdx + 1}. ${question.question}`}</div>
+                    <Form.Item
+                      name={question.question}
+                      rules={[
+                        {
+                          required: question.user_response === "",
+                          message: viproInfo.obligatory_field,
+                        },
+                      ]}
+                      className="w-full font-bold py-2"
+                      hasFeedback
+                      validateTrigger="onFinish"
+                    >
+                      {question.type_question === "abierta" && (
+                        <Input style={{ color: 'black' }} size="large" placeholder={question.user_response} value={question.user_response} />
+                      )}
+                      {question.type_question === "number" && (
+                        <Input type="number" size="large" placeholder={question.user_response} value={question.user_response} />
+                      )}
+                      {question.type_question === "textarea" && (
+                        <TextArea allowClear size="large" placeholder={question.user_response} value={question.user_response} />
+                      )}
+                      {question.type_question === "cerrada" && (
+                        <Select
+                          placeholder={question.user_response === "" ? viproInfo.select_option : question.user_response}
+                          allowClear
+                          size="large"
+                          value={question.user_response}
+                        >
+                          {question.response.map((option, optIdx) => (
+                            <Option key={optIdx} value={option}>
+                              {option}
+                            </Option>
+                          ))}
+                        </Select>
+                      )}
+                    </Form.Item>
+                  </div>
+                ))}
+              </div>
+            ))}
 
               <div className="pb-6 pt-2">
                 <div className="pb-2 font-semibold">

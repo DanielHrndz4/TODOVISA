@@ -33,6 +33,9 @@ const questionsEnglish =  [
     { "question": "Is your house Owned, Rented, Mortgaged, Others", "type_question": "closed", "response": ["Owned", "Rented", "Mortgaged", "Others"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Do you have a current study certificate?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Do you have a legally registered company that pays taxes in your country?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
+    { "question": "Have you traveled legally outside your country before?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DE VIAJES" },
+    { "question": "Have you traveled to other countries in the last 12 months?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DE VIAJES" },
+    { "question": "Have you legally traveled to more than 4 countries in the last 5 years?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DE VIAJES" }
     { "question": "Have you ever been arrested in your country?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Have you been involved in any drug-related criminal activity in your country?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Are you currently Employed?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
@@ -45,10 +48,7 @@ const questionsEnglish =  [
     { "question": "Have you served in the military?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Have you belonged to an unrecognized legal tribe or sect group?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Have you been involved in any crime in your country?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
-    { "question": "Have you ever served, been a member, or been involved in a paramilitary unit, self-defense unit, guerrilla group, or insurgent organization?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
-    { "question": "Have you traveled legally outside your country before?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DE VIAJES" },
-    { "question": "Have you traveled to other countries in the last 12 months?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DE VIAJES" },
-    { "question": "Have you legally traveled to more than 4 countries in the last 5 years?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DE VIAJES" }
+    { "question": "Have you ever served, been a member, or been involved in a paramilitary unit, self-defense unit, guerrilla group, or insurgent organization?", "type_question": "closed", "response": ["YES", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" }
 ];
 
 export default questionsEnglish;

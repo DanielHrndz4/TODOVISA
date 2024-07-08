@@ -1,41 +1,57 @@
-import React, { useEffect } from "react";
-import Cookies from "js-cookie"
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export default function Qualification() {
     const user = Cookies.get('user');
     const userData = JSON.parse(user);
     const email = userData.email;
-    const qualificationData = async (email) => {
-        try {
-            const response = await fetch(
-                "http://localhost:3366/api/form_response_eeuu",
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email }) // Asegúrate de enviar el correo electrónico que necesitas buscar
-                }
-            );
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Response data:", data);
-                return true;
-            } else {
-                console.log("Response error:", response);
-                return false;
-            }
-        } catch (err) {
-            console.error("Error:", err);
-            return false;
-        }
-    };
+
+    const [responseForm, setResponseForm] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        qualificationData(email);
-    }, []); // Agrega una dependencia vacía para que useEffect se ejecute solo una vez al montar el componente
+        const qualificationData = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:3366/api/form_response_eeuu",
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    }
+                );
+                if (response.ok) {
+                    const data = await response.json();
+                    setResponseForm(data);
+                } else {
+                    throw new Error('Error en la respuesta de la API');
+                }
+            } catch (err) {
+                setError(err.message || 'Hubo un problema al obtener los datos.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        qualificationData();
+    }, [email]); // Dependencia de useEffect para volver a cargar si cambia el correo electrónico
+
+    if (loading) return <p>Cargando...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
-        <>
-            <h1>Response</h1>
-        </>
+        <main>
+            <h1>Formulario de calificación</h1>
+            {responseForm.questions.map((question)=>(
+                <div>
+                    <div>
+                    {question.response.map((response)=>(
+                        <h2>{response}</h2>
+                    ))}
+                    </div>
+                </div>
+            ))}
+        </main>
     );
 }

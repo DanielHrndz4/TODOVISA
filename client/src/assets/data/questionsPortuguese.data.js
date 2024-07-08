@@ -33,6 +33,9 @@ const questionsPortuguese = [
     { "question": "Sua casa é própria, alugada, hipotecada, outros", "type_question": "cerrada", "response": ["Própria", "Alugada", "Hipotecada", "Outros"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Você possui um comprovante de estudo atual?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Você tem uma empresa legalmente registrada que declara impostos em seu país?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
+    { "question": "Você viajou legalmente para fora de seu país antes?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DE VIAJES" },
+    { "question": "Você viajou para outros países nos últimos 12 meses?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DE VIAJES" },
+    { "question": "Você viajou legalmente para mais de 4 países nos últimos 5 anos?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DE VIAJES" },
     { "question": "Você já foi preso em seu país?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Você esteve envolvido em atividades criminosas relacionadas a drogas em seu país?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Você está atualmente empregado?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
@@ -45,10 +48,7 @@ const questionsPortuguese = [
     { "question": "Você serviu no serviço militar?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Você pertenceu a uma tribo ou grupo não reconhecido legalmente?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Você esteve envolvido em algum crime em seu país?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
-    { "question": "Você já serviu, foi membro ou esteve envolvido em uma unidade paramilitar, unidade de autodefesa, grupo guerrilheiro ou organização insurgente?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
-    { "question": "Você viajou legalmente para fora de seu país antes?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
-    { "question": "Você viajou para outros países nos últimos 12 meses?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
-    { "question": "Você viajou legalmente para mais de 4 países nos últimos 5 anos?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" }
+    { "question": "Você já serviu, foi membro ou esteve envolvido em uma unidade paramilitar, unidade de autodefesa, grupo guerrilheiro ou organização insurgente?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "HISTORIAL DELICTIVO" }
 ];
 
 export default questionsPortuguese;
