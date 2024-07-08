@@ -281,9 +281,10 @@ router.post('/form_response_eeuu', async (req, res) => {
   try {
     const existingFormData = await Form.findOne({ email: email });
     if (existingFormData) {
-      const responseForm = await FormResponseSchema.findById('668c1c2d5b587853efaf667f');
+      const responseForm = await FormResponseSchema.findById('668c547a5c587321604fc73f');
       if (responseForm) {
-        res.status(200).json(responseForm);
+        const responseFormUser = await Form.findOne({ email: email});
+        res.status(200).json({responseForm, responseFormUser});
       } else {
         res.status(404).json({ message: 'No se encontró el formulario de respuesta' });
       }
