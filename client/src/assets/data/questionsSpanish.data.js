@@ -47,7 +47,20 @@ const questionsSpanish = [
     { "question": "Estudia actualmente?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Ha pertenecido al servicio militar?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
     { "question": "Ha pertenecido a una tribu o secta grupo no reconocido legalmente?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" },
-    { "question": "Alguna vez ha servido, ha sa estado involucrado en algun crimen en su pais?ido miembro o ha estado involucrado en una unidad paramilitar, unidad de autodefensa, grupo guerrillero u organizacion insurgente?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "HISTORIAL DELICTIVO" }
+    {
+        "question": "¿Ha estado involucrado en algún delito en su país?",
+        "type_question": "cerrada",
+        "response": ["SÍ", "NO"],
+        "user_response": "",
+        "category": "HISTORIAL DELICTIVO"
+    },
+    {
+        "question": "¿Alguna vez ha servido, sido miembro o estado involucrado en una unidad paramilitar, unidad de autodefensa, grupo guerrillero u organización insurgente?",
+        "type_question": "cerrada",
+        "response": ["SÍ", "NO"],
+        "user_response": "",
+        "category": "HISTORIAL DELICTIVO"
+    }
 ];
 
 export default questionsSpanish;

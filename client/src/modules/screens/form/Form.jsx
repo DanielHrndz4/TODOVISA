@@ -176,8 +176,6 @@ const VIPROForm = () => {
       const updatedQuestions = [...questions];
       updatedQuestions[changedQuestionIndex].user_response = changedValues[questions[changedQuestionIndex].question];
       setQuestions(updatedQuestions);
-      console.log(email)
-      console.log(questions);
     }
   };
 
