@@ -276,4 +276,24 @@ router.post('/form_response', async (req,res)=>{
   }
 })
 
+router.post('/form_response_eeuu', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const existingFormData = await Form.findOne({ email: email });
+    if (existingFormData) {
+      const responseForm = await FormResponseSchema.findById('668c1c2d5b587853efaf667f');
+      if (responseForm) {
+        res.status(200).json(responseForm);
+      } else {
+        res.status(404).json({ message: 'No se encontró el formulario de respuesta' });
+      }
+    } else {
+      res.status(404).json({ message: 'No se encontró el formulario principal' });
+    }
+  } catch (error) {
+    console.error('Error al buscar el formulario:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+});
+
 module.exports = router;

@@ -2,7 +2,6 @@ import Swal from 'sweetalert2';
 import questions from '../../../assets/data/viproLang.data';
 import Cookies from 'js-cookie';
 import fetchData from '../../../assets/data/validation/token.validation';
-import { useState } from 'react';
 
 const handleClickPopUpPay = (html, btn) => {
     Swal.fire({
@@ -10,7 +9,6 @@ const handleClickPopUpPay = (html, btn) => {
         confirmButtonText: btn,
         confirmButtonColor: '#B6122A'
     }).then((result) => {
-        const [country, setCountry] = useState("")
         if (result.isConfirmed) {
             const selectedOption = document.querySelector('input[name="option"]:checked');
             if (selectedOption) {

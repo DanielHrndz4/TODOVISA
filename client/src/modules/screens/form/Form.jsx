@@ -133,7 +133,7 @@ const VIPROForm = () => {
             );
             if (response.ok) {
               console.log(response);
-              navigateTo('/')
+              navigateTo('/qualifications')
             } else {
               console.log(response);
             }
@@ -185,6 +185,14 @@ const VIPROForm = () => {
   const pathSegments = location.pathname.split("/");
   const country = pathSegments[pathSegments.length - 1];
   const viproInfo = lang[0].form
+
+  const categorizedQuestions = {
+    'DATOS PERSONALES': questions.filter(q => q.category === 'DATOS PERSONALES'),
+    'ARRAIGOS FAMILIARES Y FINANCIEROS': questions.filter(q => q.category === 'ARRAIGOS FAMILIARES Y FINANCIEROS'),
+    'HISTORIAL DE VIAJES': questions.filter(q => q.category === 'HISTORIAL DE VIAJES'),
+    'HISTORIAL DELICTIVO': questions.filter(q => q.category === 'HISTORIAL DELICTIVO'),
+  };
+
   return (
     <>{loading && (
       <Fade>
@@ -210,7 +218,15 @@ const VIPROForm = () => {
               <p className="py-6">
                 {viproInfo.description}
               </p>
-              {questionList(form)}
+              {/* Renderizar las preguntas por categoría */}
+                {Object.keys(categorizedQuestions).map((category, idx) => (
+                  <div key={idx}>
+                    <Typography color="black" className="mb-4 font-semibold text-2xl pt-6">
+                      {category}
+                    </Typography>
+                    {questionList(categorizedQuestions[category])}
+                  </div>
+                ))}
 
               <div className="pb-6 pt-2">
                 <div className="pb-2 font-semibold">

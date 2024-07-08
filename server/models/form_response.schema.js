@@ -11,8 +11,7 @@ const formResponseSchema = new mongoose.Schema({
             required: true
         },
         response: [{
-            type: String,
-            required: true
+            type: String
         }],
     }]
 });
