@@ -26,8 +26,6 @@ const formSchema = new mongoose.Schema({
         },
         category:{
             type: String,
-            enum: ['DATOS PERSONALES', 'ARRAIGOS FAMILIARES Y FINANCIEROS', 'HISTORIAL DE VIAJES', 'HISTORIAL DELICTIVO'], // Asegúrate de ajustar según tus necesidades
-            required: true
         }
     }]
 });

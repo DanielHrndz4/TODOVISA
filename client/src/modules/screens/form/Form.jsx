@@ -192,7 +192,6 @@ const VIPROForm = () => {
     'HISTORIAL DE VIAJES': questions.filter(q => q.category === 'HISTORIAL DE VIAJES'),
     'HISTORIAL DELICTIVO': questions.filter(q => q.category === 'HISTORIAL DELICTIVO'),
   };
-
   return (
     <>{loading && (
       <Fade>
@@ -218,15 +217,7 @@ const VIPROForm = () => {
               <p className="py-6">
                 {viproInfo.description}
               </p>
-              {/* Renderizar las preguntas por categoría */}
-                {Object.keys(categorizedQuestions).map((category, idx) => (
-                  <div key={idx}>
-                    <Typography color="black" className="mb-4 font-semibold text-2xl pt-6">
-                      {category}
-                    </Typography>
-                    {questionList(categorizedQuestions[category])}
-                  </div>
-                ))}
+              {questionList(form)}
 
               <div className="pb-6 pt-2">
                 <div className="pb-2 font-semibold">

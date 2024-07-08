@@ -13,14 +13,14 @@ export default function MainVIPRO() {
     const user = Cookies.get('user');
     const validation = await fetchData(Cookies.get('jwt'))
     if (!validation) {
-      navigateTo('/');
+      // navigateTo('/');
     }
     if (user === undefined) {
-      navigateTo('/');
+      // navigateTo('/');
     }
     const userData = JSON.parse(user);
     if (!user) {
-      navigateTo('/');
+      // navigateTo('/');
     } else {
       const email = userData.email;
       try {
@@ -40,11 +40,11 @@ export default function MainVIPRO() {
           const { vipro } = data.user;
           setIsBoolean(vipro);
         } else {
-          navigateTo("/");
+          // navigateTo("/");
         }
       } catch (err) {
         console.error("Server error", err);
-        navigateTo("/");
+        // navigateTo("/");
       } finally {
         setIsLoading(false);
       }
