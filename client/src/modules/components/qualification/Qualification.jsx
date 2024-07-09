@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import ProgressCircleHero from "../stats/ProgressCircleUsageExample";
 
 export default function Qualification() {
     const user = Cookies.get('user');
@@ -120,6 +121,7 @@ export default function Qualification() {
     return (
         <main className="h-screen w-full bg-TVBlue">
             <h1>Formulario de calificación</h1>
+            <ProgressCircleHero></ProgressCircleHero>
             <main className="h-screen w-full bg-TVBlue">
                 <h1 className="text-white text-2xl font-bold p-4">Formulario de calificación</h1>
 
