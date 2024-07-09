@@ -10,7 +10,9 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': '/src'
+      '@': '/src',
+      '@emotion/react': '@emotion/react',
+      '@emotion/styled': '@emotion/styled'
     }
   },
 });
