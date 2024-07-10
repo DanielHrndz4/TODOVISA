@@ -1,6 +1,5 @@
 import { Tiny } from '@ant-design/plots';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 const PieG = ({correct, incorrect}) => {
   const totalQuestions = correct + incorrect; 
