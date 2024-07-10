@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import PieG from "../stats/PieG";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import URI from "../../../assets/data/admin/uri.api";
 
 export default function Qualification() {
     const user = Cookies.get("user");
@@ -34,7 +35,7 @@ export default function Qualification() {
         const qualificationData = async () => {
             try {
                 const response = await fetch(
-                    "https://todovisa.onrender.com/api/form_response_eeuu",
+                    `${URI}/form_response_eeuu`,
                     {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },

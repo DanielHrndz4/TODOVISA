@@ -31,6 +31,7 @@ import {
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 import lang from "../../../assets/data/lang.data";
+import URI from "../../../assets/data/admin/uri.api";
 
 const navListMenuItems = [
     {
@@ -79,6 +80,32 @@ const navListMenuItems = [
         icon: TagIcon,
     },
 ];
+
+const handleLogout = () => {
+    const cookieJWT = Cookies.get('jwt')
+    const fetchData = async () => {
+        try {
+            if (cookieJWT) {
+                const response = await fetch(
+                    `${URI}/logout`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ jwt: cookieJWT })
+                    }
+                );
+                if (response.ok) {
+                    Cookies.remove('jwt');
+                    Cookies.remove('user');
+                }
+                window.location.reload();
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    fetchData();
+};
 
 const loginNav = lang[0].navbar
 
@@ -188,6 +215,16 @@ function NavList() {
                 as="a"
                 variant="small sm:large"
                 color="white"
+                className="block xl:hidden font-medium"
+            >
+                <ListItem className="flex items-center gap-2 py-2 pr-4" onClick={handleLogout}>
+                    Cerrar sesion
+                </ListItem>
+            </Typography>
+            <Typography
+                as="a"
+                variant="small sm:large"
+                color="white"
                 className="font-medium"
             >
                 <ListItem className="flex items-center gap-2 py-2 pr-4">
@@ -229,32 +266,6 @@ export default function LoginUserNavbar() {
 
     const handleAvatarClick = () => {
         setOpenAvatarMenu(!openAvatarMenu);
-    };
-    const handleLogout = () => {
-        const cookieJWT = Cookies.get('jwt')
-        const fetchData = async () => {
-            try {
-                if (cookieJWT) {
-                    const response = await fetch(
-                        // "http://localhost:3366/api/logout",
-                        "https://todovisa.onrender.com/api/logout",
-                        {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ jwt: cookieJWT })
-                        }
-                    );
-                    if (response.ok) {
-                        Cookies.remove('jwt');
-                        Cookies.remove('user');
-                    }
-                    window.location.reload();
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        };
-        fetchData();
     };
 
     const getUserName = () => {

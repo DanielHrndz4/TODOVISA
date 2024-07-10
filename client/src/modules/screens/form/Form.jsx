@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import handleClickPopUpSaveForm from "../../components/popup/PopUpSaveForm";
 import lang from "../../../assets/data/lang.data";
 import { Fade } from "react-awesome-reveal";
+import URI from "../../../assets/data/admin/uri.api";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -33,7 +34,7 @@ const VIPROForm = () => {
     if (email) {
       const createForm = async (email) => {
         try {
-          const response = await fetch('https://todovisa.onrender.com/api/show-form-eeuu', {
+          const response = await fetch('${}/show-form-eeuu', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -106,7 +107,7 @@ const VIPROForm = () => {
 
     try {
       if (user) {
-        const response = await fetch('https://todovisa.onrender.com/api/update-form-eeuu', {
+        const response = await fetch(`${URI}/update-form-eeuu`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -123,7 +124,7 @@ const VIPROForm = () => {
         const fetchData = async () => {
           try {
             const response = await fetch(
-              "https://todovisa.onrender.com/api/vipro-finish",
+              `${URI}/vipro-finish`,
               {
                 method: 'POST',
                 credentials: 'include',

@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2';
 import lang from '../../../assets/data/lang.data';
+import URI from '../../../assets/data/admin/uri.api';
 
 const buttonText = lang[0].form
 const handleClickPopUpSaveForm = (html, email, questions) => {
@@ -24,7 +25,7 @@ const handleClickPopUpSaveForm = (html, email, questions) => {
             });
             const saveForm = async (email, questions) =>{
                 try {
-                    const response = await fetch('https://todovisa.onrender.com/api/update-form-eeuu', {
+                    const response = await fetch(`${URI}/update-form-eeuu`, {
                       method: 'POST',
                       credentials: 'include',
                       headers: {

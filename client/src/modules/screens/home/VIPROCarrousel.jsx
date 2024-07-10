@@ -25,14 +25,14 @@ function VIPROCarrousel() {
             <h1 className="text-xl lg:text-2xl font-semibold pt-3 text-center">
               {country.name}
             </h1>
-            <p className="py-2 xl:min-h-[9rem] max-h-[8rem] h-[8rem]">
+            <p className="py-2 xl:min-h-[9rem] max-h-[8rem] h-[8rem] text-justify">
               {country.description}
             </p>
-            <Link to={country.uri}>
+            {/* <Link to={country.uri}>
               <Button className="font-semibold w-full bg-TVred shadowbtn">
                 Ver más
               </Button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </Fade>

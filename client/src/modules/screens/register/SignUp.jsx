@@ -11,6 +11,7 @@ import country from "../../../assets/data/countrys.data";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Cookies from "js-cookie";
 import lang from "../../../assets/data/lang.data";
+import URI from "../../../assets/data/admin/uri.api";
 
 export default function Register() {
   const signupText = lang[0].signup
@@ -107,7 +108,7 @@ export default function Register() {
       setIsActiveBtn(true);
 
       const response = await fetch(
-        "https://todovisa.onrender.com/api/signup",
+        `${URI}/signup`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

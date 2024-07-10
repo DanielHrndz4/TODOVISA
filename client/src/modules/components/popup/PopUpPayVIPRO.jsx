@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import questions from '../../../assets/data/viproLang.data';
 import Cookies from 'js-cookie';
 import fetchData from '../../../assets/data/validation/token.validation';
+import URI from '../../../assets/data/admin/uri.api';
 
 const handleClickPopUpPay = (html, btn) => {
     Swal.fire({
@@ -23,7 +24,7 @@ const handleClickPopUpPay = (html, btn) => {
                         if (validation) {
                             const createForm = async (email, questions, selectedValue) => {
                                 try {
-                                    const response = await fetch('https://todovisa.onrender.com/api/vipro-eeuu', {
+                                    const response = await fetch(`${URI}/vipro-eeuu`, {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',

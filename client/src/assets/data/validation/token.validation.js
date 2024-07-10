@@ -1,8 +1,9 @@
+import URI from "../admin/uri.api";
+
 const fetchData = async (cookieJWT) => {
     try {
         const response = await fetch(
-            // "http://localhost:3366/api/protected-route", 
-            "https://todovisa.onrender.com/api/protected-route",
+            `${URI}/protected-route`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

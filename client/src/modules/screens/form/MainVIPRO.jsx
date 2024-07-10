@@ -3,6 +3,7 @@ import VIPROForm from "./Form";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
 import fetchData from "../../../assets/data/validation/token.validation";
+import URI from "../../../assets/data/admin/uri.api";
 
 export default function MainVIPRO() {
   const navigateTo = useNavigate();
@@ -25,7 +26,7 @@ export default function MainVIPRO() {
       const email = userData.email;
       try {
         const response = await fetch(
-          "https://todovisa.onrender.com/api/vipro/validation",
+          `${URI}/vipro/validation`,
           {
             method: "POST",
             headers: {

@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import lang from "../../../assets/data/lang.data";
+import URI from "../../../assets/data/admin/uri.api";
 
 export default function Login() {
   const [signInText, setSignInText] = useState("Inicia sesión");
@@ -55,7 +56,7 @@ export default function Login() {
       setIsActiveBtn(true);
       const response = await fetch(
         // "http://localhost:3366/api/signin",
-        "https://todovisa.onrender.com/api/signin",
+        `${URI}/signin`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
