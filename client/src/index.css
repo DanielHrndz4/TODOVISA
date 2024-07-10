@@ -16,6 +16,12 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+@media print {
+  .hide-on-print {
+    display: none !important;
+  }
+}
+
 .shadow {
   -webkit-box-shadow: 11px 11px 24px -1px rgba(0, 0, 0, 0.72);
   -moz-box-shadow: 11px 11px 24px -1px rgba(0, 0, 0, 0.72);

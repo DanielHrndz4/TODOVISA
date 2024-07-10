@@ -27,6 +27,10 @@ export default function Login() {
       setSignInValue(true);
     }
   };
+  const styles = {
+    height: '100vh', // Fallback for browsers that do not support dvh
+    height: '100dvh', // Adjusted height for browsers that support dvh
+  };
 
   useEffect(() => {
     fetchDataToken();
@@ -205,7 +209,7 @@ export default function Login() {
   }
 
   return (
-    <Fade cascade damping={0.1} className="w-full h-full">
+    <Fade cascade damping={0.1} className="w-full h-full" style={styles}>
       <main className="bg-TVBlue flex flex-col lg:flex-row h-full w-full">
         {signInValue ? withSignin() : withoutSignin()}
       </main>
