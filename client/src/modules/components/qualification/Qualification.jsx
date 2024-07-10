@@ -175,7 +175,6 @@ export default function Qualification() {
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       const now = new Date();
       const timestamp = `${now.getHours()}${now.getMinutes()}${now.getSeconds()}${now.getMilliseconds()}`;
-
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
       pdf.save(`qualification_${timestamp}.pdf`);
 
@@ -193,7 +192,7 @@ export default function Qualification() {
       <main className="h-full w-full bg-TVBlue py-10">
       <div
         className="w-[80%] m-auto h-full pt-24 pb-16 bg-white rounded-lg"
-        
+        ref={pdfRef}
       >
         <div className="w-[80%] m-auto pt-10 pb-20">
           <div className="m-auto w-full flex flex-col">
