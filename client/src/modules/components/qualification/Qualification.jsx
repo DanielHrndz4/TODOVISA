@@ -63,7 +63,6 @@ export default function Qualification() {
 
         qualificationData();
     }, [email]);
-    console.log(userResponse);
     useEffect(() => {
         let correctDPCount = 0;
         let correctAFFCount = 0;
@@ -132,8 +131,8 @@ export default function Qualification() {
         setQualification(totalCorrect * 2.6);
     }, [userResponseData, formResponseData]);
 
-    if (loading) return <p>Cargando...</p>;
-    if (error) return <p>Error: {error}</p>;
+    if (loading) return <div></div>
+    if (error) return <div></div>
 
     const getCountry = (country) => {
         switch (country.toLowerCase()) {
