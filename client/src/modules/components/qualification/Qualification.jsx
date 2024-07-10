@@ -34,7 +34,7 @@ export default function Qualification() {
         const qualificationData = async () => {
             try {
                 const response = await fetch(
-                    "http://localhost:3366/api/form_response_eeuu",
+                    "https://todovisa.onrender.com/api/form_response_eeuu",
                     {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
