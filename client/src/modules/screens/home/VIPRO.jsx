@@ -16,12 +16,12 @@ const handlePopUp = (validate) => {
                 <h2 class="pt-4 pb-8" style="font-size: 1.5rem; font-weight: 600;" className="font-semibold">${popupWithLoginText.title}</h2>
                 <div class="w-full grid grid-cols-2 gap-4">
                     <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="estadosunidos"> ${countries.usa.name}</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="canada"> ${countries.canada.name}</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="mexico"> ${countries.mexico.name}</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="england"> ${countries.uk.name}</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="china"> ${countries.china.name}</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="australia"> ${countries.australia.name}</div>
-                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="india"> ${countries.india.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="canada"> ${countries.canada.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="mexico"> ${countries.mexico.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="inglaterra"> ${countries.uk.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="china"> ${countries.china.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="australia"> ${countries.australia.name}</div>
+                    <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="india"> ${countries.india.name}</div>
                 </div>
                 <p class="text-justify pt-8">${popupWithLoginText.description}</p>
                 <h1 class="font-bold text-3xl pt-6">$11.99</h1>

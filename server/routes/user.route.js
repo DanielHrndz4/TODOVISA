@@ -50,7 +50,7 @@ router.post('/signin', (req, res) => {
       return jwtSchema.findOne({ email }).then((existUser) => {
         if (existUser) {
           return res.status(400).json({ message: `El usuario con email: ${email} ya tiene un token activo` });
-        } 
+        }
 
         const newToken = new jwtSchema({ email, name: user.name, country: user.country, jwt: token });
         return newToken.save().then(() => {
@@ -108,10 +108,50 @@ router.post('/show-form-eeuu', (req, res) => {
 });
 
 router.post('/update-form-eeuu', async (req, res) => {
-  const { email, questions } = req.body;
+  const { email, questions, country } = req.body;
   try {
     const form = await Form.findOneAndUpdate({ email: email }, { questions: questions });
     if (form) {
+      const user = await userSchema.findOne({ email: email });
+      if (user) {
+        let viproCountryCode;
+        switch (country.toLowerCase()) {
+          case 'estadosunidos':
+            viproCountryCode = 'vipro_eeuu';
+            break;
+          case 'mexico':
+            viproCountryCode = 'vipro_mx';
+            break;
+          case 'china':
+            viproCountryCode = 'vipro_ch';
+            break;
+          case 'india':
+            viproCountryCode = 'vipro_ind';
+            break;
+          case 'canada':
+            viproCountryCode = 'vipro_cnd';
+            break;
+          case 'inglaterra':
+            viproCountryCode = 'vipro_uk';
+            break;
+          case 'australia':
+            viproCountryCode = 'vipro_aus';
+            break;
+          default:
+            viproCountryCode = null;
+            break;
+        }
+        
+        if (viproCountryCode) {
+          // Eliminar la propiedad vipro_* si existe
+          if (user[viproCountryCode]) {
+            user.set(viproCountryCode, undefined)
+            await user.save();
+          }
+        } else {
+          return res.status(400).json({ message: 'País no válido' });
+        }
+      }
       res.status(200).json({ message: 'Formulario guardado con éxito' });
     } else {
       res.status(400).json({ message: 'Datos no actualizados' });
@@ -121,6 +161,7 @@ router.post('/update-form-eeuu', async (req, res) => {
     res.status(500).json({ message: 'Error del servidor' });
   }
 });
+
 
 router.post('/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
@@ -143,16 +184,16 @@ router.post('/signup', (req, res) => {
 
 router.post('/logout', (req, res) => {
   const jwt = req.body.jwt;
-  jwtSchema.deleteOne({jwt: jwt})
-  .then((response) => {
-    if(response){
-      return res.status(200).json({ message: "Cerrando sesion"})
-    }else{
-      return res.status(400).json({ message: "Ocurrio un error" });
-    }
-  }).catch((error) => {
-    res.status(500).json(error)
-  })
+  jwtSchema.deleteOne({ jwt: jwt })
+    .then((response) => {
+      if (response) {
+        return res.status(200).json({ message: "Cerrando sesion" })
+      } else {
+        return res.status(400).json({ message: "Ocurrio un error" });
+      }
+    }).catch((error) => {
+      res.status(500).json(error)
+    })
 })
 
 router.post('/forms', async (req, res) => {
@@ -173,18 +214,18 @@ router.post('/forms', async (req, res) => {
 });
 
 router.post('/protected-route',
-  (req, res) =>{
+  (req, res) => {
     const jwt = req.body.jwt
-    jwtSchema.findOne({ jwt: jwt}).then((response) =>{
-      if (response){
+    jwtSchema.findOne({ jwt: jwt }).then((response) => {
+      if (response) {
         return res.status(200).json(response)
-      }else{
+      } else {
         return res.status(400).json(response);
       }
     })
-    .catch((err) =>{
-      res.status(500).console.error(err);
-    })
+      .catch((err) => {
+        res.status(500).console.error(err);
+      })
   });
 
 router.get('/verify-token', (req, res) => {
@@ -197,26 +238,21 @@ router.get('/verify-token', (req, res) => {
 
 router.post('/vipro', async (req, res) => {
   const email = req.body.email;
-  try {
-    const user = await userSchema.findOneAndUpdate({ email: email }, { vipro: true });
-    if (!user) {
-      return res.status(404).json({ message: 'Usuario no encontrado' });
-    }
-    res.status(200).json({ message: 'Usuario actualizado a VIP', user });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error del servidor' });
-  }
-});
+  const vipro = req.body.vipro;
 
-router.post('/vipro-finish', async (req, res) => {
-  const email = req.body.email;
   try {
-    const user = await userSchema.findOneAndUpdate({ email: email }, { vipro: false });
-    if (!user) {
+    // Actualiza la propiedad específica en la base de datos
+    const updatedUser = await userSchema.findOneAndUpdate(
+      { email: email },
+      { $set: { [`${vipro}`]: true } }, // Usa template literals para actualizar la propiedad dinámicamente
+      { new: true }
+    );
+
+    if (!updatedUser) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
-    res.status(200).json({ message: 'Usuario actualizado a VIP', user });
+
+    res.status(200).json({ message: `Usuario actualizado en ${vipro} a VIP`, user: updatedUser });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error del servidor' });
@@ -228,15 +264,29 @@ router.post('/vipro/validation', (req, res) => {
   if (!email || email.trim() === '') {
     return res.status(400).json({ message: 'El correo electrónico es requerido' });
   }
+
   userSchema.findOne({ email: email })
     .then((user) => {
       if (!user) {
         return res.status(404).json({ message: 'Usuario no encontrado' });
       }
-      if (user.vipro !== true) {
+      const viproFields = [
+        'vipro_eeuu', 'vipro_mx', 'vipro_ch', 'vipro_ind',
+        'vipro_cnd', 'vipro_uk', 'vipro_aus'
+      ];
+
+      const validVipro = viproFields.reduce((acc, field) => {
+        if (user[field] === true) {
+          acc[field] = true;
+        }
+        return acc;
+      }, {});
+
+      if (Object.keys(validVipro).length === 0) {
         return res.status(401).json({ message: 'Credenciales inválidas' });
       }
-      res.status(200).json({ message: 'Inicio de sesión exitoso', user: { vipro: user.vipro } });
+
+      res.status(200).json({ message: 'Inicio de sesión exitoso', user: validVipro });
     })
     .catch((error) => {
       console.error(error.message);
@@ -246,31 +296,81 @@ router.post('/vipro/validation', (req, res) => {
 
 router.post('/vipro-eeuu', async (req, res) => {
   const { email, country, questions } = req.body;
+
   try {
+    // Buscar el formulario existente por el correo electrónico del usuario
     const existingForm = await Form.findOne({ email: email });
-    if (existingForm) {
-      return res.status(200).json({ message: 'El usuario tiene un formulario pendiente' });
+
+    // Buscar al usuario por su correo electrónico y extraer todas las propiedades vipro_*
+    const user = await userSchema.findOne({ email: email });
+
+    if (user) {
+      // Extraer todas las propiedades vipro_*
+      const viproProperties = Object.keys(user.toObject()).filter(key => key.startsWith('vipro_'));
+      // Mapear el nombre del país al código de vipro correspondiente
+      let viproCountryCode;
+      switch (country) {
+        case 'estadosunidos':
+          viproCountryCode = 'vipro_eeuu';
+          break;
+        case 'mexico':
+          viproCountryCode = 'vipro_mx';
+          break;
+        case 'china':
+          viproCountryCode = 'vipro_ch';
+          break;
+        case 'india':
+          viproCountryCode = 'vipro_ind';
+          break;
+        case 'canada':
+          viproCountryCode = 'vipro_cnd';
+          break;
+        case 'inglaterra':
+          viproCountryCode = 'vipro_uk';
+          break;
+        case 'australia':
+          viproCountryCode = 'vipro_aus';
+          break;
+        default:
+          viproCountryCode = null;
+          break;
+      }
+
+      if (!viproCountryCode || !viproProperties.includes(viproCountryCode)) {
+        // Si el país seleccionado no está permitido o no está en las propiedades vipro_*, redirigir a pagar
+        return res.status(200).json({ message: 'No tienes acceso a este país, por favor realiza el pago', redirectToPayment: true });
+      }
+
+      // Verificar si hay algún formulario existente
+      if (existingForm) {
+        return res.status(200).json({ message: 'El usuario tiene un formulario pendiente por realizar', vipro: viproProperties });
+      } else {
+        // Crear y guardar un nuevo formulario
+        const newForm = new Form({ email: email, country: country, questions });
+        const savedForm = await newForm.save();
+        return res.status(200).json({ message: 'Formulario registrado exitosamente', vipro: viproProperties });
+      }
     }
-    const newForm = new Form({ email: email, country: country, questions });
-    const savedForm = await newForm.save();
-    return res.status(200).json({ message: 'Formulario registrado exitosamente' });
+
+    res.status(400).json({ message: 'Usuario no encontrado' });
   } catch (error) {
     console.error('Error al guardar el formulario:', error.message);
     return res.status(500).json({ message: 'Error al guardar el formulario' });
   }
 });
 
-router.post('/form_response', async (req,res)=>{
-  const {country, questions} = req.body;
-  try{
-    const existingFormResponse = await FormResponseSchema.findOne({country});
-    if(existingFormResponse){
+
+router.post('/form_response', async (req, res) => {
+  const { country, questions } = req.body;
+  try {
+    const existingFormResponse = await FormResponseSchema.findOne({ country });
+    if (existingFormResponse) {
       return res.status(200).json({ message: 'El formulario no se guardo, consulte con su administrador' });
     }
-    const newFormResponse = new FormResponseSchema({country:country, questions: questions})
+    const newFormResponse = new FormResponseSchema({ country: country, questions: questions })
     const savedFormResponse = await newFormResponse.save();
-    return res.status(200).json({message: 'Formulario guardado con exito!'})
-  }catch(error){
+    return res.status(200).json({ message: 'Formulario guardado con exito!' })
+  } catch (error) {
     console.error('Error al guardar el formulario:', error.message);
     return res.status(500).json({ message: 'Error al guardar el formulario' });
   }
@@ -283,10 +383,10 @@ router.post('/form_response_eeuu', async (req, res) => {
     if (existingFormData) {
       const responseForm = await FormResponseSchema.findById('668c547a5c587321604fc73f');
       if (responseForm) {
-        const responseFormUser = await Form.findOne({ email: email});
-        if(responseFormUser){
-          const user = await userSchema.findOne({email:email})
-          res.status(200).json({responseForm, responseFormUser, user});
+        const responseFormUser = await Form.findOne({ email: email });
+        if (responseFormUser) {
+          const user = await userSchema.findOne({ email: email })
+          res.status(200).json({ responseForm, responseFormUser, user });
         }
       } else {
         res.status(404).json({ message: 'No se encontró el formulario de respuesta' });
@@ -299,5 +399,9 @@ router.post('/form_response_eeuu', async (req, res) => {
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 });
+
+router.get('/hello', (req, res) => {
+  res.status(200);
+})
 
 module.exports = router;

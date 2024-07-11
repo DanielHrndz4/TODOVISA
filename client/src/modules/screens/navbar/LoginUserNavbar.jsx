@@ -97,6 +97,7 @@ const handleLogout = () => {
                 if (response.ok) {
                     Cookies.remove('jwt');
                     Cookies.remove('user');
+                    sessionStorage.removeItem('SESSION');
                 }
                 window.location.reload();
             }

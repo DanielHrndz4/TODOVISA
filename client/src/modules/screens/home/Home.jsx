@@ -11,7 +11,7 @@ import VIPRO from "./VIPRO";
 import LoginUserNavbar from "../navbar/LoginUserNavbar";
 import Cookies from 'js-cookie';
 import lang from "../../../assets/data/lang.data";
-import fetchData from "../../../assets/data/validation/token.validation";
+import URI from "../../../assets/data/admin/uri.api";
 
 export default function Home() {
   const bannerText = lang[0].banner
@@ -19,16 +19,31 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const cookieJWT = Cookies.get('jwt')
 
+  useEffect(() => {
+    const fetchMessage = async () => {
+      try {
+        const response = await fetch(`${URI}/hello`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+        } else {
+          console.error('Error en la solicitud:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error en la solicitud:', error);
+      }
+    };
+
+    fetchMessage();
+  }, []);
 
   useEffect(() => {
     if (cookieJWT) {
-      const validateJWT = async () => {
-        if (cookieJWT) {
-          const validation = await fetchData(cookieJWT);
-          setJwtToken(validation)
-        }
-      };
-      validateJWT();
+      const validation = sessionStorage.getItem('SESSION');
+      setJwtToken(validation)
     }
     setLoading(false);
   }, []);

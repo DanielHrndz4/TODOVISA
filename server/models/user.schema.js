@@ -25,7 +25,25 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    vipro:{
+    vipro_eeuu:{
+        type: Boolean
+    },
+    vipro_mx:{
+        type: Boolean
+    },
+    vipro_ch:{
+        type: Boolean
+    },
+    vipro_ind:{
+        type: Boolean
+    },
+    vipro_cnd:{
+        type: Boolean
+    },
+    vipro_uk:{
+        type: Boolean
+    },
+    vipro_aus:{
         type: Boolean
     }
 })

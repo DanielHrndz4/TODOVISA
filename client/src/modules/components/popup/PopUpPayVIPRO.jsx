@@ -4,9 +4,10 @@ import Cookies from 'js-cookie';
 import fetchData from '../../../assets/data/validation/token.validation';
 import URI from '../../../assets/data/admin/uri.api';
 
-const handleClickPopUpPay = (html, btn) => {
+const handleClickPopUpPay = (html,btn) => {
     Swal.fire({
         html: html,
+        showConfirmButton: true,
         confirmButtonText: btn,
         confirmButtonColor: '#B6122A'
     }).then((result) => {
@@ -36,8 +37,17 @@ const handleClickPopUpPay = (html, btn) => {
                                         throw new Error('Error al guardar el formulario');
                                     }
 
-                                    console.log('Respuesta del servidor al guardar el formulario:', response);
-                                    window.location.href = `vipro/${selectedValue}`;
+                                    if (response.ok) {
+                                        const data = await response.json();
+                                        console.log(data.message);
+                                        if(data.message === 'El usuario tiene un formulario pendiente por realizar'){
+                                            window.location.href = `/vipro/${selectedValue}`;
+                                        }else if(data.message === 'El usuario tiene un formulario terminado'){
+                                            window.location.href = `https://checkout.baccredomatic.com//LjI0YTA0NjMyMjgwMTliMTY2ZjcxOTcxNzIwNjUwNDE5`;
+                                        }else{
+                                            window.location.href = `https://checkout.baccredomatic.com//LjI0YTA0NjMyMjgwMTliMTY2ZjcxOTcxNzIwNjUwNDE5`;
+                                        }
+                                    }
                                 } catch (error) {
                                     console.error('Error en la solicitud para guardar el formulario:', error);
                                     window.location.href = `/`;
@@ -47,7 +57,7 @@ const handleClickPopUpPay = (html, btn) => {
                         } else {
                             window.location.href = `/`;
                         }
-                    }else{
+                    } else {
                         window.location.href = `/`;
                     }
                 };

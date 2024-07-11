@@ -10,7 +10,6 @@ import {
   Routes,
 } from "react-router-dom";
 import Qualification from "./components/qualification/Qualification";
-import Payment from "./components/payment/Payment";
 
 function App(){
   return (  
@@ -21,7 +20,6 @@ function App(){
         <Route exact path="/forgotpassword" element={<ForgotPassword></ForgotPassword>} />
         <Route exact path="/" element={<Home></Home>} />
         <Route exact path="/vipro/:country/" element={<MainVIPRO></MainVIPRO>} />
-        <Route exact path="/payment" element={<Payment></Payment>} />
         <Route exact path="/qualifications" element={<Qualification></Qualification>} />
         <Route exact path="/country/:country" element={<CountryScreen></CountryScreen>} />
       </Routes>

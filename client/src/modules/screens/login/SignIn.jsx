@@ -69,6 +69,7 @@ export default function Login() {
         const expires = new Date(new Date().getTime() + 60 * 60 * 1000); 
         Cookies.set('jwt', token, { expires:expires, secure: true, sameSite: 'Strict' });
         Cookies.set('user', JSON.stringify(payload), { expires:expires, secure: true, sameSite: 'Strict' });
+        sessionStorage.setItem('SESSION', true);
         navigateTo("/");
       } else if (response.status === 401) {
         handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold'>Credenciales inválidas</h1><p class='py-2 text-justify'>Por favor, verifica tus credenciales e intenta nuevamente.</p>`, "Aceptar");

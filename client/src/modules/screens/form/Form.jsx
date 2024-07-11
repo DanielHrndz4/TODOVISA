@@ -25,16 +25,19 @@ const VIPROForm = () => {
   const navigateTo = useNavigate();
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const user = Cookies.get('user');
   const userData = JSON.parse(user);
   const email = userData ? userData.email : null;
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/");
+  const country = pathSegments[pathSegments.length - 1];
+  const viproInfo = lang[0].form
 
   useEffect(() => {
     if (email) {
       const createForm = async (email) => {
         try {
-          const response = await fetch('${}/show-form-eeuu', {
+          const response = await fetch(`${URI}/show-form-eeuu`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -49,7 +52,6 @@ const VIPROForm = () => {
           const responseData = await response.json();
           setQuestions(responseData.user.questions);
           setLoading(true)
-          console.log('Respuesta del servidor:', responseData.user.questions);
         } catch (error) {
           console.error('Error en la solicitud:', error);
           navigateTo('/');
@@ -61,43 +63,6 @@ const VIPROForm = () => {
       console.error('No se pudo obtener el email del usuario desde sessionStorage.');
     }
   }, [email]);
-
-
-  // const questionList = (form) => {
-  //   let count = 1;
-  //   return questions.map((question, index) => (
-  //     <>
-  //       <div className="text-lg font-semibold ">{`${count++}. ${question.question}`}</div>
-  //       <Form.Item
-  //         key={index}
-  //         name={question.question}
-  //         rules={[
-  //           {
-  //             required: question.user_response == "" ? true : false,
-  //             message: viproInfo.obligatory_field,
-  //           },
-  //         ]}
-  //         className="w-full font-bold py-2"
-  //         hasFeedback
-  //         validateTrigger="onFinish"
-  //       >
-  //         {question.type_question === "abierta" && <Input style={{ color: 'black' }} size="large" placeholder={question.user_response} value={question.user_response} />}
-  //         {question.type_question === "number" && <Input type="number" size="large" placeholder={question.user_response} value={question.user_response} />}
-  //         {question.type_question === "textarea" && <TextArea allowClear size="large" placeholder={question.user_response} value={question.user_response} />}
-  //         {question.type_question === "cerrada" && (
-  //           <Select placeholder={question.user_response == "" ? viproInfo.select_option
-  //             : question.user_response} allowClear size="large" value={question.user_response}>
-  //             {question.response.map((option, idx) => (
-  //               <Option key={idx} value={option}>
-  //                 {option}
-  //               </Option>
-  //             ))}
-  //           </Select>
-  //         )}
-  //       </Form.Item>
-  //     </>
-  //   ));
-  // };
 
   const onFinish = async () => {
     if (!termsAccepted) {
@@ -112,7 +77,7 @@ const VIPROForm = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, questions }),
+          body: JSON.stringify({ email, questions, country }),
         });
 
         if (!response.ok) {
@@ -120,30 +85,7 @@ const VIPROForm = () => {
         }
 
         const responseData = await response.json();
-        console.log('Formulario actualizado:', responseData);
-        const fetchData = async () => {
-          try {
-            const response = await fetch(
-              `${URI}/vipro-finish`,
-              {
-                method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
-              }
-            );
-            if (response.ok) {
-              console.log(response);
-              navigateTo('/qualifications')
-            } else {
-              console.log(response);
-            }
-          } catch (err) {
-            console.error(err);
-          }
-        };
-
-        fetchData();
+        navigateTo('/qualifications')
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
@@ -179,11 +121,6 @@ const VIPROForm = () => {
       setQuestions(updatedQuestions);
     }
   };
-
-  const location = useLocation();
-  const pathSegments = location.pathname.split("/");
-  const country = pathSegments[pathSegments.length - 1];
-  const viproInfo = lang[0].form
 
   const categorizedQuestions = {
     'DATOS PERSONALES': questions.filter(q => q.category === 'DATOS PERSONALES'),
