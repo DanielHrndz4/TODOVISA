@@ -191,7 +191,7 @@ export default function Qualification() {
                     >
                         <div className="w-[80%] m-auto pt-10 pb-20">
                             <div className="m-auto w-full flex flex-col">
-                                <div className="flex flex-col gap-1 text-center pb-10">
+                                <div className="flex flex-col gap-1 text-center pb-16">
                                     <h1 className="text-5xl font-bold">
                                         Formulario de aprobación de Visa
                                     </h1>
@@ -263,7 +263,7 @@ export default function Qualification() {
                                         className={`${qualification >= 60 ? "text-green-600" : "text-red-400"
                                             } text-shadow`}
                                     >
-                                        {qualification}
+                                        {qualification.toFixed(1)}
                                     </strong>
                                 </p>
                             </div>
@@ -276,7 +276,7 @@ export default function Qualification() {
                                             </h2>
                                             <p className="text-justify">
                                                 Has aprobado el formulario con una calificación total de{" "}
-                                                {qualification}. Todas tus respuestas han sido evaluadas
+                                                {qualification.toFixed(1)}. Todas tus respuestas han sido evaluadas
                                                 como correctas e incorrectas, lo que determina tu puntaje
                                                 para la prueba de visa.
                                             </p>
@@ -287,7 +287,7 @@ export default function Qualification() {
                                                 No has aprobado esta vez
                                             </h2>
                                             <p className="text-justify">
-                                                El resultado total de tu formulario es {qualification}, lo
+                                                El resultado total de tu formulario es {qualification.toFixed(1)}, lo
                                                 cual indica que no has aprobado el formulario en esta
                                                 ocasión. Las respuestas correctas e incorrectas se utilizan
                                                 para cuantificar tu puntaje, determinando si pasas la prueba
@@ -304,7 +304,7 @@ export default function Qualification() {
                                     <div className="text-justify flex flex-col gap-5">
                                         <h1 className="text-2xl font-bold">Nota importante</h1>
                                         <div className="flex flex-col gap-3">
-                                            <p>
+                                            <p className="text-xl">
                                                 Cada pregunta en el formulario tiene asignada una
                                                 ponderación específica, lo que implica que no todas las
                                                 respuestas tienen el mismo impacto en tu calificación final.
@@ -315,7 +315,7 @@ export default function Qualification() {
                                                 necesarios para aprobar la prueba y avanzar en el proceso de
                                                 visa.
                                             </p>
-                                            <p>
+                                            <p className="text-xl">
                                                 Es esencial recordar que, aunque esta calificación es
                                                 significativa, no garantiza automáticamente el éxito en la
                                                 entrevista oficial que forma parte del procedimiento de

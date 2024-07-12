@@ -129,7 +129,7 @@ const portuguese = [
         "popupWithLogin": {
             "title": "Selecione uma opção:",
             "description": "Para continuar com a sua seleção, certifique-se de revisar as opções disponíveis. Alguns destinos estão temporariamente desativados devido a restrições atuais ou falta de disponibilidade de serviços. Essas opções podem ser ativadas no futuro, por isso recomendamos que você fique atento às atualizações.",
-            "button": "Proceder à compra"
+            "button": "Continuar"
         },
         "whatsapp": {
             "status": "Online",

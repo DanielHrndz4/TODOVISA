@@ -128,7 +128,7 @@ const english = [
         "popupWithLogin": {
             "title": "Select an option:",
             "description": "To continue with your selection, make sure to review the available options. Some destinations are temporarily disabled due to current restrictions or lack of service availability. These options may be enabled in the future, so we recommend staying updated.",
-            "button": "Proceed to purchase"
+            "button": "Continue"
         },
         "whatsapp": {
             "status": "Online",

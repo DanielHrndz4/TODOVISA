@@ -1,25 +1,22 @@
 import React from "react";
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import GoogleMapReact from 'google-map-react';
 import { Fade } from "react-awesome-reveal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPhone, faClock } from '@fortawesome/free-solid-svg-icons';
 import lang from "../../../assets/data/lang.data";
 
+const AnyReactComponent = ({ text }) => <div><img src="/img/VIPRO/fa-location.png" alt="text" className="h-9" /></div>;
+
 export default function MapComponent() {
+  const contactInfo = lang[0].contact.info;
+
   const defaultProps = {
     center: {
-      lat: 10.99835602,
-      lng: 77.01502627
+      lat: 13.6970016,
+      lng: -89.2252546
     },
-    zoom: 11
+    zoom: 15
   };
-
-  const position = {
-    lat: 10.99835602,
-    lng: 77.01502627
-  };
-
-  const contactInfo = lang[0].contact.info;
 
   return (
     <>
@@ -27,16 +24,27 @@ export default function MapComponent() {
         <Fade bottom className="w-full">
           <div className="w-full h-full flex flex-row mx-auto text-white">
             <div className="h-[275px] lg:h-[225px] xl:h-[250px] sm:h-[300px] w-full">
-              <APIProvider apiKey={'AIzaSyCkW8tRmEUc7bTe9UKossrKpVb-kmxQ18g'} className="w-full">
-                <Map defaultCenter={defaultProps.center} defaultZoom={defaultProps.zoom}>
-                  <Marker position={position} />
-                </Map>
-              </APIProvider>
+              <GoogleMapReact
+                apiKey={'AIzaSyDPRY1HYtUBnqp5hKE1J7pJHCaoTjoavAo'}
+                defaultCenter={defaultProps.center}
+                defaultZoom={defaultProps.zoom}
+                options={{
+                  disableDefaultUI: true,
+                  draggable: false,
+                  zoomControl: false,
+                }}
+              >
+                <AnyReactComponent
+                  lat={defaultProps.center.lat}
+                  lng={defaultProps.center.lng}
+                  text="fa-location.png"
+                />
+              </GoogleMapReact>
             </div>
           </div>
         </Fade>
-
       </div>
+
       <Fade>
         <div className="w-full flex lg:px-0 px-6">
           <div className="border-2 border-white p-2 rounded-full xl:w-[55px] xl:min-w-[55px] xl:h-[55px] w-[45px] min-w-[45px] h-[45px] flex justify-center items-center shadowbtn">
@@ -49,6 +57,7 @@ export default function MapComponent() {
           </a>
         </div>
       </Fade>
+
       <Fade>
         <div className="w-full flex mt-4  lg:px-0 px-6">
           <div className="border-2 border-white p-2 rounded-full xl:w-[55px] xl:min-w-[55px] xl:h-[55px] w-[45px] min-w-[45px] h-[45px] flex justify-center items-center shadowbtn">

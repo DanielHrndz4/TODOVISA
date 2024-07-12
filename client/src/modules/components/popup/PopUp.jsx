@@ -5,7 +5,7 @@ const handleClickPopUp = (html,btn) => {
         html: html,
         width: '50%',
         confirmButtonText: btn,
-        confirmButtonColor: '#B6122A' 
+        confirmButtonColor: '#B6122A'
     });
 };
 

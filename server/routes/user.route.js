@@ -141,6 +141,8 @@ router.post('/update-form-eeuu', async (req, res) => {
             viproCountryCode = null;
             break;
         }
+
+        console.log(viproCountryCode)
         
         if (viproCountryCode) {
           if (user[viproCountryCode]) {
@@ -357,7 +359,6 @@ router.post('/vipro-eeuu', async (req, res) => {
     return res.status(500).json({ message: 'Error al guardar el formulario' });
   }
 });
-
 
 router.post('/form_response', async (req, res) => {
   const { country, questions } = req.body;

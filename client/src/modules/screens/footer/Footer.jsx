@@ -106,7 +106,7 @@ export default function Footer() {
         </ul>
       </div>
       <hr className="my-6 border-TVBlue" />
-      <hr className="my-8 border-blue-gray-50" />
+      <hr className="my-8 border-blue-gray-50 flex" />
       <Typography color="white" className="text-center font-bold">
         &copy; {currentYear} TodoVisa S.A de C.V
       </Typography>
