@@ -83,7 +83,7 @@ export default function Steps() {
                         </div>
                         <div className="text-center">
                             <h2 className="text-lg font-semibold mb-2">Paso 4: Enviar comprobante</h2>
-                            <p>Envía la captura de pantalla o foto del comprobante al WhatsApp de TodoVisa. Una vez que nuestro equipo confirme el pago, podrás proceder a completar el formulario VIPRO sin preocupaciones.</p>
+                            <p>Envía la captura de pantalla o foto del comprobante al WhatsApp de TodoVisa. Una vez que nuestro equipo confirme el pago, podrás proceder a completar el formulario VIPRO sin preocupaciones. También asegúrate de enviar el comprobante al correo electrónico indicado para garantizar una rápida verificación.</p>
                         </div>
                     </div>
                 </div>
