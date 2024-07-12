@@ -55,7 +55,6 @@ export default function Login() {
     try {
       setIsActiveBtn(true);
       const response = await fetch(
-        // "http://localhost:3366/api/signin",
         `${URI}/signin`,
         {
           method: 'POST',
