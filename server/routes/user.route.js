@@ -143,7 +143,6 @@ router.post('/update-form-eeuu', async (req, res) => {
         }
         
         if (viproCountryCode) {
-          // Eliminar la propiedad vipro_* si existe
           if (user[viproCountryCode]) {
             user.set(viproCountryCode, undefined)
             await user.save();
