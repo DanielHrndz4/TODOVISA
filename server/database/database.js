@@ -3,6 +3,8 @@ require('dotenv').config()
 
 const URI = process.env.URI_DATABASE || 'URI not found'
 
+mongoose.set('strictQuery', false); 
+
 const connectDB = async () =>{
     try {
         await mongoose.connect(URI);
