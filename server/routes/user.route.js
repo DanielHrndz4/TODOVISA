@@ -143,7 +143,7 @@ router.post('/update-form-eeuu', async (req, res) => {
         }
 
         console.log(viproCountryCode)
-        
+
         if (viproCountryCode) {
           if (user[viproCountryCode]) {
             user.set(viproCountryCode, undefined)
@@ -182,6 +182,54 @@ router.post('/signup', (req, res) => {
         });
     });
 });
+
+router.post('/auth/google', async (req, res) => {
+  const { name, email, country, password, tel, googleID } = req.body;
+  try {
+    // Verificar si el usuario existe en la base de datos
+    const existUser = await userSchema.findOne({ email });
+
+    if (existUser) {
+      // Verificar si existe un token activo para el usuario
+      const existToken = await jwtSchema.findOne({ email });
+      if (existToken) {
+        return res.status(400).json({ message: `El usuario con email: ${email} ya tiene un token activo` });
+      }
+      // Caso 1: El usuario existe y tiene un googleID válido
+      if (existUser.googleID && existUser.googleID !== "") {
+        // Crear y guardar un nuevo token JWT
+        const payload = { email, name, country };
+        const token = createToken(payload);
+        const newToken = new jwtSchema({ email, name, country, jwt: token });
+        await newToken.save();
+        return res.status(200).json({ message: 'Inicio de sesión exitoso', token, payload });
+      } else {
+        // Caso 2: El usuario existe pero no tiene un googleID o el googleID es diferente
+        return res.status(400).json({ message: 'Ya existe una cuenta registrada con este email' });
+      }
+    } else {
+      // Caso 3: El usuario no existe, se crea una nueva cuenta
+      const newUser = new userSchema({ name, email, country, password, tel, googleID });
+
+      // Crear y guardar un nuevo token JWT
+      const payload = { email, name, country };
+      const token = createToken(payload);
+      const newToken = new jwtSchema({ email, name, country, jwt: token });
+      await newToken.save();
+
+      // Guardar el nuevo usuario
+      await newUser.save();
+
+      // Configurar la cookie y responder con el token y payload
+      res.cookie('jwt', token, { secure: true, sameSite: 'None' });
+      return res.status(200).json({ message: 'Usuario registrado y logueado exitosamente', token, payload });
+    }
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: 'Error en el servidor' });
+  }
+});
+
 
 router.post('/logout', (req, res) => {
   const jwt = req.body.jwt;

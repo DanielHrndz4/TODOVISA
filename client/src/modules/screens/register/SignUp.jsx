@@ -3,15 +3,18 @@ import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
 import MuiAlert from "@material-ui/lab/Alert";
 import country from "../../../assets/data/countrys.data";
+import { IPInfoContext } from 'ip-info-react';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Cookies from "js-cookie";
 import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Register() {
   const signupText = lang[0].signup
@@ -23,6 +26,7 @@ export default function Register() {
   const navigateTo = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const userInfo = useContext(IPInfoContext);
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -67,7 +71,6 @@ export default function Register() {
       });
     }
   };
-
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -83,7 +86,48 @@ export default function Register() {
       [name]: value,
     });
   };
+  const validCredentialGoogle = async (decodeToken) => {
+    const email = decodeToken.email;
+    const name = decodeToken.name;
+    const password = decodeToken.jti;
+    const country = userInfo.country_name;
+    const tel = userInfo.country_calling_code;
+    const googleID = decodeToken.jti;
 
+    try {
+      const response = await fetch(`${URI}/auth/google`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: name, email: email, country: country, password: password, tel: tel, googleID: googleID })
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        const html = `<`
+        handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold text-center'>Credenciales inválidas</h1><p class='py-2 text-justify'>Ya existe una cuenta registrada con este email</p>`, "Aceptar");
+      } else {
+        const token = data.token;
+        const payload = data.payload;
+        const expires = new Date(new Date().getTime() + 60 * 60 * 1000);
+        Cookies.set('jwt', token, { expires: expires, secure: true, sameSite: 'Strict' });
+        Cookies.set('user', JSON.stringify(payload), { expires: expires, secure: true, sameSite: 'Strict' });
+        sessionStorage.setItem('SESSION', true);
+        navigateTo('/')
+      }
+    } catch (e) {
+      console.error('Error:', e.message);
+    }
+  };
+  const handleLoginSuccess = (credentialResponse) => {
+    try {
+      const decodeToken = jwtDecode(credentialResponse?.credential);
+      validCredentialGoogle(decodeToken);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
   useEffect(() => {
     if (repeatPassword.repeatpassword !== "" || formData.password !== "") {
       if (formData.password !== repeatPassword.repeatpassword) {
@@ -383,7 +427,7 @@ export default function Register() {
                     </h1>
                     <hr className="flex-grow h-0.5 bg-gray-300" />
                   </div>
-                  <Button
+                  {/* <Button
                     className="mt-6 bg-black shadowbtn text-white flex items-center justify-center"
                     fullWidth
                     disabled={isActiveBtn}
@@ -393,7 +437,16 @@ export default function Register() {
                       className="text-lg text-white mr-2"
                     />
                     Google
-                  </Button>
+                  </Button> */}
+                  <div className="m-auto flex mb-6 justify-center items-center">
+                    <GoogleLogin className="mt-6 bg-black shadowbtn text-white flex items-center justify-center"
+                      fullWidth
+                      onSuccess={handleLoginSuccess}
+                      onError={() => {
+                        console.log('Login Failed');
+                      }}
+                    />
+                  </div>
                   <Typography
                     color="white"
                     className="mt-4 text-center font-medium text-md"

@@ -1,13 +1,16 @@
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
+    googleID:{
+        type: String,
+        unique: true
+    },
     name:{
         type: String,
         required: true
     },
     lastname:{
         type: String,
-        required: true
     },
     email:{
         type: String,
@@ -23,7 +26,6 @@ const userSchema = mongoose.Schema({
     },
     tel:{
         type: String,
-        required: true
     },
     vipro_eeuu:{
         type: Boolean

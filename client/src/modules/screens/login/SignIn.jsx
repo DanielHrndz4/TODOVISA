@@ -3,18 +3,23 @@ import { Fade } from "react-awesome-reveal";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
+import { IPInfoContext } from 'ip-info-react';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+import handleClickPopUp from "../../components/popup/PopUp";
 
 export default function Login() {
   const [signInText, setSignInText] = useState("Inicia sesión");
   const [isActiveBtn, setIsActiveBtn] = useState(false);
   const [signInValue, setSignInValue] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const userInfo = useContext(IPInfoContext);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -31,6 +36,48 @@ export default function Login() {
   const styles = {
     height: '100dvh', // Adjusted height for browsers that support dvh
     height: '100%', // Fallback for browsers that do not support dvh
+  };
+  const validCredentialGoogle = async (decodeToken) => {
+    const email = decodeToken.email;
+    const name = decodeToken.name;
+    const password = decodeToken.jti;
+    const country = userInfo.country_name;
+    const tel = userInfo.country_calling_code;
+    const googleID = decodeToken.jti;
+
+    try {
+      const response = await fetch(`${URI}/auth/google`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: name, email: email, country: country, password: password, tel: tel, googleID: googleID })
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        const html = `<`
+        handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold text-center'>Credenciales inválidas</h1><p class='py-2 text-justify'>Ya existe una cuenta registrada con este email</p>`, "Aceptar");
+      } else {
+        const token = data.token;
+        const payload = data.payload;
+        const expires = new Date(new Date().getTime() + 60 * 60 * 1000);
+        Cookies.set('jwt', token, { expires: expires, secure: true, sameSite: 'Strict' });
+        Cookies.set('user', JSON.stringify(payload), { expires: expires, secure: true, sameSite: 'Strict' });
+        sessionStorage.setItem('SESSION', true);
+        navigateTo('/')
+      }
+    } catch (e) {
+      console.error('Error:', e.message);
+    }
+  };
+  const handleLoginSuccess = (credentialResponse) => {
+    try {
+      const decodeToken = jwtDecode(credentialResponse?.credential);
+      validCredentialGoogle(decodeToken);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   };
 
   useEffect(() => {
@@ -65,9 +112,9 @@ export default function Login() {
 
       if (response.ok) {
         const { token, payload } = await response.json();
-        const expires = new Date(new Date().getTime() + 60 * 60 * 1000); 
-        Cookies.set('jwt', token, { expires:expires, secure: true, sameSite: 'Strict' });
-        Cookies.set('user', JSON.stringify(payload), { expires:expires, secure: true, sameSite: 'Strict' });
+        const expires = new Date(new Date().getTime() + 60 * 60 * 1000);
+        Cookies.set('jwt', token, { expires: expires, secure: true, sameSite: 'Strict' });
+        Cookies.set('user', JSON.stringify(payload), { expires: expires, secure: true, sameSite: 'Strict' });
         sessionStorage.setItem('SESSION', true);
         navigateTo("/");
       } else if (response.status === 401) {
@@ -164,10 +211,19 @@ export default function Login() {
                     <h1 className="mx-4 [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] text-white font-medium text-md">{signinText.or_signin}</h1>
                     <hr className="flex-grow h-0.5 bg-gray-300" />
                   </div>
-                  <Button className="mt-6 bg-black shadowbtn text-white flex items-center justify-center" fullWidth>
+                  {/* <Button className="mt-6 bg-black shadowbtn text-white flex items-center justify-center" fullWidth>
                     <FontAwesomeIcon icon={faGoogle} className="text-lg text-white mr-2" />
                     Google
-                  </Button>
+                  </Button> */}
+                  <div className="m-auto flex mb-6 justify-center items-center">
+                    <GoogleLogin className="mt-6 bg-black shadowbtn text-white flex items-center justify-center"
+                      fullWidth
+                      onSuccess={handleLoginSuccess}
+                      onError={() => {
+                        console.log('Login Failed');
+                      }}
+                    />
+                  </div>
                   <Typography
                     color="white"
                     className="mt-4 text-center font-medium text-md"
