@@ -53,9 +53,6 @@ router.post('/signin', (req, res) => {
 
       // Verificar si el usuario ya tiene un token activo
       return jwtSchema.findOne({ email }).then((existUser) => {
-        if (existUser) {
-          return res.status(400).json({ message: `El usuario con email: ${email} ya tiene un token activo` });
-        }
 
         // Guardar el nuevo token JWT en la base de datos
         const newToken = new jwtSchema({ email, name: user.name, country: user.country, jwt: token });
@@ -211,11 +208,6 @@ router.post('/auth/google', async (req, res) => {
     const existUser = await userSchema.findOne({ email });
 
     if (existUser) {
-      // Verificar si existe un token activo para el usuario
-      const existToken = await jwtSchema.findOne({ email });
-      if (existToken) {
-        return res.status(400).json({ message: `El usuario con email: ${email} ya tiene un token activo` });
-      }
       // Caso 1: El usuario existe y tiene un googleID válido
       if (existUser.googleID && existUser.googleID != null) {
         // Crear y guardar un nuevo token JWT
