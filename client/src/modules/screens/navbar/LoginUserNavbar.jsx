@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Navbar,
     Collapse,
@@ -32,6 +32,7 @@ import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
+
 
 const navListMenuItems = [
     {
@@ -255,6 +256,25 @@ function NavList() {
 }
 
 export default function LoginUserNavbar() {
+    const [userPicture, setUserPicture] = useState('https://ionicframework.com/docs/img/demos/avatar.svg'); // Valor por defecto
+    const fetchUserPicture = () => {
+        const userCookie = Cookies.get('user');
+        if (userCookie) {
+            try {
+                const userCookieToJson = JSON.parse(userCookie);
+                if (userCookieToJson.avatar) {
+                    setUserPicture(userCookieToJson.avatar);
+                }
+            } catch (e) {
+                console.error('Error al parsear la cookie del usuario:', e);
+            }
+        }
+    };
+
+    // Fetch user picture on component mount
+    useEffect(() => {
+        fetchUserPicture();
+    }, []);
     const [openNav, setOpenNav] = React.useState(false);
     const [openAvatarMenu, setOpenAvatarMenu] = React.useState(false);
 
@@ -306,7 +326,7 @@ export default function LoginUserNavbar() {
                             {getUserName()}
                             <MenuHandler>
                                 <img
-                                    src="https://ionicframework.com/docs/img/demos/avatar.svg"
+                                    src={userPicture}
                                     alt="avatar"
                                     className="border-2 border-white relative inline-block h-12 w-12 !rounded-full  object-cover object-center cursor-pointer"
                                     onClick={handleAvatarClick}

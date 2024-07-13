@@ -36,7 +36,6 @@ router.post('/signin', (req, res) => {
   const hash = crypto.createHash('sha256');
   hash.update(password);
   const hashedPassword = hash.digest('hex');
-
   userSchema
     .findOne({ email: email, password: hashedPassword })
     .then((user) => {
@@ -44,10 +43,12 @@ router.post('/signin', (req, res) => {
         return res.status(401).json({ message: 'Credenciales inválidas' });
       }
 
+      const avatar = 'https://ionicframework.com/docs/img/demos/avatar.svg'
       const payload = {
         email: user.email,
         name: user.name,
-        country: user.country
+        country: user.country,
+        avatar: avatar
       };
       const token = createToken(payload);
 
@@ -148,8 +149,6 @@ router.post('/update-form-eeuu', async (req, res) => {
             break;
         }
 
-        console.log(viproCountryCode)
-
         if (viproCountryCode) {
           if (user[viproCountryCode]) {
             user.set(viproCountryCode, undefined)
@@ -202,16 +201,16 @@ router.post('/signup', (req, res) => {
 });
 
 router.post('/auth/google', async (req, res) => {
-  const { name, email, country, password, tel, googleID } = req.body;
+  const { name, email, country, password, tel, googleID, avatar } = req.body;
   try {
     // Verificar si el usuario existe en la base de datos
     const existUser = await userSchema.findOne({ email });
 
     if (existUser) {
       // Caso 1: El usuario existe y tiene un googleID válido
-      if (existUser.googleID && existUser.googleID != null) {
+      if (existUser.googleID && existUser.googleID != "") {
         // Crear y guardar un nuevo token JWT
-        const payload = { email, name, country };
+        const payload = { email, name, country, avatar };
         const token = createToken(payload);
         const newToken = new jwtSchema({ email, name, country, jwt: token });
         await newToken.save();
@@ -222,10 +221,10 @@ router.post('/auth/google', async (req, res) => {
       }
     } else {
       // Caso 3: El usuario no existe, se crea una nueva cuenta
-      const newUser = new userSchema({ name, email, country, password, tel, googleID });
+      const newUser = new userSchema({ name, email, country, password, tel, googleID, avatar });
 
       // Crear y guardar un nuevo token JWT
-      const payload = { email, name, country };
+      const payload = { email, name, country, avatar };
       const token = createToken(payload);
       const newToken = new jwtSchema({ email, name, country, jwt: token });
       await newToken.save();

@@ -93,6 +93,7 @@ export default function Register() {
     const country = userInfo.country_name;
     const tel = userInfo.country_calling_code;
     const googleID = decodeToken.jti;
+    const avatar = decodeToken.picture;
 
     try {
       const response = await fetch(`${URI}/auth/google`, {
@@ -100,12 +101,11 @@ export default function Register() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name: name, email: email, country: country, password: password, tel: tel, googleID: googleID })
+        body: JSON.stringify({ name: name, email: email, country: country, password: password, tel: tel, googleID: googleID, avatar: avatar})
       });
       const data = await response.json();
 
       if (!response.ok) {
-        const html = `<`
         handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold text-center'>Credenciales inválidas</h1><p class='py-2 text-justify'>Ya existe una cuenta registrada con este email</p>`, "Aceptar");
       } else {
         const token = data.token;
