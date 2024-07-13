@@ -29,12 +29,16 @@ function createToken(payload) {
   return `${base64Header}.${base64Payload}.${signature}`;
 }
 
-// Rutas de usuario
 router.post('/signin', (req, res) => {
   const { email, password } = req.body;
 
+  // Crear un hash de la contraseña proporcionada
+  const hash = crypto.createHash('sha256');
+  hash.update(password);
+  const hashedPassword = hash.digest('hex');
+
   userSchema
-    .findOne({ email: email, password: password })
+    .findOne({ email: email, password: hashedPassword })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ message: 'Credenciales inválidas' });
@@ -47,14 +51,19 @@ router.post('/signin', (req, res) => {
       };
       const token = createToken(payload);
 
+      // Verificar si el usuario ya tiene un token activo
       return jwtSchema.findOne({ email }).then((existUser) => {
         if (existUser) {
           return res.status(400).json({ message: `El usuario con email: ${email} ya tiene un token activo` });
         }
 
+        // Guardar el nuevo token JWT en la base de datos
         const newToken = new jwtSchema({ email, name: user.name, country: user.country, jwt: token });
         return newToken.save().then(() => {
+          // Establecer la cookie con el token JWT
           res.cookie('jwt', token, { secure: true, sameSite: 'None' });
+
+          // Responder con el mensaje de inicio de sesión exitoso, token y payload
           return res.status(200).json({
             message: 'Inicio de sesión exitoso',
             token,
@@ -65,7 +74,7 @@ router.post('/signin', (req, res) => {
     })
     .catch((error) => {
       console.error(error.message);
-      res.status(500).json({ message: 'Server error' });
+      res.status(500).json({ message: 'Error en el servidor' });
     });
 });
 
@@ -166,20 +175,32 @@ router.post('/update-form-eeuu', async (req, res) => {
 
 router.post('/signup', (req, res) => {
   const { name, lastname, email, password, country, tel } = req.body;
+
+  // Crear un hash de la contraseña utilizando SHA-256
+  const hash = crypto.createHash('sha256');
+  hash.update(password);
+  const hashedPassword = hash.digest('hex');
+
   userSchema.findOne({ email: email })
     .then((existUser) => {
       if (existUser) {
         return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` });
       }
-      const newUser = new userSchema({ name, lastname, email, password, country, tel });
+
+      // Crear un nuevo usuario con la contraseña hasheada
+      const newUser = new userSchema({ name, lastname, email, password: hashedPassword, country, tel });
       newUser.save()
         .then((user) => {
           res.status(200).json({ message: "Usuario registrado exitosamente" });
         })
         .catch((error) => {
           console.error(error.message);
-          res.status(500).json({ message: 'Server error' });
+          res.status(500).json({ message: 'Error en el servidor' });
         });
+    })
+    .catch((error) => {
+      console.error(error.message);
+      res.status(500).json({ message: 'Error en el servidor' });
     });
 });
 
