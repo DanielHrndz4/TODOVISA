@@ -217,7 +217,7 @@ router.post('/auth/google', async (req, res) => {
         return res.status(400).json({ message: `El usuario con email: ${email} ya tiene un token activo` });
       }
       // Caso 1: El usuario existe y tiene un googleID válido
-      if (existUser.googleID && existUser.googleID !== "") {
+      if (existUser.googleID && existUser.googleID != null) {
         // Crear y guardar un nuevo token JWT
         const payload = { email, name, country };
         const token = createToken(payload);
