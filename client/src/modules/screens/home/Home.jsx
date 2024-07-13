@@ -42,7 +42,7 @@ export default function Home() {
 
   useEffect(() => {
     if (cookieJWT) {
-      const validation = sessionStorage.getItem('SESSION');
+      const validation = cookieJWT
       setJwtToken(validation)
     }
     setLoading(false);
