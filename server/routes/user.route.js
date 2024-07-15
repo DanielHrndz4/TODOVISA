@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const jwtSchema = require('../models/jwt.schema');
 const crypto = require('crypto');
 const FormResponseSchema = require('../models/form_response.schema');
+const ResultData = require('../models/qualification.schema');
 
 require('dotenv').config();
 
@@ -457,6 +458,66 @@ router.post('/form_response_eeuu', async (req, res) => {
   } catch (error) {
     console.error('Error al buscar el formulario:', error);
     res.status(500).json({ message: 'Error interno del servidor' });
+  }
+});
+
+
+router.post('/save_qualification', async (req, res) => {
+  const { resultData, email } = req.body;
+  try {
+    const existingQualification = await ResultData.findOne({ email: email })
+    if (existingQualification) {
+      res.status(200).json({
+        success: true,
+        message: 'El correo ya existe',
+        error: error.message
+      })
+    } else {
+      const newQualification = new ResultData({
+        name: resultData.name,
+        email: resultData.email,
+        tel: resultData.tel,
+        user_country: resultData.user_country,
+        form_country: resultData.form_country,
+        response: [
+          {
+            dh: {
+              correct: 0,
+              incorrect: 0,
+            },
+            aff: {
+              correct: 0,
+              incorrect:0,
+            },
+            hv: {
+              correct: 0,
+              incorrect: 0,
+            },
+            hd: {  // Aquí debería ser 'hd' en lugar de 'dp'
+              correct: 0,
+              incorrect: 0,
+            },
+          }
+        ],
+        qualification: resultData.qualification
+      });
+
+      await newQualification.save();
+
+      res.status(201).json({
+        success: true,
+        message: 'Resultados guardados con exito',
+        data: newQualification
+      });
+    }
+  } catch (error) {
+    console.error('Error al guardar: ', error);
+
+    res.status(500).json({
+      success: false,
+      message: 'Ocurrio un error al guardar los resultados',
+      error: error.message
+    });
   }
 });
 
