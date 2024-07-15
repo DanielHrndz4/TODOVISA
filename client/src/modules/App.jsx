@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Qualification from "./components/qualification/Qualification";
 import Steps from "./screens/steps/Steps";
+import FormsComplete from "./components/complete_forms/FormsComplete";
 
 function App(){
   return (  
@@ -23,6 +24,7 @@ function App(){
         <Route exact path="/steps" element={<Steps></Steps>} />
         <Route exact path="/vipro/:country/" element={<MainVIPRO></MainVIPRO>} />
         <Route exact path="/qualifications" element={<Qualification></Qualification>} />
+        <Route exact path="/forms/:id" element={<FormsComplete></FormsComplete>} />
         <Route exact path="/country/:country" element={<CountryScreen></CountryScreen>} />
       </Routes>
     </Router>

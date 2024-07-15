@@ -4,7 +4,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import PieG from "../stats/PieG";
 import { Button } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import URI from "../../../assets/data/admin/uri.api";
 
 export default function Qualification() {
@@ -18,20 +18,32 @@ export default function Qualification() {
   const [userResponse, setUserResponse] = useState([]);
   const [userResponseData, setUserResponseData] = useState([]);
   const [formResponseData, setFormResponseData] = useState([]);
-  const [correctCountDP, setCorrectCountDP] = useState(0);
-  const [correctCountAFF, setCorrectCountAFF] = useState(0);
-  const [correctCountHV, setCorrectCountHV] = useState(0);
-  const [correctCountHD, setCorrectCountHD] = useState(0);
-  const [incorrectCountDP, setIncorrectCountDP] = useState(0);
-  const [incorrectCountAFF, setIncorrectCountAFF] = useState(0);
-  const [incorrectCountHV, setIncorrectCountHV] = useState(0);
-  const [incorrectCountHD, setIncorrectCountHD] = useState(0);
-  const [qualification, setQualification] = useState(0);
+  const [correctCountDP, setCorrectCountDP] = useState(null);
+  const [correctCountAFF, setCorrectCountAFF] = useState(null);
+  const [correctCountHV, setCorrectCountHV] = useState(null);
+  const [correctCountHD, setCorrectCountHD] = useState(null);
+  const [incorrectCountDP, setIncorrectCountDP] = useState(null);
+  const [incorrectCountAFF, setIncorrectCountAFF] = useState(null);
+  const [incorrectCountHV, setIncorrectCountHV] = useState(null);
+  const [incorrectCountHD, setIncorrectCountHD] = useState(null);
+  const [qualification, setQualification] = useState(null);
   const [countryForm, setCountryForm] = useState("");
   const [dataQualifications, setDataQualifications] = useState();
 
   const pdfRef = useRef();
 
+  useEffect(() => {
+    const allowedReferers = [
+      'http://localhost:5173/vipro/estadosunidos',
+      'http://localhost:5173/'
+    ];
+
+    const referer = document.referrer;
+
+    if (!allowedReferers.includes(referer)) {
+      navigateTo('/'); // Redirige a la página de inicio u otra página de tu elección
+    }
+  }, [history]);
   useEffect(() => {
     const qualificationData = async () => {
       try {
@@ -52,6 +64,7 @@ export default function Qualification() {
 
           //saveQualification();
         } else {
+          navigateTo('/')
           throw new Error("Error en la respuesta de la API");
         }
       } catch (err) {
@@ -63,78 +76,6 @@ export default function Qualification() {
 
     qualificationData();
   }, [email]);
-
-  const saveQualification = async () => {
-    const lastname = userResponse.lastname !== undefined ? userResponse.lastname : "";
-    const resultDataQualification = {
-      name: userResponse.name + " " + lastname,
-      email: userResponse.email,
-      tel: userResponse.tel,
-      user_country: userResponse.country,
-      form_country: countryForm,
-      response: [
-        {
-          dh: {
-            correct: 0,
-            incorrect: 0,
-          },
-          aff: {
-            correct: 0,
-            incorrect: 0,
-          },
-          hv: {
-            correct: 0,
-            incorrect: 0,
-          },
-          hd: {
-            correct: 0,
-            incorrect: 0,
-          },
-        },
-      ],
-      qualification: '90', // asegúrate de enviar la calificación como string
-    };
-  
-    try {
-      const response = await fetch(`${URI}/save_qualification`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ resultData: resultDataQualification, email: email })
-      });
-  
-      const data = await response.json();
-      console.log('Response from server:', data); // revisa la respuesta del servidor en la consola
-  
-      if (!data.success) {
-        throw new Error(data.message);
-      }
-    } catch (error) {
-      console.error('Error al guardar la calificación: ', error);
-    }
-  };
-  
-  const getCountry = (country) => {
-    switch (country.toLowerCase()) {
-      case "estadosunidos":
-        return "Estados Unidos";
-      case "canada":
-        return "Canadá";
-      case "mexico":
-        return "México";
-      case "inglaterra":
-        return "Inglaterra";
-      case "china":
-        return "China";
-      case "australia":
-        return "Australia";
-      case "india":
-        return "India";
-      default:
-        return "";
-    }
-  };
 
   useEffect(() => {
     let correctDPCount = 0;
@@ -198,14 +139,137 @@ export default function Qualification() {
     setIncorrectCountAFF(incorrectAFFCount);
     setIncorrectCountHV(incorrectHVCount);
     setIncorrectCountHD(incorrectHDCount);
-
     const totalCorrect =
       correctDPCount + correctAFFCount + correctHVCount + correctHDCount;
     setQualification(totalCorrect * 2.6);
   }, [userResponseData, formResponseData]);
 
+  const getCountry = (country) => {
+    switch (country.toLowerCase()) {
+      case "estadosunidos":
+        return "Estados Unidos";
+      case "canada":
+        return "Canadá";
+      case "mexico":
+        return "México";
+      case "inglaterra":
+        return "Inglaterra";
+      case "china":
+        return "China";
+      case "australia":
+        return "Australia";
+      case "india":
+        return "India";
+      default:
+        return "";
+    }
+  };
+
   useEffect(() => {
     if (!loading) {
+      const saveQualification = async () => {
+        let correctDPCount = 0;
+        let correctAFFCount = 0;
+        let correctHVCount = 0;
+        let correctHDCount = 0;
+        let incorrectDPCount = 0;
+        let incorrectAFFCount = 0;
+        let incorrectHVCount = 0;
+        let incorrectHDCount = 0;
+
+        userResponseData.forEach((userQuestion, index) => {
+          const correctResponses = formResponseData[index]?.response || [];
+          const userResponse = userQuestion.user_response.toUpperCase(); // Asegurar que la respuesta del usuario esté en mayúsculas
+
+          if (
+            correctResponses.includes("") ||
+            !correctResponses.includes(userResponse)
+          ) {
+            switch (userQuestion.category) {
+              case "DATOS PERSONALES":
+                incorrectDPCount += 1;
+                break;
+              case "ARRAIGOS FAMILIARES Y FINANCIEROS":
+                incorrectAFFCount += 1;
+                break;
+              case "HISTORIAL DE VIAJES":
+                incorrectHVCount += 1;
+                break;
+              case "HISTORIAL DELICTIVO":
+                incorrectHDCount += 1;
+                break;
+              default:
+                break;
+            }
+          } else {
+            switch (userQuestion.category) {
+              case "DATOS PERSONALES":
+                correctDPCount += 1;
+                break;
+              case "ARRAIGOS FAMILIARES Y FINANCIEROS":
+                correctAFFCount += 1;
+                break;
+              case "HISTORIAL DE VIAJES":
+                correctHVCount += 1;
+                break;
+              case "HISTORIAL DELICTIVO":
+                correctHDCount += 1;
+                break;
+              default:
+                break;
+            }
+          }
+        });
+
+        const lastname = userResponse.lastname !== undefined ? userResponse.lastname : "";
+        const resultDataQualification = {
+          name: userResponse.name + " " + lastname,
+          email: userResponse.email,
+          tel: userResponse.tel,
+          user_country: userResponse.country,
+          form_country: countryForm,
+          response: [
+            {
+              dh: {
+                correct: correctDPCount,
+                incorrect: incorrectDPCount,
+              },
+              aff: {
+                correct: correctAFFCount,
+                incorrect: incorrectAFFCount,
+              },
+              hv: {
+                correct: correctHVCount,
+                incorrect: incorrectHVCount,
+              },
+              hd: {
+                correct: correctHDCount,
+                incorrect: incorrectHDCount,
+              },
+            },
+          ],
+          qualification: '90', // asegúrate de enviar la calificación como string
+        };
+
+        try {
+          const response = await fetch(`${URI}/save_qualification`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ resultData: resultDataQualification, email: email })
+          });
+
+          const data = await response.json();
+          console.log('Response from server:', data); // revisa la respuesta del servidor en la consola
+
+          if (!data.success) {
+            throw new Error(data.message);
+          }
+        } catch (error) {
+          console.error('Error al guardar la calificación: ', error);
+        }
+      };
       saveQualification();
     }
   }, [loading]);
@@ -326,9 +390,8 @@ export default function Qualification() {
                 <p className="text-black text-4xl">
                   Calificación total:{" "}
                   <strong
-                    className={`${
-                      qualification >= 60 ? "text-green-600" : "text-red-400"
-                    } text-shadow`}
+                    className={`${qualification >= 60 ? "text-green-600" : "text-red-400"
+                      } text-shadow`}
                   >
                     {qualification.toFixed(1)}
                   </strong>

@@ -470,7 +470,6 @@ router.post('/save_qualification', async (req, res) => {
       res.status(200).json({
         success: true,
         message: 'El correo ya existe',
-        error: error.message
       })
     } else {
       const newQualification = new ResultData({
@@ -482,28 +481,29 @@ router.post('/save_qualification', async (req, res) => {
         response: [
           {
             dh: {
-              correct: 0,
-              incorrect: 0,
+              correct: resultData.response[0].dh.correct,
+              incorrect: resultData.response[0].dh.incorrect,
             },
             aff: {
-              correct: 0,
-              incorrect:0,
+              correct: resultData.response[0].aff.correct,
+              incorrect:resultData.response[0].aff.incorrect,
             },
             hv: {
-              correct: 0,
-              incorrect: 0,
+              correct: resultData.response[0].hv.correct,
+              incorrect: resultData.response[0].hv.incorrect,
             },
             hd: {  // Aquí debería ser 'hd' en lugar de 'dp'
-              correct: 0,
-              incorrect: 0,
+              correct: resultData.response[0].hd.correct,
+              incorrect: resultData.response[0].hd.incorrect,
             },
           }
         ],
         qualification: resultData.qualification
       });
-
+      const formCountry = resultData.form_country.toLowerCase().replace(/\s+/g, '');
+      console.log(formCountry);
       await newQualification.save();
-
+      await Form.findOneAndDelete({ email: email, country: formCountry });
       res.status(201).json({
         success: true,
         message: 'Resultados guardados con exito',
@@ -518,6 +518,26 @@ router.post('/save_qualification', async (req, res) => {
       message: 'Ocurrio un error al guardar los resultados',
       error: error.message
     });
+  }
+});
+
+router.post('/complete_forms', async (req, res) => {
+  const { email } = req.body;
+  try {
+      const forms = await ResultData.find({ email: email });
+      res.json({forms});
+  } catch (err) {
+      res.status(500).json({ error: 'Error al recuperar los formularios' });
+  }
+});
+
+router.post('/complete_forms_id', async (req, res) => {
+  const { id } = req.body;
+  try {
+      const forms = await ResultData.findById(id);
+      res.json({forms});
+  } catch (err) {
+      res.status(500).json({ error: 'Error al recuperar los formularios' });
   }
 });
 
