@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="w-full bg-TVBlue lg:p-10 p-6 pt-8 mt-4">
       <div className="flex flex-col lg:flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-around">
-        <img src="/img/logo/todovisa.png" alt="" className="lg:w-[150px] w-[120px] py-4" />
+        <img src="/img/logo/todovisa.png" alt="" className="lg:w-[200px] w-[150px] lg:py-0 py-4" />
         <ul className="flex lg:flex-row flex-col flex-wrap items-center gap-y-4 lg:gap-y-2 gap-x-8">
           <li>
             <Typography
