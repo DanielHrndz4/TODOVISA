@@ -31,8 +31,8 @@ function createToken(payload) {
   return `${base64Header}.${base64Payload}.${signature}`;
 }
 
-cron.schedule("*/1 * * * *", () =>{
-  console.log("hello world")
+cron.schedule("*/20 * * * *", () =>{
+  console.log("Health: OK")
 })
 
 router.post('/signin', (req, res) => {
