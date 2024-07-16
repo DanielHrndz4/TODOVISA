@@ -10,12 +10,15 @@
     "crypto": "^1.0.1",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.1",
     "moongose": "^1.0.0",
     "node-cron": "^3.0.3",
     "nodemon": "^3.1.4",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "vercel": "^35.0.0"
   },
   "devDependencies": {
+    "vite": "^5.3.4",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4"
   }
