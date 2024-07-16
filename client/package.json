@@ -48,6 +48,7 @@
     "react-awesome-reveal": "^4.2.11",
     "react-dom": "^18.3.1",
     "react-floating-whatsapp": "^5.0.8",
+    "react-js-cron": "^5.0.1",
     "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^6.23.1",
     "react-slick": "^0.30.2",

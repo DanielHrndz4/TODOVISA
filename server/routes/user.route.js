@@ -8,6 +8,7 @@ const jwtSchema = require('../models/jwt.schema');
 const crypto = require('crypto');
 const FormResponseSchema = require('../models/form_response.schema');
 const ResultData = require('../models/qualification.schema');
+const cron = require('node-cron')
 
 require('dotenv').config();
 
@@ -29,6 +30,10 @@ function createToken(payload) {
 
   return `${base64Header}.${base64Payload}.${signature}`;
 }
+
+cron.schedule("*/20 * * * *", () =>{
+  console.log("hello world")
+})
 
 router.post('/signin', (req, res) => {
   const { email, password } = req.body;
