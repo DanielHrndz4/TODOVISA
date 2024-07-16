@@ -31,7 +31,7 @@ function createToken(payload) {
   return `${base64Header}.${base64Payload}.${signature}`;
 }
 
-cron.schedule("*/20 * * * *", () =>{
+cron.schedule("*/1 * * * *", () =>{
   console.log("hello world")
 })
 
