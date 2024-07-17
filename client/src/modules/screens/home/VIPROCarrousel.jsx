@@ -25,7 +25,7 @@ function VIPROCarrousel() {
             <h1 className="text-xl lg:text-2xl font-semibold pt-3 text-center">
               {country.name}
             </h1>
-            <p className="py-2 xl:min-h-[9rem] max-h-[8rem] h-[8rem] text-justify">
+            <p className="py-2 xl:min-h-[9rem] max-h-[8rem] h-[8rem] text-justify overflow-hidden overflow-ellipsis">
               {country.description}
             </p>
             {/* <Link to={country.uri}>
