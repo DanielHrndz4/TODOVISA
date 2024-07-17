@@ -1,16 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Slide, Fade } from "react-awesome-reveal"
 import lang from "../../../assets/data/lang.data";
+import { Button } from "@material-tailwind/react";
+import Cookies from "js-cookie";
+import URI from "../../../assets/data/admin/uri.api";
 
 export default function About() {
     const aboutText = lang[0].about
+    const [isValidateDownload, setIsValidateDownload] = useState(false);
+
+    useEffect(() => {
+        if (Cookies.get('jwt')) {
+            const userEmail = Cookies.get('user');
+            const userDataEmail = JSON.parse(userEmail);
+            const email = userDataEmail.email
+            const validatePDF = async () => {
+                try {
+                    const response = await fetch(
+                        `${URI}/validate_pdf`,
+                        {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email: email })
+                        }
+                    );
+                    const data = await response.json();
+                    if (response.ok) {
+                        setIsValidateDownload(true);
+                        console.log(data.message)
+                    }
+                    console.log(data.message)
+                } catch (err) {
+                    console.error(err);
+                }
+            };
+            validatePDF()
+        }
+    }, [])
 
     const countries = () => {
         const country = Object.values(lang[0].about.countries);
-        return country.map((country, index)=>(
+        return country.map((country, index) => (
             <span key={index}><strong>{index + 1})</strong> {country.name}</span>
         ));
     }
+    const downloadPdf = () => {
+        const pdfPath = './A9bC3dE4FgH5IjK6LmN7oP8QrS9TuV0WxY1Za2Bc3Dd4Ef5Gh6Ij7Kl8Mn9Op0Qr1St2Uv3Wx4Yz5A6B7C8D9E0F1G2H3I4J5K6L.pdf';
+        const link = document.createElement('a');
+        link.href = pdfPath;
+        link.download = 'GUIA_TODOVISA.pdf';
+        link.click();
+    };
 
     return (
         <div className="flex flex-col h-full lg:mb-4" id="about">
@@ -27,9 +67,18 @@ export default function About() {
                                 <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
                             </div>
                             <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{aboutText.description}</p></div>
-                            <div className="grid grid-cols-2 text-justify lg:text-md xl:text-lg gap-2">
+                            {/* <div className="grid grid-cols-2 text-justify lg:text-md xl:text-lg gap-2">
                                 {countries()}
-                            </div>
+                            </div> */}
+                            {
+                                isValidateDownload ?
+                                    (<Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={downloadPdf}>
+                                        Descargar PDF
+                                    </Button>) :
+                                    (<Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => window.open('/guide', '_black')}>
+                                        Ver PDF
+                                    </Button>)
+                            }
                         </div>
                     </div>
                 </Fade>

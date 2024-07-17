@@ -241,16 +241,7 @@ function NavList() {
                     </Menu>
                 </ListItem>
             </Typography>
-            <Typography
-                as="a"
-                variant="small sm:large"
-                color="white"
-                className="block xl:hidden font-medium"
-            >
-                <ListItem className="flex items-center gap-2 py-2 pr-4" onClick={handleLogout}>
-                    Cerrar sesion
-                </ListItem>
-            </Typography>
+            
         </List>
     );
 }
@@ -431,7 +422,7 @@ export default function LoginUserNavbar() {
 
                 <Menu className='lg:hidden'>
                     <MenuHandler>
-                        <MenuItem className="flex items-center gap-2 py-2 pr-4 mb-6">
+                        <MenuItem className="flex items-center gap-2 py-2 pr-4">
                             Formularios</MenuItem>
                     </MenuHandler>
                     <MenuList className="bg-TVBlue border-white">
@@ -463,6 +454,16 @@ export default function LoginUserNavbar() {
                         />
                     </div>
                 </div>
+                <Typography
+                as="a"
+                variant="small sm:large"
+                color="white"
+                className="block xl:hidden font-medium mb-4"
+            >
+                <ListItem className="flex items-center gap-2 py-2 pr-4" onClick={handleLogout}>
+                    Cerrar sesion
+                </ListItem>
+            </Typography>
             </Collapse>
         </Navbar>
     );

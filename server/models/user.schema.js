@@ -29,6 +29,9 @@ const userSchema = mongoose.Schema({
     tel:{
         type: String,
     },
+    guide:{
+        type: Boolean
+    },
     vipro_eeuu:{
         type: Boolean
     },

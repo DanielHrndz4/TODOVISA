@@ -326,6 +326,50 @@ router.post('/vipro', async (req, res) => {
   }
 });
 
+router.post('/access_pdf', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Buscar el usuario por email
+    const user = await userSchema.findOne({ email: email });
+
+    if (user) {
+      // Verificar si el usuario ya tiene guide en true
+      if (user.guide === true) {
+        res.status(200).json({ message: 'El usuario ya tiene una guía' });
+      } else {
+        // Actualizar el campo guide a true
+        user.guide = true;
+        await user.save();
+        res.status(200).json({ message: 'Respuesta guardada con éxito' });
+      }
+    } else {
+      res.status(400).json({ message: 'Usuario no encontrado' });
+    }
+  } catch (error) {
+    console.error('Error al actualizar el usuario:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+});
+
+router.post('/validate_pdf', async (req, res) => {
+  const {email} = req.body;
+  try {
+    const validateGuide = await userSchema.findOne({ email: email });
+    if(validateGuide){
+      if(validateGuide.guide === true){
+        res.status(200).json({ message: "El usuario tiene acceso a la descarga"})
+      }else{
+        res.status(400).json({ message: "El usuario no tiene acceso a la descarga"})
+      }
+    }else{
+      res.status(401).json({ message: "El usuario debe estar registrado para realizar esta accion"})
+    }
+  } catch (error) {
+    res.status(500).json({message: 'Error del servidor'});
+  }
+})
+
 router.post('/vipro/validation', (req, res) => {
   const email = req.body.email;
   if (!email || email.trim() === '') {
