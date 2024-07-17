@@ -12,6 +12,7 @@ import {
 import Qualification from "./components/qualification/Qualification";
 import Steps from "./screens/steps/Steps";
 import FormsComplete from "./components/complete_forms/FormsComplete";
+import Guide from "./screens/pdf/Guide";
 
 function App(){
   return (  
@@ -24,6 +25,7 @@ function App(){
         <Route exact path="/steps" element={<Steps></Steps>} />
         <Route exact path="/vipro/:country/" element={<MainVIPRO></MainVIPRO>} />
         <Route exact path="/qualifications" element={<Qualification></Qualification>} />
+        <Route exact path="/guide" element={<Guide></Guide>} />
         <Route exact path="/forms/:id" element={<FormsComplete></FormsComplete>} />
         <Route exact path="/country/:country" element={<CountryScreen></CountryScreen>} />
       </Routes>

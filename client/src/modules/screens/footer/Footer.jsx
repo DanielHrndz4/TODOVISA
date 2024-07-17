@@ -108,7 +108,7 @@ export default function Footer() {
       <hr className="my-6 border-TVBlue" />
       <hr className="my-8 border-blue-gray-50 flex" />
       <Typography color="white" className="text-center font-bold">
-        &copy; {currentYear} TodoVisa S.A de C.V
+        &copy; {currentYear} TodoVisa S.A de C.V | Powered by Volamos Viajes.
       </Typography>
     </footer>
   );
