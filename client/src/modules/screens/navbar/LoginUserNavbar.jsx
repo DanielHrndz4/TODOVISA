@@ -367,7 +367,7 @@ export default function LoginUserNavbar() {
                             <MenuHandler>
                                 <img
                                     src={userPicture}
-                                    alt="avatar"
+                                    alt=""
                                     className="border-2 border-white relative inline-block h-12 w-12 !rounded-full  object-cover object-center cursor-pointer"
                                     onClick={handleAvatarClick}
                                 />

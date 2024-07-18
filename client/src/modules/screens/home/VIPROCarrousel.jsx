@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Button } from "@material-tailwind/react";
 import { Fade } from "react-awesome-reveal";
-import { Link } from "react-router-dom";
 import lang from "../../../assets/data/lang.data";
+import { Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 function VIPROCarrousel() {
   const countries = Object.values(lang[0].about.countries);
@@ -28,11 +28,11 @@ function VIPROCarrousel() {
             <p className="py-2 xl:min-h-[9rem] max-h-[8rem] h-[8rem] text-justify overflow-hidden overflow-ellipsis">
               {country.description}
             </p>
-            {/* <Link to={country.uri}>
+            <Link to={country.uri}>
               <Button className="font-semibold w-full bg-TVred shadowbtn">
                 Ver más
               </Button>
-            </Link> */}
+            </Link>
           </div>
         </div>
       </Fade>
@@ -81,6 +81,7 @@ function VIPROCarrousel() {
         </Slider>
       </div>
     </div>
+
   );
 }
 

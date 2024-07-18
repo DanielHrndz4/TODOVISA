@@ -33,72 +33,66 @@ const spanish = [
         },
         "about":
         {
-            "title": "¡Descubre Nuevos Horizontes con Oportunidades Sin Fin!",
-            "description": "¡Explora un universo de posibilidades con nosotros! Ya sea que busques crecimiento, aventura o innovación, nuestra plataforma está diseñada para abrirte puertas a innumerables oportunidades. Únete a una comunidad donde las ideas florecen y los sueños se hacen realidad. Juntos, romperemos barreras y redefiniremos el éxito. Emprendamos este viaje hacia un futuro más brillante, donde cada paso te acerque a alcanzar tu máximo potencial.",
+            "title": "¡Descubre Nuevos Horizontes con TODOVISA!",
+            "description": "¡Bienvenido a TODOVISA! Somos una empresa dedicada a abrir puertas a incontables oportunidades de crecimiento, aventura e innovación. En nuestra comunidad, fomentamos la creatividad y la realización de sueños.",
+            "description02": "Nos esforzamos por derribar barreras y redefinir el concepto de éxito. Con pasión y compromiso, guiamos a nuestros clientes en un emocionante viaje hacia un futuro más brillante, donde cada paso te acerque a alcanzar tu máximo potencial. Descubre cómo podemos ayudarte a hacer realidad tus sueños.",
             "countries":
             {
-                "usa":
-                {
+                "usa": {
                     "name": "Estados Unidos",
-                    "description": "País de América del Norte, conocido por su diversidad cultural, su economía poderosa, y sus influencias en la política y la tecnología a nivel mundial.",
+                    "description": "País de América del Norte conocido por su diversidad cultural, economía poderosa y liderazgo global en política y tecnología.",
                     "img": "/img/carrousel/estadosunidos.jpg",
                     "uri": "/country/estadosunidos"
                 },
-                "canada":
-                {
+                "canada": {
                     "name": "Canadá",
-                    "description": "País en América del Norte, famoso por sus vastos paisajes naturales, multiculturalismo, y alta calidad de vida. Conocido por sus políticas progresistas y recursos naturales.",
+                    "description": "País en América del Norte famoso por sus paisajes naturales vastos, multiculturalismo y alta calidad de vida.",
                     "img": "/img/carrousel/canada.jpg",
                     "uri": "/country/canada"
                 },
-                "mexico":
-                {
+                "mexico": {
                     "name": "México",
-                    "description": "País en América del Norte, rico en cultura, historia y gastronomía. Conocido por sus antiguas civilizaciones, playas paradisíacas y vibrante vida urbana.",
+                    "description": "País en América del Norte rico en cultura, historia, playas paradisíacas y vida urbana vibrante.",
                     "img": "/img/carrousel/mexico.jpg",
                     "uri": "/country/mexico"
                 },
-                "uk":
-                {
+                "uk": {
                     "name": "Inglaterra",
-                    "description": "Parte del Reino Unido, famosa por su rica historia, contribuciones a la literatura y la ciencia, y su monarquía. Destaca por ciudades emblemáticas como Londres.",
+                    "description": "Parte del Reino Unido famosa por su historia rica, contribuciones a la literatura y ciencia, y su monarquía.",
                     "img": "/img/carrousel/inglaterra.jpg",
                     "uri": "/country/inglaterra"
                 },
-                "china":
-                {
+                "china": {
                     "name": "China",
-                    "description": "País en Asia, conocido por su antigua civilización, grandes avances tecnológicos y económicos recientes. Alberga maravillas como la Gran Muralla y la Ciudad Prohibida.",
+                    "description": "País en Asia conocido por su antigua civilización, avances tecnológicos y económicos, y maravillas como la Gran Muralla y la Ciudad Prohibida.",
                     "img": "/img/carrousel/china.jpg",
                     "uri": "/country/china"
                 },
-                "australia":
-                {
+                "australia": {
                     "name": "Australia",
-                    "description": "País en Oceanía, famoso por su fauna única, impresionantes paisajes naturales como la Gran Barrera de Coral, y un estilo de vida relajado.",
+                    "description": "País en Oceanía famoso por su fauna única, paisajes naturales impresionantes como la Gran Barrera de Coral, y un estilo de vida relajado.",
                     "img": "/img/carrousel/australia.jpg",
                     "uri": "/country/australia"
                 },
-                "india":
-                {
+                "india": {
                     "name": "India",
-                    "description": "País en Asia del Sur, conocido por su diversidad cultural, histórica riqueza, y espiritualidad. Hogar de importantes monumentos como el Taj Mahal.",
+                    "description": "País en Asia del Sur conocido por su diversidad cultural, riqueza histórica y espiritualidad, hogar de monumentos como el Taj Mahal.",
                     "img": "/img/carrousel/india.jpg",
                     "uri": "/country/india"
                 }
-            }
+            }            
         },
         "VIPRO": {
-            "title": "VIPRO Formulario",
+            "title": "Formulario VIPRO",
             "subtitle": {
-                "title": "¿Estás listo para sacar tu visa?",
-                "strong": "No te preocupes, estamos aquí para ayudarte"
+                "title": "¿Listo para dar el siguiente paso hacia tu visa?",
+                "strong": "¡Estamos aquí para apoyarte en cada paso!"
             },
-            "text": "Este formulario te ayudará a saber qué tan preparado estás para obtener tu visa. No te preocupes si no tienes toda la información a la mano, estamos aquí para guiarte en cada paso del proceso. Simplemente haz clic en el botón y responde las preguntas necesarias para evaluar tu preparación. Toda tu información será tratada con la máxima confidencialidad y utilizada únicamente para este propósito.",
-                
-            "button": "Realizar Formulario"
+            "text": "Este formulario te brindará una evaluación de tu perfil para obtener tu visa. No te preocupes si no tienes toda la información ahora, estamos aquí para guiarte en todo momento. Simplemente haz clic en el botón y responde las preguntas para conocer tu preparación.",
+            "strong":"Al completar el formulario, recibirás un 25% de descuento en el siguiente paso de la asesoría para la visa con",
+            "button": "Completar Formulario"
         },
-        "contact":{
+        "contact": {
             "title": "Contáctanos",
             "form": {
                 "title": "Escribenos",
@@ -121,14 +115,14 @@ const spanish = [
             "Contact": "Contáctanos",
             "copi": "© 2024 TodoVisa S.A de C.V"
         },
-        "popupWithoutLogin":{
+        "popupWithoutLogin": {
             "title": "Oops...",
             "description": "Debes iniciar sesión para ejecutar esta acción.",
             "button": "Aceptar!"
         },
-        "popupWithLogin":{
-            "title": "Selecciona una opción:",
-            "description": "Para continuar con su selección, asegúrese de revisar las opciones disponibles. Algunos destinos están deshabilitados temporalmente debido a restricciones actuales o falta de disponibilidad de servicios. Es posible que estas opciones se habiliten en el futuro, así que le recomendamos estar atento a las actualizaciones.",
+        "popupWithLogin": {
+            "title": "Elige una Opción:",
+            "description": "Selecciona una de las opciones disponibles para continuar con el formulario. Te ofrecemos una amplia variedad de servicios adaptados a tus necesidades. Tómate tu tiempo para revisar cada opción y elige la que mejor se adapte a tus requisitos. <strong>¡Realiza tu selección y avanza al siguiente paso!</strong>",
             "button": "Continuar"
         },
         "whatsapp": {
@@ -138,7 +132,7 @@ const spanish = [
         },
         "form": {
             "return": " Regresar al inicio",
-            "title": "Formulario de solicitud de VISA",
+            "title": "Formulario de Solicitud de Visa",
             "description": "A continuación, encontrará el formulario de solicitud de visa que deberá completar para procesar su solicitud. Le pedimos que llene todos los campos con la información más precisa y actualizada posible. Esto nos permitirá evaluar su solicitud de manera eficiente y rápida.",
             "acept": "Acepto los ",
             "terms": "Términos y condiciones",
@@ -159,7 +153,7 @@ const spanish = [
             "subtitle": "Cierra sesión para registrarte o iniciar sesión con otro usuario.",
             "button": "Regresar al inicio"
         },
-        "signin":{
+        "signin": {
             "title": "Iniciar Sesión",
             "subtitle": "¡Encantado de conocerte! Ingresa tus datos para iniciar sesión.",
             "email": "Correo electrónico",
@@ -173,7 +167,7 @@ const spanish = [
             "account": "¿Aún no tienes una cuenta?",
             "signup": "Regístrate"
         },
-        "signup":{
+        "signup": {
             "title": "Regístrate",
             "subtitle": "¡Encantado de conocerte! Ingresa tus datos para registrarte.",
             "name": "Nombres",

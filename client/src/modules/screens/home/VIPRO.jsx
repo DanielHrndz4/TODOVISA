@@ -27,7 +27,7 @@ const handlePopUp = (validate) => {
                     <p class="text-justify pt-8">${popupWithLoginText.description}</p>
                     <h1 class="font-bold text-3xl pt-5 PB-1">$19.99</h1>
                     <div class="relative mt-4 z-50 w-[95%] py-[7px] bg-yellow-600 shadow-xl m-auto justify-center items-center text-black">
-                    Recibiras un <strong>25%</strong> de descuento en tu acesoria
+                    Recibirás un <strong>25%</strong> de descuento en tu asesoría
                     </div>
                     <div class="flex flex-row w-full z-40">
                         <div class="h-6 -mt-4 w-[50px] py-[7px] bg-yellow-600 flex justify-center items-center"></div>
@@ -66,10 +66,10 @@ export default function VIPRO(props) {
                         <div className="w-full lg:py-0 xl:py-8 lg:px-7 sm:px-20 px-6">
                             <div className="pb-4 lg:pb-6 pt-4"><h1 className="text-4xl lg:text-3xl xl:text-5xl text-center text-TVBlue font-bold">{viproSection.title}</h1></div>
                             <div className="py-4">
-                                <h2 className="text-xl lg:text-lg xl:text-2xl text-black">{viproSection.subtitle.title} <strong>{viproSection.subtitle.strong}</strong></h2>
+                                <h2 className="text-xl lg:text-lg xl:text-2xl text-black text-center">{viproSection.subtitle.title} <strong>{viproSection.subtitle.strong}</strong></h2>
                                 <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
                             </div>
-                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{viproSection.text}</p></div>
+                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{viproSection.text} <strong>{viproSection.strong} <span className="text-TVBlue hover:underline hover:cursor-pointer"><a href="https://www.facebook.com/Volamosviajes/?locale=es_LA" target="_blank">Volamos Viajes</a></span></strong>.</p></div>
                             <div className="lg:text-lg">
                                 <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp(props.validation)}>{viproSection.button}</Button>
                             </div>

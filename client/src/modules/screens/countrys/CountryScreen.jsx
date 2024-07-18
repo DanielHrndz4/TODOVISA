@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { WAsettings } from "../../../assets/data/ws.data";
 import Cookies from "js-cookie"; 
 import LoginUserNavbar from "../navbar/LoginUserNavbar";
+import Mexico from "./mexico/Mexico";
 
 export default function CountryScreen() {
   const location = useLocation();
@@ -21,7 +22,7 @@ export default function CountryScreen() {
       case 'canada':
         return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para Canadá</div>;
       case 'mexico':
-        return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para México</div>;
+        return <Mexico></Mexico>;
       case 'inglaterra':
         return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para Inglaterra</div>;
       case 'china':

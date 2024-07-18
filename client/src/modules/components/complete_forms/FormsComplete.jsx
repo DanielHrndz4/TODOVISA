@@ -42,7 +42,7 @@ export default function FormsComplete() {
         const mainElement = document.querySelector(".mainElementPdf");
         if (button) {
             button.style.display = "none";
-            mainElement.style.minWidth = "1700px";
+            mainElement.style.minWidth = "1400px";
         }
         const input = pdfRef.current;
         html2canvas(input).then((canvas) => {
@@ -64,24 +64,24 @@ export default function FormsComplete() {
 
     const getCountry = (country) => {
         switch (country.toLowerCase()) {
-          case 'estadosunidos':
-            return "Estados Unidos";
-          case 'canada':
-            return "Canadá";
-          case 'mexico':
-            return "México";
-          case 'inglaterra':
-            return "Inglaterra";
-          case 'china':
-            return "China";
-          case 'australia':
-            return "Australia";
-          case 'india':
-            return "India";
-          default:
-            return "";
+            case 'estadosunidos':
+                return "Estados Unidos";
+            case 'canada':
+                return "Canadá";
+            case 'mexico':
+                return "México";
+            case 'inglaterra':
+                return "Inglaterra";
+            case 'china':
+                return "China";
+            case 'australia':
+                return "Australia";
+            case 'india':
+                return "India";
+            default:
+                return "";
         }
-      };
+    };
 
     return (
         <>
@@ -182,15 +182,19 @@ export default function FormsComplete() {
                                 <div className="w-full m-auto">
                                     {userData.qualification && userData.qualification >= 60 ? (
                                         <div className="flex flex-col gap-3 py-10 text-xl text-black">
-                                            <h2 className="text-center text-3xl pb-2 font-semibold">
+                                            <h2 className="text-center text-3xl pb-4 font-semibold">
                                                 ¡Felicidades!
                                             </h2>
                                             <p className="text-justify">
                                                 Has aprobado el formulario con una calificación total de{" "}
-                                                {userData.qualification}. Todas tus respuestas han
+                                                <strong>{userData.qualification}</strong>. Todas tus respuestas han
                                                 sido evaluadas como correctas e incorrectas, lo que
                                                 determina tu puntaje para la prueba de visa.
                                             </p>
+                                            <p className="text-justify">
+                                                Ahora estás listo para dar el siguiente paso hacia la obtención de tu visa. Para continuar, simplemente envía este comprobante al chat de WhatsApp de <strong><a href="https://api.whatsapp.com/send/?phone=50370323075" className="text-TVBlue hover:cursor-pointer">TODOVISA</a></strong> y podrás disfrutar de un descuento del 25% en la asesoría con Volamos Viajes.
+                                            </p>
+                                            <p className="text-justify">El equipo de <strong><a href="https://api.whatsapp.com/send/?phone=50370323075" className="text-TVBlue hover:cursor-pointer">TODOVISA</a></strong> estará allí para guiarte en cada paso del proceso. ¡Mucho éxito en tu solicitud de visa!</p>
                                         </div>
                                     ) : (
                                         <div className="flex flex-col gap-3 py-10 text-xl text-black">
@@ -264,7 +268,7 @@ export default function FormsComplete() {
                         >
                             <img
                                 src="/img/logo/todovisa.png"
-                                className="w-[60px] h-[45px]"
+                                className="w-[60px] h-[60px]"
                                 alt=""
                             />
                             <h2 className="font-semibold">© 2024 TodoVisa S.A de C.V</h2>

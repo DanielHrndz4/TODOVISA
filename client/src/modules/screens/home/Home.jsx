@@ -12,6 +12,7 @@ import LoginUserNavbar from "../navbar/LoginUserNavbar";
 import Cookies from 'js-cookie';
 import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
+import GuideSection from "./GuideSection";
 
 export default function Home() {
   const bannerText = lang[0].banner
@@ -84,6 +85,8 @@ export default function Home() {
           <hr className="my-8 bg-white" />
           {/* VIPROCarrousel section */}
           <VIPROCarrousel></VIPROCarrousel>
+          <hr className="my-8 bg-white" />
+          <GuideSection></GuideSection>
           <hr className="my-8 bg-white" />
           {/* VIPRO form section */}
           <VIPRO validation={jwtToken}></VIPRO>
