@@ -1,5 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 import lang from "../../../assets/data/lang.data";
+import FRONT_URI from "../../../assets/data/admin/uri.front";
 
 export default function Footer() {
   let currentYear = new Date().getFullYear();
@@ -12,7 +13,7 @@ export default function Footer() {
           <li>
             <Typography
               as="a"
-              href="#about"
+              href={`${FRONT_URI}/#about`}
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
@@ -22,7 +23,7 @@ export default function Footer() {
           <li>
             <Typography
               as="a"
-              href="#services"
+              href={`${FRONT_URI}/#services`}
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
@@ -32,7 +33,7 @@ export default function Footer() {
           <li>
             <Typography
               as="a"
-              href="#vipro"
+              href={`${FRONT_URI}/#vipro`}
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >
@@ -42,7 +43,7 @@ export default function Footer() {
           <li>
             <Typography
               as="a"
-              href="#contactus"
+              href={`${FRONT_URI}/#contactus`}
               color="white"
               className="font-bold transition-colors hover:text-TVred focus:text-blue-500"
             >

@@ -61,8 +61,8 @@ export default function VIPRO(props) {
         <div className="flex flex-col h-full lg:mb-4" id="vipro">
             <div className="min-h-[55%] h-[55%] absolute"></div>
             <div className="flex flex-col lg:px-7 lg:flex-row gap-4 h-full z-100 relative w-full lg:w-full xl:w-[80%] m-auto">
-                <Fade className="w-full flex flex-col lg:py-0 xl:py-8 mx-auto text-black">
-                    <div className="w-full flex flex-col lg:py-8 mx-auto text-black">
+                <Fade className="w-full flex flex-col lg:py-0 xl:py-0 mx-auto text-black">
+                    <div className="w-full flex flex-col lg:py-0 xl:py-0 mx-auto text-black">
                         <div className="w-full lg:py-0 xl:py-8 lg:px-7 sm:px-20 px-6">
                             <div className="pb-4 lg:pb-6 pt-4"><h1 className="text-4xl lg:text-3xl xl:text-5xl text-center text-TVBlue font-bold">{viproSection.title}</h1></div>
                             <div className="py-4">

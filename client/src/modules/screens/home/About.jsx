@@ -44,6 +44,7 @@ export default function About() {
             <span key={index}><strong>{index + 1})</strong> {country.name}</span>
         ));
     }
+
     const downloadPdf = () => {
         const pdfPath = './A9bC3dE4FgH5IjK6LmN7oP8QrS9TuV0WxY1Za2Bc3Dd4Ef5Gh6Ij7Kl8Mn9Op0Qr1St2Uv3Wx4Yz5A6B7C8D9E0F1G2H3I4J5K6L.pdf';
         const link = document.createElement('a');
@@ -59,26 +60,28 @@ export default function About() {
                 <div className="w-full flex justify-center items-center lg:items-end flex-col py-8 lg:py-0 xl:py-8">
                     <Slide className="w-[85%] lg:w-full xl:w-[85%] sm:w-[75%]"><img src="/img/about/about.png" alt="" /></Slide>
                 </div>
-                <Fade className="w-full flex flex-col pb-2 sm:py-8 lg:py-0 xl:py-8 mx-auto text-black">
-                    <div className="w-full flex flex-col lg:py-0 xl:py-8 mx-auto text-black">
+                <Fade className="w-full flex flex-col pb-2 sm:py-8 lg:py-0 xl:py-0 mx-auto text-black">
+                    <div className="w-full flex flex-col lg:py-0 xl:py-0 mx-auto text-black">
                         <div className="w-full lg:py-8 sm:px-20 lg:px-7 px-6">
                             <div className="pt-4"><h1 className="text-4xl sm:text-5xl lg:text-3xl xl:text-5xl text-center text-TVBlue font-bold">{aboutText.title}</h1></div>
                             <div className="py-4">
                                 <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
                             </div>
-                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{aboutText.description}</p></div>
+                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg ">{aboutText.description}</p></div>
                             {/* <div className="grid grid-cols-2 text-justify lg:text-md xl:text-lg gap-2">
                                 {countries()}
                             </div> */}
+                            <div className="flex justify-center items-center">
                             {
                                 isValidateDownload ?
                                     (<Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={downloadPdf}>
                                         Descargar PDF
                                     </Button>) :
-                                    (<Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => window.open('/guide', '_black')}>
+                                    (<Button className="py-4 px-10 rounded-sm shadowbtn bg-TVred" onClick={() => window.open('/guide', '_black')}>
                                         Ver PDF
                                     </Button>)
                             }
+                            </div>
                         </div>
                     </div>
                 </Fade>

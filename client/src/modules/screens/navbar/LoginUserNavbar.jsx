@@ -33,6 +33,7 @@ import Cookies from 'js-cookie';
 import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
 import Item from "antd/es/list/Item";
+import FRONT_URI from "../../../assets/data/admin/uri.front";
 
 const navListMenuItems = [
     {
@@ -170,7 +171,7 @@ function NavList() {
         <List className="mt-4 mb-0 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
             <Typography
                 as="a"
-                href="#about"
+                href={`${FRONT_URI}/#about`}
                 variant="small sm:large"
                 color="white"
                 className="font-medium"
@@ -182,7 +183,7 @@ function NavList() {
             <NavListMenu />
             <Typography
                 as="a"
-                href="#services"
+                href={`${FRONT_URI}/#services`}
                 variant="small sm:large"
                 color="white"
                 className="font-medium"
@@ -193,7 +194,7 @@ function NavList() {
             </Typography>
             <Typography
                 as="a"
-                href="#vipro"
+                href={`${FRONT_URI}/#vipro`}
                 variant="small sm:large"
                 color="white"
                 className="font-medium"
@@ -204,7 +205,7 @@ function NavList() {
             </Typography>
             <Typography
                 as="a"
-                href="#contactus"
+                href={`${FRONT_URI}/#contactus`}
                 variant="small sm:large"
                 color="white"
                 className="font-medium"
