@@ -74,7 +74,7 @@ export default function CountryScreen() {
   }
 
   return (
-    <main className="h-full w-full absolute">
+    <main className="h-full w-full absolute bg-[#fafafa]">
       {tokenExist()}
       <div className="flex flex-col">
         <div

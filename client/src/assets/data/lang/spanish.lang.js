@@ -1,3 +1,6 @@
+import FRONT_URI from "../admin/uri.front";
+
+
 const spanish = [
     {
         "navbar":
@@ -192,7 +195,170 @@ const spanish = [
             "description": "No te preocupes, nos pasa a todos. Ingrese su correo electrónico a continuación para recuperar su contraseña",
             "email": "Correo electrónico",
             "button": "Enviar al correo"
-        }
+        },
+        "mexico": {
+            "title": "Proceso de Solicitud de Visa",
+            "sections": [
+              {
+                "title": "1. Introducción al Proceso",
+                "paragraphs": [
+                  "Para iniciar el proceso de solicitud de visa, es fundamental conocer los requisitos específicos del tipo de visa que se desea obtener, ya sea de turismo u otra categoría. Es importante revisar detenidamente la información correspondiente a la categoría de visa seleccionada.",
+                  "Si cumple con los requisitos, y requiere una cita, puede recopilar y digitalizar todos los documentos necesarios y enviarlos a este correo electrónico. Tras recibir y verificar su documentación, nos pondremos en contacto para agendar una cita y continuar con el proceso. A continuación, encontrará un listado de todas las categorías de visa y sus requisitos específicos."
+                ]
+              },
+              {
+                "title": "2. Requisitos Generales para la Visa de Turismo y Tránsito",
+                "subsections": [
+                  {
+                    "title": "Documentación Requerida",
+                    "items": [
+                      {
+                        "text": "Pasaporte: Presentar en original y copia."
+                      },
+                      {
+                        "text": "Fotografía Reciente: Tamaño pasaporte, a color, rostro visible sin anteojos. Medidas: mínimo 32.0 mm x 26 mm, máximo 39.0 mm x 31.0 mm. Fondo blanco y tomada de frente."
+                      },
+                      {
+                        "text": "Formulario Migratorio: Puedes realizar tu formulario con nosotros, Formulario TODOVISA",
+                        "link": `${FRONT_URI}/#vipro`
+                      },
+                      {
+                        "text": "Documento de Estancia Legal (No requerido para salvadoreños): Si no es nacional del país donde solicita la visa, presente original y copia del documento que acredite su estancia legal en El Salvador."
+                      },
+                      {
+                        "text": "Documentación Adicional (cumplir al menos uno de los siguientes supuestos; A,B,C,D,E, F, G):",
+                        "subitems": [
+                          {
+                            "title": "A. Por Arraigo:",
+                            "options": [
+                              {
+                                "text": "Opción 1: Escritura pública de bienes inmuebles (2 años mínimo) y constancia de empleo estable (2 años mínimo)."
+                              },
+                              {
+                                "text": "Opción 2: Escritura pública de bienes inmuebles (2 años mínimo) y documento que acredite propiedad o participación en negocios, expedido por la autoridad competente y su registro ante el Ministerio de Hacienda con antigüedad mínima de dos años, además de la última declaración de impuestos o cuenta bancaria de la empresa con el promedio anual (2 años mínimo)."
+                              },
+                              {
+                                "text": "Nota importante: Con opción 1 y 2 por Arraigo es necesario presentar carta extractada emitida por el Centro Nacional de Registro (CNR) con fecha actual donde establece que la propiedad está a su nombre y el tiempo que está registrada, siempre y cuando la propiedad no se encuentre hipotecada."
+                              }
+                            ]
+                          },
+                          {
+                            "title": "B. Por Solvencia Económica - Por Empleo, Cuenta Bancaria o Depósitos a Plazo:",
+                            "options": [
+                              {
+                                "title": "Por Empleo:",
+                                "text": "Equivalente a 100 días del salario mínimo de la Ciudad de México, con un valor aproximado basado en el salario mínimo al 1 de enero de 2024: $1,461 USD."
+                              },
+                              {
+                                "title": "Por Cuenta Bancaria:",
+                                "text": "Equivalente a 300 días del salario mínimo de la Ciudad de México, con un valor aproximado basado en el salario mínimo al 1 de enero de 2024: $4,380 USD (promedio trimestral)."
+                              },
+                              {
+                                "title": "Opción 1: Por Empleo.",
+                                "details": [
+                                  "Presentar constancia de empleo estable (mínimo 1 año) con las siguientes características:",
+                                  "Nombre completo, cargo, antigüedad y salario neto.",
+                                  "Datos de contacto de la empresa (domicilio, teléfono, correo electrónico).",
+                                  "Copia simple del D.U.I. de la persona que firma la carta.",
+                                  "Copia del NIT de la empresa.",
+                                  "La carta deberá estar expedida en papel membretado de la empresa.",
+                                  "Las cartas de empleo son aceptadas con vencimiento de un mes a partir de la fecha que fue emitida.",
+                                  "El salario mensual debe ser mayor a $1,461.00 dólares mensuales (libre de las deducciones de ley como son; Renta, AFP y ISSS).",
+                                  "Debe agregar la cuenta bancaria donde le depositan los pagos de su salario (Las descripciones de la carta o constancia del banco se encuentran en la Opción 2: Cuenta Bancaria)"
+                                ],
+                                "note": "Montos a Evaluar 2024 Por Empleo: Debe tener un sueldo trimestral igual o mayor al equivalente a 100 días del salario mínimo de la Ciudad de México, con un valor aproximado basado en el salario mínimo al 1 de enero de 2024: $1,461 USD."
+                              },
+                              {
+                                "title": "Opción 2: Cuenta Bancaria.",
+                                "details": [
+                                  "Si es por cuenta bancaria personal deberá presentar una constancia expedida por su banco, con las siguientes características:",
+                                  "Nombre completo del titular de la cuenta.",
+                                  "Número de la(s) cuenta(s) bancaria(s).",
+                                  "Fecha de apertura de la(s) cuenta(s).",
+                                  "Nombre, cargo y firma del ejecutivo bancario que firma la carta.",
+                                  "Sello oficial del banco.",
+                                  "La constancia deberá expedirse en papel membretado del banco."
+                                ],
+                                "note": "Montos a Evaluar 2024 Por Cuenta Bancaria: La cuenta bancaria debe mantener un saldo promedio trimestral igual o mayor al equivalente a 300 días del salario mínimo de la Ciudad de México, con un valor aproximado basado en el salario mínimo al 1 de enero de 2024: $4,380 USD (promedio trimestral)."
+                              },
+                              {
+                                "title": "Opción 3: Depósitos a Plazo o Títulos Valores y Acciones.",
+                                "details": [
+                                  "Comprobante de inversiones son certificados por depósitos a plazo o títulos valores y acciones, si es un Certificado a plazo fijo debe presentar una carta original emitida por el Banco con las siguientes características:",
+                                  "Fecha de apertura y vencimiento.",
+                                  "Nombre del titular.",
+                                  "Monto, plazo.",
+                                  "Número de cuenta.",
+                                  "Impresión de la cuenta de los últimos 6 meses.",
+                                  "Copia del certificado del Depósitos a Plazo con una vigencia de 3 meses a partir de $4,380.00 en adelante junto o cuentas bancarias (saldo promedio mensual equivalente a 300 días del salario mínimo, últimos 3 meses)."
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "title": "C. Estudiantes con Empleo:",
+                            "details": [
+                              "Constancia de estudios y empleo, pensión o beca.",
+                              "Ingresos equivalentes a 60 días del salario mínimo de la Ciudad de México, últimos 3 meses."
+                            ]
+                          },
+                          {
+                            "title": "D. Por Invitación de una Organización o de una Institución Pública o Privada:",
+                            "details": [
+                              "IMPORTANTE: Las cartas de invitación solo son válidas si provienen de organizaciones o instituciones públicas o privadas. No se aceptan invitaciones de particulares.",
+                              "Carta Responsiva debe contener:",
+                              "Nombre completo del solicitante y su nacionalidad.",
+                              "Denominación o razón social de la organización.",
+                              "Registro oficial o patente.",
+                              "Objeto de la organización o institución privada o pública.",
+                              "Domicilio completo y datos de contacto de la organización o institución.",
+                              "Información detallada sobre la actividad que realizará el solicitante o el proyecto en el que participará.",
+                              "Denominación o razón social de la organización.",
+                              "Duración estimada o fecha aproximada de terminación de la actividad que realizará el solicitante.",
+                              "Compromiso de hacerse cargo de la manutención total de la persona invitada durante su estancia en México y de su retorno a su país de origen o de residencia.",
+                              "Copia de identificación oficial con firma y fotografía de quien suscribe la carta."
+                            ]
+                          },
+                          {
+                            "title": "E. Personas Adultas Mayores de 65 años:",
+                            "details": ["Si el solicitante de visa de turista que sea mayor de 65 años, y que acredite fehacientemente, a juicio de la autoridad migratoria, tener como propósito visitar territorio nacional con fines turísticos, no será necesario acreditar la solvencia económica."]
+                          },
+                          {
+                            "title": "F. Viajero Frecuente:",
+                            "details": ["Mostrar copia de las páginas del pasaporte con tres visas vigentes o sellos de control migratorio de países no limítrofes, visitados en los últimos 12 meses."]
+                          },
+                          {
+                            "title": "Nota Adicional:",
+                            "text": "Menores de Edad: Se requiere la presencia de los padres con documentos de identificación y que acrediten vínculo familiar con documento oficial."
+                          },
+                          {
+                            "title": "G. Estudiantes – Residencia Temporal:",
+                            "details": [
+                              "Si su visa de estudiante es aprobada, el costo del trámite será de $53.00 dólares, los cuales deberán ser pagados en efectivo con el monto exacto el día de su cita.",
+                              "Original de Carta de Aceptación de la Institución Educativa perteneciente al Sistema Educativo Nacional de México en la que pretende estudiar, en la que se especifique:",
+                              "1. Nombre completo del solicitante",
+                              "2. Nivel, grado y área de estudio que el solicitante pretenda realizar",
+                              "3. Nombre del curso en el que ha sido aceptado",
+                              "4. Fecha de inicio y terminación del curso",
+                              "5. Costo de matrícula para el curso, y",
+                              "6. Datos de identificación de la institución educativa (credencial de quien firma la carta de aceptación, e.g. INE, Pasaporte o RFC)"
+                            ],
+                            "note": "Prueba de Solvencia Económica para el Estudiante: Para demostrar la disponibilidad de fondos suficientes que cubran los costos de matrícula, alojamiento y manutención durante su estancia en el territorio nacional, por favor consulte las opciones detalladas en la Sección B: Solvencia Económica - Empleo o Cuenta Bancaria, específicamente las opciones 1, 2 o 3.",
+                            "additional_info": [
+                              "En caso de necesitar tramitar su visa de estudiante, por favor envíe los documentos requeridos adjuntos al correo electrónico visasesa@sre.gob.mx, con copia a consulesa@sre.gob.mx",
+                              "Consideraciones Importantes:",
+                              "- La prueba de solvencia económica puede ser aportada por el solicitante o sus padres/tutores.",
+                              "- Si el solicitante es menor de edad, se requiere la presencia y documentación de ambos padres o tutores legales."
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
     }
 ];
 

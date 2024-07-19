@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <Fade duration={1000} triggerOnce > {/* Añade la animación de fade */}
-      <main className="h-full w-full overflow-auto lg:absolute">
+      <main className="h-full w-full overflow-auto lg:absolute bg-[#fafafa]">
         {jwtToken ? <LoginUserNavbar /> : <NavbarWithMegaMenu />}
         <div className="flex flex-col w-full">
           <div className="backgroundgradient w-full">

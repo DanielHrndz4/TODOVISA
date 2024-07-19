@@ -19,7 +19,7 @@ function VIPROCarrousel() {
               <img
                 src={country.img}
                 alt={country.name}
-                className="square-image"
+                className="square-image rounded-md"
               />
             </div>
             <h1 className="text-xl lg:text-2xl font-semibold pt-3 text-center">
