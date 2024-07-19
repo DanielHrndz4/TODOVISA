@@ -8,6 +8,10 @@ import { WAsettings } from "../../../assets/data/ws.data";
 import Cookies from "js-cookie"; 
 import LoginUserNavbar from "../navbar/LoginUserNavbar";
 import Mexico from "./mexico/Mexico";
+import Canada from "./canada/Canada";
+import Australia from "./australia/Australia";
+import England from "./inglaterra/England";
+import India from "./india/India";
 
 export default function CountryScreen() {
   const location = useLocation();
@@ -18,19 +22,19 @@ export default function CountryScreen() {
   const getCountryContent = () => {
     switch (country.toLowerCase()) {
       case 'estadosunidos':
-        return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para Estados Unidos</div>;
+        return <div className="w-1/2 m-auto text-center font-semibold"></div>;
       case 'canada':
-        return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para Canadá</div>;
+        return <Canada></Canada>;
       case 'mexico':
         return <Mexico></Mexico>;
       case 'inglaterra':
-        return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para Inglaterra</div>;
+        return <England></England>;
       case 'china':
-        return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para China</div>;
+        return <div className="w-1/2 m-auto text-center font-semibold"></div>;
       case 'australia':
-        return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para Australia</div>;
+        return <Australia></Australia>;
       case 'india':
-        return <div className="w-1/2 m-auto text-center font-semibold">Contenido específico y personalizable que se proporcionara por todovisa para India</div>;
+        return <India></India>;
       default:
         return null; 
     }

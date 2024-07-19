@@ -28,11 +28,19 @@ function VIPROCarrousel() {
             <p className="py-2 xl:min-h-[9rem] max-h-[8rem] h-[8rem] text-justify overflow-hidden overflow-ellipsis">
               {country.description}
             </p>
-            <Link to={country.uri}>
+            {
+              country.name == 'Estados Unidos' || country.name == 'China' ? (
+              <Button className="font-semibold w-full bg-gray-800 shadowbtn">
+                No disponible
+              </Button>
+              ) : (
+                <Link to={country.uri}>
               <Button className="font-semibold w-full bg-TVred shadowbtn">
                 Ver más
               </Button>
             </Link>
+              )
+            }
           </div>
         </div>
       </Fade>

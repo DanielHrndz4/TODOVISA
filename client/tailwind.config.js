@@ -11,8 +11,9 @@ module.exports = withMT({
       colors: {
         "TVBlue": '#113E5F', 
         "TVsecondaryColor": '#cccccc',
-        'TVred': '#B6122A'
-      },
+        'TVred': '#B6122A',
+        'TVgray': '#fafafa'
+      }
     },
   },
   plugins: [],

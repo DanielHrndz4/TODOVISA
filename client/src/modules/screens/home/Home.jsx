@@ -62,12 +62,12 @@ export default function Home() {
             <div
               className="relative mt-12 mb-4" // Adjust based on the height of the navbar
               style={{
-                backgroundImage: "url('/img/background/bgmain4.jpg')",
+                backgroundImage: "url('/img/background/bannereeuu.webp')",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
                 minHeight: "40rem", // Ensure it covers at least 30rem height
                 width: "100%",
-                backgroundPosition: "center",
+                backgroundPosition: "top",
                 display: "flex", // Ensure the child div can stretch to full height
                 alignItems: "center", // Center content vertically if needed
                 justifyContent: "center", // Center content horizontally if needed

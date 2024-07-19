@@ -3,7 +3,7 @@ import React from "react";
 export const cards = (country, img, theme, description) => {
     return (
         <div className="relative my-4 lg:my-8 m-auto bg-white rounded-lg shadowbtn overflow-hidden max-w-[370px] w-full max-h-[300px] h-screen transform transition-transform duration-500 ease-in-out">
-            <div className="w-full h-full max-h-[240px] bg-cover bg-center" style={{ backgroundImage: `url(../img/countries/mexico/${img})` }}></div>
+            <div className="w-full h-full max-h-[240px] bg-cover bg-center" style={{ backgroundImage: `url(../img/countries/${img})` }}></div>
             <div className="flex flex-col justify-center items-center h-[60px]">
                 <h1 className="text-center py-2 text-xl font-semibold text-gray-900">{theme}</h1>
             </div>
