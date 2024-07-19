@@ -35,6 +35,8 @@ const english = [
             "title": "Discover New Horizons with TODOVISA!",
             "description": "Welcome to TODOVISA! We are a company dedicated to opening doors to countless opportunities for growth, adventure, and innovation. In our community, we foster creativity and the realization of dreams.",
             "description02": "We strive to break down barriers and redefine the concept of success. With passion and commitment, we guide our clients on an exciting journey towards a brighter future, where each step brings you closer to reaching your full potential. Discover how we can help you make your dreams come true.",
+            "not_available": "Not available",
+            "see_more": "View more",
             "countries": {
                 "usa": {
                     "name": "United States",
@@ -1067,8 +1069,10 @@ const english = [
             "downloadPdfButton": "Download PDF",
             "viewPdfButton": "View PDF",
             "pdfPath": "./A9bC3dE4FgH5IjK6LmN7oP8QrS9TuV0WxY1Za2Bc3Dd4Ef5Gh6Ij7Kl8Mn9Op0Qr1St2Uv3Wx4Yz5A6B7C8D9E0F1G2H3I4J5K6L.pdf"
+        },
+        "guide": {
+            "button": "Get the complete guide"
         }
-
     }
 ];
 

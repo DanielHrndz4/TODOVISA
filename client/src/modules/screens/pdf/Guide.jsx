@@ -4,11 +4,12 @@ import fetchData from "../../../assets/data/validation/token.validation";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import LoginUserNavbar from "../navbar/LoginUserNavbar";
+import lang from "../../../assets/data/lang.data";
 
 const Guide = () => {
   const [isValidate, setIsValidate] = useState(false);
   const navigateTo = useNavigate();
-
+  const textButton = lang[0].guide.button
   useEffect(() => {
     const checkToken = async () => {
       const response = await fetchData(Cookies.get("jwt"));
@@ -36,7 +37,7 @@ const Guide = () => {
                   )
                 }
               >
-                Adquirir guia completa
+                {textButton}
               </Button>
             </div>
           </div>
@@ -49,12 +50,12 @@ const Guide = () => {
               <img   
                 src="./img/pdf/portada.jpg"
                 alt=""
-                className="max-w-[816px] w-full max-h-[1056px] h-full mb-3"
+                className="max-w-[816px] w-full max-h-[1056px] h-full mb-3 shadowbtn"
               />
               <img
                 src="./img/pdf/page.jpg"
                 alt=""
-                className="max-w-[816px] w-full max-h-[1056px] h-full my-3"
+                className="max-w-[816px] w-full max-h-[1056px] h-full my-3 shadowbtn"
               />
             </div>
           </div>

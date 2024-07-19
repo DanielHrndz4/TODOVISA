@@ -38,6 +38,8 @@ const spanish = [
             "title": "¡Descubre Nuevos Horizontes con TODOVISA!",
             "description": "¡Bienvenido a TODOVISA! Somos una empresa dedicada a abrir puertas a incontables oportunidades de crecimiento, aventura e innovación. En nuestra comunidad, fomentamos la creatividad y la realización de sueños.",
             "description02": "Nos esforzamos por derribar barreras y redefinir el concepto de éxito. Con pasión y compromiso, guiamos a nuestros clientes en un emocionante viaje hacia un futuro más brillante, donde cada paso te acerque a alcanzar tu máximo potencial. Descubre cómo podemos ayudarte a hacer realidad tus sueños.",
+            "not_available": "No disponible",
+            "see_more": "Ver más",
             "countries":
             {
                 "usa": {
@@ -1081,6 +1083,9 @@ const spanish = [
             "viewPdfButton": "Ver PDF",
             "pdfPath": "./A9bC3dE4FgH5IjK6LmN7oP8QrS9TuV0WxY1Za2Bc3Dd4Ef5Gh6Ij7Kl8Mn9Op0Qr1St2Uv3Wx4Yz5A6B7C8D9E0F1G2H3I4J5K6L.pdf"
         },
+        "guide": {
+            "button": "Adquirir guia completa"
+        }
     }
 ];
 

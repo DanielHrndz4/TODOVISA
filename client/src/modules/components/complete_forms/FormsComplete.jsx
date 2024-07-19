@@ -264,7 +264,7 @@ export default function FormsComplete() {
                         </div>
                         <div
                             id="paddingButton"
-                            className={`w-[80%] flex flex-row m-auto justify-center items-center gap-4 pb-4 pt-40`}
+                            className={`w-[80%] flex flex-row m-auto justify-center items-center gap-4 pb-4 pt-24`}
                         >
                             <img
                                 src="/img/logo/todovisa.png"
