@@ -52,7 +52,6 @@ const GuideSection = () => {
           if (response.ok) {
             setIsValidateDownload(true);
           }
-          console.log(data.message);
         } catch (err) {
           console.error(err);
         }
@@ -62,8 +61,9 @@ const GuideSection = () => {
   }, []);
 
   const downloadPdf = () => {
+    const pdfPath = texts.pdfPath
     const link = document.createElement("a");
-    link.href = texts.pdfPath;
+    link.href = pdfPath;
     link.download = "GUIA_TODOVISA.pdf";
     link.click();
   };
