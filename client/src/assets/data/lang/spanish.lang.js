@@ -127,7 +127,10 @@ const spanish = [
         "popupWithLogin": {
             "title": "Elige una Opción:",
             "description": "Selecciona una de las opciones disponibles para continuar con el formulario. Te ofrecemos una amplia variedad de servicios adaptados a tus necesidades. Tómate tu tiempo para revisar cada opción y elige la que mejor se adapte a tus requisitos. <strong>¡Realiza tu selección y avanza al siguiente paso!</strong>",
-            "button": "Continuar"
+            "button": "Continuar",
+            "discountText1": "Recibirás un ",
+            "discountText2": " de descuento en tu asesoría",
+            "buy": "¿Cómo realizo una compra?"
         },
         "whatsapp": {
             "status": "En linea",
@@ -1085,6 +1088,67 @@ const spanish = [
         },
         "guide": {
             "button": "Adquirir guia completa"
+        },
+        "qualification": {
+            "title": "Formulario de aprobación de Visa",
+            "applicantData": "Datos del aplicante",
+            "name": "Nombre:",
+            "countryOfOrigin": "País de origen:",
+            "email": "Correo:",
+            "phone": "Teléfono:",
+            "personalData": "DATOS PERSONALES",
+            "familyAndFinancialTies": "ARRAIGOS FAM. Y FINAN.",
+            "travelHistory": "HISTORIAL DE VIAJES",
+            "criminalHistory": "HISTORIAL DELICTIVO",
+            "overallResults": "Resultados generales",
+            "totalScore": "Calificación total:",
+            "congratulations": "¡Felicidades!",
+            "approvalMessage": "Has aprobado el formulario con una calificación total de ",
+            "approvalMessage2": "Todas tus respuestas han sido evaluadas como correctas e incorrectas, lo que determina tu puntaje para la prueba de visa",
+            "nextStep": "Ahora estás listo para dar el siguiente paso hacia la obtención de tu visa. Para continuar, simplemente envía este comprobante al chat de WhatsApp de ",
+            "whatsappLink": "https://api.whatsapp.com/send/?phone=50370323075",
+            "whatsappText": "TODOVISA",
+            "guideMessage": "y podrás disfrutar de un descuento del 25% en la asesoría con Volamos Viajes.",
+            "guideConclusion": "El equipo de ",
+            "team": " estará allí para guiarte en cada paso del proceso. ¡Mucho éxito en tu solicitud de visa!",
+            "notApprovedTitle": "No has aprobado esta vez",
+            "notApprovedMessage": "El resultado total de tu formulario es ",
+            "notApprovedMessage2": "lo cual indica que no has aprobado el formulario en esta ocasión. Las respuestas correctas e incorrectas se utilizan para cuantificar tu puntaje, determinando si pasas la prueba de visa o no.",
+            "dontGetDiscouraged": "¡No te desanimes! Cada intento es una oportunidad para aprender y mejorar.",
+            "importantNote": "Nota importante",
+            "weightingMessage": "Cada pregunta en el formulario tiene asignada una ponderación específica, lo que implica que no todas las respuestas tienen el mismo impacto en tu calificación final. Es fundamental tener en cuenta esta variabilidad al evaluar tus respuestas, ya que cada una contribuye de manera única al puntaje global. Esta calificación final es un criterio importante para determinar si cumples con los requisitos necesarios para aprobar la prueba y avanzar en el proceso de visa.",
+            "interviewMessage": "Es esencial recordar que, aunque esta calificación es significativa, no garantiza automáticamente el éxito en la entrevista oficial que forma parte del procedimiento de visa. La entrevista evaluará aspectos adicionales, como la veracidad de la información proporcionada, tu capacidad para comunicarte eficazmente en el idioma requerido, y otros criterios específicos según las regulaciones del país solicitante.",
+            "downloadCertificate": "Descargar Comprobante",
+            "goBackToStart": "Regresar al inicio",
+            "logoAlt": "",
+            "logoSrc": "/img/logo/todovisa.png",
+            "footerText": "© 2024 TodoVisa S.A de C.V"
+        },
+        "payment": {
+            "title": "¿Cómo realizar tu pago seguro con TODOVISA en 4 sencillos pasos?",
+            "steps": [
+                {
+                    "title": "Paso 1: Seleccionar el país",
+                    "description": "Primero, elige el país para el cual deseas realizar el servicio VIPRO. Puedes seleccionar entre una variedad de opciones que mejor se adapten a tus necesidades."
+                },
+                {
+                    "title": "Paso 2: Proceder al pago",
+                    "description": "Una vez seleccionado tu país, procede al pago utilizando tu tarjeta de débito o crédito. Aceptamos Visa, Mastercard, American Express y otras tarjetas principales, asegurando que tu información esté protegida con nuestras medidas de seguridad avanzadas."
+                },
+                {
+                    "title": "Paso 3: Confirmación y captura",
+                    "description": "Al finalizar el pago, recibirás una confirmación de la transacción. Asegúrate de tomar una captura de pantalla o una foto del comprobante para tus registros."
+                },
+                {
+                    "title": "Paso 4: Enviar comprobante",
+                    "description": "Envía la captura de pantalla o foto del comprobante al WhatsApp de TODOVISA. Una vez que nuestro equipo confirme el pago, podrás proceder a completar el formulario VIPRO sin preocupaciones. También asegúrate de enviar el comprobante al correo electrónico indicado para garantizar una rápida verificación."
+                }
+            ],
+            "finalMessage": "¡Listo! Has completado tu pago de manera segura y eficiente con TodoVisa."
+        },
+        "send_email":{
+            "success": "¡Correo enviado exitosamente!",
+            "error": "No se pudo enviar el correo. Por favor, inténtelo de nuevo."
         }
     }
 ];

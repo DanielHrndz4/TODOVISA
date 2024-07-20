@@ -123,7 +123,10 @@ const portuguese = [
         "popupWithLogin": {
             "title": "Escolha uma Opção:",
             "description": "Selecione uma das opções disponíveis para continuar com o formulário. Oferecemos uma ampla variedade de serviços adaptados às suas necessidades. Reserve um tempo para revisar cada opção e escolha a que melhor se adequa às suas necessidades. <strong>Faça sua seleção e prossiga para o próximo passo!</strong>",
-            "button": "Continuar"
+            "button": "Continuar",
+            "discountText1": "Você receberá um ",
+            "discountText2": " de desconto na sua consultoria",
+            "buy": "Como faço uma compra?"
         },
         "whatsapp": {
             "status": "Online",
@@ -1071,6 +1074,67 @@ const portuguese = [
         },
         "guide": {
             "button": "Adquirir o guia completo"
+        },
+        "qualification": {
+            "title": "Formulário de Aprovação de Visto",
+            "applicantData": "Dados do Candidato",
+            "name": "Nome:",
+            "countryOfOrigin": "País de Origem:",
+            "email": "E-mail:",
+            "phone": "Telefone:",
+            "personalData": "DADOS PESSOAIS",
+            "familyAndFinancialTies": "VÍNCULOS FAMILIARES E FINANCEIROS",
+            "travelHistory": "HISTÓRICO DE VIAGENS",
+            "criminalHistory": "HISTÓRICO CRIMINAL",
+            "overallResults": "Resultados Gerais",
+            "totalScore": "Pontuação Total:",
+            "congratulations": "Parabéns!",
+            "approvalMessage": "Você passou no formulário com uma pontuação total de ",
+            "approvalMessage2": "Todas as suas respostas foram avaliadas como corretas e incorretas, o que determina sua pontuação para o teste de visto",
+            "nextStep": "Agora você está pronto para dar o próximo passo para obter seu visto. Para continuar, basta enviar este certificado para o chat do WhatsApp de ",
+            "whatsappLink": "https://api.whatsapp.com/send/?phone=50370323075",
+            "whatsappText": "TODOVISA",
+            "guideMessage": " e você aproveitará um desconto de 25% na consultoria com Volamos Viajes.",
+            "guideConclusion": "A equipe de ",
+            "team": " estará lá para guiá-lo em cada passo do processo. Boa sorte com sua solicitação de visto!",
+            "notApprovedTitle": "Você não passou desta vez",
+            "notApprovedMessage": "O resultado total do seu formulário é ",
+            "notApprovedMessage2": "o que indica que você não passou no formulário desta vez. As respostas corretas e incorretas são usadas para quantificar sua pontuação, determinando se você passa no teste de visto ou não.",
+            "dontGetDiscouraged": "Não desanime! Cada tentativa é uma oportunidade para aprender e melhorar.",
+            "importantNote": "Nota Importante",
+            "weightingMessage": "Cada pergunta no formulário tem uma ponderação específica, o que significa que nem todas as respostas têm o mesmo impacto na sua pontuação final. É fundamental considerar essa variabilidade ao avaliar suas respostas, pois cada uma contribui de forma única para a pontuação geral. Esta pontuação final é um critério importante para determinar se você atende aos requisitos necessários para passar no teste e avançar no processo de visto.",
+            "interviewMessage": "É essencial lembrar que, embora esta pontuação seja significativa, ela não garante automaticamente o sucesso na entrevista oficial, que faz parte do procedimento de visto. A entrevista avaliará aspectos adicionais, como a veracidade das informações fornecidas, sua capacidade de se comunicar eficazmente no idioma exigido, e outros critérios específicos de acordo com as regulamentações do país solicitante.",
+            "downloadCertificate": "Baixar Certificado",
+            "goBackToStart": "Voltar ao Início",
+            "logoAlt": "",
+            "logoSrc": "/img/logo/todovisa.png",
+            "footerText": "© 2024 TodoVisa S.A de C.V"
+        },
+        "payment": {
+            "title": "Como realizar seu pagamento seguro com TODOVISA em 4 passos simples?",
+            "steps": [
+                {
+                    "title": "Passo 1: Selecionar o país",
+                    "description": "Primeiro, escolha o país para o qual deseja utilizar o serviço VIPRO. Você pode selecionar entre uma variedade de opções que melhor atendem às suas necessidades."
+                },
+                {
+                    "title": "Passo 2: Prosseguir para o pagamento",
+                    "description": "Depois de selecionar o seu país, prossiga para o pagamento usando seu cartão de débito ou crédito. Aceitamos Visa, Mastercard, American Express e outros cartões principais, garantindo que suas informações estejam protegidas com nossas medidas de segurança avançadas."
+                },
+                {
+                    "title": "Passo 3: Confirmação e captura",
+                    "description": "Após concluir o pagamento, você receberá uma confirmação da transação. Certifique-se de tirar uma captura de tela ou uma foto do recibo para seus registros."
+                },
+                {
+                    "title": "Passo 4: Enviar comprovante",
+                    "description": "Envie a captura de tela ou a foto do recibo para o WhatsApp do TODOVISA. Após nossa equipe confirmar o pagamento, você poderá prosseguir para completar o formulário VIPRO sem preocupações. Além disso, certifique-se de enviar o comprovante para o endereço de e-mail indicado para uma verificação rápida."
+                }
+            ],
+            "finalMessage": "Pronto! Você completou seu pagamento de forma segura e eficiente com o TodoVisa."
+        },
+        "send_email": {
+            "success": "Email enviado com sucesso!",
+            "error": "Não foi possível enviar o email. Por favor, tente novamente."
         }
     }
 ];

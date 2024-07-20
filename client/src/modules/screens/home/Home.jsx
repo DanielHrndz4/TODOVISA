@@ -74,6 +74,10 @@ export default function Home() {
       image: '/img/background/bgmain4.jpg',
       position: 'center',
     },
+    {
+      image: '/img/background/bgmx.webp',
+      position: 'center',
+    },
     // Agrega más slides según lo necesites
   ];
 
@@ -89,7 +93,7 @@ export default function Home() {
               {slides.map((slide, index) => (
                 <div key={index} className="banner-slide">
                   <div
-                    className="banner-image mt-0 xl:mt-[40px]"
+                    className="banner-image mt-0 xl:mt-[25px]"
                     style={{
                       backgroundImage: `url(${slide.image})`,
                       backgroundSize: "cover",

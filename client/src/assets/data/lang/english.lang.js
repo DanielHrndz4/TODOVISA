@@ -123,7 +123,10 @@ const english = [
         "popupWithLogin": {
             "title": "Choose an Option:",
             "description": "Select one of the available options to continue with the form. We offer a wide variety of services tailored to your needs. Take your time to review each option and choose the one that best suits your requirements. <strong>Make your selection and move on to the next step!</strong>",
-            "button": "Continue"
+            "button": "Continue",
+            "discountText1": "You will receive a ",
+            "discountText2": " discount on your consultation",
+            "buy": "How do I make a purchase?"
         },
         "whatsapp": {
             "status": "Online",
@@ -1072,6 +1075,67 @@ const english = [
         },
         "guide": {
             "button": "Get the complete guide"
+        },
+        "qualification": {
+            "title": "Visa Approval Form",
+            "applicantData": "Applicant Data",
+            "name": "Name:",
+            "countryOfOrigin": "Country of Origin:",
+            "email": "Email:",
+            "phone": "Phone:",
+            "personalData": "PERSONAL DATA",
+            "familyAndFinancialTies": "FAMILY AND FINANCIAL TIES",
+            "travelHistory": "TRAVEL HISTORY",
+            "criminalHistory": "CRIMINAL HISTORY",
+            "overallResults": "Overall Results",
+            "totalScore": "Total Score:",
+            "congratulations": "Congratulations!",
+            "approvalMessage": "You have passed the form with a total score of ",
+            "approvalMessage2": "All your answers have been evaluated as correct and incorrect, which determines your score for the visa test",
+            "nextStep": "You are now ready to take the next step towards obtaining your visa. To continue, simply send this certificate to the WhatsApp chat of ",
+            "whatsappLink": "https://api.whatsapp.com/send/?phone=50370323075",
+            "whatsappText": "TODOVISA",
+            "guideMessage": " and you will enjoy a 25% discount on the advisory service with Volamos Viajes.",
+            "guideConclusion": "The team of ",
+            "team": " It will be there to guide you every step of the way. Best of luck with your visa application!",
+            "notApprovedTitle": "You did not pass this time",
+            "notApprovedMessage": "The total result of your form is ",
+            "notApprovedMessage2": "which indicates that you have not passed the form on this occasion. Correct and incorrect answers are used to quantify your score, determining whether you pass the visa test or not.",
+            "dontGetDiscouraged": "Don't get discouraged! Each attempt is an opportunity to learn and improve.",
+            "importantNote": "Important Note",
+            "weightingMessage": "Each question on the form has a specific weighting assigned, which means that not all answers have the same impact on your final score. It is essential to consider this variability when evaluating your answers, as each one uniquely contributes to the overall score. This final score is an important criterion for determining whether you meet the necessary requirements to pass the test and advance in the visa process.",
+            "interviewMessage": "It is essential to remember that although this score is significant, it does not automatically guarantee success in the official interview, which is part of the visa procedure. The interview will evaluate additional aspects, such as the veracity of the information provided, your ability to communicate effectively in the required language, and other specific criteria according to the regulations of the applicant country.",
+            "downloadCertificate": "Download Certificate",
+            "goBackToStart": "Go Back to Start",
+            "logoAlt": "",
+            "logoSrc": "/img/logo/todovisa.png",
+            "footerText": "© 2024 TodoVisa S.A de C.V"
+        },
+        "payment": {
+            "title": "How to make a secure payment with TODOVISA in 4 simple steps?",
+            "steps": [
+                {
+                    "title": "Step 1: Select the country",
+                    "description": "First, choose the country for which you want to use the VIPRO service. You can select from a variety of options that best suit your needs."
+                },
+                {
+                    "title": "Step 2: Proceed to payment",
+                    "description": "Once you have selected your country, proceed to payment using your debit or credit card. We accept Visa, Mastercard, American Express, and other major cards, ensuring that your information is protected with our advanced security measures."
+                },
+                {
+                    "title": "Step 3: Confirmation and capture",
+                    "description": "After completing the payment, you will receive a confirmation of the transaction. Be sure to take a screenshot or a photo of the receipt for your records."
+                },
+                {
+                    "title": "Step 4: Send proof",
+                    "description": "Send the screenshot or photo of the receipt to TODOVISA WhatsApp. Once our team confirms the payment, you will be able to proceed with completing the VIPRO form without worries. Also, make sure to send the receipt to the indicated email address for quick verification."
+                }
+            ],
+            "finalMessage": "Done! You have completed your payment securely and efficiently with TodoVisa."
+        },
+        "send_email": {
+            "success": "Email sent successfully!",
+            "error": "Failed to send the email. Please try again."
         }
     }
 ];

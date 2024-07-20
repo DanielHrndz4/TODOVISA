@@ -6,6 +6,7 @@ import PieG from "../stats/PieG";
 import { Button } from "@material-tailwind/react";
 import { useNavigate, useLocation } from "react-router-dom";
 import URI from "../../../assets/data/admin/uri.api";
+import lang from "../../../assets/data/lang.data";
 
 export default function FormsComplete() {
     const [viproResult, setViproResult] = useState(false);
@@ -15,6 +16,7 @@ export default function FormsComplete() {
     const location = useLocation();
     const pathSegments = location.pathname.split('/');
     const id = pathSegments[pathSegments.length - 1];
+    const quaText = lang[0].qualification
 
     useEffect(() => {
         const fetchFormData = async () => {
@@ -95,7 +97,7 @@ export default function FormsComplete() {
                             <div className="m-auto w-full flex flex-col">
                                 <div className="flex flex-col gap-1 text-center pb-16">
                                     <h1 className="text-5xl font-bold">
-                                        Formulario de aprobación de Visa
+                                        {quaText.title}
                                     </h1>
                                     <h2 className="text-5xl font-medium">
                                         {getCountry(userData.form_country)}
@@ -106,32 +108,32 @@ export default function FormsComplete() {
                                         <thead className="border mx-4 my-2 font-bold">
                                             <tr>
                                                 <th className="px-4 py-2" colSpan="4">
-                                                    Datos del aplicante
+                                                    {quaText.applicantData}
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td className="border px-4 py-2 font-bold">Nombre:</td>
+                                                <td className="border px-4 py-2 font-bold">{quaText.name}</td>
                                                 <td className="border px-4 py-2 capitalize">
                                                     {userData.name}
                                                 </td>
                                                 <td className="border px-4 py-2 font-bold">
-                                                    País de origen:
+                                                    {quaText.countryOfOrigin}
                                                 </td>
                                                 <td className="border px-4 py-2">
                                                     {userData.user_country}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td className="border px-4 py-2 font-bold">Correo:</td>
+                                                <td className="border px-4 py-2 font-bold">{quaText.email}</td>
                                                 <td className="border px-4 py-2" colSpan="3">
                                                     {userData.email}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td className="border px-4 py-2 font-bold">
-                                                    Teléfono:
+                                                    {quaText.phone}
                                                 </td>
                                                 <td className="border px-4 py-2" colSpan="3">
                                                     {userData.tel}
@@ -146,19 +148,19 @@ export default function FormsComplete() {
                                     <>
                                         <div className="flex flex-col w-full pt-20 pb-12">
                                             <PieG correct={userData.response[0]?.dh?.correct || 0} incorrect={userData.response[0]?.dh?.incorrect || 0} />
-                                            <p className="text-center py-6">DATOS PERSONALES</p>
+                                            <p className="text-center py-6">{quaText.personalData}</p>
                                         </div>
                                         <div className="flex flex-col w-full pt-20 pb-12">
                                             <PieG correct={userData.response[0]?.aff?.correct || 0} incorrect={userData.response[0]?.aff?.incorrect || 0} />
-                                            <p className="text-center py-6">ARRAIGOS FAM. Y FINAN.</p>
+                                            <p className="text-center py-6">{quaText.familyAndFinancialTies}</p>
                                         </div>
                                         <div className="flex flex-col w-full pt-20 pb-12">
                                             <PieG correct={userData.response[0]?.hv?.correct || 0} incorrect={userData.response[0]?.hv?.incorrect || 0} />
-                                            <p className="text-center py-6">HISTORIAL DE VIAJES</p>
+                                            <p className="text-center py-6">{quaText.travelHistory}</p>
                                         </div>
                                         <div className="flex flex-col w-full pt-20 pb-12">
                                             <PieG correct={userData.response[0]?.hd?.correct || 0} incorrect={userData.response[0]?.hd?.incorrect || 0} />
-                                            <p className="text-center py-6">HISTORIAL DELICTIVO</p>
+                                            <p className="text-center py-6">{quaText.criminalHistory}</p>
                                         </div>
                                     </>
                                 )}
@@ -166,10 +168,10 @@ export default function FormsComplete() {
 
                             <div className="text-center">
                                 <h2 className="text-black font-bold text-5xl pb-4 capitalize">
-                                    Resultados generales
+                                    {quaText.overallResults}
                                 </h2>
                                 <p className="text-black text-4xl">
-                                    Calificación total:{" "}
+                                    {quaText.totalScore}{" "}
                                     <strong
                                         className={`${userData.qualification >= 60 ? "text-green-600" : "text-red-400"
                                             } text-shadow`}
@@ -183,63 +185,42 @@ export default function FormsComplete() {
                                     {userData.qualification && userData.qualification >= 60 ? (
                                         <div className="flex flex-col gap-3 py-10 text-xl text-black">
                                             <h2 className="text-center text-3xl pb-4 font-semibold">
-                                                ¡Felicidades!
+                                                {quaText.congratulations}
                                             </h2>
                                             <p className="text-justify">
-                                                Has aprobado el formulario con una calificación total de{" "}
-                                                <strong>{userData.qualification}</strong>. Todas tus respuestas han
-                                                sido evaluadas como correctas e incorrectas, lo que
-                                                determina tu puntaje para la prueba de visa.
+                                                {quaText.approvalMessage}{" "}
+                                                <strong>{userData.qualification}</strong>. {quaText.approvalMessage2}
                                             </p>
                                             <p className="text-justify">
-                                                Ahora estás listo para dar el siguiente paso hacia la obtención de tu visa. Para continuar, simplemente envía este comprobante al chat de WhatsApp de <strong><a href="https://api.whatsapp.com/send/?phone=50370323075" className="text-TVBlue hover:cursor-pointer">TODOVISA</a></strong> y podrás disfrutar de un descuento del 25% en la asesoría con Volamos Viajes.
+                                                {quaText.nextStep}<strong><a href={quaText.whatsappLink} className="text-TVBlue hover:cursor-pointer">{quaText.whatsappText}</a></strong>{quaText.guideMessage}
                                             </p>
-                                            <p className="text-justify">El equipo de <strong><a href="https://api.whatsapp.com/send/?phone=50370323075" className="text-TVBlue hover:cursor-pointer">TODOVISA</a></strong> estará allí para guiarte en cada paso del proceso. ¡Mucho éxito en tu solicitud de visa!</p>
+                                            <p className="text-justify">{quaText.guideConclusion}<strong><a href={quaText.whatsappLink} className="text-TVBlue hover:cursor-pointer">{quaText.whatsappText}</a></strong>{quaText.team}</p>
                                         </div>
                                     ) : (
                                         <div className="flex flex-col gap-3 py-10 text-xl text-black">
                                             <h2 className="text-center text-3xl pb-2 font-semibold">
-                                                No has aprobado esta vez
+                                               {quaText.notApprovedTitle}
                                             </h2>
                                             <p className="text-justify">
-                                                El resultado total de tu formulario es{" "}
+                                                {quaText.notApprovedMessage}{" "}
                                                 {userData.qualification ? userData.qualification : ''}
-                                                , lo cual indica que no has
-                                                aprobado el formulario en esta ocasión. Las respuestas
-                                                correctas e incorrectas se utilizan para cuantificar tu
-                                                puntaje, determinando si pasas la prueba de visa o no.
+                                                , {quaText.notApprovedMessage2}
                                             </p>
                                             <p>
-                                                ¡No te desanimes! Cada intento es una oportunidad para
-                                                aprender y mejorar.
+                                                {quaText.dontGetDiscouraged}
                                             </p>
                                         </div>
                                     )}
                                 </div>
                                 <div className="w-full m-auto">
                                     <div className="text-justify flex flex-col gap-5">
-                                        <h1 className="text-2xl font-bold">Nota importante</h1>
+                                        <h1 className="text-2xl font-bold">{quaText.importantNote}</h1>
                                         <div className="flex flex-col gap-3">
                                             <p className="text-xl">
-                                                Cada pregunta en el formulario tiene asignada una
-                                                ponderación específica, lo que implica que no todas las
-                                                respuestas tienen el mismo impacto en tu calificación
-                                                final. Es fundamental tener en cuenta esta variabilidad
-                                                al evaluar tus respuestas, ya que cada una contribuye de
-                                                manera única al puntaje global. Esta calificación final
-                                                es un criterio importante para determinar si cumples con
-                                                los requisitos necesarios para aprobar la prueba y
-                                                avanzar en el proceso de visa.
+                                                {quaText.weightingMessage}
                                             </p>
                                             <p className="text-xl">
-                                                Es esencial recordar que, aunque esta calificación es
-                                                significativa, no garantiza automáticamente el éxito en
-                                                la entrevista oficial que forma parte del procedimiento
-                                                de visa. La entrevista evaluará aspectos adicionales,
-                                                como la veracidad de la información proporcionada, tu
-                                                capacidad para comunicarte eficazmente en el idioma
-                                                requerido, y otros criterios específicos según las
-                                                regulaciones del país solicitante.
+                                                {quaText.interviewMessage}
                                             </p>
                                         </div>
                                     </div>
@@ -252,14 +233,14 @@ export default function FormsComplete() {
                                 className="bg-TVBlue shadowbtn"
                                 style={{ display: "block" }} // Asegúrate de que el botón esté visible por defecto
                             >
-                                Descargar Comprobante
+                                {quaText.downloadCertificate}
                             </Button>
                             <Button
                                 onClick={() => navigate("/")}
                                 className="bg-TVred shadowbtn"
                                 style={{ display: "block" }} // Asegúrate de que el botón esté visible por defecto
                             >
-                                Regresar al inicio
+                                {quaText.goBackToStart}
                             </Button>
                         </div>
                         <div
@@ -269,7 +250,7 @@ export default function FormsComplete() {
                             <img
                                 src="/img/logo/todovisa.png"
                                 className="w-[60px] h-[60px]"
-                                alt=""
+                                alt="TODOVISA S.A DE C.V"
                             />
                             <h2 className="font-semibold">© 2024 TodoVisa S.A de C.V</h2>
                         </div>

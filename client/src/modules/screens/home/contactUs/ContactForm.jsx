@@ -12,7 +12,7 @@ import handleClickPopUpContact from '../../../components/popup/PopUpContactForm'
 export default function ContactForm() {
   const contactForm = lang[0].contact.form;
   const form = useRef();
-
+  const emailText = lang[0].send_email
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -23,10 +23,10 @@ export default function ContactForm() {
       .then(
         () => {
           form.current.reset();
-          handleClickPopUpContact('<h1 class="font-semibold text-center">¡Correo enviado exitosamente!</h1>', 'success','OK');
+          handleClickPopUpContact(`<h1 class="font-semibold text-center">${emailText.success}</h1>`, 'success','OK');
         },
         (error) => {
-          handleClickPopUpContact('<h1 class="font-semibold text-center">No se pudo enviar el correo. Por favor, inténtelo de nuevo.</h1>', 'error', 'OK');
+          handleClickPopUpContact(`<h1 class="font-semibold text-center">${emailText.error}</h1>`, 'error', 'OK');
         },
       );
   };

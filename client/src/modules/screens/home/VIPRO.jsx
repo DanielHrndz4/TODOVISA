@@ -27,14 +27,14 @@ const handlePopUp = (validate) => {
                     <p class="text-justify pt-8">${popupWithLoginText.description}</p>
                     <h1 class="font-bold text-3xl pt-5 PB-1">$19.99</h1>
                     <div class="relative mt-4 z-50 w-[95%] py-[7px] bg-yellow-600 shadow-xl m-auto justify-center items-center text-black">
-                    Recibirás un <strong>25%</strong> de descuento en tu asesoría
+                    ${popupWithLoginText.discountText1}<strong>25%</strong>${popupWithLoginText.discountText2}
                     </div>
                     <div class="flex flex-row w-full z-40">
                         <div class="h-6 -mt-4 w-[50px] py-[7px] bg-yellow-600 flex justify-center items-center"></div>
                         <div class="h-6 -mt-4 w-full py-[7px] flex justify-center items-center"></div>
                         <div class="h-6 -mt-4 w-[50px] py-[7px] bg-yellow-600 flex justify-center items-center"></div>
                     </div>
-                    <h1 class="text-center font-bold text-lg pt-2 text-TVred hover:underline hover:cursor-pointer" onClick="window.open('/steps', '_blank')">¿Cómo realizo una compra?</h1>
+                    <h1 class="text-center font-bold text-lg pt-2 text-TVred hover:underline hover:cursor-pointer" onClick="window.open('/steps', '_blank')">${popupWithLoginText.buy}</h1>
                 </div>
             </div>
         `;
