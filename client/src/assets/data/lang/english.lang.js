@@ -149,7 +149,13 @@ const english = [
             "obligatory_field": "This field is required. Please enter a value.",
             "select_option": "Select an option",
             "save": "Saving form",
-            "wait": "Please wait..."
+            "wait": "Please wait...",
+            "wait_title": "Validating data",
+            "error_save": "An error occurred while saving the form. Please try again.",
+            "success_save": "Form saved successfully!",
+            "submit_form": "Form submitted successfully!",
+            "form_resent": "Form resent successfully!",
+            "send_error": "An error occurred while sending the form. Please try again later."
         },
         "with_session": {
             "title": "You already have an active session",
@@ -172,19 +178,22 @@ const english = [
         },
         "signup": {
             "title": "Sign Up",
-            "subtitle": "Join our community! Create your account to get started.",
-            "first_name": "First Name",
+            "subtitle": "Nice to meet you! Enter your details to sign up.",
+            "name": "First Name",
             "last_name": "Last Name",
             "email": "Email",
             "password": "Password",
-            "confirm_password": "Confirm Password",
+            "repeat_password": "Repeat Password",
             "button": {
                 "loading_text": "Loading...",
                 "default_text": "Sign Up"
             },
+            "country": "Country",
+            "select_country": "Select your country",
+            "phone_number": "Phone Number",
             "or_signup": "Or sign up with",
-            "question": "Already have an account?",
-            "link": "Sign In"
+            "account": "Already have an account?",
+            "signin": "Sign In"
         },
         "mexico": {
             "first_section": {
@@ -1137,11 +1146,17 @@ const english = [
             "success": "Email sent successfully!",
             "error": "Failed to send the email. Please try again."
         },
-        "log_forms":{
+        "log_forms": {
             "signing_out": "Signing out",
             "sign_out": "Sign out",
             "without_forms": "Without forms",
             "forms": "Forms"
+        },
+        "validation_popup": {
+            "success": "Successful Registration",
+            "text_success": "Now you can enjoy the services of Todovisa.",
+            "text_success2": "Log in to enjoy the services of Todovisa.",
+            "button_success": "Accept"
         }
     }
 ];

@@ -3,7 +3,6 @@ import questionsPortuguese from "./questionsPortuguese.data";
 import questionsSpanish from "./questionsSpanish.data";
 
 const localLanguageVIPRO = localStorage.getItem('lang');
-console.log(localLanguageVIPRO)
 
 const langSelectionVIPRO = (lang) => {
     if (lang === 'Spanish' || lang === 'Español' || lang === 'Espanhol') {

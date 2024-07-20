@@ -174,7 +174,6 @@ const handleLang = (lang) => {
   } else {
     localStorage.setItem("lang", "Español");
   }
-  console.log(localStorage.getItem("lang"));
   location.reload();
 };
 

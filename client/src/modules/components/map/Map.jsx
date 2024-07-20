@@ -25,7 +25,8 @@ export default function MapComponent() {
           <div className="w-full h-full flex flex-row mx-auto text-white">
             <div className="h-[275px] lg:h-[225px] xl:h-[250px] sm:h-[300px] w-full">
               <GoogleMapReact
-                apiKey={'AIzaSyDPRY1HYtUBnqp5hKE1J7pJHCaoTjoavAo'}
+                //apiKey={'AIzaSyDPRY1HYtUBnqp5hKE1J7pJHCaoTjoavAo'}
+                bootstrapURLKeys={{key: 'AIzaSyDPRY1HYtUBnqp5hKE1J7pJHCaoTjoavAo'}}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
                 options={{

@@ -54,12 +54,8 @@ export default function MainVIPRO() {
         const data = await response.json();
         const vipro = data.user;
 
-        console.log(vipro);
-
-        // Convertir las propiedades del objeto en un arreglo de claves
         const viproArray = Object.keys(vipro);
 
-        // Mapear las claves de vipro a nombres de países alternativos
         const viproAlt = viproArray.map(key => {
           switch (key) {
             case 'vipro_eeuu':

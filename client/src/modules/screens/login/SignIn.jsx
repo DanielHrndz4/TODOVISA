@@ -47,7 +47,16 @@ export default function Login() {
     const googleID = decodeToken.jti;
     const avatar = decodeToken.picture;
     const buttonText = lang[0].form;
-
+    Swal.fire({
+      title: buttonText.wait_title,
+      html: buttonText.wait,
+      icon: "info",
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+    });
     try {
       const response = await fetch(`${URI}/auth/google`, {
         method: "POST",
@@ -67,6 +76,7 @@ export default function Login() {
       const data = await response.json();
 
       if (!response.ok) {
+        Swal.close();
         handleClickPopUpSignUp(
           "error",
           `<h1 class='text-black pb-4 text-2xl font-semibold text-center'>Credenciales inválidas</h1><p class='py-2 text-justify'>Ya existe una cuenta registrada con este email</p>`,
@@ -86,6 +96,7 @@ export default function Login() {
           secure: true,
           sameSite: "Strict",
         });
+        Swal.close();
         sessionStorage.setItem("SESSION", true);
         navigateTo("/");
       }
@@ -147,7 +158,7 @@ export default function Login() {
       } else if (response.status === 401) {
         handleClickPopUpSignUp(
           "error",
-          `<h1 class='text-black pb-4 text-2xl font-semibold'>Credenciales inválidas</h1><p class='py-2 text-justify'>Por favor, verifica tus credenciales e intenta nuevamente.</p>`,
+          `<h1 class='text-black pb-4 text-2xl font-semibold'>Credenciales inválidas</h1><p class='py-2 text-center'>Por favor, verifica tus credenciales e intenta nuevamente.</p>`,
           "Aceptar"
         );
       } else {
@@ -299,9 +310,7 @@ export default function Login() {
                       className="mt-6 bg-black shadowbtn text-white flex items-center justify-center"
                       fullWidth
                       onSuccess={handleLoginSuccess}
-                      onError={() => {
-                        console.log("Login Failed");
-                      }}
+                      onError={() => {}}
                     />
                   </div>
                   <Typography
@@ -331,7 +340,7 @@ export default function Login() {
         <div
           className="w-full hidden lg:block"
           style={{
-            backgroundImage: 'url("/img/LRP/visa3.jpg")',
+            backgroundImage: 'url("/img/LRP/visa3.webp")',
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

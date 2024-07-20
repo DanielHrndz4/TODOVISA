@@ -12,10 +12,8 @@ const fetchData = async (cookieJWT) => {
         );
 
         if (response.ok) {
-            console.log(response)
             return true;
         } else {
-            console.log(response)
             return false;
         }
     } catch (err) {

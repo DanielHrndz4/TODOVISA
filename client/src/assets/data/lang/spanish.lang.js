@@ -153,7 +153,13 @@ const spanish = [
             "obligatory_field": "Este campo es obligatorio. Por favor, ingresa un valor.",
             "select_option": "Selecciona una opción",
             "save": "Guardando formulario",
-            "wait": "Por favor espera..."
+            "wait": "Por favor espera...",
+            "wait_title": "Validando datos",
+            "error_save": "Ocurrió un error al guardar el formulario. Inténtalo de nuevo.",
+            "success_save": "¡Formulario guardado con éxito!",
+            "submit_form": "¡Formulario enviado con éxito!",
+            "form_resent": "Formulario reenviado con éxito!",
+            "send_error": "Ocurrió un error al enviar el formulario. Inténtalo de nuevo más tarde."
         },
         "with_session": {
             "title": "Ya tienes una sesion iniciada",
@@ -1146,15 +1152,21 @@ const spanish = [
             ],
             "finalMessage": "¡Listo! Has completado tu pago de manera segura y eficiente con TodoVisa."
         },
-        "send_email":{
+        "send_email": {
             "success": "¡Correo enviado exitosamente!",
             "error": "No se pudo enviar el correo. Por favor, inténtelo de nuevo."
         },
-        "log_forms":{
-            "signing_out":"Cerrando sesión",
-            "sign_out":"Cerrar sesión",
+        "log_forms": {
+            "signing_out": "Cerrando sesión",
+            "sign_out": "Cerrar sesión",
             "without_forms": "Sin formularios",
             "forms": "Formularios"
+        },
+        "validation_popup":{
+            "success": "Registro Exitoso",
+            "text_success": "Ahora puedes disfrutar de los servicios de Todovisa.",
+            "text_success2": "Inicia sesión para disfrutar de los servicios de Todovisa.",
+            "button_success": "Aceptar"
         }
     }
 ];

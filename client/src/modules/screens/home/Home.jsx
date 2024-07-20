@@ -113,7 +113,7 @@ export default function Home() {
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-semibold z-10">
               <Fade>
                 <div className="flex flex-col gap-4 [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)]">
-                <h1 className="text-white text-2xl text-center sm:text-4xl">{bannerText.title}</h1>
+                <h1 className="text-white text-3xl text-center sm:text-4xl">{bannerText.title}</h1>
                 <h1 className="text-white text-5xl text-center sm:text-7xl">{bannerText.todovisa}</h1>
                 </div>
               </Fade>

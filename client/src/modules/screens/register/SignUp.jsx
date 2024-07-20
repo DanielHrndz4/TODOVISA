@@ -14,10 +14,12 @@ import Cookies from "js-cookie";
 import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
 import { GoogleLogin } from '@react-oauth/google';
+import Swal from "sweetalert2";
 import { jwtDecode } from 'jwt-decode';
 
 export default function Register() {
   const signupText = lang[0].signup
+  const vpp = lang[0].validation_popup
   const [errorMessage, setErrorMessage] = useState(null);
   const [signUpValue, setSignUpValue] = useState(null);
   const [isActiveBtn, setIsActiveBtn] = useState(false);
@@ -94,7 +96,17 @@ export default function Register() {
     const tel = userInfo.country_calling_code;
     const googleID = decodeToken.jti;
     const avatar = decodeToken.picture;
-
+    const buttonText = lang[0].form;
+    Swal.fire({
+      title: buttonText.wait_title,
+      html: buttonText.wait,
+      icon: "info",
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      onBeforeOpen: () => {
+        Swal.showLoading();
+      },
+    });
     try {
       const response = await fetch(`${URI}/auth/google`, {
         method: 'POST',
@@ -106,13 +118,16 @@ export default function Register() {
       const data = await response.json();
 
       if (!response.ok) {
-        handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold text-center'>Credenciales inválidas</h1><p class='py-2 text-justify'>Ya existe una cuenta registrada con este email</p>`, "Aceptar");
+        Swal.close();
+        handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold text-center'>Credenciales inválidas</h1><p class='py-2 text-justify'>Ya existe una cuenta registrada con este email</p>`, vpp.button_success);
       } else {
         const token = data.token;
         const payload = data.payload;
         const expires = new Date(new Date().getTime() + 60 * 60 * 1000);
         Cookies.set('jwt', token, { expires: expires, secure: true, sameSite: 'Strict' });
         Cookies.set('user', JSON.stringify(payload), { expires: expires, secure: true, sameSite: 'Strict' });
+        Swal.close();
+        handleClickPopUpSignUp("success", `<h1 class='text-black pb-4 text-2xl font-semibold'>${vpp.success}</h1><p class='text-center'>${vpp.text_success}</p>`, vpp.button_success);
         sessionStorage.setItem('SESSION', true);
         navigateTo('/')
       }
@@ -163,7 +178,7 @@ export default function Register() {
       if (response.ok) {
         const data = await response.json();
         setErrorMessage('');
-        handleClickPopUpSignUp("success", "<h1 class='text-black pb-4 text-2xl font-semibold'>Registro Exitoso</h1><p class='text-justify'>Inicia sesión para disfrutar de los servicios de Todovisa.</p>", "Aceptar");
+        handleClickPopUpSignUp("success", `<h1 class='text-black pb-4 text-2xl font-semibold'>${vpp.success}</h1><p class='text-center'>${vpp.text_success2}</p>`, vpp.button_success);
         navigateTo("/signin");
       } else {
         const errorData = await response.json();
@@ -442,9 +457,7 @@ export default function Register() {
                     <GoogleLogin className="mt-6 bg-black shadowbtn text-white flex items-center justify-center"
                       fullWidth
                       onSuccess={handleLoginSuccess}
-                      onError={() => {
-                        console.log('Login Failed');
-                      }}
+                      onError={() => {}}
                     />
                   </div>
                   <Typography
@@ -467,7 +480,7 @@ export default function Register() {
         <div
           className="w-full hidden lg:block"
           style={{
-            backgroundImage: 'url("/img/LRP/visa3.jpg")',
+            backgroundImage: 'url("/img/LRP/visa3.webp")',
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

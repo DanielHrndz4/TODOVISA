@@ -75,7 +75,7 @@ export default function Login() {
             </Card>
           </Fade>
         </div>
-        <div className="w-full hidden lg:block" style={{ backgroundImage: 'url("/img/LRP/visa3.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        <div className="w-full hidden lg:block" style={{ backgroundImage: 'url("/img/LRP/visa3.webp")', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
       </main>
     </Fade>
   );

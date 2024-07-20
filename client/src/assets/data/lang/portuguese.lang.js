@@ -150,11 +150,17 @@ const portuguese = [
             "select_option": "Selecione uma opção",
             "save": "Salvando formulário",
             "wait": "Aguarde um momento...",
+            "wait_title": "Validando dados",
             "error_save": "Ocorreu um erro ao salvar o formulário. Tente novamente.",
             "success_save": "Formulário salvo com sucesso!",
             "submit_form": "Formulário enviado com sucesso!",
             "form_resent": "Formulário reenviado com sucesso!",
             "send_error": "Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde."
+        },
+        "with_session": {
+            "title": "Você já está logado",
+            "subtitle": "Faça logout para se registrar ou entrar com outro usuário.",
+            "button": "Voltar ao início"
         },
         "signin": {
             "title": "Entrar",
@@ -170,20 +176,23 @@ const portuguese = [
             "link": "Cadastrar-se"
         },
         "signup": {
-            "title": "Cadastrar-se",
-            "subtitle": "Junte-se à nossa comunidade! Crie sua conta para começar.",
-            "first_name": "Nome",
+            "title": "Cadastre-se",
+            "subtitle": "Prazer em conhecê-lo! Insira seus dados para se registrar.",
+            "name": "Nome",
             "last_name": "Sobrenome",
-            "email": "Email",
+            "email": "E-mail",
             "password": "Senha",
-            "confirm_password": "Confirmar Senha",
+            "repeat_password": "Repita a Senha",
             "button": {
                 "loading_text": "Carregando...",
-                "default_text": "Cadastrar-se"
+                "default_text": "Registrar"
             },
-            "or_signup": "Ou cadastre-se com",
-            "question": "Já tem uma conta?",
-            "link": "Entrar"
+            "country": "País",
+            "select_country": "Selecione seu país",
+            "phone_number": "Número de telefone",
+            "or_signup": "Ou registre-se com",
+            "account": "Já tem uma conta?",
+            "signin": "Entrar"
         },
         "mexico": {
             "first_section": {
@@ -1136,12 +1145,18 @@ const portuguese = [
             "success": "Email enviado com sucesso!",
             "error": "Não foi possível enviar o email. Por favor, tente novamente."
         },
-        "log_forms":{
+        "log_forms": {
             "signing_out": "Encerrando sessão",
             "sign_out": "Sair",
             "without_forms": "Sem formulários",
             "forms": "Formulários"
-        }        
+        },
+        "validation_popup": {
+            "success": "Registro bem-sucedido",
+            "text_success": "Agora você pode aproveitar os serviços da Todovisa.",
+            "text_success2": "Faça login para aproveitar os serviços da Todovisa.",
+            "button_success": "Aceitar"
+        }
     }
 ];
 
