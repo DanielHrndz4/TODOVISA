@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Cookies from 'js-cookie';
 import fetchData from "../../../assets/data/validation/token.validation";
 import URI from "../../../assets/data/admin/uri.api";
+import Loading from "../../components/loader/Loading";
 
 export default function MainVIPRO() {
   const navigateTo = useNavigate();
@@ -12,6 +13,8 @@ export default function MainVIPRO() {
   const location = useLocation();
   const pathSegments = location.pathname.split("/");
   const country = pathSegments[pathSegments.length - 1];
+  const [loadingTimeout, setLoadingTimeout] = useState(null);
+
   const validationData = async () => {
     const user = Cookies.get('user');
     const jwt = Cookies.get('jwt');
@@ -90,16 +93,21 @@ export default function MainVIPRO() {
       console.error("Server error", err);
       navigateTo("/");
     } finally {
-      setIsLoading(false);
+      // Asegúrate de que el loading se muestre al menos durante 2 segundos
+      setLoadingTimeout(setTimeout(() => {
+        setIsLoading(false);
+      }, 3000));
     }
   };
 
   useEffect(() => {
     validationData();
+    // Limpia el temporizador si el componente se desmonta
+    return () => clearTimeout(loadingTimeout);
   }, []); // Llama a validationData solo cuando el componente se monta
 
   if (isLoading) {
-    return <div></div>; // Muestra un mensaje de carga mientras se verifica la sesión
+    return <Loading />; // Muestra un mensaje de carga mientras se verifica la sesión
   }
 
   return (

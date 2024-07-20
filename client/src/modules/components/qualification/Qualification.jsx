@@ -6,6 +6,7 @@ import PieG from "../stats/PieG";
 import { Button } from "@material-tailwind/react";
 import { useNavigate, useLocation } from "react-router-dom";
 import URI from "../../../assets/data/admin/uri.api";
+import lang from "../../../assets/data/lang.data";
 
 export default function Qualification() {
   const user = Cookies.get("user");
@@ -29,19 +30,19 @@ export default function Qualification() {
   const [qualification, setQualification] = useState(null);
   const [countryForm, setCountryForm] = useState("");
   const [dataQualifications, setDataQualifications] = useState();
-
+  const quaText = lang[0].qualification;
   const pdfRef = useRef();
 
   useEffect(() => {
     const allowedReferers = [
-      'http://localhost:5173/vipro/estadosunidos',
-      'http://localhost:5173/'
+      "http://localhost:5173/vipro/estadosunidos",
+      "http://localhost:5173/",
     ];
 
     const referer = document.referrer;
 
     if (!allowedReferers.includes(referer)) {
-      navigateTo('/'); // Redirige a la página de inicio u otra página de tu elección
+      navigateTo("/"); // Redirige a la página de inicio u otra página de tu elección
     }
   }, [history]);
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function Qualification() {
 
           //saveQualification();
         } else {
-          navigateTo('/')
+          navigateTo("/");
           throw new Error("Error en la respuesta de la API");
         }
       } catch (err) {
@@ -221,7 +222,8 @@ export default function Qualification() {
           }
         });
 
-        const lastname = userResponse.lastname !== undefined ? userResponse.lastname : "";
+        const lastname =
+          userResponse.lastname !== undefined ? userResponse.lastname : "";
         const resultDataQualification = {
           name: userResponse.name + " " + lastname,
           email: userResponse.email,
@@ -248,26 +250,29 @@ export default function Qualification() {
               },
             },
           ],
-          qualification: '90', // asegúrate de enviar la calificación como string
+          qualification: qualification.toFixed(1).toString(), // asegúrate de enviar la calificación como string
         };
 
         try {
           const response = await fetch(`${URI}/save_qualification`, {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json'
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({ resultData: resultDataQualification, email: email })
+            body: JSON.stringify({
+              resultData: resultDataQualification,
+              email: email,
+            }),
           });
 
           const data = await response.json();
-          console.log('Response from server:', data); // revisa la respuesta del servidor en la consola
+          console.log("Response from server:", data); // revisa la respuesta del servidor en la consola
 
           if (!data.success) {
             throw new Error(data.message);
           }
         } catch (error) {
-          console.error('Error al guardar la calificación: ', error);
+          console.error("Error al guardar la calificación: ", error);
         }
       };
       saveQualification();
@@ -282,7 +287,7 @@ export default function Qualification() {
     const mainElement = document.querySelector(".mainElementPdf");
     if (button) {
       button.style.display = "none";
-      mainElement.style.minWidth = "1700px";
+      mainElement.style.minWidth = "1400px";
     }
     const input = pdfRef.current;
     html2canvas(input).then((canvas) => {
@@ -315,9 +320,7 @@ export default function Qualification() {
             <div className="w-[80%] m-auto pt-10 pb-20">
               <div className="m-auto w-full flex flex-col">
                 <div className="flex flex-col gap-1 text-center pb-16">
-                  <h1 className="text-5xl font-bold">
-                    Formulario de aprobación de Visa
-                  </h1>
+                  <h1 className="text-5xl font-bold">{quaText.title}</h1>
                   <h2 className="text-5xl font-medium">
                     {getCountry(countryForm)}
                   </h2>
@@ -327,7 +330,7 @@ export default function Qualification() {
                     <thead className="border mx-4 my-2 font-bold">
                       <tr>
                         <th className="px-4 py-2" colSpan="4">
-                          Datos del aplicante
+                          {quaText.applicantData}
                         </th>
                       </tr>
                     </thead>
@@ -338,21 +341,23 @@ export default function Qualification() {
                           {userResponse.name} {userResponse.lastname}
                         </td>
                         <td className="border px-4 py-2 font-bold">
-                          País de origen:
+                          {quaText.countryOfOrigin}
                         </td>
                         <td className="border px-4 py-2">
                           {userResponse.country}
                         </td>
                       </tr>
                       <tr>
-                        <td className="border px-4 py-2 font-bold">Correo:</td>
+                        <td className="border px-4 py-2 font-bold">
+                          {quaText.email}
+                        </td>
                         <td className="border px-4 py-2" colSpan="3">
                           {userResponse.email}
                         </td>
                       </tr>
                       <tr>
                         <td className="border px-4 py-2 font-bold">
-                          Teléfono:
+                          {quaText.phone}
                         </td>
                         <td className="border px-4 py-2" colSpan="3">
                           {userResponse.tel}
@@ -365,33 +370,36 @@ export default function Qualification() {
               <div className="w-full flex flex-row gap-2 m-auto">
                 <div className="flex flex-col w-full pt-20 pb-12">
                   <PieG correct={correctCountDP} incorrect={incorrectCountDP} />
-                  <p className="text-center py-6">DATOS PERSONALES</p>
+                  <p className="text-center py-6">{quaText.personalData}</p>
                 </div>
                 <div className="flex flex-col w-full pt-20 pb-12">
                   <PieG
                     correct={correctCountAFF}
                     incorrect={incorrectCountAFF}
                   />
-                  <p className="text-center py-6">ARRAIGOS FAM. Y FINAN.</p>
+                  <p className="text-center py-6">
+                    {quaText.familyAndFinancialTies}
+                  </p>
                 </div>
                 <div className="flex flex-col w-full pt-20 pb-12">
                   <PieG correct={correctCountHV} incorrect={incorrectCountHV} />
-                  <p className="text-center py-6">HISTORIAL DE VIAJES</p>
+                  <p className="text-center py-6">{quaText.travelHistory}</p>
                 </div>
                 <div className="flex flex-col w-full pt-20 pb-12">
                   <PieG correct={correctCountHD} incorrect={incorrectCountHD} />
-                  <p className="text-center py-6">HISTORIAL DELICTIVO</p>
+                  <p className="text-center py-6">{quaText.criminalHistory}</p>
                 </div>
               </div>
               <div className="text-center">
                 <h2 className="text-black font-bold text-5xl pb-4 capitalize">
-                  Resultados generales
+                  {quaText.overallResults}
                 </h2>
                 <p className="text-black text-4xl">
-                  Calificación total:{" "}
+                  {quaText.totalScore}{" "}
                   <strong
-                    className={`${qualification >= 60 ? "text-green-600" : "text-red-400"
-                      } text-shadow`}
+                    className={`${
+                      qualification >= 60 ? "text-green-600" : "text-red-400"
+                    } text-shadow`}
                   >
                     {qualification.toFixed(1)}
                   </strong>
@@ -402,58 +410,62 @@ export default function Qualification() {
                   {qualification >= 60 ? (
                     <div className="flex flex-col gap-3 py-10 text-xl text-black">
                       <h2 className="text-center text-3xl pb-2 font-semibold">
-                        ¡Felicidades!
+                        {quaText.congratulations}
                       </h2>
                       <p className="text-justify">
-                        Has aprobado el formulario con una calificación total de{" "}
-                        {qualification.toFixed(1)}. Todas tus respuestas han
-                        sido evaluadas como correctas e incorrectas, lo que
-                        determina tu puntaje para la prueba de visa.
+                        {quaText.approvalMessage}{" "}
+                        <strong>{qualification.toFixed(1)}</strong>.{" "}
+                        {quaText.approvalMessage2}
+                      </p>
+                      <p className="text-justify">
+                        {quaText.nextStep}
+                        <strong>
+                          <a
+                            href={quaText.whatsappLink}
+                            className="text-TVBlue hover:cursor-pointer"
+                          >
+                            {quaText.whatsappText}
+                          </a>
+                        </strong>
+                        {quaText.guideMessage}
+                      </p>
+                      <p className="text-justify">
+                        {quaText.guideConclusion}
+                        <strong>
+                          <a
+                            href={quaText.whatsappLink}
+                            className="text-TVBlue hover:cursor-pointer"
+                          >
+                            {quaText.whatsappText}
+                          </a>
+                        </strong>
+                        {quaText.team}
                       </p>
                     </div>
                   ) : (
                     <div className="flex flex-col gap-3 py-10 text-xl text-black">
                       <h2 className="text-center text-3xl pb-2 font-semibold">
-                        No has aprobado esta vez
+                      {quaText.notApprovedTitle}
                       </h2>
                       <p className="text-justify">
-                        El resultado total de tu formulario es{" "}
-                        {qualification.toFixed(1)}, lo cual indica que no has
-                        aprobado el formulario en esta ocasión. Las respuestas
-                        correctas e incorrectas se utilizan para cuantificar tu
-                        puntaje, determinando si pasas la prueba de visa o no.
+                      {quaText.notApprovedMessage}{" "}
+                        {qualification.toFixed(1)}, {quaText.notApprovedMessage2}
                       </p>
                       <p>
-                        ¡No te desanimes! Cada intento es una oportunidad para
-                        aprender y mejorar.
+                      {quaText.dontGetDiscouraged}
                       </p>
                     </div>
                   )}
                 </div>
                 <div className="w-full m-auto">
                   <div className="text-justify flex flex-col gap-5">
-                    <h1 className="text-2xl font-bold">Nota importante</h1>
+                    <h1 className="text-2xl font-bold">{quaText.importantNote}</h1>
                     <div className="flex flex-col gap-3">
                       <p className="text-xl">
-                        Cada pregunta en el formulario tiene asignada una
-                        ponderación específica, lo que implica que no todas las
-                        respuestas tienen el mismo impacto en tu calificación
-                        final. Es fundamental tener en cuenta esta variabilidad
-                        al evaluar tus respuestas, ya que cada una contribuye de
-                        manera única al puntaje global. Esta calificación final
-                        es un criterio importante para determinar si cumples con
-                        los requisitos necesarios para aprobar la prueba y
-                        avanzar en el proceso de visa.
+                      {quaText.weightingMessage}
                       </p>
                       <p className="text-xl">
-                        Es esencial recordar que, aunque esta calificación es
-                        significativa, no garantiza automáticamente el éxito en
-                        la entrevista oficial que forma parte del procedimiento
-                        de visa. La entrevista evaluará aspectos adicionales,
-                        como la veracidad de la información proporcionada, tu
-                        capacidad para comunicarte eficazmente en el idioma
-                        requerido, y otros criterios específicos según las
-                        regulaciones del país solicitante.
+                      {quaText.interviewMessage}
                       </p>
                     </div>
                   </div>
@@ -466,14 +478,14 @@ export default function Qualification() {
                 className="bg-TVBlue shadowbtn"
                 style={{ display: "block" }} // Asegúrate de que el botón esté visible por defecto
               >
-                Descargar Comprobante
+                {quaText.downloadCertificate}
               </Button>
               <Button
                 onClick={() => navigateTo("/")}
                 className="bg-TVred shadowbtn"
                 style={{ display: "block" }} // Asegúrate de que el botón esté visible por defecto
               >
-                Regresar al inicio
+               {quaText.goBackToStart}
               </Button>
             </div>
             <div
@@ -482,8 +494,8 @@ export default function Qualification() {
             >
               <img
                 src="/img/logo/todovisa.png"
-                className="w-[60px] h-[45px]"
-                alt=""
+                className="w-[60px] h-[60px]"
+                alt="TODOVISA S.A DE C.V"
               />
               <h2 className="font-semibold">© 2024 TodoVisa S.A de C.V</h2>
             </div>

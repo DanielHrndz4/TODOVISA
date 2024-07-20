@@ -121,14 +121,15 @@ router.post('/show-form-eeuu', (req, res) => {
 });
 
 router.post('/update-form-eeuu', async (req, res) => {
-  const { email, questions, country } = req.body;
+  const { email, questions, country, isFinish } = req.body;
   try {
     const form = await Form.findOneAndUpdate({ email: email }, { questions: questions });
     if (form) {
       const user = await userSchema.findOne({ email: email });
       if (user) {
         let viproCountryCode;
-        switch (country.toLowerCase()) {
+        console.log(country)
+        switch (country) {
           case 'estadosunidos':
             viproCountryCode = 'vipro_eeuu';
             break;
@@ -156,9 +157,11 @@ router.post('/update-form-eeuu', async (req, res) => {
         }
 
         if (viproCountryCode) {
-          if (user[viproCountryCode]) {
-            user.set(viproCountryCode, undefined)
-            await user.save();
+          if(isFinish){
+            if (user[viproCountryCode]) {
+              user.set(viproCountryCode, undefined)
+              await user.save();
+            }
           }
         } else {
           return res.status(400).json({ message: 'País no válido' });
@@ -514,61 +517,60 @@ router.post('/form_response_eeuu', async (req, res) => {
 router.post('/save_qualification', async (req, res) => {
   const { resultData, email } = req.body;
   try {
-    const existingQualification = await ResultData.findOne({ email: email })
-    if (existingQualification) {
-      res.status(200).json({
-        success: true,
-        message: 'El correo ya existe',
-      })
-    } else {
-      const newQualification = new ResultData({
-        name: resultData.name,
-        email: resultData.email,
-        tel: resultData.tel,
-        user_country: resultData.user_country,
-        form_country: resultData.form_country,
-        response: [
-          {
-            dh: {
-              correct: resultData.response[0].dh.correct,
-              incorrect: resultData.response[0].dh.incorrect,
-            },
-            aff: {
-              correct: resultData.response[0].aff.correct,
-              incorrect:resultData.response[0].aff.incorrect,
-            },
-            hv: {
-              correct: resultData.response[0].hv.correct,
-              incorrect: resultData.response[0].hv.incorrect,
-            },
-            hd: {  // Aquí debería ser 'hd' en lugar de 'dp'
-              correct: resultData.response[0].hd.correct,
-              incorrect: resultData.response[0].hd.incorrect,
-            },
-          }
-        ],
-        qualification: resultData.qualification
-      });
-      const formCountry = resultData.form_country.toLowerCase().replace(/\s+/g, '');
-      console.log(formCountry);
-      await newQualification.save();
-      await Form.findOneAndDelete({ email: email, country: formCountry });
-      res.status(201).json({
-        success: true,
-        message: 'Resultados guardados con exito',
-        data: newQualification
-      });
-    }
+    const formCountry = resultData.form_country.toLowerCase().replace(/\s+/g, '');
+    const updatedQualification = await ResultData.findOneAndUpdate(
+      { email: email },
+      {
+        $set: {
+          name: resultData.name,
+          tel: resultData.tel,
+          user_country: resultData.user_country,
+          form_country: resultData.form_country,
+          response: [
+            {
+              dh: {
+                correct: resultData.response[0].dh.correct,
+                incorrect: resultData.response[0].dh.incorrect,
+              },
+              aff: {
+                correct: resultData.response[0].aff.correct,
+                incorrect: resultData.response[0].aff.incorrect,
+              },
+              hv: {
+                correct: resultData.response[0].hv.correct,
+                incorrect: resultData.response[0].hv.incorrect,
+              },
+              hd: {  // Aquí debería ser 'hd' en lugar de 'dp'
+                correct: resultData.response[0].hd.correct,
+                incorrect: resultData.response[0].hd.incorrect,
+              },
+            }
+          ],
+          qualification: resultData.qualification
+        }
+      },
+      { new: true, upsert: true }
+    );
+
+    // Elimina la entrada en Form
+    await Form.findOneAndDelete({ email: email, country: formCountry });
+
+    res.status(200).json({
+      success: true,
+      message: 'Resultados guardados con éxito',
+      data: updatedQualification
+    });
   } catch (error) {
     console.error('Error al guardar: ', error);
 
     res.status(500).json({
       success: false,
-      message: 'Ocurrio un error al guardar los resultados',
+      message: 'Ocurrió un error al guardar los resultados',
       error: error.message
     });
   }
 });
+
 
 router.post('/complete_forms', async (req, res) => {
   const { email } = req.body;

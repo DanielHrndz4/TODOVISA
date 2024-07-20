@@ -1136,6 +1136,12 @@ const english = [
         "send_email": {
             "success": "Email sent successfully!",
             "error": "Failed to send the email. Please try again."
+        },
+        "log_forms":{
+            "signing_out": "Signing out",
+            "sign_out": "Sign out",
+            "without_forms": "Without forms",
+            "forms": "Forms"
         }
     }
 ];

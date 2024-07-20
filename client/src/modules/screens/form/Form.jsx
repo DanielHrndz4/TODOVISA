@@ -32,7 +32,6 @@ const VIPROForm = () => {
   const pathSegments = location.pathname.split("/");
   const country = pathSegments[pathSegments.length - 1];
   const viproInfo = lang[0].form
-
   useEffect(() => {
     if (email) {
       const createForm = async (email) => {
@@ -65,11 +64,12 @@ const VIPROForm = () => {
   }, [email]);
 
   const onFinish = async () => {
+    
     if (!termsAccepted) {
       setTermsMessage(viproInfo.warning);
       return;
     }
-
+    const isFinish = true
     try {
       if (user) {
         const response = await fetch(`${URI}/update-form-eeuu`, {
@@ -77,7 +77,7 @@ const VIPROForm = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, questions, country }),
+          body: JSON.stringify({ email, questions, country, isFinish }),
         });
 
         if (!response.ok) {
@@ -98,7 +98,7 @@ const VIPROForm = () => {
       return;
     } else {
       const html = `<div>${viproInfo.alert_save}</div>`
-      handleClickPopUpSaveForm(html, email, questions)
+      handleClickPopUpSaveForm(html, email, questions, country)
     }
   };
 
@@ -122,12 +122,50 @@ const VIPROForm = () => {
     }
   };
 
-  const categorizedQuestions = {
-    'DATOS PERSONALES': questions.filter(q => q.category === 'DATOS PERSONALES'),
-    'ARRAIGOS FAMILIARES Y FINANCIEROS': questions.filter(q => q.category === 'ARRAIGOS FAMILIARES Y FINANCIEROS'),
-    'HISTORIAL DE VIAJES': questions.filter(q => q.category === 'HISTORIAL DE VIAJES'),
-    'HISTORIAL DELICTIVO': questions.filter(q => q.category === 'HISTORIAL DELICTIVO'),
-  };
+  const localLanguage = localStorage.getItem('lang') || "Spanish";
+
+const langSelection = (language) => {
+    if (language === 'Spanish' || language === 'Español' || language === 'Espanhol') {
+        return 'spanish';
+    } else if (language === 'English' || language === 'Inglês') {
+        return 'english';
+    } else {
+        return 'portuguese';
+    }
+}
+
+const language = langSelection(localLanguage);
+
+const categories = {
+    spanish: {
+        personalData: 'DATOS PERSONALES',
+        familyAndFinancialTies: 'ARRAIGOS FAMILIARES Y FINANCIEROS',
+        travelHistory: 'HISTORIAL DE VIAJES',
+        criminalHistory: 'HISTORIAL DELICTIVO'
+    },
+    english: {
+      personalData: 'PERSONAL DATA',
+      familyAndFinancialTies: 'FAMILY AND FINANCIAL TIES',
+      travelHistory: 'TRAVEL HISTORY',
+      criminalHistory: 'CRIMINAL HISTORY'
+  },
+  portuguese: {
+      personalData: 'DADOS PESSOAIS',
+      familyAndFinancialTies: 'VÍNCULOS FAMILIARES E FINANCEIROS',
+      travelHistory: 'HISTÓRICO DE VIAGENS',
+      criminalHistory: 'HISTÓRICO CRIMINAL'
+  }
+};
+
+const selectedCategories = categories[language];
+
+const categorizedQuestions = {
+    [selectedCategories.personalData]: questions.filter(q => q.category === 'DATOS PERSONALES'),
+    [selectedCategories.familyAndFinancialTies]: questions.filter(q => q.category === 'ARRAIGOS FAMILIARES Y FINANCIEROS'),
+    [selectedCategories.travelHistory]: questions.filter(q => q.category === 'HISTORIAL DE VIAJES'),
+    [selectedCategories.criminalHistory]: questions.filter(q => q.category === 'HISTORIAL DELICTIVO')
+};
+
   return (
     <>{loading && (
       <Fade>
@@ -150,7 +188,7 @@ const VIPROForm = () => {
               <h1 className="text-center text-4xl lg:pt-4 pt-3 lg:text-5xl text-black pb-4 font-bold flex flex-col">
                 {viproInfo.title}<span className="capitalize font-semibold pt-2 lg:pt-0">{country === "estadosunidos" ? "Estados Unidos" : country}</span>
               </h1>
-              <p className="py-6">
+              <p className="py-6 text-justify">
                 {viproInfo.description}
               </p>
               {Object.keys(categorizedQuestions).map((category, idx) => (

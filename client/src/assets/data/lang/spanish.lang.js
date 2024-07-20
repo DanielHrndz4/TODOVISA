@@ -1149,6 +1149,12 @@ const spanish = [
         "send_email":{
             "success": "¡Correo enviado exitosamente!",
             "error": "No se pudo enviar el correo. Por favor, inténtelo de nuevo."
+        },
+        "log_forms":{
+            "signing_out":"Cerrando sesión",
+            "sign_out":"Cerrar sesión",
+            "without_forms": "Sin formularios",
+            "forms": "Formularios"
         }
     }
 ];
