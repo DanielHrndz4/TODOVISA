@@ -1177,7 +1177,7 @@ const english = [
             "invalid_otp": "The code is not valid.",
             "otp_validation_error": "An error occurred. Please try again.",
             "password_reset_success": "Password changed successfully.",
-            "password_reset_instruction": "Log in to enjoy the benefits of Todovisa",
+            "password_reset_instruction": "Change password",
             "password_reset_error": "Error changing password.",
             "password_mismatch_error": "Passwords must match.",
             "password_length_error": "The new password must be at least 8 characters long.",

@@ -1180,7 +1180,7 @@ const spanish = [
             "invalid_otp": "El código no es válido.",
             "otp_validation_error": "An error occurred. Please try again.",
             "password_reset_success": "Contraseña cambiada exitosamente.",
-            "password_reset_instruction": "Inicia sesion para disfrutar de los beneficios de Todovisa",
+            "password_reset_instruction": "Cambiar contraseña",
             "password_reset_error": "Error al cambiar la contraseña.",
             "password_mismatch_error": "Las contraseñas deben ser iguales.",
             "password_length_error": "La nueva contraseña debe tener al menos 8 caracteres.",

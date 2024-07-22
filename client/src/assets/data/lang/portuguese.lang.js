@@ -1177,7 +1177,7 @@ const portuguese = [
             "invalid_otp": "O código não é válido.",
             "otp_validation_error": "Ocorreu um erro. Por favor, tente novamente.",
             "password_reset_success": "Senha alterada com sucesso.",
-            "password_reset_instruction": "Faça login para aproveitar os benefícios do Todovisa",
+            "password_reset_instruction": "Alterar senha",
             "password_reset_error": "Erro ao alterar a senha.",
             "password_mismatch_error": "As senhas devem coincidir.",
             "password_length_error": "A nova senha deve ter pelo menos 8 caracteres.",

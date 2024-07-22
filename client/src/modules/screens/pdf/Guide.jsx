@@ -46,7 +46,7 @@ const Guide = () => {
                       className="py-4 px-6 rounded-md shadowbtn bg-TVred"
                       onClick={() =>
                         window.open(
-                          "https://checkout.baccredomatic.com//LjI0YTA0NjMyMjgwMTliMTY2ZjcxOTcxNzIwNjUwNDE5",
+                          "https://checkout.baccredomatic.com/Njc4My45NjMyZTg2OTQ2NzNmMTA0N2UxNzIxNjY1NzY3",
                           "_blank" // Corregido a "_blank" para abrir en una nueva pestaña
                         )
                       }

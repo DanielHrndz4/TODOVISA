@@ -43,9 +43,9 @@ const handleClickPopUpPay = (html,btn) => {
                                         if(data.message === 'El usuario tiene un formulario pendiente por realizar'){
                                             window.location.href = `/vipro/${selectedValue}`;
                                         }else if(data.message === 'El usuario tiene un formulario terminado'){
-                                            window.open('https://checkout.baccredomatic.com//LjI0YTA0NjMyMjgwMTliMTY2ZjcxOTcxNzIwNjUwNDE5', '_black')
+                                            window.open('https://checkout.baccredomatic.com/YTc2NTA0NWU4YTgwZWQ1MDg5LjkxNzYxNzIxNjY1NDQ1', '_black')
                                         }else{
-                                            window.open('https://checkout.baccredomatic.com//LjI0YTA0NjMyMjgwMTliMTY2ZjcxOTcxNzIwNjUwNDE5', '_black')
+                                            window.open('https://checkout.baccredomatic.com/YTc2NTA0NWU4YTgwZWQ1MDg5LjkxNzYxNzIxNjY1NDQ1', '_black')
                                         }
                                     }
                                 } catch (error) {

@@ -71,7 +71,7 @@ export default function Steps() {
                   >
                     <div className="w-full h-[300px] flex items-center justify-center mb-4">
                       <img
-                        src={`/img/payment/paso${index + 1}.jpg`}
+                        src={`/img/payment/paso${index + 1}.png`}
                         alt={`Imagen del paso ${index + 1}`}
                         className="w-full h-full object-cover rounded-md"
                       />
