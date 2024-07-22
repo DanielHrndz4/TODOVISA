@@ -162,6 +162,13 @@ const english = [
             "subtitle": "Log out to register or sign in with another user.",
             "button": "Return to Home"
         },
+        "forgot_password": {
+            "return": "Return to login",
+            "title": "Forgot your password?",
+            "description": "Don't worry, it happens to all of us. Enter your email below to recover your password",
+            "email": "Email",
+            "button": "Send to email"
+        },
         "signin": {
             "title": "Sign In",
             "subtitle": "Nice to meet you! Enter your details to sign in.",
@@ -1157,7 +1164,28 @@ const english = [
             "text_success": "Now you can enjoy the services of Todovisa.",
             "text_success2": "Log in to enjoy the services of Todovisa.",
             "button_success": "Accept"
-        }
+        },
+        "verification_otp": {
+            "password": "New Password",
+            "repeat_password": "Repeat New Password",
+            "otp_title": "OTP Validation",
+            "otp_instruction": "Enter the code we sent to your email",
+            "validate_button": "Validate Code",
+            "resend_button": "Resend Email",
+            "resend_limit_alert": "No more emails can be sent today.",
+            "resend_email_success": "Password reset link has been sent to your email.",
+            "invalid_otp": "The code is not valid.",
+            "otp_validation_error": "An error occurred. Please try again.",
+            "password_reset_success": "Password changed successfully.",
+            "password_reset_instruction": "Log in to enjoy the benefits of Todovisa",
+            "password_reset_error": "Error changing password.",
+            "password_mismatch_error": "Passwords must match.",
+            "password_length_error": "The new password must be at least 8 characters long.",
+            "resend_timer": "Retry in",
+            "validating": "Validating...",
+            "sending": "Sending...",
+            "changing": "Changing..."
+        }        
     }
 ];
 

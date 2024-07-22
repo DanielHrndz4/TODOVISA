@@ -6,6 +6,7 @@ import URI from "../../../assets/data/admin/uri.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
+import lang from "../../../assets/data/lang.data";
 
 export default function OTP() {
   const [otp, setOtp] = useState("");
@@ -25,11 +26,7 @@ export default function OTP() {
   const location = useLocation();
   const pathSegments = location.pathname.split("/");
   const email = pathSegments[pathSegments.length - 1];
-
-  const signupText = {
-    password: "Nueva contraseña",
-    repeat_password: "Repetir nueva contraseña",
-  };
+  const votp = lang[0].verification_otp;
 
   useEffect(() => {
     if (!email) {
@@ -56,7 +53,7 @@ export default function OTP() {
 
   const handleResendEmail = async () => {
     if (resendCount >= 3) {
-      alert("No se pueden enviar más correos hoy.");
+      alert(votp.resend_limit_alert);
       return;
     }
 
@@ -81,12 +78,12 @@ export default function OTP() {
 
       const data = await response.json();
       console.log('Response Data:', data);
-      setSuccess('Password reset link has been sent to your email.');
+      setSuccess(votp.resend_email_success);
       setResendCount((prevCount) => prevCount + 1);
       setIsDisabled(true);
       setTimer(60); // 60 segundos
     } catch (err) {
-      setError(err.message || 'An error occurred. Please try again.');
+      setError(err.message || votp.otp_validation_error);
     } finally {
       setLoading(false);
     }
@@ -110,10 +107,10 @@ export default function OTP() {
       if (response.status === 200) {
         setIsVerified(true);
       } else {
-        setError(data.message || 'El código no es válido.');
+        setError(data.message || votp.invalid_otp);
       }
     } catch (err) {
-      setError(err.message || 'An error occurred. Please try again.');
+      setError(err.message || votp.otp_validation_error);
     } finally {
       setLoading(false);
     }
@@ -139,35 +136,38 @@ export default function OTP() {
 
   const handlePasswordReset = async () => {
     if (formData.password !== repeatPassword.repeatpassword) {
-      setError("Las contraseñas deben ser iguales.");
+      setError(votp.password_mismatch_error);
+      return;
+    }
+    if (formData.password.length < 8) {
+      setError(votp.password_length_error);
       return;
     }
 
     setLoading(true);
     setError('');
     setSuccess('');
-    const pass = formData.password
-    console.log(pass)
+
     try {
       const response = await fetch(`${URI}/update_password_otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, newPassword: pass })
+        body: JSON.stringify({ email, newPassword: formData.password })
       });
 
       const data = await response.json();
       if (response.status === 200) {
-        setSuccess('Contraseña cambiada exitosamente.');
-        handleClickPopUpSignUp("success", `<h1 class='text-black pb-4 text-2xl font-semibold'>Contraseña modificada con exito</h1><p class='text-center'>Inicia sesion para disfrutar de los beneficios de Todovisa</p>`, 'Aceptar');
+        setSuccess(votp.password_reset_success);
+        handleClickPopUpSignUp("success", `<h1 class='text-black pb-4 text-2xl font-semibold'>${votp.password_reset_success}</h1><p class='text-center'>${votp.password_reset_instruction}</p>`, 'Aceptar');
         // Redirigir a la página de inicio de sesión después del éxito
         navigate('/signin');
       } else {
-        setError(data.message || 'Error al cambiar la contraseña.');
+        setError(data.message || votp.password_reset_error);
       }
     } catch (err) {
-      setError(err.message || 'An error occurred. Please try again.');
+      setError(err.message || votp.otp_validation_error);
     } finally {
       setLoading(false);
     }
@@ -189,17 +189,17 @@ export default function OTP() {
         backgroundPosition: "center",
       }}
     >
-      <div className={`w-full lg:w-[40%] m-auto glassmorphism flex flex-col justify-center items-center pb-24 pt-4 lg:px-8 ${isVerified ? 'hidden' : ''}`}>
+      <div className={`w-full sm:w-[80%] md:w-[60%] lg:w-[40%] m-auto glassmorphism flex flex-col justify-center items-center pb-24 pt-4 lg:px-8 ${isVerified ? 'hidden' : ''}`}>
         <img
           src="/img/logo/todovisa.png"
           alt="Todovisa"
           className="w-[150px] py-1"
         />
         <h1 className="text-4xl sm:text-5xl lg:text-3xl xl:text-5xl text-center text-white font-bold py-2 [text-shadow:_4px_2px_0_rgb(0_0_0_/_40%)]">
-          Validación OTP
+          {votp.otp_title}
         </h1>
         <p className="text-center lg:text-md xl:text-lg text-white [text-shadow:_4px_2px_0_rgb(0_0_0_/_40%)]">
-          Ingresa el código que enviamos a correo electrónico <strong>{email}</strong>
+          {votp.otp_instruction} <strong>{email}</strong>
         </p>
         <OtpInput
           value={otp}
@@ -226,7 +226,7 @@ export default function OTP() {
             className="py-4 px-6 rounded-sm shadowbtn bg-TVred"
             disabled={loading}
           >
-            {loading ? "Validando..." : "Validar Código"}
+            {loading ? votp.validating : votp.validate_button}
           </Button>
           <Button
             onClick={handleResendEmail}
@@ -234,15 +234,15 @@ export default function OTP() {
             className="py-4 px-6 rounded-sm shadowbtn bg-TVBlue"
           >
             {isDisabled
-              ? `Reintentar en ${formatTime(timer)}`
-              : loading ? "Enviando..." : "Reenviar Email"}
+              ? `${votp.resend_timer} ${formatTime(timer)}`
+              : loading ? votp.sending : votp.resend_button}
           </Button>
         </div>
         {error && <p className="text-red-500 mt-6 bg-TVgray px-4 py-2 rounded-md font-semibold shadowbtn">{error}</p>}
         {success && <p className="text-green-500 mt-6 bg-TVgray px-4 py-2 rounded-md font-semibold shadowbtn">{success}</p>}
       </div>
       {isVerified && (
-        <div className="w-[40%] m-auto glassmorphism flex flex-col justify-center items-center pb-24 pt-4 px-8">
+        <div className="w-full sm:w-[80%] md:w-[50%] lg:w-[40%] m-auto glassmorphism flex flex-col justify-center items-center pb-24 pt-4 px-8">
           <img
             src="/img/logo/todovisa.png"
             alt="Todovisa"
@@ -255,7 +255,7 @@ export default function OTP() {
                 color="blue-gray"
                 className="text-white"
               >
-                {signupText.password}
+                {votp.password}
               </Typography>
               <div className="relative">
                 <input
@@ -284,7 +284,7 @@ export default function OTP() {
                 color="blue-gray"
                 className="text-white"
               >
-                {signupText.repeat_password}
+                {votp.repeat_password}
               </Typography>
               <div className="relative">
                 <input
@@ -311,7 +311,7 @@ export default function OTP() {
             className="py-4 px-6 rounded-sm shadowbtn bg-TVBlue"
             disabled={loading}
           >
-            {loading ? "Cambiando..." : "Cambiar Contraseña"}
+            {loading ? votp.changing : votp.password_reset_instruction}
           </Button>
           {error && <p className="text-red-500 mt-6 bg-TVgray px-4 py-2 rounded-md font-semibold shadowbtn">{error}</p>}
           {success && <p className="text-green-500 mt-6 bg-TVgray px-4 py-2 rounded-md font-semibold shadowbtn">{success}</p>}

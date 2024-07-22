@@ -1162,11 +1162,32 @@ const spanish = [
             "without_forms": "Sin formularios",
             "forms": "Formularios"
         },
-        "validation_popup":{
+        "validation_popup": {
             "success": "Registro Exitoso",
             "text_success": "Ahora puedes disfrutar de los servicios de Todovisa.",
             "text_success2": "Inicia sesión para disfrutar de los servicios de Todovisa.",
             "button_success": "Aceptar"
+        },
+        "verification_otp": {
+            "password": "Nueva contraseña",
+            "repeat_password": "Repetir nueva contraseña",
+            "otp_title": "Validación OTP",
+            "otp_instruction": "Ingresa el código que enviamos a correo electrónico ",
+            "validate_button": "Validar Código",
+            "resend_button": "Reenviar Email",
+            "resend_limit_alert": "No se pueden enviar más correos hoy.",
+            "resend_email_success": "Password reset link has been sent to your email.",
+            "invalid_otp": "El código no es válido.",
+            "otp_validation_error": "An error occurred. Please try again.",
+            "password_reset_success": "Contraseña cambiada exitosamente.",
+            "password_reset_instruction": "Inicia sesion para disfrutar de los beneficios de Todovisa",
+            "password_reset_error": "Error al cambiar la contraseña.",
+            "password_mismatch_error": "Las contraseñas deben ser iguales.",
+            "password_length_error": "La nueva contraseña debe tener al menos 8 caracteres.",
+            "resend_timer": "Reintentar en ",
+            "validating": "Validando...",
+            "sending": "Enviando...",
+            "changing": "Cambiando..."
         }
     }
 ];

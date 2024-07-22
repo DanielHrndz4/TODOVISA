@@ -133,6 +133,13 @@ const portuguese = [
             "message": "Olá! 👋 \nBem-vindo ao Todovisa. \nComo podemos ajudá-lo hoje?",
             "placeholder": "Digite uma mensagem"
         },
+        "forgot_password": {
+            "return": "Voltar ao login",
+            "title": "Esqueceu sua senha?",
+            "description": "Não se preocupe, isso acontece com todos nós. Digite seu e-mail abaixo para recuperar sua senha",
+            "email": "E-mail",
+            "button": "Enviar para o e-mail"
+        },
         "form": {
             "return": "Voltar para a Página Inicial",
             "title": "Formulário de Solicitação de Visto",
@@ -167,6 +174,7 @@ const portuguese = [
             "subtitle": "Bem-vindo de volta! Faça login para continuar.",
             "email": "Email",
             "password": "Senha",
+            "forgot_password": "Esqueceu sua senha?",
             "button": {
                 "loading_text": "Carregando...",
                 "default_text": "Entrar"
@@ -1156,7 +1164,28 @@ const portuguese = [
             "text_success": "Agora você pode aproveitar os serviços da Todovisa.",
             "text_success2": "Faça login para aproveitar os serviços da Todovisa.",
             "button_success": "Aceitar"
-        }
+        },
+        "verification_otp": {
+            "password": "Nova Senha",
+            "repeat_password": "Repita a Nova Senha",
+            "otp_title": "Validação OTP",
+            "otp_instruction": "Digite o código que enviamos para seu e-mail",
+            "validate_button": "Validar Código",
+            "resend_button": "Reenviar E-mail",
+            "resend_limit_alert": "Não é possível enviar mais e-mails hoje.",
+            "resend_email_success": "Link de redefinição de senha foi enviado para seu e-mail.",
+            "invalid_otp": "O código não é válido.",
+            "otp_validation_error": "Ocorreu um erro. Por favor, tente novamente.",
+            "password_reset_success": "Senha alterada com sucesso.",
+            "password_reset_instruction": "Faça login para aproveitar os benefícios do Todovisa",
+            "password_reset_error": "Erro ao alterar a senha.",
+            "password_mismatch_error": "As senhas devem coincidir.",
+            "password_length_error": "A nova senha deve ter pelo menos 8 caracteres.",
+            "resend_timer": "Tentar novamente em",
+            "validating": "Validando...",
+            "sending": "Enviando...",
+            "changing": "Mudando..."
+        }        
     }
 ];
 
