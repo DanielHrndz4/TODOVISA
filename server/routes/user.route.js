@@ -15,7 +15,7 @@ const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
-sgMail.setApiKey('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');
+sgMail.setApiKey( process.env.SENDGRID_TOKEN);
 
 function createToken(payload) {
   const header = {
