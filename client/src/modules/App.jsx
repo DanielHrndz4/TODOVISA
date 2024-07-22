@@ -8,11 +8,13 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  Navigate
 } from "react-router-dom";
 import Qualification from "./components/qualification/Qualification";
 import Steps from "./screens/steps/Steps";
 import FormsComplete from "./components/complete_forms/FormsComplete";
 import Guide from "./screens/pdf/Guide";
+import OTP from "./screens/OTP/OTP";
 
 function App(){
   return (  
@@ -28,6 +30,8 @@ function App(){
         <Route exact path="/guide" element={<Guide></Guide>} />
         <Route exact path="/forms/:id" element={<FormsComplete></FormsComplete>} />
         <Route exact path="/country/:country" element={<CountryScreen></CountryScreen>} />
+        <Route exact path="/validation_code/:email" element={<OTP></OTP>} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

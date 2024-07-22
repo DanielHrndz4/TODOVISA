@@ -9,10 +9,13 @@ const crypto = require('crypto');
 const FormResponseSchema = require('../models/form_response.schema');
 const ResultData = require('../models/qualification.schema');
 const cron = require('node-cron')
+const sgMail = require('@sendgrid/mail');
+
 
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
+sgMail.setApiKey('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');
 
 function createToken(payload) {
   const header = {
@@ -31,9 +34,323 @@ function createToken(payload) {
   return `${base64Header}.${base64Payload}.${signature}`;
 }
 
-// cron.schedule("*/15 * * * *", () =>{
-//   console.log("Health: OK")
-// })
+router.post('/reset_password', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await userSchema.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'El correo electrónico no está registrado' });
+    }
+
+    // Verificar si el usuario se registró con Google
+    if (user.googleID) {
+      return res.status(400).json({ message: 'No se puede cambiar la contraseña porque la cuenta se creó con Google' });
+    }
+    const generateRandomNumberString = (length) => {
+      const bytes = crypto.randomBytes(length);
+      let result = '';
+
+      // Convertir cada byte a un dígito numérico (0-9)
+      for (let i = 0; i < bytes.length; i++) {
+        result += (bytes[i] % 10); // Obtener el módulo 10 para obtener un dígito numérico
+      }
+
+      return result.padStart(length, '0'); // Asegurar que la longitud sea la deseada, rellenar con ceros si es necesario
+    };
+    // Generar un código aleatorio
+    const codePassword = generateRandomNumberString(4);
+    const userName = user.name
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Los meses son 0-indexados
+    const day = String(today.getDate()).padStart(2, '0');
+
+    const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Reset Password</title>
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body
+        style="
+          margin: 0;
+          font-family: 'Poppins', sans-serif;
+          background: #ffffff;
+          font-size: 14px;
+        "
+      >
+        <div
+          style="
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 30px 30px 60px;
+            background: #f4f7ff;
+            background-image: url(https://todovisa.vercel.app/img/background/bgeeuu.webp);
+            background-repeat: no-repeat;
+            background-size: 800px 452px;
+            background-position: top center;
+            font-size: 14px;
+            color: #113E5F;
+          "
+        >
+        <header style="text-align: center;">
+            <table style="margin: 0 auto;">
+              <tbody>
+                <tr>
+                  <td>
+                    <img
+                      alt="Todovisa Logo"
+                      src="https://todovisa.vercel.app/img/logo/todovisa.png"
+                      height="120px"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </header>
+
+          <main>
+            <div
+              style="
+                margin: 0;
+                margin-top: 20px;
+                padding: 60px 30px 80px;
+                background: #ffffff;
+                border-radius: 30px;
+                text-align: center;
+              "
+            >
+              <div style="width: 100%; max-width: 100%; margin: 0 auto;">
+                <h1
+                  style="
+                    margin: 0;
+                    font-size: 24px;
+                    font-weight: 500;
+                    color: #1f1f1f;
+                  "
+                >
+                Reset Password
+                </h1>
+                <p
+                  style="
+                    margin: 0;
+                    margin-top: 17px;
+                    font-size: 16px;
+                    font-weight: 500;
+                  "
+                >
+                  Hey ${userName},
+                </p>
+                <p
+                  style="
+                    margin: 0;
+                    margin-top: 17px;
+                    font-weight: 500;
+                    letter-spacing: 0.56px;
+                  "
+                >
+                <p>Thank you for choosing Todovisa. Please use the following link to complete your password reset procedure. Do not share this link with anyone, including Todovisa employees.</p>
+                <p>If you did not request this change, please ignore this email. If you have any questions or need further assistance, please contact us.</p>
+                <p>Thank you!</p>
+                <p>The Todovisa Team</p>
+                </p>
+                <p
+                  style="
+                    margin: 0;
+                    margin-top: 40px;
+                    margin-bottom: 20px;
+                    font-size: 40px;
+                    font-weight: 600;
+                    letter-spacing: 25px;
+                    color: #113E5F;
+                  "
+                >
+                  ${codePassword}
+                </p>
+                <p><strong style="font-weight: 600; color: #1f1f1f;">Password Reset Link:</strong> <a href="https://todovisa.com" style="font-size: 1.2em; font-weight: bold; color: #007BFF;">Reset Password</a></p>
+              </div>
+            </div>
+
+            <p
+              style="
+                max-width: 400px;
+                margin: 0 auto;
+                margin-top: 90px;
+                text-align: center;
+                font-weight: 500;
+                color: #8c8c8c;
+              "
+            >
+              Need help? Ask at
+              <a
+                href="mailto:tuvisa@todovisa.com"
+                style="color: #113E5F; text-decoration: none;"
+                >tuvisa@todovisa.com</a
+              >
+              or visit our
+              <a
+                href="https://www.google.com/maps/dir//67+Avenida+Sur+Local+%231,+San+Salvador/@13.6970016,-89.2252546,18z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8f6331d77b1013e3:0xbfa86a56cf477af7!2m2!1d-89.2246802!2d13.6971043?entry=ttu"
+                target="_blank"
+                style="color: #113E5F; text-decoration: none;"
+                >Help Center</a
+              >
+            </p>
+          </main>
+
+          <footer
+            style="
+              width: 100%;
+              max-width: 490px;
+              margin: 20px auto 0;
+              text-align: center;
+              border-top: 1px solid #113E5F;
+            "
+          >
+            <p
+              style="
+                margin: 0;
+                margin-top: 40px;
+                font-size: 16px;
+                font-weight: 600;
+                color: #434343;
+              "
+            >
+              Todovisa S.A de C.V
+            </p>
+            <p style="margin: 0; margin-top: 8px; color: #434343;">
+               67 Avenida Sur Local #1, San Salvador
+            </p>
+            <div style="margin: 0; margin-top: 16px;">
+              <a href="" target="_blank" style="display: inline-block;">
+                <img
+                  width="36px"
+                  alt="Facebook"
+                  src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661502815169_682499/email-template-icon-facebook"
+                />
+              </a>
+              <a
+                href=""
+                target="_blank"
+                style="display: inline-block; margin-left: 8px;"
+              >
+                <img
+                  width="36px"
+                  alt="Instagram"
+                  src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661504218208_684135/email-template-icon-instagram"
+            /></a>
+            <a
+              href=""
+              target="_blank"
+              style="display: inline-block; margin-left: 8px;"
+            >
+              <img
+                width="36px"
+                alt="Twitter"
+                src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661503043040_372004/email-template-icon-twitter"
+              />
+            </a>
+            <a
+              href=""
+              target="_blank"
+              style="display: inline-block; margin-left: 8px;"
+            >
+              <img
+                width="36px"
+                alt="Youtube"
+                src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661503195931_210869/email-template-icon-youtube"
+            /></a>
+            </div>
+            <p style="margin: 0; margin-top: 16px; color: #434343;">
+              Copyright © ${year} Todovisa. All rights reserved.
+            </p>
+          </footer>
+        </div>
+      </body>
+    </html>
+    `;
+
+    // Actualizar el usuario con el código
+    user.code_password = codePassword;
+    await user.save();
+    const msg = {
+      to: email, // Replace with your recipient
+      from: 'tuvisa@todovisa.com', // Replace with your verified sender
+      subject: 'Reset Password',
+      text: 'Click the link for more information',
+      html: htmlContent,
+    };
+
+    await sgMail.send(msg);
+    res.status(200).json({ message: 'Correo enviado con éxito' });
+  } catch (error) {
+    console.error('Error al enviar el correo:', error);
+    res.status(500).json({ message: 'Error al enviar el correo' });
+  }
+});
+
+router.post('/validate_otp', async (req, res)=>{
+  const {email, codeOTP} = req.body;
+  try {
+    const user = await userSchema.findOne({email})
+    if(user){
+      const otp = user.code_password
+      if(otp){
+        if(otp == codeOTP){
+          res.status(200).json({message: 'Codigo verificado exitosamente'})
+        }else{
+          res.status(401).json({message: 'El codigo no es valido'})
+        }
+      }else{
+        res.status(400).json({message: 'Codigo no generado'})
+      }
+    }else{
+      res.status(400).json({message: 'Usuario no encontrado'})
+    }
+  } catch (error) {
+    res.status(500).json({message: 'Server error'})
+  }
+})
+
+router.post('/update_password_otp', async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  try {
+    // Verificar si el usuario existe
+    const user = await userSchema.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Crear un hash de la nueva contraseña
+    const hash = crypto.createHash('sha256');
+    hash.update(newPassword);
+    const hashedPassword = hash.digest('hex');
+
+    // Actualizar la contraseña del usuario
+    user.password = hashedPassword;
+    await user.save();
+
+    // Eliminar el código de contraseña (esto asume que el código de contraseña se guarda en un campo)
+    // Si el código de contraseña se guarda en una colección separada, necesitarás eliminarlo desde allí.
+    user.code_password = undefined; // O usa `delete user.code_password;` si el campo existe
+    await user.save();
+
+    res.status(200).json({ message: 'Contraseña actualizada exitosamente' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Error en el servidor' });
+  }
+});
 
 router.post('/signin', (req, res) => {
   const { email, password } = req.body;
@@ -157,7 +474,7 @@ router.post('/update-form-eeuu', async (req, res) => {
         }
 
         if (viproCountryCode) {
-          if(isFinish){
+          if (isFinish) {
             if (user[viproCountryCode]) {
               user.set(viproCountryCode, undefined)
               await user.save();
@@ -356,20 +673,20 @@ router.post('/access_pdf', async (req, res) => {
 });
 
 router.post('/validate_pdf', async (req, res) => {
-  const {email} = req.body;
+  const { email } = req.body;
   try {
     const validateGuide = await userSchema.findOne({ email: email });
-    if(validateGuide){
-      if(validateGuide.guide === true){
-        res.status(200).json({ message: "El usuario tiene acceso a la descarga"})
-      }else{
-        res.status(400).json({ message: "El usuario no tiene acceso a la descarga"})
+    if (validateGuide) {
+      if (validateGuide.guide === true) {
+        res.status(200).json({ message: "El usuario tiene acceso a la descarga" })
+      } else {
+        res.status(400).json({ message: "El usuario no tiene acceso a la descarga" })
       }
-    }else{
-      res.status(401).json({ message: "El usuario debe estar registrado para realizar esta accion"})
+    } else {
+      res.status(401).json({ message: "El usuario debe estar registrado para realizar esta accion" })
     }
   } catch (error) {
-    res.status(500).json({message: 'Error del servidor'});
+    res.status(500).json({ message: 'Error del servidor' });
   }
 })
 
@@ -575,20 +892,20 @@ router.post('/save_qualification', async (req, res) => {
 router.post('/complete_forms', async (req, res) => {
   const { email } = req.body;
   try {
-      const forms = await ResultData.find({ email: email });
-      res.json({forms});
+    const forms = await ResultData.find({ email: email });
+    res.json({ forms });
   } catch (err) {
-      res.status(500).json({ error: 'Error al recuperar los formularios' });
+    res.status(500).json({ error: 'Error al recuperar los formularios' });
   }
 });
 
 router.post('/complete_forms_id', async (req, res) => {
   const { id } = req.body;
   try {
-      const forms = await ResultData.findById(id);
-      res.json({forms});
+    const forms = await ResultData.findById(id);
+    res.json({ forms });
   } catch (err) {
-      res.status(500).json({ error: 'Error al recuperar los formularios' });
+    res.status(500).json({ error: 'Error al recuperar los formularios' });
   }
 });
 

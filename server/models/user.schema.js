@@ -32,6 +32,9 @@ const userSchema = mongoose.Schema({
     guide:{
         type: Boolean
     },
+    code_password:{
+        type: String,
+    },
     vipro_eeuu:{
         type: Boolean
     },
