@@ -1087,7 +1087,8 @@ const english = [
             },
             "downloadPdfButton": "Download PDF",
             "viewPdfButton": "View PDF",
-            "pdfPath": "./pdf/private/todovisa/Guia_Todovisa.pdf"
+            "pdfPath": "./pdf/private/todovisa/Guia_Todovisa.pdf",
+            "buy": "Get the complete guide for just "
         },
         "guide": {
             "button": "Get the complete guide"

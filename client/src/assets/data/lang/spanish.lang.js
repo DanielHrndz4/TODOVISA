@@ -1090,7 +1090,8 @@ const spanish = [
             },
             "downloadPdfButton": "Descargar PDF",
             "viewPdfButton": "Ver PDF",
-            "pdfPath": "./pdf/private/todovisa/Guia_Todovisa.pdf"
+            "pdfPath": "./pdf/private/todovisa/Guia_Todovisa.pdf",
+            "buy": "Obten la guia completa por tan solo "
         },
         "guide": {
             "button": "Adquirir guia completa"
