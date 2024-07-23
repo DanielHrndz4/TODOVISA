@@ -20,17 +20,17 @@ function App(){
   return (  
     <Router>
       <Routes>
-        <Route exact path="https://todovisa.com/signup" element={<Register></Register>} />
-        <Route exact path="https://todovisa.com/signin" element={<Login></Login>} />
-        <Route exact path="https://todovisa.com/forgotpassword" element={<ForgotPassword></ForgotPassword>} />
-        <Route exact path="https://todovisa.com/" element={<Home></Home>} />
-        <Route exact path="https://todovisa.com/steps" element={<Steps></Steps>} />
-        <Route exact path="https://todovisa.com/vipro/:country/" element={<MainVIPRO></MainVIPRO>} />
-        <Route exact path="https://todovisa.com/qualifications" element={<Qualification></Qualification>} />
-        <Route exact path="https://todovisa.com/guide" element={<Guide></Guide>} />
-        <Route exact path="https://todovisa.com/forms/:id" element={<FormsComplete></FormsComplete>} />
-        <Route exact path="https://todovisa.com/country/:country" element={<CountryScreen></CountryScreen>} />
-        <Route exact path="https://todovisa.com/validation_code/:email" element={<OTP></OTP>} />
+        <Route exact path="/signup" element={<Register></Register>} />
+        <Route exact path="/signin" element={<Login></Login>} />
+        <Route exact path="/forgotpassword" element={<ForgotPassword></ForgotPassword>} />
+        <Route exact path="/" element={<Home></Home>} />
+        <Route exact path="/steps" element={<Steps></Steps>} />
+        <Route exact path="/vipro/:country/" element={<MainVIPRO></MainVIPRO>} />
+        <Route exact path="/qualifications" element={<Qualification></Qualification>} />
+        <Route exact path="/guide" element={<Guide></Guide>} />
+        <Route exact path="/forms/:id" element={<FormsComplete></FormsComplete>} />
+        <Route exact path="/country/:country" element={<CountryScreen></CountryScreen>} />
+        <Route exact path="/validation_code/:email" element={<OTP></OTP>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

@@ -5,7 +5,7 @@ const questionsEnglish =  [
     { "question": "Date of birth", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Marital status", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Have you applied for a US visa before?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "DATOS PERSONALES" },
-    { "question": "Have you been denied a US visa before? (Depends on previous answer)", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "DATOS PERSONALES" },
+    { "question": "Have you been denied a US visa before?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Have you ever entered the United States illegally?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Have you ever been deported from the United States?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Have you ever been arrested?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "DATOS PERSONALES" },

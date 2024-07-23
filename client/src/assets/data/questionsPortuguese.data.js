@@ -5,7 +5,7 @@ const questionsPortuguese = [
     { "question": "Data de nascimento", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Estado civil", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Você solicitou visto americano anteriormente?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "DATOS PERSONALES" },
-    { "question": "Você já teve um visto americano negado antes? (Depende da resposta anterior)", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "DATOS PERSONALES" },
+    { "question": "Você já teve um visto americano negado antes?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Você já entrou nos Estados Unidos ilegalmente?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Você já foi deportado dos Estados Unidos?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Você já foi detido?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "DATOS PERSONALES" },

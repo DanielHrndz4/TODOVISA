@@ -17,11 +17,11 @@ const handlePopUp = (validate) => {
                     <h2 class="pt-4 pb-6" style="font-size: 1.5rem; font-weight: 600;" className="font-semibold">${popupWithLoginText.title}</h2>
                     <div class="w-full grid grid-cols-2 gap-4">
                         <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="estadosunidos"> ${countries.usa.name}</div>
-                        <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="canada"> ${countries.canada.name}</div>
+                        <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="canada"> ${countries.canada.name}</div>
                         <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="mexico"> ${countries.mexico.name}</div>
                         <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="inglaterra"> ${countries.uk.name}</div>
                         <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="china"> ${countries.china.name}</div>
-                        <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="australia"> ${countries.australia.name}</div>
+                        <div className="w-full bg-blue-gray-500"><input type="radio" name="option" value="australia"> ${countries.australia.name}</div>
                         <div className="w-full bg-blue-gray-500"><input type="radio" name="option" disabled value="india"> ${countries.india.name}</div>
                     </div>
                     <p class="text-justify pt-8">${popupWithLoginText.description}</p>
@@ -69,7 +69,7 @@ export default function VIPRO(props) {
                                 <h2 className="text-xl lg:text-lg xl:text-2xl text-black text-center">{viproSection.subtitle.title} <strong>{viproSection.subtitle.strong}</strong></h2>
                                 <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
                             </div>
-                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{viproSection.text} <strong>{viproSection.strong} <span className="text-TVBlue hover:underline hover:cursor-pointer"><a href="https://www.facebook.com/Volamosviajes/?locale=es_LA" target="_blank">Volamos Viajes</a></span></strong>.</p></div>
+                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{viproSection.text} <strong>{viproSection.strong} <span className="text-TVBlue hover:underline hover:cursor-pointer"><a href="" target="_blank">TODOVISA</a></span></strong>.</p></div>
                             <div className="lg:text-lg">
                                 <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp(props.validation)}>{viproSection.button}</Button>
                             </div>

@@ -1,3 +1,3 @@
-const FRONT_URI = 'https://todovisa.vercel.app/'
+const FRONT_URI = 'http://localhost:5173'
 
 export default FRONT_URI

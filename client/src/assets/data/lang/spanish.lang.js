@@ -1090,7 +1090,7 @@ const spanish = [
             },
             "downloadPdfButton": "Descargar PDF",
             "viewPdfButton": "Ver PDF",
-            "pdfPath": "./A9bC3dE4FgH5IjK6LmN7oP8QrS9TuV0WxY1Za2Bc3Dd4Ef5Gh6Ij7Kl8Mn9Op0Qr1St2Uv3Wx4Yz5A6B7C8D9E0F1G2H3I4J5K6L.pdf"
+            "pdfPath": "./pdf/private/todovisa/Guia_Todovisa.pdf"
         },
         "guide": {
             "button": "Adquirir guia completa"
@@ -1114,7 +1114,7 @@ const spanish = [
             "nextStep": "Ahora estás listo para dar el siguiente paso hacia la obtención de tu visa. Para continuar, simplemente envía este comprobante al chat de WhatsApp de ",
             "whatsappLink": "https://api.whatsapp.com/send/?phone=50370323075",
             "whatsappText": "TODOVISA",
-            "guideMessage": "y podrás disfrutar de un descuento del 25% en la asesoría con Volamos Viajes.",
+            "guideMessage": "y podrás disfrutar de un descuento del 25% en la asesoría con TODOVISA.",
             "guideConclusion": "El equipo de ",
             "team": " estará allí para guiarte en cada paso del proceso. ¡Mucho éxito en tu solicitud de visa!",
             "notApprovedTitle": "No has aprobado esta vez",

@@ -1087,7 +1087,7 @@ const english = [
             },
             "downloadPdfButton": "Download PDF",
             "viewPdfButton": "View PDF",
-            "pdfPath": "./A9bC3dE4FgH5IjK6LmN7oP8QrS9TuV0WxY1Za2Bc3Dd4Ef5Gh6Ij7Kl8Mn9Op0Qr1St2Uv3Wx4Yz5A6B7C8D9E0F1G2H3I4J5K6L.pdf"
+            "pdfPath": "./pdf/private/todovisa/Guia_Todovisa.pdf"
         },
         "guide": {
             "button": "Get the complete guide"
@@ -1111,7 +1111,7 @@ const english = [
             "nextStep": "You are now ready to take the next step towards obtaining your visa. To continue, simply send this certificate to the WhatsApp chat of ",
             "whatsappLink": "https://api.whatsapp.com/send/?phone=50370323075",
             "whatsappText": "TODOVISA",
-            "guideMessage": " and you will enjoy a 25% discount on the advisory service with Volamos Viajes.",
+            "guideMessage": " and you will enjoy a 25% discount on the advisory service with TODOVISA.",
             "guideConclusion": "The team of ",
             "team": " It will be there to guide you every step of the way. Best of luck with your visa application!",
             "notApprovedTitle": "You did not pass this time",

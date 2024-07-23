@@ -74,7 +74,18 @@ const GuideSection = () => {
       style={{ position: "relative" }}
     >
       <div className="absolute inset-0 z-0"></div>
-      <div className="relative z-10 text-center xl:w-[85%] w-full lg:px-14 sm:px-20 px-6 m-auto">
+      <div className="flex flex-row">
+        <div className="w-1/4 my-4 py-4 mx-8 px-4 flex flex-col rounded-lg justify-center items-center shadowbtn">
+          <img src="./img/pdf/portada.jpg" alt="" className="w-full" />
+          <div className="flex flex-row items-center py-3">
+          <div className="flex flex-col text-start w-full">
+          <p className="text-TVBlue font-semibold">Guia completa</p>
+          <p className="text-TVBlue font-medium">Visa Americana</p>
+          </div>
+          <p className="font-bold w-[40%] text-2xl text-gray-800">$ 9.99</p>
+          </div>
+        </div>
+      <div className="relative z-10 text-center xl:w-[85%] w-full lg:pr-14 lg:pl-0 sm:pr-20 sm:pl-20 pl-6 pr-6 m-auto">
         <Fade>
           <h2 className="text-xl lg:text-lg xl:text-2xl text-TVBlue">
             {texts.header}
@@ -116,6 +127,7 @@ const GuideSection = () => {
             </Slide>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
