@@ -39,7 +39,12 @@ const handlePopUp = (validate) => {
             </div>
         `;
         const btn = popupWithLoginText.button;
-        handleClickPopUp(html, btn);
+        const cancelButton = {
+            show: true,
+            text: 'Cancelar',
+            color: '#113e5f'
+        }
+        handleClickPopUp(html, btn, cancelButton);
     } else {
         const popupWithoutLogin = lang[0].popupWithoutLogin;
         const html = `

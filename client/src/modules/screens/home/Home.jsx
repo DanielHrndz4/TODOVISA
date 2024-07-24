@@ -78,7 +78,6 @@ export default function Home() {
       image: '/img/background/bgmx.webp',
       position: 'center',
     },
-    // Agrega más slides según lo necesites
   ];
 
   return (

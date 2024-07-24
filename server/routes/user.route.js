@@ -768,19 +768,21 @@ router.post('/vipro-eeuu', async (req, res) => {
           break;
       }
 
+      const id = user._id
+
       if (!viproCountryCode || !viproProperties.includes(viproCountryCode)) {
         // Si el país seleccionado no está permitido o no está en las propiedades vipro_*, redirigir a pagar
-        return res.status(200).json({ message: 'No tienes acceso a este país, por favor realiza el pago', redirectToPayment: true });
+        return res.status(200).json({ message: 'No tienes acceso a este país, por favor realiza el pago', redirectToPayment: true, id: id });
       }
 
       // Verificar si hay algún formulario existente
       if (existingForm) {
-        return res.status(200).json({ message: 'El usuario tiene un formulario pendiente por realizar', vipro: viproProperties });
+        return res.status(200).json({ message: 'El usuario tiene un formulario pendiente por realizar', vipro: viproProperties, id: id });
       } else {
         // Crear y guardar un nuevo formulario
         const newForm = new Form({ email: email, country: country, questions });
         const savedForm = await newForm.save();
-        return res.status(200).json({ message: 'Formulario registrado exitosamente', vipro: viproProperties });
+        return res.status(200).json({ message: 'Formulario registrado exitosamente', vipro: viproProperties, id: id});
       }
     }
 
