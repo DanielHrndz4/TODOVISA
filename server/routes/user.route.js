@@ -298,26 +298,26 @@ router.post('/reset_password', async (req, res) => {
   }
 });
 
-router.post('/validate_otp', async (req, res)=>{
-  const {email, codeOTP} = req.body;
+router.post('/validate_otp', async (req, res) => {
+  const { email, codeOTP } = req.body;
   try {
-    const user = await userSchema.findOne({email})
-    if(user){
+    const user = await userSchema.findOne({ email })
+    if (user) {
       const otp = user.code_password
-      if(otp){
-        if(otp == codeOTP){
-          res.status(200).json({message: 'Codigo verificado exitosamente'})
-        }else{
-          res.status(401).json({message: 'El codigo no es valido'})
+      if (otp) {
+        if (otp == codeOTP) {
+          res.status(200).json({ message: 'Codigo verificado exitosamente' })
+        } else {
+          res.status(401).json({ message: 'El codigo no es valido' })
         }
-      }else{
-        res.status(400).json({message: 'Codigo no generado'})
+      } else {
+        res.status(400).json({ message: 'Codigo no generado' })
       }
-    }else{
-      res.status(400).json({message: 'Usuario no encontrado'})
+    } else {
+      res.status(400).json({ message: 'Usuario no encontrado' })
     }
   } catch (error) {
-    res.status(500).json({message: 'Server error'})
+    res.status(500).json({ message: 'Server error' })
   }
 })
 
@@ -417,8 +417,8 @@ router.post('/jwt', (req, res) => {
 });
 
 router.post('/show-form-eeuu', (req, res) => {
-  const email = req.body.email;
-  Form.findOne({ email: email })
+  const {email , country} = req.body;
+  Form.findOne({ email: email, country: country})
     .then((user) => {
       if (user) {
         return res.status(200).json({
@@ -441,12 +441,20 @@ router.post('/show-form-eeuu', (req, res) => {
 router.post('/update-form-eeuu', async (req, res) => {
   const { email, questions, country, isFinish } = req.body;
   try {
-    const form = await Form.findOneAndUpdate({ email: email }, { questions: questions });
+    // Actualizar el formulario con el país y las preguntas
+    const form = await Form.findOneAndUpdate(
+      { email: email, country: country },
+      { $set: { questions: questions } },
+      { new: true } // Devuelve el documento actualizado
+    );
+    
     if (form) {
       const user = await userSchema.findOne({ email: email });
+      
       if (user) {
         let viproCountryCode;
-        console.log(country)
+
+        // Mapear el país al código de vipro correspondiente
         switch (country) {
           case 'estadosunidos':
             viproCountryCode = 'vipro_eeuu';
@@ -474,23 +482,27 @@ router.post('/update-form-eeuu', async (req, res) => {
             break;
         }
 
+        // Actualizar las propiedades vipro del usuario si el formulario está terminado
         if (viproCountryCode) {
           if (isFinish) {
             if (user[viproCountryCode]) {
-              user.set(viproCountryCode, undefined)
+              user[viproCountryCode] = undefined;
               await user.save();
             }
           }
         } else {
           return res.status(400).json({ message: 'País no válido' });
         }
+        
+        res.status(200).json({ message: 'Formulario guardado con éxito' });
+      } else {
+        res.status(404).json({ message: 'Usuario no encontrado' });
       }
-      res.status(200).json({ message: 'Formulario guardado con éxito' });
     } else {
-      res.status(400).json({ message: 'Datos no actualizados' });
+      res.status(400).json({ message: 'Formulario no encontrado o datos no actualizados' });
     }
   } catch (error) {
-    console.error(error);
+    console.error('Error al actualizar el formulario:', error.message);
     res.status(500).json({ message: 'Error del servidor' });
   }
 });
@@ -782,7 +794,7 @@ router.post('/vipro-eeuu', async (req, res) => {
         // Crear y guardar un nuevo formulario
         const newForm = new Form({ email: email, country: country, questions });
         const savedForm = await newForm.save();
-        return res.status(200).json({ message: 'Formulario registrado exitosamente', vipro: viproProperties, id: id});
+        return res.status(200).json({ message: 'Formulario registrado exitosamente', vipro: viproProperties, id: id });
       }
     }
 
@@ -792,6 +804,72 @@ router.post('/vipro-eeuu', async (req, res) => {
     return res.status(500).json({ message: 'Error al guardar el formulario' });
   }
 });
+
+router.post('/payment_n1co', async (req, res) => {
+  const { email, country, questions, id } = req.body;
+  try {
+    // Verificar si el usuario existe
+    const user = await userSchema.findById(id);
+    if (!user) {
+      return res.status(400).json({ message: 'El usuario no existe' });
+    }
+
+    // Verificar si ya existe un formulario con el mismo país y email
+    const existingForm = await Form.findOne({ email: email, country: country });
+    if (existingForm) {
+      return res.status(400).json({ message: 'Ya existe un formulario con este país y correo electrónico' });
+    }
+
+    // Obtener propiedades vipro del usuario
+    const viproProperties = Object.keys(user.toObject()).filter(key => key.startsWith('vipro_'));
+
+    // Mapear el nombre del país al código de vipro correspondiente
+    let viproCountryCode;
+
+    switch (country) {
+      case 'estadosunidos':
+        viproCountryCode = 'vipro_eeuu';
+        break;
+      case 'mexico':
+        viproCountryCode = 'vipro_mx';
+        break;
+      case 'china':
+        viproCountryCode = 'vipro_ch';
+        break;
+      case 'india':
+        viproCountryCode = 'vipro_ind';
+        break;
+      case 'canada':
+        viproCountryCode = 'vipro_cnd';
+        break;
+      case 'inglaterra':
+        viproCountryCode = 'vipro_uk';
+        break;
+      case 'australia':
+        viproCountryCode = 'vipro_aus';
+        break;
+      default:
+        viproCountryCode = null;
+        break;
+    }
+
+    // Crear y guardar el nuevo formulario
+    const newForm = new Form({ email: email, country: country, questions });
+    await newForm.save();
+
+    await userSchema.findOneAndUpdate(
+      { email: email },
+      { $set: { [`${viproCountryCode}`]: true } }, // Usa template literals para actualizar la propiedad dinámicamente
+      { new: true }
+    );
+
+    return res.status(200).json({ message: 'Formulario registrado exitosamente', vipro: viproProperties });
+  } catch (error) {
+    console.error('Error al guardar el formulario:', error.message);
+    return res.status(500).json({ message: 'Error al guardar el formulario' });
+  }
+});
+
 
 router.post('/form_response', async (req, res) => {
   const { country, questions } = req.body;

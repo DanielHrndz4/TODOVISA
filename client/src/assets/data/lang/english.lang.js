@@ -1126,7 +1126,14 @@ const english = [
             "goBackToStart": "Go Back to Start",
             "logoAlt": "",
             "logoSrc": "/img/logo/todovisa.png",
-            "footerText": "© 2024 TodoVisa S.A de C.V"
+            "footerText": "© 2024 TodoVisa S.A de C.V",
+            "notes": {
+                "improvement": "Areas for improvement",
+                "personalinformation": "Your score in this section is low. It is crucial that all personal information is accurate and complete. Errors or incomplete information in this area can significantly impact your final score.",
+                "familyfinancialties": "Your score in this section is low. Lack of detailed information or weak family and financial ties may negatively affect the evaluation of your visa application. Make sure to provide all relevant and accurate information.",
+                "travelhistory": "Your score in this section is low due to a limited travel history. Lack of travel experience may influence the perception of your application and the assessment of your ability to meet visa requirements.",
+                "criminalhistory": "Your score in this section is low. Any issues in your criminal history or a limited record can impact the evaluation of your application. It is important to note that irregularities in this aspect may affect your score."
+            }
         },
         "payment": {
             "title": "How to make a secure payment with TODOVISA in 4 simple steps?",
@@ -1186,7 +1193,7 @@ const english = [
             "validating": "Validating...",
             "sending": "Sending...",
             "changing": "Changing..."
-        }        
+        }
     }
 ];
 

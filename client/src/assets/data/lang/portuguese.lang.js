@@ -1126,7 +1126,14 @@ const portuguese = [
             "goBackToStart": "Voltar ao Início",
             "logoAlt": "",
             "logoSrc": "/img/logo/todovisa.png",
-            "footerText": "© 2024 TodoVisa S.A de C.V"
+            "footerText": "© 2024 TodoVisa S.A de C.V",
+            "notes": {
+                "improvement": "Áreas de melhoria",
+                "personalinformation": "Sua pontuação nesta seção está baixa. É crucial que todas as informações pessoais sejam precisas e completas. Erros ou informações incompletas nesta área podem impactar significativamente sua pontuação final.",
+                "familyfinancialties": "Sua pontuação nesta seção está baixa. A falta de informações detalhadas ou vínculos familiares e financeiros fracos pode afetar negativamente a avaliação de sua solicitação de visto. Certifique-se de fornecer todas as informações relevantes e precisas.",
+                "travelhistory": "Sua pontuação nesta seção está baixa devido a um histórico de viagens limitado. A falta de experiência em viagens pode influenciar a percepção de sua solicitação e a avaliação de sua capacidade para atender aos requisitos do visto.",
+                "criminalhistory": "Sua pontuação nesta seção está baixa. Quaisquer problemas em seu histórico criminal ou um registro limitado podem impactar a avaliação de sua solicitação. É importante observar que irregularidades neste aspecto podem afetar sua pontuação."
+            }
         },
         "payment": {
             "title": "Como realizar seu pagamento seguro com TODOVISA em 4 passos simples?",
@@ -1186,7 +1193,7 @@ const portuguese = [
             "validating": "Validando...",
             "sending": "Enviando...",
             "changing": "Mudando..."
-        }        
+        }
     }
 ];
 

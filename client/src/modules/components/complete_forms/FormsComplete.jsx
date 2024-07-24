@@ -44,7 +44,7 @@ export default function FormsComplete() {
         const mainElement = document.querySelector(".mainElementPdf");
         if (button) {
             button.style.display = "none";
-            mainElement.style.minWidth = "1400px";
+            mainElement.style.minWidth = "1500px";
         }
         const input = pdfRef.current;
         html2canvas(input).then((canvas) => {
@@ -85,15 +85,67 @@ export default function FormsComplete() {
         }
     };
 
+    const recomendation = (correct, incorrect, selection) => {
+        const totalQuestions = correct + incorrect;
+        const percent = (correct / totalQuestions);
+        const roundedPercent = percent.toFixed(2);
+        const percentTotal = (roundedPercent * 100) / 4
+        const percentForCategory = 25 * 0.60
+        console.log(percentForCategory, percentTotal)
+        if (percentTotal <= percentForCategory) {
+            if (selection === 'dh') {
+                return (
+                    <p className="text-justify">
+                        <strong className="text-TVred">{quaText.personalData}: </strong>{quaText.notes.personalinformation}
+                    </p>
+                )
+            } else if (selection === 'aff') {
+                return (
+                    <p className="text-justify">
+                        <strong className="text-TVred">{quaText.familyAndFinancialTies}: </strong>{quaText.notes.familyfinancialties}
+                    </p>
+                )
+            } else if (selection === 'hv') {
+                return (
+                    <p className="text-justify">
+                        <strong className="text-TVred">{quaText.travelHistory}: </strong>{quaText.notes.travelhistory}
+                    </p>
+                )
+            } else {
+                return (
+                    <p className="text-justify">
+                        <strong className="text-TVred">{quaText.criminalHistory}: </strong>{quaText.notes.criminalhistory}
+                    </p>
+                )
+            }
+        }
+    }
+
+    const allRecommendationsValid = () => {
+        if (!userData.response || !Array.isArray(userData.response) || userData.response.length === 0) {
+            return false;
+        }
+
+        const dhValid = recomendation(userData.response[0]?.dh?.correct, userData.response[0]?.dh?.incorrect, 'dh');
+        const affValid = recomendation(userData.response[0]?.aff?.correct, userData.response[0]?.aff?.incorrect, 'aff');
+        const hvValid = recomendation(userData.response[0]?.hv?.correct, userData.response[0]?.hv?.incorrect, 'hv');
+        const hdValid = recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'hd');
+
+        // Verifica si todas las recomendaciones son válidas
+        return dhValid && affValid && hvValid && hdValid;
+    }
+
+    const allValid = allRecommendationsValid()
+
     return (
         <>
             {viproResult ? (
-                <main className="min-w-[800px] min-h-[2000px] bg-TVBlue py-40 sm:py-10">
+                <main className="min-w-[800px] min-h-[2000px] bg-TVBlue py-10 sm:py-10">
                     <div
-                        className="w-[80%] m-auto h-full pt-24 pb-16 bg-white rounded-lg mainElementPdf"
+                        className="w-[80%] m-auto h-full pt-10 pb-10 bg-white rounded-lg mainElementPdf"
                         ref={pdfRef}
                     >
-                        <div className="w-[80%] m-auto pt-10 pb-20">
+                        <div className="w-[90%] m-auto pt-10 pb-20">
                             <div className="m-auto w-full flex flex-col">
                                 <div className="flex flex-col gap-1 text-center pb-16">
                                     <h1 className="text-5xl font-bold">
@@ -146,19 +198,19 @@ export default function FormsComplete() {
                             <div className="w-full flex flex-row gap-2 m-auto">
                                 {userData.response && userData.response.length > 0 && (
                                     <>
-                                        <div className="flex flex-col w-full pt-20 pb-12">
+                                        <div className="flex flex-col w-full pt-12 pb-4">
                                             <PieG correct={userData.response[0]?.dh?.correct || 0} incorrect={userData.response[0]?.dh?.incorrect || 0} />
                                             <p className="text-center py-6">{quaText.personalData}</p>
                                         </div>
-                                        <div className="flex flex-col w-full pt-20 pb-12">
+                                        <div className="flex flex-col w-full pt-12 pb-4">
                                             <PieG correct={userData.response[0]?.aff?.correct || 0} incorrect={userData.response[0]?.aff?.incorrect || 0} />
                                             <p className="text-center py-6">{quaText.familyAndFinancialTies}</p>
                                         </div>
-                                        <div className="flex flex-col w-full pt-20 pb-12">
+                                        <div className="flex flex-col w-full pt-12 pb-4">
                                             <PieG correct={userData.response[0]?.hv?.correct || 0} incorrect={userData.response[0]?.hv?.incorrect || 0} />
                                             <p className="text-center py-6">{quaText.travelHistory}</p>
                                         </div>
-                                        <div className="flex flex-col w-full pt-20 pb-12">
+                                        <div className="flex flex-col w-full pt-12 pb-4">
                                             <PieG correct={userData.response[0]?.hd?.correct || 0} incorrect={userData.response[0]?.hd?.incorrect || 0} />
                                             <p className="text-center py-6">{quaText.criminalHistory}</p>
                                         </div>
@@ -199,7 +251,7 @@ export default function FormsComplete() {
                                     ) : (
                                         <div className="flex flex-col gap-3 py-10 text-xl text-black">
                                             <h2 className="text-center text-3xl pb-2 font-semibold">
-                                               {quaText.notApprovedTitle}
+                                                {quaText.notApprovedTitle}
                                             </h2>
                                             <p className="text-justify">
                                                 {quaText.notApprovedMessage}{" "}
@@ -210,6 +262,22 @@ export default function FormsComplete() {
                                                 {quaText.dontGetDiscouraged}
                                             </p>
                                         </div>
+                                    )}
+                                </div>
+                                <div>
+                                    {/* Muestra el texto si todas las recomendaciones son válidas */}
+                                    {allValid ? (
+                                        <p>Todo está correcto.</p>
+                                    ) : (
+                                        <>
+                                            <div className="flex flex-col gap-3 pb-10 text-xl text-black">
+                                                <h1 className="text-2xl font-bold">{quaText.notes.improvement}</h1>
+                                                {recomendation(userData.response[0]?.dh?.correct, userData.response[0]?.dh?.incorrect, 'dh')}
+                                                {recomendation(userData.response[0]?.aff?.correct, userData.response[0]?.aff?.incorrect, 'aff')}
+                                                {recomendation(userData.response[0]?.hv?.correct, userData.response[0]?.hv?.incorrect, 'hv')}
+                                                {recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'hd')}
+                                            </div>
+                                        </>
                                     )}
                                 </div>
                                 <div className="w-full m-auto">
@@ -245,7 +313,7 @@ export default function FormsComplete() {
                         </div>
                         <div
                             id="paddingButton"
-                            className={`w-[80%] flex flex-row m-auto justify-center items-center gap-4 pb-4 pt-24`}
+                            className={`w-[80%] flex flex-row m-auto justify-center items-center gap-4 pb-4 pt-4`}
                         >
                             <img
                                 src="/img/logo/todovisa.png"

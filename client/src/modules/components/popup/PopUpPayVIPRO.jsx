@@ -3,9 +3,14 @@ import questions from '../../../assets/data/viproLang.data';
 import Cookies from 'js-cookie';
 import fetchData from '../../../assets/data/validation/token.validation';
 import URI from '../../../assets/data/admin/uri.api';
+import CryptoJS from 'crypto-js';
 import { Button } from '@material-tailwind/react';
 
-const handleClickPopUpPay = (html,btn,cancelButton) => {
+function encodeBase64(value) {
+    return btoa(value); // btoa() codifica una cadena en Base64
+}
+
+const handleClickPopUpPay = (html, btn, cancelButton) => {
     Swal.fire({
         html: html,
         showConfirmButton: true,
@@ -17,7 +22,7 @@ const handleClickPopUpPay = (html,btn,cancelButton) => {
     }).then((result) => {
         if (result.isConfirmed) {
             const selectedOption = document.querySelector('input[name="option"]:checked');
-            const swalPopup = (id) =>{
+            const swalPopup = (id, selectedValue) => {
                 Swal.fire({
                     width: 'auto',
                     html: `
@@ -25,7 +30,7 @@ const handleClickPopUpPay = (html,btn,cancelButton) => {
                       <div class="w-full flex flex-col sm:flex-row justify-around gap-8 m-auto items-center">
                         <div class="flex flex-col justify-center items-center max-w-[300px] w-full p-4 border border-gray-300 rounded-lg shadow-lg">
                           <p class="min-h-[100px] text-start max-w-full w-full mb-4">Perfecto para pagos con tarjetas Visa y MasterCard. Pagos rápidos y seguros.</p>
-                          <a href="/payment/estadosunidos/${id}" target="_blank">
+                          <a href="/payment/${selectedValue}/${id}" target="_blank">
                           <button class="shadowbtn bg-black w-[160px] py-3 px-2 rounded-md text-white hover:bg-gray-800 transition duration-300">N1CO</button>
                           </a>
                           <img src="./img/payment/visamastercard.png" class="h-[35px] w-auto mt-4" alt="Visa MasterCard"/>
@@ -47,15 +52,14 @@ const handleClickPopUpPay = (html,btn,cancelButton) => {
                     showCancelButton: true,
                     cancelButtonColor: '#113e5f',
                     cancelButtonText: "Cancelar"
-                  });
+                });
             }
-            if (selectedOption) {            
-                  
+            if (selectedOption) {
                 const selectedValue = selectedOption.value;
                 const user = Cookies.get('user');
                 const userData = JSON.parse(user);
                 const email = userData.email;
-                const cookieJWT = Cookies.get('jwt')
+                const cookieJWT = Cookies.get('jwt');
                 const validateJWT = async () => {
                     if (cookieJWT) {
                         const validation = await fetchData(cookieJWT);
@@ -74,15 +78,15 @@ const handleClickPopUpPay = (html,btn,cancelButton) => {
                                         throw new Error('Error al guardar el formulario');
                                     }
 
-                                    if (response.ok) {
-                                        const data = await response.json();
-                                        if(data.message === 'El usuario tiene un formulario pendiente por realizar'){
-                                            window.location.href = `/vipro/${selectedValue}`;
-                                        }else if(data.message === 'El usuario tiene un formulario terminado'){
-                                            swalPopup(data.id)
-                                        }else{
-                                            swalPopup(data.id)
-                                        }
+                                    const data = await response.json();
+                                    if (data.message === 'El usuario tiene un formulario pendiente por realizar') {
+                                        window.location.href = `/vipro/${selectedValue}`;
+                                    } else if (data.message === 'El usuario tiene un formulario terminado') {
+                                        swalPopup(encodeBase64(data.id), encodeBase64(selectedValue));
+                                        console.log(data.message);
+                                    } else {
+                                        swalPopup(encodeBase64(data.id), encodeBase64(selectedValue));
+                                        console.log(data.message);
                                     }
                                 } catch (error) {
                                     console.error('Error en la solicitud para guardar el formulario:', error);

@@ -14,7 +14,7 @@ const PieG = ({correct, incorrect}) => {
       {
         type: 'text',
         style: {
-          text: `${roundedPercent * 100}%`,
+          text: `${(roundedPercent * 100)/4}%`,
           x: '50%',
           y: '50%',
           textAlign: 'center',

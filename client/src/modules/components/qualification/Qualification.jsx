@@ -309,6 +309,58 @@ export default function Qualification() {
 
   const viproResult = userResponse.vipro;
 
+  const recomendation = (correct, incorrect, selection) => {
+    const totalQuestions = correct + incorrect;
+    const percent = (correct / totalQuestions);
+    const roundedPercent = percent.toFixed(2);
+    const percentTotal = (roundedPercent * 100) / 4
+    const percentForCategory = 25 * 0.60
+    console.log(percentForCategory, percentTotal)
+    if (percentTotal <= percentForCategory) {
+      if (selection === 'dh') {
+        return (
+          <p className="text-justify">
+            <strong className="text-TVred">{quaText.personalData}: </strong>{quaText.notes.personalinformation}
+          </p>
+        )
+      } else if (selection === 'aff') {
+        return (
+          <p className="text-justify">
+            <strong className="text-TVred">{quaText.familyAndFinancialTies}: </strong>{quaText.notes.familyfinancialties}
+          </p>
+        )
+      } else if (selection === 'hv') {
+        return (
+          <p className="text-justify">
+            <strong className="text-TVred">{quaText.travelHistory}: </strong>{quaText.notes.travelhistory}
+          </p>
+        )
+      } else {
+        return (
+          <p className="text-justify">
+            <strong className="text-TVred">{quaText.criminalHistory}: </strong>{quaText.notes.criminalhistory}
+          </p>
+        )
+      }
+    }
+  }
+
+  const allRecommendationsValid = () => {
+    if (!userData.response || !Array.isArray(userData.response) || userData.response.length === 0) {
+      return false;
+    }
+
+    const dhValid = recomendation(userData.response[0]?.dh?.correct, userData.response[0]?.dh?.incorrect, 'dh');
+    const affValid = recomendation(userData.response[0]?.aff?.correct, userData.response[0]?.aff?.incorrect, 'aff');
+    const hvValid = recomendation(userData.response[0]?.hv?.correct, userData.response[0]?.hv?.incorrect, 'hv');
+    const hdValid = recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'hd');
+
+    // Verifica si todas las recomendaciones son válidas
+    return dhValid && affValid && hvValid && hdValid;
+  }
+
+  const allValid = allRecommendationsValid()
+
   return (
     <>
       {!viproResult ? (
@@ -397,9 +449,8 @@ export default function Qualification() {
                 <p className="text-black text-4xl">
                   {quaText.totalScore}{" "}
                   <strong
-                    className={`${
-                      qualification >= 60 ? "text-green-600" : "text-red-400"
-                    } text-shadow`}
+                    className={`${qualification >= 60 ? "text-green-600" : "text-red-400"
+                      } text-shadow`}
                   >
                     {qualification.toFixed(1)}
                   </strong>
@@ -445,16 +496,32 @@ export default function Qualification() {
                   ) : (
                     <div className="flex flex-col gap-3 py-10 text-xl text-black">
                       <h2 className="text-center text-3xl pb-2 font-semibold">
-                      {quaText.notApprovedTitle}
+                        {quaText.notApprovedTitle}
                       </h2>
                       <p className="text-justify">
-                      {quaText.notApprovedMessage}{" "}
+                        {quaText.notApprovedMessage}{" "}
                         {qualification.toFixed(1)}, {quaText.notApprovedMessage2}
                       </p>
                       <p>
-                      {quaText.dontGetDiscouraged}
+                        {quaText.dontGetDiscouraged}
                       </p>
                     </div>
+                  )}
+                </div>
+                <div>
+                  {/* Muestra el texto si todas las recomendaciones son válidas */}
+                  {allValid ? (
+                    <p>Todo está correcto.</p>
+                  ) : (
+                    <>
+                      <div className="flex flex-col gap-3 pb-10 text-xl text-black">
+                        <h1 className="text-2xl font-bold">{quaText.notes.improvement}</h1>
+                        {recomendation(userData.response[0]?.dh?.correct, userData.response[0]?.dh?.incorrect, 'dh')}
+                        {recomendation(userData.response[0]?.aff?.correct, userData.response[0]?.aff?.incorrect, 'aff')}
+                        {recomendation(userData.response[0]?.hv?.correct, userData.response[0]?.hv?.incorrect, 'hv')}
+                        {recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'hd')}
+                      </div>
+                    </>
                   )}
                 </div>
                 <div className="w-full m-auto">
@@ -462,10 +529,10 @@ export default function Qualification() {
                     <h1 className="text-2xl font-bold">{quaText.importantNote}</h1>
                     <div className="flex flex-col gap-3">
                       <p className="text-xl">
-                      {quaText.weightingMessage}
+                        {quaText.weightingMessage}
                       </p>
                       <p className="text-xl">
-                      {quaText.interviewMessage}
+                        {quaText.interviewMessage}
                       </p>
                     </div>
                   </div>
@@ -485,7 +552,7 @@ export default function Qualification() {
                 className="bg-TVred shadowbtn"
                 style={{ display: "block" }} // Asegúrate de que el botón esté visible por defecto
               >
-               {quaText.goBackToStart}
+                {quaText.goBackToStart}
               </Button>
             </div>
             <div
