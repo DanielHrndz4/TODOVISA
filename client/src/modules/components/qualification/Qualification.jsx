@@ -7,6 +7,7 @@ import { Button } from "@material-tailwind/react";
 import { useNavigate, useLocation } from "react-router-dom";
 import URI from "../../../assets/data/admin/uri.api";
 import lang from "../../../assets/data/lang.data";
+import FRONT_URI from "../../../assets/data/admin/uri.front";
 
 export default function Qualification() {
   const user = Cookies.get("user");
@@ -35,9 +36,13 @@ export default function Qualification() {
 
   useEffect(() => {
     const allowedReferers = [
-      "http://localhost:5173/vipro/estadosunidos",
-      "http://localhost:5173/vipro/canada",
-      "http://localhost:5173/",
+      `${FRONT_URI}/vipro/estadosunidos`,
+      `${FRONT_URI}/vipro/mexico`,
+      `${FRONT_URI}/vipro/china`,
+      `${FRONT_URI}/vipro/india`,
+      `${FRONT_URI}/vipro/canada`,
+      `${FRONT_URI}/vipro/inglaterra`,
+      `${FRONT_URI}/vipro/australia`,
     ];
 
     const referer = document.referrer;

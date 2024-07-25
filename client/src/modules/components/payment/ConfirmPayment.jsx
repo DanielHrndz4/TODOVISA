@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../loader/Loading";
 import URI from "../../../assets/data/admin/uri.api";
 import questions from '../../../assets/data/viproLang.data';
+import handleClickPopUpSignUp from "../popup/PopUpSignUp";
 
 export default function ConfirmPayment() {
   const [tokenValidation, setTokenValidation] = useState(null);
@@ -66,7 +67,13 @@ export default function ConfirmPayment() {
 
         const data = await response.json();
         setResponseData(data);
-        navigateTo(`/vipro/${decodeBase64(country)}`)
+        if (response.ok) {
+          navigateTo(`/vipro/${decodeBase64(country)}`)
+        } else {
+          handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold'>Acceso Denegado</h1><p class='text-center'>No se pudo acceder al formulario. Si el problema persiste, por favor contacta a un administrador de TODOVISA.</p>`, 'Aceptar');
+          navigateTo('/')
+        }
+
       } catch (err) {
         console.error("Error during form submission:", err);
         setError("An error occurred while submitting the form.");
@@ -79,7 +86,11 @@ export default function ConfirmPayment() {
   }, [tokenValidation, email, id, country]); // Dependencias para ejecutar cuando cambie el tokenValidation, email, id, o country
 
   if (error) {
-    return <div>{error}</div>;
+    const errorMessage = () => {
+      handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold'>Acceso Denegado</h1><p class='text-center'>No se pudo acceder al formulario. Si el problema persiste, por favor contacta a un administrador de TODOVISA.</p>`, 'Aceptar');
+      navigateTo('/')
+    }
+    return errorMessage();
   }
 
   if (tokenValidation === null) {
@@ -88,14 +99,7 @@ export default function ConfirmPayment() {
 
   return (
     <div>
-      {responseData ? (
-        <div>
-          <p>Message: {responseData.message}</p>
-          <p>VIPRO Properties: {JSON.stringify(responseData.vipro)}</p>
-        </div>
-      ) : (
-        <div>Loading response data...</div>
-      )}
+      <Loading></Loading>
     </div>
   );
 }

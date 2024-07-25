@@ -80,20 +80,20 @@ const GuideSection = () => {
         <CardHeader
           shadow={false}
           floated={false}
-          className="m-auto w-[90%] xl:w-[20%] flex-shrink-0 flex flex-col sm:flex-row xl:flex-col overflow-hidden justify-center items-center gap-2"
+          className="m-auto w-[90%] xl:w-[20%] flex-shrink-0 flex flex-col bg-TVgray sm:flex-row xl:flex-col overflow-hidden justify-center items-center gap-2"
         >
           <Slide>
             <img
               src="./img/pdf/portada.jpg"
               alt="card-image"
-              className="w-full sm:w-1/2 lg:w-[40%] xl:w-full h-auto object-cover"
+              className="w-[90%] sm:w-[60%] lg:w-[40%] xl:w-full h-auto object-cover m-auto"
             />
           </Slide>
           <Slide>
             <img
               src="./img/pdf/page.jpg"
               alt="card-image"
-              className="w-full sm:w-1/2 lg:w-[40%] xl:w-full h-auto object-cover hidden sm:block lg:block xl:hidden"
+              className="w-[90%] sm:w-[60%] lg:w-[40%] xl:w-full h-auto object-cover hidden sm:block lg:block xl:hidden m-auto"
             />
           </Slide>
         </CardHeader>

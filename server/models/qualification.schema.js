@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const qualificationSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true},
     tel: { type: String, required: true },
     user_country: { type: String, required: true },
     form_country: { type: String },
@@ -29,6 +29,7 @@ const qualificationSchema = new mongoose.Schema({
     qualification: { type: String, required: true }
 });
 
+qualificationSchema.index({ email: 1 }, { unique: false });
 const ResultData = mongoose.model('ResultData', qualificationSchema);
 
 module.exports = ResultData;

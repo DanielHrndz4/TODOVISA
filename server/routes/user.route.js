@@ -417,8 +417,8 @@ router.post('/jwt', (req, res) => {
 });
 
 router.post('/show-form-eeuu', (req, res) => {
-  const {email , country} = req.body;
-  Form.findOne({ email: email, country: country})
+  const { email, country } = req.body;
+  Form.findOne({ email: email, country: country })
     .then((user) => {
       if (user) {
         return res.status(200).json({
@@ -447,10 +447,10 @@ router.post('/update-form-eeuu', async (req, res) => {
       { $set: { questions: questions } },
       { new: true } // Devuelve el documento actualizado
     );
-    
+
     if (form) {
       const user = await userSchema.findOne({ email: email });
-      
+
       if (user) {
         let viproCountryCode;
 
@@ -493,7 +493,7 @@ router.post('/update-form-eeuu', async (req, res) => {
         } else {
           return res.status(400).json({ message: 'País no válido' });
         }
-        
+
         res.status(200).json({ message: 'Formulario guardado con éxito' });
       } else {
         res.status(404).json({ message: 'Usuario no encontrado' });
@@ -915,76 +915,35 @@ router.post('/save_qualification', async (req, res) => {
   const { resultData, email } = req.body;
   try {
     const formCountry = resultData.form_country.toLowerCase().replace(/\s+/g, '');
-    const country = resultData.form_country
-    // Busca si existe un documento con el email y el form_country proporcionado
-    let updatedQualification = await ResultData.findOne({ email: email, form_country: country });
 
-    if (updatedQualification) {
-      // Si existe, actualiza el documento
-      updatedQualification = await ResultData.findOneAndUpdate(
-        { email: email, form_country: formCountry },
+    updatedQualification = await ResultData.create({
+      email: email,
+      name: resultData.name,
+      tel: resultData.tel,
+      user_country: resultData.user_country,
+      form_country: resultData.form_country,
+      response: [
         {
-          $set: {
-            name: resultData.name,
-            tel: resultData.tel,
-            user_country: resultData.user_country,
-            form_country: resultData.form_country,
-            response: [
-              {
-                dh: {
-                  correct: resultData.response[0].dh.correct,
-                  incorrect: resultData.response[0].dh.incorrect,
-                },
-                aff: {
-                  correct: resultData.response[0].aff.correct,
-                  incorrect: resultData.response[0].aff.incorrect,
-                },
-                hv: {
-                  correct: resultData.response[0].hv.correct,
-                  incorrect: resultData.response[0].hv.incorrect,
-                },
-                hd: {
-                  correct: resultData.response[0].hd.correct,
-                  incorrect: resultData.response[0].hd.incorrect,
-                },
-              }
-            ],
-            qualification: resultData.qualification
-          }
-        },
-        { new: true }
-      );
-    } else {
-      // Si no existe, crea un nuevo documento
-      updatedQualification = await ResultData.create({
-        email: email,
-        name: resultData.name,
-        tel: resultData.tel,
-        user_country: resultData.user_country,
-        form_country: resultCountry,
-        response: [
-          {
-            dh: {
-              correct: resultData.response[0].dh.correct,
-              incorrect: resultData.response[0].dh.incorrect,
-            },
-            aff: {
-              correct: resultData.response[0].aff.correct,
-              incorrect: resultData.response[0].aff.incorrect,
-            },
-            hv: {
-              correct: resultData.response[0].hv.correct,
-              incorrect: resultData.response[0].hv.incorrect,
-            },
-            hd: {
-              correct: resultData.response[0].hd.correct,
-              incorrect: resultData.response[0].hd.incorrect,
-            },
-          }
-        ],
-        qualification: resultData.qualification
-      });
-    }
+          dh: {
+            correct: resultData.response[0].dh.correct,
+            incorrect: resultData.response[0].dh.incorrect,
+          },
+          aff: {
+            correct: resultData.response[0].aff.correct,
+            incorrect: resultData.response[0].aff.incorrect,
+          },
+          hv: {
+            correct: resultData.response[0].hv.correct,
+            incorrect: resultData.response[0].hv.incorrect,
+          },
+          hd: {
+            correct: resultData.response[0].hd.correct,
+            incorrect: resultData.response[0].hd.incorrect,
+          },
+        }
+      ],
+      qualification: resultData.qualification
+    });
 
     // Elimina la entrada en Form
     await Form.findOneAndDelete({ email: email, country: formCountry });

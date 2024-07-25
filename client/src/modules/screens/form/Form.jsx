@@ -175,7 +175,7 @@ const categorizedQuestions = {
               {...layout}
               form={form}
               name="control-hooks"
-              onFinish={onFinish}
+              onFinish={()=>onFinish()}
               onFinishFailed={() => onFinishFailed(email, questions)}
               onValuesChange={handleValuesChange}
               className="w-full py-6 lg:py-10 px-6 lg:px-24 bg-white rounded-lg shadow"
