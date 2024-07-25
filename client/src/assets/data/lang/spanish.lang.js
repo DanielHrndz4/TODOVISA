@@ -1196,6 +1196,18 @@ const spanish = [
             "validating": "Validando...",
             "sending": "Enviando...",
             "changing": "Cambiando..."
+        },
+        "confirmpayment": {
+            "messages": {
+                "errorTokenValidation": "Se produjo un error al validar el token.",
+                "errorFormSubmission": "Se produjo un error al enviar el formulario.",
+                "popupAccessDenied": {
+                    "title": "Acceso Denegado",
+                    "description": "No se pudo acceder al formulario. Si el problema persiste, por favor contacta a un administrador de TODOVISA.",
+                    "button": "Aceptar"
+                }
+            },
+            "loading": "Cargando"
         }
     }
 ];

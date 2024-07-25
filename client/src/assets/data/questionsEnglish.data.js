@@ -18,7 +18,7 @@ const questionsEnglish =  [
     { "question": "Do you want to travel to the United States for Work?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Do you have a contract letter sent by a US company?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Do you have a relative in serious condition in the United States?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
-    { "question": "Is your relative a Resident or Citizen?", "type_question": "cerrada", "response": ["RESIDENT", "CITIZEN"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
+    { "question": "Is your relative a Resident or Citizen?", "type_question": "cerrada", "response": ["RESIDENT", "CITIZEN", "I HAVE NO FAMILY IN THAT COUNTRY"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Will your stay in the United States be less than 30 days?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Will your travel expenses be paid by someone else?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Will you be responsible for paying your travel to the United States?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },

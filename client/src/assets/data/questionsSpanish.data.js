@@ -18,7 +18,7 @@ const questionsSpanish = [
     { "question": "Desea Viajar a estados unidos para Trabajar", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Posee una carta de contrato enviada de parte de una empresa americana?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Tiene a un familiar en graves condiciones en Estados Unidos?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
-    { "question": "Su familiar es Residente o Ciudadano?", "type_question": "cerrada", "response": ["RESIDENTE", "CIUDADANO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
+    { "question": "Su familiar es Residente o Ciudadano?", "type_question": "cerrada", "response": ["RESIDENTE", "CIUDADANO", "NO TENGO FAMILIAR EN ESE PAIS"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Su estancia en estados unidos será menor a 30 días?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Sus gastos de viaje serán pagados por otra persona?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },
     { "question": "Usted será el responsable de pagar su viaje a estados unidos?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "ARRAIGOS FAMILIARES Y FINANCIEROS" },

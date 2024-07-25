@@ -77,8 +77,13 @@ export default function GuidePayment() {
     }, [tokenValidation, email]);
 
     return (
-        <div>
-            {showLoading && <Loading />}
-        </div>
+        <>
+            {tokenValidation ?
+                <div>
+                    <Loading />
+                </div> :
+                navigateTo('/')
+            }
+        </>
     );
 }
