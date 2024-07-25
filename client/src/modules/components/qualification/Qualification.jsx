@@ -36,6 +36,7 @@ export default function Qualification() {
   useEffect(() => {
     const allowedReferers = [
       "http://localhost:5173/vipro/estadosunidos",
+      "http://localhost:5173/vipro/canada",
       "http://localhost:5173/",
     ];
 
@@ -58,10 +59,10 @@ export default function Qualification() {
           const userResponse = data.responseFormUser;
           const formResponse = data.responseForm;
           const userInfo = data.user;
-          setCountryForm(formResponse.country);
           setUserResponse(userInfo);
           setUserResponseData(userResponse.questions || []);
           setFormResponseData(formResponse.questions || []);
+          setCountryForm(userResponse.country);
 
           //saveQualification();
         } else {
@@ -250,8 +251,10 @@ export default function Qualification() {
               },
             },
           ],
-          qualification: qualification.toFixed(1).toString(), // asegúrate de enviar la calificación como string
+          qualification: (correctDPCount+correctAFFCount+correctHVCount+correctHDCount) * 2.6, // asegúrate de enviar la calificación como string
         };
+
+        console.log(resultDataQualification)
 
         try {
           const response = await fetch(`${URI}/save_qualification`, {
@@ -262,6 +265,7 @@ export default function Qualification() {
             body: JSON.stringify({
               resultData: resultDataQualification,
               email: email,
+              country: countryForm
             }),
           });
 
@@ -287,7 +291,7 @@ export default function Qualification() {
     const mainElement = document.querySelector(".mainElementPdf");
     if (button) {
       button.style.display = "none";
-      mainElement.style.minWidth = "1400px";
+      mainElement.style.minWidth = "1500px";
     }
     const input = pdfRef.current;
     html2canvas(input).then((canvas) => {
@@ -350,10 +354,10 @@ export default function Qualification() {
       return false;
     }
 
-    const dhValid = recomendation(userData.response[0]?.dh?.correct, userData.response[0]?.dh?.incorrect, 'dh');
-    const affValid = recomendation(userData.response[0]?.aff?.correct, userData.response[0]?.aff?.incorrect, 'aff');
-    const hvValid = recomendation(userData.response[0]?.hv?.correct, userData.response[0]?.hv?.incorrect, 'hv');
-    const hdValid = recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'hd');
+    const dhValid = recomendation(correctCountDP, incorrectCountDP, 'dh');
+    const affValid = recomendation(correctCountAFF, incorrectCountAFF, 'aff');
+    const hvValid = recomendation(correctCountHV, incorrectCountHV, 'hv');
+    const hdValid = recomendation(correctCountHD, incorrectCountHD, 'hd');
 
     // Verifica si todas las recomendaciones son válidas
     return dhValid && affValid && hvValid && hdValid;
@@ -364,12 +368,12 @@ export default function Qualification() {
   return (
     <>
       {!viproResult ? (
-        <main className="min-w-[800px] min-h-[2000px] bg-TVBlue py-40 sm:py-10">
+        <main className="min-w-[800px] min-h-[2000px] bg-TVBlue py-10 sm:py-10">
           <div
-            className="w-[80%] m-auto h-full pt-24 pb-16 bg-white rounded-lg mainElementPdf"
+            className="w-[80%] m-auto h-full pt-10 pb-10 bg-white rounded-lg mainElementPdf"
             ref={pdfRef}
           >
-            <div className="w-[80%] m-auto pt-10 pb-20">
+            <div className="w-[90%] m-auto pt-10 pb-20">
               <div className="m-auto w-full flex flex-col">
                 <div className="flex flex-col gap-1 text-center pb-16">
                   <h1 className="text-5xl font-bold">{quaText.title}</h1>
@@ -420,11 +424,11 @@ export default function Qualification() {
                 </div>
               </div>
               <div className="w-full flex flex-row gap-2 m-auto">
-                <div className="flex flex-col w-full pt-20 pb-12">
+                <div className="flex flex-col w-full pt-12 pb-4">
                   <PieG correct={correctCountDP} incorrect={incorrectCountDP} />
                   <p className="text-center py-6">{quaText.personalData}</p>
                 </div>
-                <div className="flex flex-col w-full pt-20 pb-12">
+                <div className="flex flex-col w-full pt-12 pb-4">
                   <PieG
                     correct={correctCountAFF}
                     incorrect={incorrectCountAFF}
@@ -433,11 +437,11 @@ export default function Qualification() {
                     {quaText.familyAndFinancialTies}
                   </p>
                 </div>
-                <div className="flex flex-col w-full pt-20 pb-12">
+                <div className="flex flex-col w-full pt-12 pb-4">
                   <PieG correct={correctCountHV} incorrect={incorrectCountHV} />
                   <p className="text-center py-6">{quaText.travelHistory}</p>
                 </div>
-                <div className="flex flex-col w-full pt-20 pb-12">
+                <div className="flex flex-col w-full pt-12 pb-4">
                   <PieG correct={correctCountHD} incorrect={incorrectCountHD} />
                   <p className="text-center py-6">{quaText.criminalHistory}</p>
                 </div>
@@ -460,7 +464,7 @@ export default function Qualification() {
                 <div className="w-full m-auto">
                   {qualification >= 60 ? (
                     <div className="flex flex-col gap-3 py-10 text-xl text-black">
-                      <h2 className="text-center text-3xl pb-2 font-semibold">
+                      <h2 className="text-center text-3xl pb-4 font-semibold">
                         {quaText.congratulations}
                       </h2>
                       <p className="text-justify">
@@ -516,10 +520,10 @@ export default function Qualification() {
                     <>
                       <div className="flex flex-col gap-3 pb-10 text-xl text-black">
                         <h1 className="text-2xl font-bold">{quaText.notes.improvement}</h1>
-                        {recomendation(userData.response[0]?.dh?.correct, userData.response[0]?.dh?.incorrect, 'dh')}
-                        {recomendation(userData.response[0]?.aff?.correct, userData.response[0]?.aff?.incorrect, 'aff')}
-                        {recomendation(userData.response[0]?.hv?.correct, userData.response[0]?.hv?.incorrect, 'hv')}
-                        {recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'hd')}
+                        {recomendation(correctCountDP, incorrectCountDP, 'dh')}
+                        {recomendation(correctCountAFF, incorrectCountAFF, 'aff')}
+                        {recomendation(correctCountHV, incorrectCountHV, 'hv')}
+                        {recomendation(correctCountHD, incorrectCountHD, 'hd')}
                       </div>
                     </>
                   )}
@@ -557,7 +561,7 @@ export default function Qualification() {
             </div>
             <div
               id="paddingButton"
-              className={`w-[80%] flex flex-row m-auto justify-center items-center gap-4 pb-4 pt-40`}
+              className={`w-[80%] flex flex-row m-auto justify-center items-center gap-4 pb-4 pt-4`}
             >
               <img
                 src="/img/logo/todovisa.png"

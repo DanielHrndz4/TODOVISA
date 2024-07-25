@@ -170,7 +170,7 @@ const categorizedQuestions = {
     <>{loading && (
       <Fade>
         <main className="w-full h-full bg-TVBlue" >
-          <div className="w-full lg:w-[60%] m-auto py-8">
+          <div className="w-full lg:w-[70%] m-auto py-8">
             <Form
               {...layout}
               form={form}

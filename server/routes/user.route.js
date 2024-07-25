@@ -911,44 +911,80 @@ router.post('/form_response_eeuu', async (req, res) => {
   }
 });
 
-
 router.post('/save_qualification', async (req, res) => {
   const { resultData, email } = req.body;
   try {
     const formCountry = resultData.form_country.toLowerCase().replace(/\s+/g, '');
-    const updatedQualification = await ResultData.findOneAndUpdate(
-      { email: email },
-      {
-        $set: {
-          name: resultData.name,
-          tel: resultData.tel,
-          user_country: resultData.user_country,
-          form_country: resultData.form_country,
-          response: [
-            {
-              dh: {
-                correct: resultData.response[0].dh.correct,
-                incorrect: resultData.response[0].dh.incorrect,
-              },
-              aff: {
-                correct: resultData.response[0].aff.correct,
-                incorrect: resultData.response[0].aff.incorrect,
-              },
-              hv: {
-                correct: resultData.response[0].hv.correct,
-                incorrect: resultData.response[0].hv.incorrect,
-              },
-              hd: {  // Aquí debería ser 'hd' en lugar de 'dp'
-                correct: resultData.response[0].hd.correct,
-                incorrect: resultData.response[0].hd.incorrect,
-              },
-            }
-          ],
-          qualification: resultData.qualification
-        }
-      },
-      { new: true, upsert: true }
-    );
+    const country = resultData.form_country
+    // Busca si existe un documento con el email y el form_country proporcionado
+    let updatedQualification = await ResultData.findOne({ email: email, form_country: country });
+
+    if (updatedQualification) {
+      // Si existe, actualiza el documento
+      updatedQualification = await ResultData.findOneAndUpdate(
+        { email: email, form_country: formCountry },
+        {
+          $set: {
+            name: resultData.name,
+            tel: resultData.tel,
+            user_country: resultData.user_country,
+            form_country: resultData.form_country,
+            response: [
+              {
+                dh: {
+                  correct: resultData.response[0].dh.correct,
+                  incorrect: resultData.response[0].dh.incorrect,
+                },
+                aff: {
+                  correct: resultData.response[0].aff.correct,
+                  incorrect: resultData.response[0].aff.incorrect,
+                },
+                hv: {
+                  correct: resultData.response[0].hv.correct,
+                  incorrect: resultData.response[0].hv.incorrect,
+                },
+                hd: {
+                  correct: resultData.response[0].hd.correct,
+                  incorrect: resultData.response[0].hd.incorrect,
+                },
+              }
+            ],
+            qualification: resultData.qualification
+          }
+        },
+        { new: true }
+      );
+    } else {
+      // Si no existe, crea un nuevo documento
+      updatedQualification = await ResultData.create({
+        email: email,
+        name: resultData.name,
+        tel: resultData.tel,
+        user_country: resultData.user_country,
+        form_country: resultCountry,
+        response: [
+          {
+            dh: {
+              correct: resultData.response[0].dh.correct,
+              incorrect: resultData.response[0].dh.incorrect,
+            },
+            aff: {
+              correct: resultData.response[0].aff.correct,
+              incorrect: resultData.response[0].aff.incorrect,
+            },
+            hv: {
+              correct: resultData.response[0].hv.correct,
+              incorrect: resultData.response[0].hv.incorrect,
+            },
+            hd: {
+              correct: resultData.response[0].hd.correct,
+              incorrect: resultData.response[0].hd.incorrect,
+            },
+          }
+        ],
+        qualification: resultData.qualification
+      });
+    }
 
     // Elimina la entrada en Form
     await Form.findOneAndDelete({ email: email, country: formCountry });
@@ -968,7 +1004,6 @@ router.post('/save_qualification', async (req, res) => {
     });
   }
 });
-
 
 router.post('/complete_forms', async (req, res) => {
   const { email } = req.body;
