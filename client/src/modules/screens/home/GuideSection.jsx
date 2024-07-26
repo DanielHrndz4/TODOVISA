@@ -82,20 +82,20 @@ const GuideSection = () => {
           floated={false}
           className="m-auto w-[90%] xl:w-[20%] flex-shrink-0 flex flex-col bg-TVgray sm:flex-row xl:flex-col overflow-hidden justify-center items-center gap-2"
         >
-          <Slide>
+          <Fade>
             <img
               src="./img/pdf/portada.jpg"
               alt="card-image"
               className="w-[90%] sm:w-[60%] lg:w-[40%] xl:w-full h-auto object-cover m-auto"
             />
-          </Slide>
-          <Slide>
+          </Fade>
+          <Fade>
             <img
               src="./img/pdf/page.jpg"
               alt="card-image"
               className="w-[90%] sm:w-[60%] lg:w-[40%] xl:w-full h-auto object-cover hidden sm:block lg:block xl:hidden m-auto"
             />
-          </Slide>
+          </Fade>
         </CardHeader>
         <CardBody className="lg:py-6 lg:px-6 px-0 py-6 flex flex-col justify-center items-center text-justify bg-TVgray">
           <Typography variant="h6" color="gray" className="mb-4 text-xl lg:text-lg xl:text-2xl text-TVBlue">
