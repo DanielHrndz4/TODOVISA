@@ -145,7 +145,7 @@ const spanish = [
             "terms": "Términos y condiciones",
             "send_form": "Enviar formulario",
             "reload_form": "Reiniciar formulario",
-            "terms_and_conditions": "<strong>1. Aceptación de los Términos</strong><br><br>Al acceder y utilizar este formulario de solicitud de visa, usted acepta cumplir con estos términos y condiciones. Si no está de acuerdo con alguno de estos términos, no utilice este formulario.<br><br><strong>2. Uso del Formulario</strong><br><br>Este formulario está destinado únicamente para uso personal y no comercial. Usted se compromete a proporcionar información precisa y completa al completar el formulario.<br><br><strong>3. Privacidad de la Información</strong><br><br>Toda la información proporcionada en este formulario se utilizará exclusivamente para procesar su solicitud de visa. No compartiremos su información con terceros sin su consentimiento, excepto cuando sea requerido por la ley.<br><br><strong>4. Limitación de Responsabilidad</strong><br><br>No garantizamos que el uso del formulario sea ininterrumpido o libre de errores. No seremos responsables de ningún daño que resulte del uso de este formulario, incluidos, entre otros, daños directos, indirectos, incidentales, punitivos y consecuentes.<br><br><strong>5. Modificaciones de los Términos</strong><br><br>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones se publicarán en esta página y su uso continuado del formulario constituirá la aceptación de los términos modificados.<br><br><strong>6. Ley Aplicable</strong><br><br>Estos términos y condiciones se regirán e interpretarán de acuerdo con las leyes del país donde se procesa la solicitud de visa, sin dar efecto a ninguna disposición sobre conflictos de leyes.<br><br><strong>7. Contacto</strong><br><br>Si tiene alguna pregunta sobre estos términos y condiciones, por favor contacte con nosotros a través de nuestros canales de atención al cliente.",
+            "terms_and_conditions": "<strong>1. Aceptación de los Términos</strong><br><br>Al acceder y utilizar este formulario de solicitud de visa, usted acepta cumplir con estos términos y condiciones. Si no está de acuerdo con alguno de estos términos, no utilice este formulario.<br><br><strong>2. Uso del Formulario</strong><br><br>Este formulario está destinado únicamente para uso personal y no comercial. Usted se compromete a proporcionar información precisa y completa al completar el formulario.<br><br><strong>3. Privacidad de la Información</strong><br><br>Toda la información proporcionada en este formulario se utilizará exclusivamente para procesar su solicitud de visa. No compartiremos su información con terceros sin su consentimiento, excepto cuando sea requerido por la ley.<br><br><strong>4. Limitación de Responsabilidad</strong><br><br>No garantizamos que el uso del formulario sea ininterrumpido o libre de errores. No seremos responsables de ningún daño que resulte del uso de este formulario, incluidos, entre otros, daños directos, indirectos, incidentales, punitivos y consecuentes.<br><br><strong>5. Modificaciones de los Términos</strong><br><br>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones se publicarán en esta página y su uso continuado del formulario constituirá la aceptación de los términos modificados.<br><br><strong>6. Ley Aplicable</strong><br><br>Estos términos y condiciones se regirán e interpretarán de acuerdo con las leyes del país donde se procesa la solicitud de visa, sin dar efecto a ninguna disposición sobre conflictos de leyes.<br><br><strong>7. Contacto</strong><br><br>Si tiene alguna pregunta sobre estos términos y condiciones, por favor contacte con nosotros a través de nuestros canales de atención al cliente.<br><br><strong>8. Nota Importante sobre la Calificación</strong><br><br> La calificación obtenida en este cuestionario es un indicador preliminar y no garantiza el éxito en la entrevista oficial que forma parte del procedimiento de visa. Es fundamental tener en cuenta que la entrevista oficial evaluará aspectos adicionales, como la veracidad de la información proporcionada, la capacidad para comunicarse eficazmente en el idioma requerido, y otros criterios específicos según las regulaciones del país solicitante. La calificación obtenida en este cuestionario no asegura ni implica una aprobación automática en la entrevista de visa.",
             "button": "Aceptar!",
             "button2": "Cancelar!",
             "warning": "Debes aceptar los términos y condiciones antes de guardar el formulario.",
@@ -1208,6 +1208,31 @@ const spanish = [
                 }
             },
             "loading": "Cargando"
+        },
+        "payBtn": {
+            "payMethod": "Selecciona tu método de pago",
+            "payN1co": "Perfecto para pagos con tarjetas Visa y MasterCard. Pagos rápidos y seguros.",
+            "payAMC": "Ideal para pagos con tarjetas American Express. Pagos rápidos y seguros. Puedes ver cómo realizar una compra con América Central",
+            "paySteps": "aquí",
+            "button": "Cancelar"
+        },
+        "guidePayment": {
+            "success": {
+                "title": "¡Acceso Concedido!",
+                "description": "Tu acceso al PDF ha sido aprobado con éxito. Ahora puedes descargar el documento en cualquier momento.",
+                "button": "Aceptar"
+            },
+            "error": {
+                "title": "Acceso Denegado",
+                "description": "Hubo un problema al intentar acceder al PDF. Por favor, intenta nuevamente más tarde.",
+                "button": "Aceptar"
+            }
+        },
+        "errorPopupSignIn": {
+            "title": "Credenciales inválidas",
+            "description": "Ya existe una cuenta registrada con este email.",
+            "validationCredentials": "Por favor, verifica tus credenciales e intenta nuevamente.",
+            "button": "Aceptar"
         }
     }
 ];

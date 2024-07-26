@@ -199,19 +199,19 @@ export default function FormsComplete() {
                                 {userData.response && userData.response.length > 0 && (
                                     <>
                                         <div className="flex flex-col w-full pt-12 pb-4">
-                                            <PieG correct={userData.response[0]?.dh?.correct || 0} incorrect={userData.response[0]?.dh?.incorrect || 0} />
+                                            <PieG correct={userData.response[0]?.dh?.correct || 0} incorrect={userData.response[0]?.dh?.incorrect || 0} category="dh" />
                                             <p className="text-center py-6">{quaText.personalData}</p>
                                         </div>
                                         <div className="flex flex-col w-full pt-12 pb-4">
-                                            <PieG correct={userData.response[0]?.aff?.correct || 0} incorrect={userData.response[0]?.aff?.incorrect || 0} />
+                                            <PieG correct={userData.response[0]?.aff?.correct || 0} incorrect={userData.response[0]?.aff?.incorrect || 0} category="aff" />
                                             <p className="text-center py-6">{quaText.familyAndFinancialTies}</p>
                                         </div>
                                         <div className="flex flex-col w-full pt-12 pb-4">
-                                            <PieG correct={userData.response[0]?.hv?.correct || 0} incorrect={userData.response[0]?.hv?.incorrect || 0} />
+                                            <PieG correct={userData.response[0]?.hv?.correct || 0} incorrect={userData.response[0]?.hv?.incorrect || 0} category="hv" />
                                             <p className="text-center py-6">{quaText.travelHistory}</p>
                                         </div>
                                         <div className="flex flex-col w-full pt-12 pb-4">
-                                            <PieG correct={userData.response[0]?.hd?.correct || 0} incorrect={userData.response[0]?.hd?.incorrect || 0} />
+                                            <PieG correct={userData.response[0]?.hd?.correct || 0} incorrect={userData.response[0]?.hd?.incorrect || 0} category="hd" />
                                             <p className="text-center py-6">{quaText.criminalHistory}</p>
                                         </div>
                                     </>

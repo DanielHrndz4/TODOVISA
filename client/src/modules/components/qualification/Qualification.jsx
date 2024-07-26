@@ -430,24 +430,24 @@ export default function Qualification() {
               </div>
               <div className="w-full flex flex-row gap-2 m-auto">
                 <div className="flex flex-col w-full pt-12 pb-4">
-                  <PieG correct={correctCountDP} incorrect={incorrectCountDP} />
+                  <PieG correct={correctCountDP} incorrect={incorrectCountDP} category="dh" />
                   <p className="text-center py-6">{quaText.personalData}</p>
                 </div>
                 <div className="flex flex-col w-full pt-12 pb-4">
                   <PieG
                     correct={correctCountAFF}
-                    incorrect={incorrectCountAFF}
+                    incorrect={incorrectCountAFF} category="aff"
                   />
                   <p className="text-center py-6">
                     {quaText.familyAndFinancialTies}
                   </p>
                 </div>
                 <div className="flex flex-col w-full pt-12 pb-4">
-                  <PieG correct={correctCountHV} incorrect={incorrectCountHV} />
+                  <PieG correct={correctCountHV} incorrect={incorrectCountHV} category="hv" />
                   <p className="text-center py-6">{quaText.travelHistory}</p>
                 </div>
                 <div className="flex flex-col w-full pt-12 pb-4">
-                  <PieG correct={correctCountHD} incorrect={incorrectCountHD} />
+                  <PieG correct={correctCountHD} incorrect={incorrectCountHD} category="hd" />
                   <p className="text-center py-6">{quaText.criminalHistory}</p>
                 </div>
               </div>

@@ -148,7 +148,7 @@ const portuguese = [
             "terms": "Termos e Condições",
             "send_form": "Enviar Formulário",
             "reload_form": "Reiniciar Formulário",
-            "terms_and_conditions": "<strong>1. Aceitação dos Termos</strong><br><br>Ao acessar e usar este formulário de solicitação de visto, você concorda em cumprir estes termos e condições. Se você não concordar com algum destes termos, não use este formulário.<br><br><strong>2. Uso do Formulário</strong><br><br>Este formulário é destinado ao uso pessoal e não comercial. Você concorda em fornecer informações precisas e completas ao preencher o formulário.<br><br><strong>3. Privacidade das Informações</strong><br><br>Todas as informações fornecidas neste formulário serão usadas exclusivamente para processar sua solicitação de visto. Não compartilharemos suas informações com terceiros sem o seu consentimento, exceto quando exigido por lei.<br><br><strong>4. Limitação de Responsabilidade</strong><br><br>Não garantimos que o uso do formulário será ininterrupto ou livre de erros. Não seremos responsáveis por quaisquer danos resultantes do uso deste formulário, incluindo, mas não se limitando a, danos diretos, indiretos, incidentais, punitivos e consequenciais.<br><br><strong>5. Modificações nos Termos</strong><br><br>Reservamo-nos o direito de modificar estes termos e condições a qualquer momento. As alterações serão publicadas nesta página e o uso contínuo do formulário constituirá aceitação dos termos modificados.<br><br><strong>6. Lei Aplicável</strong><br><br>Estes termos e condições serão regidos e interpretados de acordo com as leis do país onde a solicitação de visto é processada, sem dar efeito a quaisquer disposições de conflito de leis.<br><br><strong>7. Contato</strong><br><br>Se você tiver alguma dúvida sobre estes termos e condições, entre em contato conosco através dos nossos canais de atendimento ao cliente.",
+            "terms_and_conditions": "<strong>1. Aceitação dos Termos</strong><br><br>Ao acessar e usar este formulário de solicitação de visto, você concorda em cumprir com estes termos e condições. Se você não concordar com algum desses termos, não use este formulário.<br><br><strong>2. Uso do Formulário</strong><br><br>Este formulário destina-se exclusivamente para uso pessoal e não comercial. Você se compromete a fornecer informações precisas e completas ao preencher o formulário.<br><br><strong>3. Privacidade das Informações</strong><br><br>Todas as informações fornecidas neste formulário serão usadas exclusivamente para processar sua solicitação de visto. Não compartilharemos suas informações com terceiros sem seu consentimento, exceto quando exigido por lei.<br><br><strong>4. Limitação de Responsabilidade</strong><br><br>Não garantimos que o uso do formulário será ininterrupto ou livre de erros. Não seremos responsáveis por qualquer dano resultante do uso deste formulário, incluindo, entre outros, danos diretos, indiretos, incidentais, punitivos e consequenciais.<br><br><strong>5. Modificações dos Termos</strong><br><br>Reservamo-nos o direito de modificar estes termos e condições a qualquer momento. As modificações serão publicadas nesta página e seu uso continuado do formulário constituirá aceitação dos termos modificados.<br><br><strong>6. Lei Aplicável</strong><br><br>Estes termos e condições serão regidos e interpretados de acordo com as leis do país onde a solicitação de visto é processada, sem considerar quaisquer disposições sobre conflitos de leis.<br><br><strong>7. Contato</strong><br><br>Se você tiver alguma dúvida sobre estes termos e condições, entre em contato conosco através dos nossos canais de atendimento ao cliente.<br><br><strong>8. Nota Importante sobre a Qualificação</strong><br><br>A pontuação obtida neste questionário é um indicador preliminar e não garante sucesso na entrevista oficial que faz parte do processo de visto. É importante observar que a entrevista oficial avaliará aspectos adicionais, como a precisão das informações fornecidas, a capacidade de se comunicar eficazmente no idioma exigido e outros critérios específicos de acordo com as regulamentações do país solicitante. A pontuação obtida neste questionário não garante nem implica aprovação automática na entrevista de visto.",
             "button": "Aceitar!",
             "button2": "Cancelar!",
             "warning": "Você deve aceitar os termos e condições antes de salvar o formulário.",
@@ -180,8 +180,8 @@ const portuguese = [
                 "default_text": "Entrar"
             },
             "or_signin": "Ou entre com",
-            "question": "Não tem uma conta?",
-            "link": "Cadastrar-se"
+            "account": "Não tem uma conta?",
+            "signup": "Cadastrar-se"
         },
         "signup": {
             "title": "Cadastre-se",
@@ -1205,6 +1205,31 @@ const portuguese = [
                 }
             },
             "loading": "Carregando"
+        },
+        "payBtn": {
+            "payMethod": "Selecione seu método de pagamento",
+            "payN1co": "Perfeito para pagamentos com cartões Visa e MasterCard. Pagamentos rápidos e seguros.",
+            "payAMC": "Ideal para pagamentos com cartões American Express. Pagamentos rápidos e seguros. Você pode ver como realizar uma compra com a América Central",
+            "paySteps": "aqui",
+            "button": "Cancelar"
+        },
+        "guidePayment": {
+            "success": {
+                "title": "Acesso Concedido",
+                "description": "Seu acesso ao PDF foi aprovado com sucesso. Agora você pode baixar o documento a qualquer momento.",
+                "button": "Aceitar"
+            },
+            "error": {
+                "title": "Acesso Negado",
+                "description": "Houve um problema ao tentar acessar o PDF. Por favor, tente novamente mais tarde.",
+                "button": "Aceitar"
+            }
+        },
+        "errorPopupSignIn": {
+            "title": "Credenciais Inválidas",
+            "description": "Já existe uma conta registrada com este e-mail.",
+            "validationCredentials": "Por favor, verifique suas credenciais e tente novamente.",
+            "button": "Aceitar"
         }
     }
 ];

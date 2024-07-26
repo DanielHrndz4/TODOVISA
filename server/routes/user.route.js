@@ -110,7 +110,7 @@ router.post('/reset_password', async (req, res) => {
                   <td>
                     <img
                       alt="Todovisa Logo"
-                      src="https://todovisa.vercel.app/img/logo/todovisa.png"
+                      src="https://todovisa.com/img/logo/todovisa.png"
                       height="120px"
                     />
                   </td>

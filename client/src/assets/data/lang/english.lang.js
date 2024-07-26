@@ -141,7 +141,7 @@ const english = [
             "terms": "Terms and Conditions",
             "send_form": "Submit Form",
             "reload_form": "Reset Form",
-            "terms_and_conditions": "<strong>1. Acceptance of the Terms</strong><br><br>By accessing and using this visa application form, you agree to comply with these terms and conditions. If you do not agree with any of these terms, do not use this form.<br><br><strong>2. Use of the Form</strong><br><br>This form is intended for personal and non-commercial use only. You agree to provide accurate and complete information when filling out the form.<br><br><strong>3. Privacy of Information</strong><br><br>All information provided in this form will be used exclusively to process your visa application. We will not share your information with third parties without your consent, except when required by law.<br><br><strong>4. Limitation of Liability</strong><br><br>We do not guarantee that the use of the form will be uninterrupted or error-free. We will not be liable for any damages resulting from the use of this form, including, but not limited to, direct, indirect, incidental, punitive, and consequential damages.<br><br><strong>5. Modifications to the Terms</strong><br><br>We reserve the right to modify these terms and conditions at any time. Changes will be posted on this page and your continued use of the form will constitute acceptance of the modified terms.<br><br><strong>6. Governing Law</strong><br><br>These terms and conditions will be governed and interpreted in accordance with the laws of the country where the visa application is processed, without giving effect to any conflict of law provisions.<br><br><strong>7. Contact</strong><br><br>If you have any questions about these terms and conditions, please contact us through our customer service channels.",
+            "terms_and_conditions": "<strong>1. Acceptance of Terms</strong><br><br>By accessing and using this visa application form, you agree to comply with these terms and conditions. If you do not agree with any of these terms, do not use this form.<br><br><strong>2. Use of the Form</strong><br><br>This form is intended for personal, non-commercial use only. You agree to provide accurate and complete information when filling out the form.<br><br><strong>3. Privacy of Information</strong><br><br>All information provided in this form will be used solely to process your visa application. We will not share your information with third parties without your consent, except as required by law.<br><br><strong>4. Limitation of Liability</strong><br><br>We do not guarantee that the use of the form will be uninterrupted or error-free. We will not be liable for any damage resulting from the use of this form, including, but not limited to, direct, indirect, incidental, punitive, and consequential damages.<br><br><strong>5. Changes to Terms</strong><br><br>We reserve the right to modify these terms and conditions at any time. Changes will be posted on this page, and your continued use of the form will constitute acceptance of the modified terms.<br><br><strong>6. Governing Law</strong><br><br>These terms and conditions will be governed by and interpreted in accordance with the laws of the country where the visa application is processed, without regard to any conflict of laws provisions.<br><br><strong>7. Contact</strong><br><br>If you have any questions about these terms and conditions, please contact us through our customer service channels.<br><br><strong>8. Important Note on Qualification</strong><br><br>The score obtained in this questionnaire is a preliminary indicator and does not guarantee success in the official interview that is part of the visa process. It is important to note that the official interview will assess additional aspects, such as the accuracy of the information provided, the ability to communicate effectively in the required language, and other criteria specific to the regulations of the applying country. The score obtained in this questionnaire does not ensure or imply automatic approval in the visa interview.",
             "button": "Accept!",
             "button2": "Cancel!",
             "warning": "You must accept the terms and conditions before saving the form.",
@@ -180,8 +180,8 @@ const english = [
                 "default_text": "Sign In"
             },
             "or_signin": "Or sign in with",
-            "question": "Don't have an account?",
-            "link": "Sign Up"
+            "account": "Don't have an account?",
+            "signup": "Sign Up"
         },
         "signup": {
             "title": "Sign Up",
@@ -1199,12 +1199,37 @@ const english = [
                 "errorTokenValidation": "An error occurred while validating the token.",
                 "errorFormSubmission": "An error occurred while submitting the form.",
                 "popupAccessDenied": {
-                    "title": "Acceso Denegado",
-                    "description": "No se pudo acceder al formulario. Si el problema persiste, por favor contacta a un administrador de TODOVISA.",
-                    "button": "Aceptar"
+                    "title": "Access Denied",
+                    "description": "Unable to access the form. If the problem persists, please contact a TODOVISA administrator.",
+                    "button": "Accept"
                 }
             },
             "loading": "Loading"
+        },
+        "payBtn": {
+            "payMethod": "Select your payment method",
+            "payN1co": "Perfect for payments with Visa and MasterCard. Fast and secure payments.",
+            "payAMC": "Ideal for payments with American Express cards. Fast and secure payments. You can see how to make a purchase with Central America",
+            "paySteps": "here",
+            "button": "Cancel"
+        },
+        "guidePayment": {
+            "success": {
+                "title": "Access Granted",
+                "description": "Your access to the PDF has been successfully approved. You can now download the document at any time.",
+                "button": "Accept"
+            },
+            "error": {
+                "title": "Access Denied",
+                "description": "There was a problem accessing the PDF. Please try again later.",
+                "button": "Accept"
+            }
+        },
+        "errorPopupSignIn": {
+            "title": "Invalid Credentials",
+            "description": "An account with this email already exists.",
+            "validationCredentials": "Please check your credentials and try again.",
+            "button": "Accept"
         }
     }
 ];

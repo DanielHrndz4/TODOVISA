@@ -455,7 +455,8 @@ export default function Register() {
                   </Button> */}
                   <div className="m-auto flex mb-6 justify-center items-center">
                     <GoogleLogin className="mt-6 bg-black shadowbtn text-white flex items-center justify-center"
-                      fullWidth
+                      theme='filled_black'
+                      size="large"
                       onSuccess={handleLoginSuccess}
                       onError={() => {}}
                     />

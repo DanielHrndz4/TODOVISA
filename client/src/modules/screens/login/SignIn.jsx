@@ -21,6 +21,7 @@ export default function Login() {
   const [signInValue, setSignInValue] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const userInfo = useContext(IPInfoContext);
+  const errorPopupSignUp = lang[0].errorPopupSignIn
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -79,8 +80,8 @@ export default function Login() {
         Swal.close();
         handleClickPopUpSignUp(
           "error",
-          `<h1 class='text-black pb-4 text-2xl font-semibold text-center'>Credenciales inválidas</h1><p class='py-2 text-justify'>Ya existe una cuenta registrada con este email</p>`,
-          "Aceptar"
+          `<h1 class='text-black pb-4 text-2xl font-semibold text-center'>${errorPopupSignUp.title}</h1><p class='py-2 text-justify'>${errorPopupSignUp.description}</p>`,
+          errorPopupSignUp.button
         );
       } else {
         const token = data.token;
@@ -158,8 +159,8 @@ export default function Login() {
       } else if (response.status === 401) {
         handleClickPopUpSignUp(
           "error",
-          `<h1 class='text-black pb-4 text-2xl font-semibold'>Credenciales inválidas</h1><p class='py-2 text-center'>Por favor, verifica tus credenciales e intenta nuevamente.</p>`,
-          "Aceptar"
+          `<h1 class='text-black pb-4 text-2xl font-semibold'>${errorPopupSignUp.title}</h1><p class='py-2 text-center'>${errorPopupSignUp.validationCredentials}</p>`,
+          errorPopupSignUp.button
         );
       } else {
         const errorData = await response.json();
@@ -308,7 +309,8 @@ export default function Login() {
                   <div className="m-auto flex mb-6 justify-center items-center">
                     <GoogleLogin
                       className="mt-6 bg-black shadowbtn text-white flex items-center justify-center"
-                      fullWidth
+                      theme='filled_black'
+                      size="large"
                       onSuccess={handleLoginSuccess}
                       onError={() => {}}
                     />
@@ -318,13 +320,11 @@ export default function Login() {
                     className="mt-4 text-center font-medium text-md"
                   >
                     {signinText.account}{" "}
-                    <Link to="/signup">
-                      <a
-                        href="#"
-                        className="font-medium text-white hover:text-TVred [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] hover:underline"
-                      >
-                        {signinText.signup}
-                      </a>
+                    <Link
+                      to="/signup"
+                      className="font-medium text-white hover:text-TVred [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)] hover:underline"
+                    >
+                      {signinText.signup}
                     </Link>
                   </Typography>
                   {errorMessage && (

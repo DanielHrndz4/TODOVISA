@@ -17,6 +17,7 @@ const Guide = () => {
   const user = Cookies.get('user');
   const userData = JSON.parse(user)
   const email = userData.email
+  const langPay = lang[0].payBtn
 
   useEffect(() => {
     const checkToken = async () => {
@@ -37,24 +38,26 @@ const Guide = () => {
 
   function encodeBase64(value) {
     return btoa(value); // btoa() codifica una cadena en Base64
-}
+  }
 
   const swalPopup = (email) => {
     Swal.fire({
-        width: 'auto',
-        html: `
-          <h1 class="pt-4 pb-6" style="font-size: 1.5rem; font-weight: 600;" className="font-semibold">Selecciona tu método de pago</h1>
+      width: 'auto',
+      html: `
+          <h1 class="pt-4 pb-6" style="font-size: 1.5rem; font-weight: 600;" className="font-semibold">${langPay.payMethod}</h1>
           <div class="w-full flex flex-col sm:flex-row justify-around gap-8 m-auto items-center">
             <div class="flex flex-col justify-center items-center max-w-[300px] w-full p-4 border border-gray-300 rounded-lg shadow-lg">
-              <p class="min-h-[100px] text-start max-w-full w-full mb-4">Perfecto para pagos con tarjetas Visa y MasterCard. Pagos rápidos y seguros.</p>
+              <p class="min-h-[130px] text-start max-w-full w-full mb-4">${langPay.payN1co}</p>
               <a href="/payment/guide/${email}" target="_blank">
               <button class="shadowbtn bg-black w-[160px] py-3 px-2 rounded-md text-white hover:bg-gray-800 transition duration-300">N1CO</button>
               </a>
               <img src="./img/payment/visamastercard.png" class="h-[35px] w-auto mt-4" alt="Visa MasterCard"/>
             </div>
             <div class="flex flex-col justify-center items-center max-w-[300px] w-full p-4 border border-gray-300 rounded-lg shadow-lg">
-              <p class="min-h-[100px] text-start max-w-full w-full mb-4">Ideal para pagos con tarjetas American Express. Pagos rápidos y seguros. Puedes ver cómo realizar una compra con América Central 
-                <a href="/steps" target="_blank" class="text-TVred hover:cursor-pointer hover:underline">aquí</a>.
+              <p class="min-h-[130px] text-start max-w-full w-full mb-4">${langPay.payAMC}
+                <a href="/steps" target="_blank" class="text-TVred hover:cursor-pointer hover:underline">${langPay
+                  .paySteps
+                }</a>.
               </p>
               <a href="https://checkout.baccredomatic.com/Njc4My45NjMyZTg2OTQ2NzNmMTA0N2UxNzIxNjY1NzY3" target="_blank">
               <button class="shadowbtn bg-TVred w-[160px] py-3 px-2 rounded-md text-white hover:bg-red-600 transition duration-300">América Central</button>
@@ -65,12 +68,12 @@ const Guide = () => {
               </div>
             </div>
           </div>`,
-        showConfirmButton: false,
-        showCancelButton: true,
-        cancelButtonColor: '#113e5f',
-        cancelButtonText: "Cancelar"
+      showConfirmButton: false,
+      showCancelButton: true,
+      cancelButtonColor: '#113e5f',
+      cancelButtonText: langPay.button
     });
-}
+  }
 
   return (
     <>

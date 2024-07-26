@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../loader/Loading";
 import URI from "../../../assets/data/admin/uri.api";
 import handleClickPopUpSignUp from "../popup/PopUpSignUp";
+import lang from "../../../assets/data/lang.data";
 
 export default function GuidePayment() {
     const [tokenValidation, setTokenValidation] = useState(null);
@@ -12,6 +13,7 @@ export default function GuidePayment() {
     const [responseData, setResponseData] = useState(null);
     const [showLoading, setShowLoading] = useState(true); // Estado para controlar la visualización de Loading
     const navigateTo = useNavigate();
+    const langGuide = lang[0].guidePayment;
 
     function decodeBase64(encodedValue) {
         try {
@@ -60,9 +62,9 @@ export default function GuidePayment() {
                 setResponseData(data);
 
                 if (response.ok) {
-                    handleClickPopUpSignUp("success", `<h1 class='text-black pb-4 text-2xl font-semibold'>¡Acceso Concedido!</h1><p class='text-center'>Tu acceso al PDF ha sido aprobado con éxito. Ahora puedes descargar el documento en cualquier momento.</p>`, 'Aceptar');
+                    handleClickPopUpSignUp("success", `<h1 class='text-black pb-4 text-2xl font-semibold'>${langGuide.success.title}</h1><p class='text-center'>${langGuide.success.description}</p>`, langGuide.success.button);
                 } else {
-                    handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold'>Acceso Denegado</h1><p class='text-center'>Hubo un problema al intentar acceder al PDF. Por favor, intenta nuevamente más tarde.</p>`, 'Aceptar');
+                    handleClickPopUpSignUp("error", `<h1 class='text-black pb-4 text-2xl font-semibold'>${langGuide.error.title}</h1><p class='text-center'>${langGuide.error.description}</p>`, langGuide.error.button);
                 }
                 navigateTo('/');
             } catch (err) {

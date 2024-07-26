@@ -339,7 +339,7 @@ export default function LoginUserNavbar() {
         </div>
       );
     } else {
-      return <div>No user data available</div>;
+      return <div>No user available</div>;
     }
   };
 
