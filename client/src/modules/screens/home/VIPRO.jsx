@@ -74,7 +74,7 @@ export default function VIPRO(props) {
                                 <h2 className="text-xl lg:text-lg xl:text-2xl text-black text-center">{viproSection.subtitle.title} <strong>{viproSection.subtitle.strong}</strong></h2>
                                 <img src="/img/VIPRO/theline.png" alt="" className="py-4" />
                             </div>
-                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{viproSection.text} <strong>{viproSection.strong} <span className="text-TVBlue hover:underline hover:cursor-pointer"><a href="" target="_blank">TODOVISA</a></span></strong>.</p></div>
+                            <div className="pb-6"><p className="text-justify lg:text-md xl:text-lg">{viproSection.text} <strong>{viproSection.strong} <span className="text-TVBlue hover:underline hover:cursor-pointer"><a href="https://www.facebook.com/todovisasv?mibextid=ZbWKwL" target="_blank">TODOVISA</a></span></strong>.</p></div>
                             <div className="lg:text-lg">
                                 <Button className="py-4 px-6 rounded-sm shadowbtn bg-TVred" onClick={() => handlePopUp(props.validation)}>{viproSection.button}</Button>
                             </div>
