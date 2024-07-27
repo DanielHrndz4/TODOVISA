@@ -29,7 +29,7 @@ function VIPROCarrousel() {
               {country.description}
             </p>
             {
-              country.name == 'Estados Unidos' || country.name == 'China' ? (
+              country.name == 'Estados Unidos' || country.name == 'United States' || country.name == 'China' ? (
               <Button className="font-semibold w-full bg-gray-800 shadowbtn">
                 {lang[0].about.not_available}
               </Button>

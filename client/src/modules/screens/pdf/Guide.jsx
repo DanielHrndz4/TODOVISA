@@ -39,6 +39,8 @@ const Guide = () => {
   function encodeBase64(value) {
     return btoa(value); // btoa() codifica una cadena en Base64
   }
+  
+  // <a href="/payment/guide/${email}" target="_blank"></a>
 
   const swalPopup = (email) => {
     Swal.fire({
@@ -48,9 +50,9 @@ const Guide = () => {
           <div class="w-full flex flex-col sm:flex-row justify-around gap-8 m-auto items-center">
             <div class="flex flex-col justify-center items-center max-w-[300px] w-full p-4 border border-gray-300 rounded-lg shadow-lg">
               <p class="min-h-[130px] text-start max-w-full w-full mb-4">${langPay.payN1co}</p>
-              <a href="/payment/guide/${email}" target="_blank">
+
               <button class="shadowbtn bg-black w-[160px] py-3 px-2 rounded-md text-white hover:bg-gray-800 transition duration-300">N1CO</button>
-              </a>
+  
               <img src="./img/payment/visamastercard.png" class="h-[35px] w-auto mt-4" alt="Visa MasterCard"/>
             </div>
             <div class="flex flex-col justify-center items-center max-w-[300px] w-full p-4 border border-gray-300 rounded-lg shadow-lg">
