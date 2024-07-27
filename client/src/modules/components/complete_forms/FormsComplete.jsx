@@ -151,7 +151,7 @@ export default function FormsComplete() {
                                     <h1 className="text-5xl font-bold">
                                         {quaText.title}
                                     </h1>
-                                    <h2 className="text-5xl font-medium">
+                                    <h2 className="text-5xl font-medium pt-2">
                                         {getCountry(userData.form_country)}
                                     </h2>
                                 </div>

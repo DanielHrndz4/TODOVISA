@@ -382,7 +382,7 @@ export default function Qualification() {
               <div className="m-auto w-full flex flex-col">
                 <div className="flex flex-col gap-1 text-center pb-16">
                   <h1 className="text-5xl font-bold">{quaText.title}</h1>
-                  <h2 className="text-5xl font-medium">
+                  <h2 className="text-5xl font-medium pt-2">
                     {getCountry(countryForm)}
                   </h2>
                 </div>
