@@ -259,8 +259,6 @@ export default function Qualification() {
           qualification: (correctDPCount+correctAFFCount+correctHVCount+correctHDCount) * 2.6, // asegúrate de enviar la calificación como string
         };
 
-        console.log(resultDataQualification)
-
         try {
           const response = await fetch(`${URI}/save_qualification`, {
             method: "POST",
@@ -275,7 +273,6 @@ export default function Qualification() {
           });
 
           const data = await response.json();
-          console.log("Response from server:", data); // revisa la respuesta del servidor en la consola
 
           if (!data.success) {
             throw new Error(data.message);
@@ -324,7 +321,6 @@ export default function Qualification() {
     const roundedPercent = percent.toFixed(2);
     const percentTotal = (roundedPercent * 100) / 4
     const percentForCategory = 25 * 0.60
-    console.log(percentForCategory, percentTotal)
     if (percentTotal <= percentForCategory) {
       if (selection === 'dh') {
         return (

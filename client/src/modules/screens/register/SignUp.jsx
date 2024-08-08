@@ -16,6 +16,7 @@ import URI from "../../../assets/data/admin/uri.api";
 import { GoogleLogin } from '@react-oauth/google';
 import Swal from "sweetalert2";
 import { jwtDecode } from 'jwt-decode';
+import { Helmet } from "react-helmet";
 
 export default function Register() {
   const signupText = lang[0].signup
@@ -113,7 +114,7 @@ export default function Register() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name: name, email: email, country: country, password: password, tel: tel, googleID: googleID, avatar: avatar})
+        body: JSON.stringify({ name: name, email: email, country: country, password: password, tel: tel, googleID: googleID, avatar: avatar })
       });
       const data = await response.json();
 
@@ -458,7 +459,7 @@ export default function Register() {
                       theme='filled_black'
                       size="large"
                       onSuccess={handleLoginSuccess}
-                      onError={() => {}}
+                      onError={() => { }}
                     />
                   </div>
                   <Typography
@@ -511,6 +512,24 @@ export default function Register() {
 
   return (
     <Fade cascade damping={0.1} className="w-full h-full">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Todovisa - Regístrate</title>
+        <meta name="description" content="Regístrate en Todovisa para acceder a nuestros servicios exclusivos. Completa tu perfil para explorar nuestras guías y herramientas que te ayudarán a obtener tu visa de manera eficiente." />
+        <meta name="keywords" content="registro, Todovisa, sign up, registro de usuario, servicios de visa, obtener visa, perfil Todovisa" />
+        <meta property="og:title" content="Todovisa - Regístrate" />
+        <meta property="og:description" content="Regístrate en Todovisa para acceder a nuestros servicios exclusivos. Completa tu perfil para explorar nuestras guías y herramientas que te ayudarán a obtener tu visa de manera eficiente." />
+        <meta property="og:image" content="https://todovisa.com/img/logo/todovisaLogo.jpg" />
+        <meta property="og:url" content="https://todovisa.com/signup" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Todovisa - Regístrate" />
+        <meta name="twitter:description" content="Regístrate en Todovisa para acceder a nuestros servicios exclusivos. Completa tu perfil para explorar nuestras guías y herramientas que te ayudarán a obtener tu visa de manera eficiente." />
+        <meta name="twitter:image" content="https://todovisa.com/img/logo/todovisaLogo.jpg" />
+        <meta name="twitter:site" content="@todovisa" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://todovisa.com/signup" />
+      </Helmet>
       <main className="bg-TVBlue flex flex-col lg:flex-row h-full w-full">
         {signUpValue ? withSignup() : withoutSignup()}
       </main>

@@ -8,6 +8,8 @@ import lang from "../../../assets/data/lang.data";
 import Loading from "../../components/loader/Loading";
 import { Fade } from "react-awesome-reveal";
 import Swal from 'sweetalert2';
+import paymentData from "../../../assets/data/admin/payment.n1co";
+import { Helmet } from "react-helmet";
 
 const Guide = () => {
   const [isValidate, setIsValidate] = useState(false);
@@ -39,10 +41,11 @@ const Guide = () => {
   function encodeBase64(value) {
     return btoa(value); // btoa() codifica una cadena en Base64
   }
-  
+
   // <a href="/payment/guide/${email}" target="_blank"></a>
 
   const swalPopup = (email) => {
+    const callbackURL = `/payment/guide/${email}`;
     Swal.fire({
       width: 'auto',
       html: `
@@ -50,16 +53,16 @@ const Guide = () => {
           <div class="w-full flex flex-col sm:flex-row justify-around gap-8 m-auto items-center">
             <div class="flex flex-col justify-center items-center max-w-[300px] w-full p-4 border border-gray-300 rounded-lg shadow-lg">
               <p class="min-h-[130px] text-start max-w-full w-full mb-4">${langPay.payN1co}</p>
-
+              <a href="https://pay.n1co.shop/pl/${paymentData.linkCode}?amount=${paymentData.amount.form}&stay=${paymentData.stay}&callbackurl=${encodeURIComponent(callbackURL)}" target="_blank">
               <button class="shadowbtn bg-black w-[160px] py-3 px-2 rounded-md text-white hover:bg-gray-800 transition duration-300">N1CO</button>
-  
+              </a>
               <img src="./img/payment/visamastercard.png" class="h-[35px] w-auto mt-4" alt="Visa MasterCard"/>
             </div>
             <div class="flex flex-col justify-center items-center max-w-[300px] w-full p-4 border border-gray-300 rounded-lg shadow-lg">
               <p class="min-h-[130px] text-start max-w-full w-full mb-4">${langPay.payAMC}
                 <a href="/steps" target="_blank" class="text-TVred hover:cursor-pointer hover:underline">${langPay
-                  .paySteps
-                }</a>.
+          .paySteps
+        }</a>.
               </p>
               <a href="https://checkout.baccredomatic.com/Njc4My45NjMyZTg2OTQ2NzNmMTA0N2UxNzIxNjY1NzY3" target="_blank">
               <button class="shadowbtn bg-TVred w-[160px] py-3 px-2 rounded-md text-white hover:bg-red-600 transition duration-300">América Central</button>
@@ -85,6 +88,23 @@ const Guide = () => {
         <>
           {isValidate ? (
             <Fade triggerOnce>
+              <Helmet>
+                <meta charSet="utf-8" />
+                <title>Todovisa - Guía Completa para Obtener tu Visa</title>
+                <meta name="description" content="Descubre nuestra guía completa en Todovisa para obtener tu visa. Explora pasos detallados, consejos útiles y recursos exclusivos para facilitar tu proceso de solicitud de visa." />
+                <meta name="keywords" content="guía de visa, Todovisa, obtener visa, solicitud de visa, pasos para visa, consejos de visa, recursos de visa" />
+                <meta property="og:title" content="Todovisa - Guía Completa para Obtener tu Visa" />
+                <meta property="og:description" content="Descubre nuestra guía completa en Todovisa para obtener tu visa. Explora pasos detallados, consejos útiles y recursos exclusivos para facilitar tu proceso de solicitud de visa." />
+                <meta property="og:image" content="https://todovisa.com/img/logo/todovisaLogo.jpg" />
+                <meta property="og:url" content="https://todovisa.com/guide" />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Todovisa - Guía Completa para Obtener tu Visa" />
+                <meta name="twitter:description" content="Descubre nuestra guía completa en Todovisa para obtener tu visa. Explora pasos detallados, consejos útiles y recursos exclusivos para facilitar tu proceso de solicitud de visa." />
+                <meta name="twitter:image" content="https://todovisa.com/img/logo/todovisaLogo.jpg" />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href="https://todovisa.com/guide" />
+              </Helmet>
               <div className="relative">
                 <div className="fixed bottom-0 right-0 text-black px-4 py-4 w-full text-center">
                   <div>

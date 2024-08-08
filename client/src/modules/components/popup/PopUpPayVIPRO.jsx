@@ -84,10 +84,8 @@ const handleClickPopUpPay = (html, btn, cancelButton) => {
                                         window.location.href = `/vipro/${selectedValue}`;
                                     } else if (data.message === 'El usuario tiene un formulario terminado') {
                                         swalPopup(encodeBase64(data.id), encodeBase64(selectedValue));
-                                        console.log(data.message);
                                     } else {
                                         swalPopup(encodeBase64(data.id), encodeBase64(selectedValue));
-                                        console.log(data.message);
                                     }
                                 } catch (error) {
                                     console.error('Error en la solicitud para guardar el formulario:', error);

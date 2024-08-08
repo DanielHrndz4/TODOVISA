@@ -30,6 +30,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import lang from "../../../assets/data/lang.data";
+import FRONT_URI from "../../../assets/data/admin/uri.front";
 
 const navListMenuItems = [
   {
@@ -135,7 +136,7 @@ function NavList() {
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       <Typography
         as="a"
-        href="#about"
+        href={`${FRONT_URI}/#about`}
         variant="small"
         color="white"
         className="font-medium"
@@ -147,7 +148,7 @@ function NavList() {
       <NavListMenu />
       <Typography
         as="a"
-        href="#services"
+        href={`${FRONT_URI}/#services`}
         variant="small"
         color="white"
         className="font-medium"
@@ -158,7 +159,7 @@ function NavList() {
       </Typography>
       <Typography
         as="a"
-        href="#vipro"
+        href={`${FRONT_URI}/#vipro`}
         variant="small"
         color="white"
         className="font-medium"
@@ -167,7 +168,7 @@ function NavList() {
       </Typography>
       <Typography
         as="a"
-        href="#contactus"
+        href={`${FRONT_URI}/#contactus`}
         variant="small"
         color="white"
         className="font-medium"

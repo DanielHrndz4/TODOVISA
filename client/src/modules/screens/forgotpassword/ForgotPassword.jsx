@@ -41,7 +41,6 @@ export default function Login() {
     }
   
     try {
-      console.log(`Sending request to: ${URI}/reset-password`);
   
       const response = await fetch(`${URI}/reset_password`, {
         method: 'POST',
@@ -68,7 +67,6 @@ export default function Login() {
       }
   
       const data = await response.json();
-      console.log('Response Data:', data);
       setSuccess('Password reset link has been sent to your email.');
       setFormData({ email: '' });
       navigateTo(`/validation_code/${email}`);

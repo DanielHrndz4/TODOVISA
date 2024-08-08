@@ -14,6 +14,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import handleClickPopUp from "../../components/popup/PopUp";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 export default function Login() {
   const [signInText, setSignInText] = useState("Inicia sesión");
@@ -312,7 +313,7 @@ export default function Login() {
                       theme='filled_black'
                       size="large"
                       onSuccess={handleLoginSuccess}
-                      onError={() => {}}
+                      onError={() => { }}
                     />
                   </div>
                   <Typography
@@ -372,6 +373,25 @@ export default function Login() {
 
   return (
     <Fade cascade damping={0.1} className="w-full" style={styles}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Todovisa - Inicia Sesión</title>
+        <meta name="description" content="Inicia sesión en Todovisa para acceder a tu cuenta y explorar nuestros servicios exclusivos. Recupera tu perfil y gestiona tu información de visa de manera fácil y segura." />
+        <meta name="keywords" content="inicio de sesión, Todovisa, sign in, acceso de usuario, servicios de visa, gestión de cuenta, perfil Todovisa" />
+        <meta property="og:title" content="Todovisa - Inicia Sesión" />
+        <meta property="og:description" content="Inicia sesión en Todovisa para acceder a tu cuenta y explorar nuestros servicios exclusivos. Recupera tu perfil y gestiona tu información de visa de manera fácil y segura." />
+        <meta property="og:image" content="https://todovisa.com/img/logo/todovisaLogo.jpg" />
+        <meta property="og:url" content="https://todovisa.com/signin" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Todovisa - Inicia Sesión" />
+        <meta name="twitter:description" content="Inicia sesión en Todovisa para acceder a tu cuenta y explorar nuestros servicios exclusivos. Recupera tu perfil y gestiona tu información de visa de manera fácil y segura." />
+        <meta name="twitter:image" content="https://todovisa.com/img/logo/todovisaLogo.jpg" />
+        <meta name="twitter:site" content="@todovisa" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://todovisa.com/signin" />
+      </Helmet>
+
       <main className="bg-TVBlue flex flex-col lg:flex-row h-full w-full">
         {signInValue ? withSignin() : withoutSignin()}
       </main>

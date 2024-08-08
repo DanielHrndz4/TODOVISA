@@ -14,6 +14,7 @@ import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
 import GuideSection from "./GuideSection";
 import Slider from 'react-slick';
+import { Helmet } from "react-helmet";
 
 export default function Home() {
   const bannerText = lang[0].banner;
@@ -82,41 +83,59 @@ export default function Home() {
 
   return (
     <Fade duration={1000} triggerOnce>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Todovisa - Guías y Asesoría para Tu Visa</title>
+        <meta name="description" content="Descubre cómo Todovisa puede ayudarte a obtener tu visa. Consulta nuestras guías completas, formulario VIPRO y mucho más para tu viaje internacional." />
+        <meta name="keywords" content="visas, Todovisa, guía de visas, formulario VIPRO, contacto, asesoría de visas" />
+        <meta property="og:title" content="Todovisa - Guías y Asesoría para Tu Visa" />
+        <meta property="og:description" content="Descubre cómo Todovisa puede ayudarte a obtener tu visa. Consulta nuestras guías completas, formulario VIPRO y mucho más para tu viaje internacional." />
+        <meta property="og:image" content="https://todovisa.com/img/logo/todovisaLogo.jpg" />
+        <meta property="og:url" content="https://todovisa.com/" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Todovisa - Guías y Asesoría para Tu Visa" />
+        <meta name="twitter:description" content="Descubre cómo Todovisa puede ayudarte a obtener tu visa. Consulta nuestras guías completas, formulario VIPRO y mucho más para tu viaje internacional." />
+        <meta name="twitter:image" content="https://todovisa.com/img/logo/todovisaLogo.jpg" />
+        <meta name="twitter:site" content="@todovisa" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://todovisa.com/" />
+      </Helmet>
       <main className="h-full w-full overflow-auto lg:absolute bg-[#fafafa]">
         {jwtToken ? <LoginUserNavbar /> : <NavbarWithMegaMenu />}
         <div className="flex flex-col w-full">
           {/* Banner Carousel section */}
           <div className="flex flex-col w-full">
             <div className="relative banner-carousel">
-            <Slider {...carouselSettings}>
-              {slides.map((slide, index) => (
-                <div key={index} className="banner-slide">
-                  <div
-                    className="banner-image mt-0 xl:mt-[25px]"
-                    style={{
-                      backgroundImage: `url(${slide.image})`,
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      minHeight: "40rem",
-                      width: "100%",
-                      backgroundPosition: slide.position,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  />
-                </div>
-              ))}
-            </Slider>
-            {/* Static Text */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-semibold z-10">
-              <Fade>
-                <div className="flex flex-col gap-4 [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)]">
-                <h1 className="text-white text-3xl text-center sm:text-4xl">{bannerText.title}</h1>
-                <h1 className="text-white text-5xl text-center sm:text-7xl">{bannerText.todovisa}</h1>
-                </div>
-              </Fade>
-            </div>
+              <Slider {...carouselSettings}>
+                {slides.map((slide, index) => (
+                  <div key={index} className="banner-slide">
+                    <div
+                      className="banner-image mt-0 xl:mt-[25px]"
+                      style={{
+                        backgroundImage: `url(${slide.image})`,
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        minHeight: "40rem",
+                        width: "100%",
+                        backgroundPosition: slide.position,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    />
+                  </div>
+                ))}
+              </Slider>
+              {/* Static Text */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white font-semibold z-10">
+                <Fade>
+                  <div className="flex flex-col gap-4 [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)]">
+                    <h1 className="text-white text-3xl text-center sm:text-4xl">{bannerText.title}</h1>
+                    <h1 className="text-white text-5xl text-center sm:text-7xl">{bannerText.todovisa}</h1>
+                  </div>
+                </Fade>
+              </div>
             </div>
 
             {/* About section */}

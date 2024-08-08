@@ -77,7 +77,6 @@ export default function OTP() {
       }
 
       const data = await response.json();
-      console.log('Response Data:', data);
       setSuccess(votp.resend_email_success);
       setResendCount((prevCount) => prevCount + 1);
       setIsDisabled(true);
