@@ -9,7 +9,6 @@ const PieG = ({correct, incorrect, category}) => {
   }
   const percent = (correct / totalQuestions);
   const roundedPercent = percent.toFixed(2);
-
   const config = {
     percent,
     width: 120,

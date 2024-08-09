@@ -86,12 +86,16 @@ export default function FormsComplete() {
     };
 
     const recomendation = (correct, incorrect, selection) => {
-        const totalQuestions = correct + incorrect;
+        let totalQuestions = (correct + incorrect);
+        if (selection === 'dh') {
+            totalQuestions = totalQuestions - 5;
+        }
         const percent = (correct / totalQuestions);
+        console.log(percent);
         const roundedPercent = percent.toFixed(2);
         const percentTotal = (roundedPercent * 100) / 4
-        const percentForCategory = 25 * 0.60
-        if (percentTotal <= percentForCategory) {
+        console.log(percentTotal)
+        if (percentTotal <= 15 || percentTotal == 0) {
             if (selection === 'dh') {
                 return (
                     <p className="text-justify">
@@ -110,13 +114,26 @@ export default function FormsComplete() {
                         <strong className="text-TVred">{quaText.travelHistory}: </strong>{quaText.notes.travelhistory}
                     </p>
                 )
-            } else {
+            } else if (selection === 'delictivo') {
                 return (
                     <p className="text-justify">
                         <strong className="text-TVred">{quaText.criminalHistory}: </strong>{quaText.notes.criminalhistory}
                     </p>
                 )
             }
+            return null;
+        }
+    }
+
+    const calcIsValid = (correct, incorrect) => {
+        const totalQuestions = correct + incorrect;
+        const percent = (correct / totalQuestions);
+        const roundedPercent = percent.toFixed(2);
+        const percentTotal = (roundedPercent * 100) / 4
+        if (percentTotal <= 15) {
+            return true;
+        } else {
+            return false
         }
     }
 
@@ -124,17 +141,21 @@ export default function FormsComplete() {
         if (!userData.response || !Array.isArray(userData.response) || userData.response.length === 0) {
             return false;
         }
+        const data = userData.response[0];
 
-        const dhValid = recomendation(userData.response[0]?.dh?.correct, userData.response[0]?.dh?.incorrect, 'dh');
-        const affValid = recomendation(userData.response[0]?.aff?.correct, userData.response[0]?.aff?.incorrect, 'aff');
-        const hvValid = recomendation(userData.response[0]?.hv?.correct, userData.response[0]?.hv?.incorrect, 'hv');
-        const hdValid = recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'hd');
+        const dhValid = calcIsValid(data.dh.correct, data.dh.incorrect)
+        const affValid = calcIsValid(data.aff.correct, data.aff.incorrect)
+        const hvValid = calcIsValid(data.hv.correct, data.hv.incorrect)
+        const hdValid = calcIsValid(data.hd.correct, data.hd.incorrect)
 
-        // Verifica si todas las recomendaciones son válidas
-        return dhValid && affValid && hvValid && hdValid;
+        if (dhValid || affValid || hvValid || hdValid) {
+            return false
+        } else {
+            return true
+        }
     }
 
-    const allValid = allRecommendationsValid()
+    const allValid = allRecommendationsValid();
 
     return (
         <>
@@ -274,7 +295,7 @@ export default function FormsComplete() {
                                                 {recomendation(userData.response[0]?.dh?.correct, userData.response[0]?.dh?.incorrect, 'dh')}
                                                 {recomendation(userData.response[0]?.aff?.correct, userData.response[0]?.aff?.incorrect, 'aff')}
                                                 {recomendation(userData.response[0]?.hv?.correct, userData.response[0]?.hv?.incorrect, 'hv')}
-                                                {recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'hd')}
+                                                {recomendation(userData.response[0]?.hd?.correct, userData.response[0]?.hd?.incorrect, 'delictivo')}
                                             </div>
                                         </>
                                     )}

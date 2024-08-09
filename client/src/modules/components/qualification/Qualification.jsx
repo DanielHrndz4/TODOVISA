@@ -34,23 +34,136 @@ export default function Qualification() {
   const quaText = lang[0].qualification;
   const pdfRef = useRef();
 
+  // useEffect(() => {
+  //   const allowedReferers = [
+  //     `${FRONT_URI}/vipro/estadosunidos`,
+  //     `${FRONT_URI}/vipro/mexico`,
+  //     `${FRONT_URI}/vipro/china`,
+  //     `${FRONT_URI}/vipro/india`,
+  //     `${FRONT_URI}/vipro/canada`,
+  //     `${FRONT_URI}/vipro/inglaterra`,
+  //     `${FRONT_URI}/vipro/australia`,
+  //   ];
+
+  //   const referer = document.referrer;
+
+  //   if (!allowedReferers.includes(referer)) {
+  //     navigateTo('/');
+  //     // Redirige a la página de inicio u otra página de tu elección
+  //   }
+  // }, [history]);
+
   useEffect(() => {
-    const allowedReferers = [
-      `${FRONT_URI}/vipro/estadosunidos`,
-      `${FRONT_URI}/vipro/mexico`,
-      `${FRONT_URI}/vipro/china`,
-      `${FRONT_URI}/vipro/india`,
-      `${FRONT_URI}/vipro/canada`,
-      `${FRONT_URI}/vipro/inglaterra`,
-      `${FRONT_URI}/vipro/australia`,
-    ];
+    if (!loading) {
+      const saveQualification = async () => {
+        let correctDPCount = 0;
+        let correctAFFCount = 0;
+        let correctHVCount = 0;
+        let correctHDCount = 0;
+        let incorrectDPCount = 0;
+        let incorrectAFFCount = 0;
+        let incorrectHVCount = 0;
+        let incorrectHDCount = 0;
 
-    const referer = document.referrer;
+        userResponseData.forEach((userQuestion, index) => {
+          const correctResponses = formResponseData[index]?.response || [];
+          const userResponse = userQuestion.user_response.toUpperCase(); // Asegurar que la respuesta del usuario esté en mayúsculas
 
-    if (!allowedReferers.includes(referer)) {
-       // Redirige a la página de inicio u otra página de tu elección
+          if (
+            correctResponses.includes("") ||
+            !correctResponses.includes(userResponse)
+          ) {
+            switch (userQuestion.category) {
+              case "DATOS PERSONALES":
+                incorrectDPCount += 1;
+                break;
+              case "ARRAIGOS FAMILIARES Y FINANCIEROS":
+                incorrectAFFCount += 1;
+                break;
+              case "HISTORIAL DE VIAJES":
+                incorrectHVCount += 1;
+                break;
+              case "HISTORIAL DELICTIVO":
+                incorrectHDCount += 1;
+                break;
+              default:
+                break;
+            }
+          } else {
+            switch (userQuestion.category) {
+              case "DATOS PERSONALES":
+                correctDPCount += 1;
+                break;
+              case "ARRAIGOS FAMILIARES Y FINANCIEROS":
+                correctAFFCount += 1;
+                break;
+              case "HISTORIAL DE VIAJES":
+                correctHVCount += 1;
+                break;
+              case "HISTORIAL DELICTIVO":
+                correctHDCount += 1;
+                break;
+              default:
+                break;
+            }
+          }
+        });
+
+        const lastname =
+          userResponse.lastname !== undefined ? userResponse.lastname : "";
+        const resultDataQualification = {
+          name: userResponse.name + " " + lastname,
+          email: userResponse.email,
+          tel: userResponse.tel,
+          user_country: userResponse.country,
+          form_country: countryForm,
+          response: [
+            {
+              dh: {
+                correct: correctDPCount,
+                incorrect: incorrectDPCount,
+              },
+              aff: {
+                correct: correctAFFCount,
+                incorrect: incorrectAFFCount,
+              },
+              hv: {
+                correct: correctHVCount,
+                incorrect: incorrectHVCount,
+              },
+              hd: {
+                correct: correctHDCount,
+                incorrect: incorrectHDCount,
+              },
+            },
+          ],
+          qualification: (correctDPCount + correctAFFCount + correctHVCount + correctHDCount) * 2.6, // asegúrate de enviar la calificación como string
+        };
+
+        try {
+          const response = await fetch(`${URI}/save_qualification`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              resultData: resultDataQualification,
+              email: email,
+              country: countryForm
+            }),
+          });
+          const data = await response.json();
+          console.log(data);
+          if (!data.success) {
+            throw new Error(data.message);
+          }
+        } catch (error) {
+          console.error("Error al guardar la calificación: ", error);
+        }
+      };
+      saveQualification();
     }
-  }, [history]);
+  }, [loading]);
 
   useEffect(() => {
     const qualificationData = async () => {
@@ -73,7 +186,7 @@ export default function Qualification() {
 
           saveQualification();
         } else {
-          
+          navigateTo('/');
           throw new Error("Error en la respuesta de la API");
         }
       } catch (err) {
@@ -174,121 +287,8 @@ export default function Qualification() {
     }
   };
 
-  useEffect(() => {
-    if (!loading) {
-      const saveQualification = async () => {
-        let correctDPCount = 0;
-        let correctAFFCount = 0;
-        let correctHVCount = 0;
-        let correctHDCount = 0;
-        let incorrectDPCount = 0;
-        let incorrectAFFCount = 0;
-        let incorrectHVCount = 0;
-        let incorrectHDCount = 0;
-
-        userResponseData.forEach((userQuestion, index) => {
-          const correctResponses = formResponseData[index]?.response || [];
-          const userResponse = userQuestion.user_response.toUpperCase(); // Asegurar que la respuesta del usuario esté en mayúsculas
-
-          if (
-            correctResponses.includes("") ||
-            !correctResponses.includes(userResponse)
-          ) {
-            switch (userQuestion.category) {
-              case "DATOS PERSONALES":
-                incorrectDPCount += 1;
-                break;
-              case "ARRAIGOS FAMILIARES Y FINANCIEROS":
-                incorrectAFFCount += 1;
-                break;
-              case "HISTORIAL DE VIAJES":
-                incorrectHVCount += 1;
-                break;
-              case "HISTORIAL DELICTIVO":
-                incorrectHDCount += 1;
-                break;
-              default:
-                break;
-            }
-          } else {
-            switch (userQuestion.category) {
-              case "DATOS PERSONALES":
-                correctDPCount += 1;
-                break;
-              case "ARRAIGOS FAMILIARES Y FINANCIEROS":
-                correctAFFCount += 1;
-                break;
-              case "HISTORIAL DE VIAJES":
-                correctHVCount += 1;
-                break;
-              case "HISTORIAL DELICTIVO":
-                correctHDCount += 1;
-                break;
-              default:
-                break;
-            }
-          }
-        });
-
-        const lastname =
-          userResponse.lastname !== undefined ? userResponse.lastname : "";
-        const resultDataQualification = {
-          name: userResponse.name + " " + lastname,
-          email: userResponse.email,
-          tel: userResponse.tel,
-          user_country: userResponse.country,
-          form_country: countryForm,
-          response: [
-            {
-              dh: {
-                correct: correctDPCount,
-                incorrect: incorrectDPCount,
-              },
-              aff: {
-                correct: correctAFFCount,
-                incorrect: incorrectAFFCount,
-              },
-              hv: {
-                correct: correctHVCount,
-                incorrect: incorrectHVCount,
-              },
-              hd: {
-                correct: correctHDCount,
-                incorrect: incorrectHDCount,
-              },
-            },
-          ],
-          qualification: (correctDPCount+correctAFFCount+correctHVCount+correctHDCount) * 2.6, // asegúrate de enviar la calificación como string
-        };
-
-        try {
-          const response = await fetch(`${URI}/save_qualification`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              resultData: resultDataQualification,
-              email: email,
-              country: countryForm
-            }),
-          });
-          console.log(response)
-          const data = await response.json();
-          console.log(data)
-          if (!data.success) {
-            throw new Error(data.message);
-          }
-        } catch (error) {
-          console.error("Error al guardar la calificación: ", error);
-        }
-      };
-      saveQualification();
-    }
-  }, [loading]);
-
-  if (loading) return <div></div>;
-  if (error) return <div></div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   const handleDownloadPDF = () => {
     const button = document.querySelector(".download-button");
@@ -322,7 +322,7 @@ export default function Qualification() {
     const percent = (correct / totalQuestions);
     const roundedPercent = percent.toFixed(2);
     const percentTotal = (roundedPercent * 100) / 4
-    const percentForCategory = 25 * 0.60
+    const percentForCategory = (25 * percent).toFixed(2)
     if (percentTotal <= percentForCategory) {
       if (selection === 'dh') {
         return (
@@ -518,7 +518,7 @@ export default function Qualification() {
                 <div>
                   {/* Muestra el texto si todas las recomendaciones son válidas */}
                   {allValid ? (
-                    <p>Todo está correcto.</p>
+                    <p></p>
                   ) : (
                     <>
                       <div className="flex flex-col gap-3 pb-10 text-xl text-black">
