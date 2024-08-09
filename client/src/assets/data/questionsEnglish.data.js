@@ -1,7 +1,6 @@
 const questionsEnglish =  [
     { "question": "Full name", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
-    { "question": "Passport expiration date", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
-    { "question": "Must be valid for at least 180 days", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "DATOS PERSONALES" },
+    { "question": "Passport expiration date (Must be valid for at least 180 days)", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Date of birth", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Marital status", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Have you applied for a US visa before?", "type_question": "cerrada", "response": ["YES", "NO"], "user_response": "", "category": "DATOS PERSONALES" },

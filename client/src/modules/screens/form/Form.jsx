@@ -85,7 +85,10 @@ const VIPROForm = () => {
         }
 
         const responseData = await response.json();
-        navigateTo('/qualifications')
+        
+        if(response.ok){
+          navigateTo('/qualifications')
+        }
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);

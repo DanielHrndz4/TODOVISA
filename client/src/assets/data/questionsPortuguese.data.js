@@ -1,7 +1,6 @@
 const questionsPortuguese = [
     { "question": "Nome completo", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
-    { "question": "Data de validade do seu passaporte", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
-    { "question": "Deve estar válido por pelo menos 180 dias", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "DATOS PERSONALES" },
+    { "question": "Data de validade do seu passaporte (Deve estar válido por pelo menos 180 dias)", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Data de nascimento", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Estado civil", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Você solicitou visto americano anteriormente?", "type_question": "cerrada", "response": ["SIM", "NÃO"], "user_response": "", "category": "DATOS PERSONALES" },

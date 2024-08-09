@@ -48,9 +48,10 @@ export default function Qualification() {
     const referer = document.referrer;
 
     if (!allowedReferers.includes(referer)) {
-      navigateTo("/"); // Redirige a la página de inicio u otra página de tu elección
+       // Redirige a la página de inicio u otra página de tu elección
     }
   }, [history]);
+
   useEffect(() => {
     const qualificationData = async () => {
       try {
@@ -59,6 +60,7 @@ export default function Qualification() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: email }),
         });
+        console.log(response)
         if (response.ok) {
           const data = await response.json();
           const userResponse = data.responseFormUser;
@@ -69,9 +71,9 @@ export default function Qualification() {
           setFormResponseData(formResponse.questions || []);
           setCountryForm(userResponse.country);
 
-          //saveQualification();
+          saveQualification();
         } else {
-          navigateTo("/");
+          
           throw new Error("Error en la respuesta de la API");
         }
       } catch (err) {
@@ -271,9 +273,9 @@ export default function Qualification() {
               country: countryForm
             }),
           });
-
+          console.log(response)
           const data = await response.json();
-
+          console.log(data)
           if (!data.success) {
             throw new Error(data.message);
           }

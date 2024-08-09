@@ -8,8 +8,8 @@ import lang from "../../../assets/data/lang.data";
 import Loading from "../../components/loader/Loading";
 import { Fade } from "react-awesome-reveal";
 import Swal from 'sweetalert2';
-import paymentData from "../../../assets/data/admin/payment.n1co";
 import { Helmet } from "react-helmet";
+import { paymentDataGuide } from "../../../assets/data/admin/payment.n1co";
 
 const Guide = () => {
   const [isValidate, setIsValidate] = useState(false);
@@ -45,7 +45,7 @@ const Guide = () => {
   // <a href="/payment/guide/${email}" target="_blank"></a>
 
   const swalPopup = (email) => {
-    const callbackURL = `/payment/guide/${email}`;
+    const callbackURL = `https://todovisa.com/payment/guide/${email}`;
     Swal.fire({
       width: 'auto',
       html: `
@@ -53,7 +53,7 @@ const Guide = () => {
           <div class="w-full flex flex-col sm:flex-row justify-around gap-8 m-auto items-center">
             <div class="flex flex-col justify-center items-center max-w-[300px] w-full p-4 border border-gray-300 rounded-lg shadow-lg">
               <p class="min-h-[130px] text-start max-w-full w-full mb-4">${langPay.payN1co}</p>
-              <a href="https://pay.n1co.shop/pl/${paymentData.linkCode}?amount=${paymentData.amount.form}&stay=${paymentData.stay}&callbackurl=${encodeURIComponent(callbackURL)}" target="_blank">
+              <a href="https://pay.n1co.shop/pl/${paymentDataGuide.linkCode}?amount=${paymentDataGuide.amount.guide}&stay=${paymentDataGuide.stay}&callbackurl=${encodeURIComponent(callbackURL)}" target="_blank">
               <button class="shadowbtn bg-black w-[160px] py-3 px-2 rounded-md text-white hover:bg-gray-800 transition duration-300">N1CO</button>
               </a>
               <img src="./img/payment/visamastercard.png" class="h-[35px] w-auto mt-4" alt="Visa MasterCard"/>

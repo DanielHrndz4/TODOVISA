@@ -1,7 +1,6 @@
 const questionsSpanish = [
     { "question": "Nombre completo", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
-    { "question": "Fecha de vencimiento de su pasaporte", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
-    { "question": "Debe estar vigente mayor a 180 días mínimo", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "DATOS PERSONALES" },
+    { "question": "Fecha de vencimiento de su pasaporte (Debe estar vigente mayor a 180 días mínimo)", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Fecha de nacimiento", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Estado civil", "type_question": "abierta", "response": [""], "user_response": "", "category": "DATOS PERSONALES" },
     { "question": "Ha solicitado visa americana anteriormente?", "type_question": "cerrada", "response": ["SI", "NO"], "user_response": "", "category": "DATOS PERSONALES" },
