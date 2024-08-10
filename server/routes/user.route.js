@@ -892,7 +892,7 @@ router.post('/form_response_eeuu', async (req, res) => {
   try {
     const existingFormData = await Form.findOne({ email: email });
     if (existingFormData) {
-      const responseForm = await FormResponseSchema.findById('66b67cba0f6c0cc43b3a4991');
+      const responseForm = await FormResponseSchema.findById('66b68c4a1a7ba88921479514');
       if (responseForm) {
         const responseFormUser = await Form.findOne({ email: email });
         if (responseFormUser) {
@@ -913,45 +913,58 @@ router.post('/form_response_eeuu', async (req, res) => {
 
 router.post('/save_qualification', async (req, res) => {
   const { resultData, email } = req.body;
+  if (!resultData || !email || !resultData.form_country || !resultData.name) {
+    return res.status(400).json({
+      success: false,
+      message: 'Datos incompletos para guardar la calificación.',
+    });
+  }
   try {
     const formCountry = resultData.form_country.toLowerCase().replace(/\s+/g, '');
 
-    updatedQualification = await ResultData.create({
-      email: email,
-      name: resultData.name,
-      tel: resultData.tel,
-      user_country: resultData.user_country,
-      form_country: resultData.form_country,
-      response: [
-        {
-          dh: {
-            correct: resultData.response[0].dh.correct,
-            incorrect: resultData.response[0].dh.incorrect,
-          },
-          aff: {
-            correct: resultData.response[0].aff.correct,
-            incorrect: resultData.response[0].aff.incorrect,
-          },
-          hv: {
-            correct: resultData.response[0].hv.correct,
-            incorrect: resultData.response[0].hv.incorrect,
-          },
-          hd: {
-            correct: resultData.response[0].hd.correct,
-            incorrect: resultData.response[0].hd.incorrect,
-          },
-        }
-      ],
-      qualification: resultData.qualification
-    });
+    const updatedQualification = await ResultData.findOneAndUpdate(
+      { email: email, form_country: resultData.form_country }, // Condición de búsqueda
+      {
+        // Datos a actualizar
+        name: resultData.name,
+        tel: resultData.tel,
+        user_country: resultData.user_country,
+        form_country: resultData.form_country,
+        response: [
+          {
+            dh: {
+              correct: resultData.response[0].dh.correct,
+              incorrect: resultData.response[0].dh.incorrect,
+            },
+            aff: {
+              correct: resultData.response[0].aff.correct,
+              incorrect: resultData.response[0].aff.incorrect,
+            },
+            hv: {
+              correct: resultData.response[0].hv.correct,
+              incorrect: resultData.response[0].hv.incorrect,
+            },
+            hd: {
+              correct: resultData.response[0].hd.correct,
+              incorrect: resultData.response[0].hd.incorrect,
+            },
+          }
+        ],
+        qualification: resultData.qualification
+      },
+      {
+        new: true, // Retorna el documento actualizado
+        upsert: true, // Crea un nuevo documento si no existe uno que coincida
+      }
+    );
 
-    // Elimina la entrada en Form
-    await Form.findOneAndDelete({ email: email, country: formCountry });
+     // Elimina la entrada en Form
+    //await Form.findOneAndDelete({ email: email, country: formCountry });
 
     res.status(200).json({
       success: true,
       message: 'Resultados guardados con éxito',
-      data: updatedQualification
+      data: updatedQualification,
     });
   } catch (error) {
     console.error('Error al guardar: ', error);
@@ -959,7 +972,7 @@ router.post('/save_qualification', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Ocurrió un error al guardar los resultados',
-      error: error.message
+      error: error.message,
     });
   }
 });

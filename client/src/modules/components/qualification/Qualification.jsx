@@ -34,136 +34,24 @@ export default function Qualification() {
   const quaText = lang[0].qualification;
   const pdfRef = useRef();
 
-  // useEffect(() => {
-  //   const allowedReferers = [
-  //     `${FRONT_URI}/vipro/estadosunidos`,
-  //     `${FRONT_URI}/vipro/mexico`,
-  //     `${FRONT_URI}/vipro/china`,
-  //     `${FRONT_URI}/vipro/india`,
-  //     `${FRONT_URI}/vipro/canada`,
-  //     `${FRONT_URI}/vipro/inglaterra`,
-  //     `${FRONT_URI}/vipro/australia`,
-  //   ];
-
-  //   const referer = document.referrer;
-
-  //   if (!allowedReferers.includes(referer)) {
-  //     navigateTo('/');
-  //     // Redirige a la página de inicio u otra página de tu elección
-  //   }
-  // }, [history]);
-
   useEffect(() => {
-    if (!loading) {
-      const saveQualification = async () => {
-        let correctDPCount = 0;
-        let correctAFFCount = 0;
-        let correctHVCount = 0;
-        let correctHDCount = 0;
-        let incorrectDPCount = 0;
-        let incorrectAFFCount = 0;
-        let incorrectHVCount = 0;
-        let incorrectHDCount = 0;
+    const allowedReferers = [
+      `${FRONT_URI}/vipro/estadosunidos`,
+      `${FRONT_URI}/vipro/mexico`,
+      `${FRONT_URI}/vipro/china`,
+      `${FRONT_URI}/vipro/india`,
+      `${FRONT_URI}/vipro/canada`,
+      `${FRONT_URI}/vipro/inglaterra`,
+      `${FRONT_URI}/vipro/australia`,
+    ];
 
-        userResponseData.forEach((userQuestion, index) => {
-          const correctResponses = formResponseData[index]?.response || [];
-          const userResponse = userQuestion.user_response.toUpperCase(); // Asegurar que la respuesta del usuario esté en mayúsculas
+    const referer = document.referrer;
 
-          if (
-            correctResponses.includes("") ||
-            !correctResponses.includes(userResponse)
-          ) {
-            switch (userQuestion.category) {
-              case "DATOS PERSONALES":
-                incorrectDPCount += 1;
-                break;
-              case "ARRAIGOS FAMILIARES Y FINANCIEROS":
-                incorrectAFFCount += 1;
-                break;
-              case "HISTORIAL DE VIAJES":
-                incorrectHVCount += 1;
-                break;
-              case "HISTORIAL DELICTIVO":
-                incorrectHDCount += 1;
-                break;
-              default:
-                break;
-            }
-          } else {
-            switch (userQuestion.category) {
-              case "DATOS PERSONALES":
-                correctDPCount += 1;
-                break;
-              case "ARRAIGOS FAMILIARES Y FINANCIEROS":
-                correctAFFCount += 1;
-                break;
-              case "HISTORIAL DE VIAJES":
-                correctHVCount += 1;
-                break;
-              case "HISTORIAL DELICTIVO":
-                correctHDCount += 1;
-                break;
-              default:
-                break;
-            }
-          }
-        });
-
-        const lastname =
-          userResponse.lastname !== undefined ? userResponse.lastname : "";
-        const resultDataQualification = {
-          name: userResponse.name + " " + lastname,
-          email: userResponse.email,
-          tel: userResponse.tel,
-          user_country: userResponse.country,
-          form_country: countryForm,
-          response: [
-            {
-              dh: {
-                correct: correctDPCount,
-                incorrect: incorrectDPCount,
-              },
-              aff: {
-                correct: correctAFFCount,
-                incorrect: incorrectAFFCount,
-              },
-              hv: {
-                correct: correctHVCount,
-                incorrect: incorrectHVCount,
-              },
-              hd: {
-                correct: correctHDCount,
-                incorrect: incorrectHDCount,
-              },
-            },
-          ],
-          qualification: (correctDPCount + correctAFFCount + correctHVCount + correctHDCount) * 2.6, // asegúrate de enviar la calificación como string
-        };
-
-        try {
-          const response = await fetch(`${URI}/save_qualification`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              resultData: resultDataQualification,
-              email: email,
-              country: countryForm
-            }),
-          });
-          const data = await response.json();
-          console.log(data);
-          if (!data.success) {
-            throw new Error(data.message);
-          }
-        } catch (error) {
-          console.error("Error al guardar la calificación: ", error);
-        }
-      };
-      saveQualification();
+    if (!allowedReferers.includes(referer)) {
+      navigateTo('/');
+      // Redirige a la página de inicio u otra página de tu elección
     }
-  }, [loading]);
+  }, [history]);
 
   useEffect(() => {
     const qualificationData = async () => {
@@ -173,7 +61,7 @@ export default function Qualification() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: email }),
         });
-        console.log(response)
+        console.log(response);
         if (response.ok) {
           const data = await response.json();
           const userResponse = data.responseFormUser;
@@ -186,7 +74,7 @@ export default function Qualification() {
 
           saveQualification();
         } else {
-          navigateTo('/');
+          navigateTo("/");
           throw new Error("Error en la respuesta de la API");
         }
       } catch (err) {
@@ -266,6 +154,118 @@ export default function Qualification() {
     setQualification(totalCorrect * 2.6);
   }, [userResponseData, formResponseData]);
 
+  const saveQualification = async () => {
+    let correctDPCount = 0;
+    let correctAFFCount = 0;
+    let correctHVCount = 0;
+    let correctHDCount = 0;
+    let incorrectDPCount = 0;
+    let incorrectAFFCount = 0;
+    let incorrectHVCount = 0;
+    let incorrectHDCount = 0;
+
+    userResponseData.forEach((userQuestion, index) => {
+      const correctResponses = formResponseData[index]?.response || [];
+      const userResponse = userQuestion.user_response.toUpperCase(); // Asegurar que la respuesta del usuario esté en mayúsculas
+
+      if (
+        correctResponses.includes("") ||
+        !correctResponses.includes(userResponse)
+      ) {
+        switch (userQuestion.category) {
+          case "DATOS PERSONALES":
+            incorrectDPCount += 1;
+            break;
+          case "ARRAIGOS FAMILIARES Y FINANCIEROS":
+            incorrectAFFCount += 1;
+            break;
+          case "HISTORIAL DE VIAJES":
+            incorrectHVCount += 1;
+            break;
+          case "HISTORIAL DELICTIVO":
+            incorrectHDCount += 1;
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (userQuestion.category) {
+          case "DATOS PERSONALES":
+            correctDPCount += 1;
+            break;
+          case "ARRAIGOS FAMILIARES Y FINANCIEROS":
+            correctAFFCount += 1;
+            break;
+          case "HISTORIAL DE VIAJES":
+            correctHVCount += 1;
+            break;
+          case "HISTORIAL DELICTIVO":
+            correctHDCount += 1;
+            break;
+          default:
+            break;
+        }
+      }
+    });
+
+    const lastname =
+      userResponse.lastname !== undefined ? userResponse.lastname : "";
+    const resultDataQualification = {
+      name: userResponse.name + " " + lastname,
+      email: userResponse.email,
+      tel: userResponse.tel,
+      user_country: userResponse.country,
+      form_country: countryForm,
+      response: [
+        {
+          dh: {
+            correct: correctDPCount,
+            incorrect: incorrectDPCount,
+          },
+          aff: {
+            correct: correctAFFCount,
+            incorrect: incorrectAFFCount,
+          },
+          hv: {
+            correct: correctHVCount,
+            incorrect: incorrectHVCount,
+          },
+          hd: {
+            correct: correctHDCount,
+            incorrect: incorrectHDCount,
+          },
+        },
+      ],
+      qualification:
+        (correctDPCount + correctAFFCount + correctHVCount + correctHDCount) *
+        2.6, // asegúrate de enviar la calificación como string
+    };
+
+    try {
+      const response = await fetch(`${URI}/save_qualification`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          resultData: resultDataQualification,
+          email: email,
+          country: countryForm,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (!data.success) {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.error("Error al guardar la calificación: ", error);
+    }
+  };
+  useEffect(()=>{
+    saveQualification();
+  },[loading])
+
   const getCountry = (country) => {
     switch (country.toLowerCase()) {
       case "estadosunidos":
@@ -318,55 +318,72 @@ export default function Qualification() {
   const viproResult = userResponse.vipro;
 
   const recomendation = (correct, incorrect, selection) => {
-    const totalQuestions = correct + incorrect;
-    const percent = (correct / totalQuestions);
+    let totalQuestions = correct + incorrect;
+    if (selection === "dh") {
+      totalQuestions = totalQuestions - 5;
+    }
+    const percent = correct / totalQuestions;
+    console.log(percent);
     const roundedPercent = percent.toFixed(2);
-    const percentTotal = (roundedPercent * 100) / 4
-    const percentForCategory = (25 * percent).toFixed(2)
-    if (percentTotal <= percentForCategory) {
-      if (selection === 'dh') {
+    const percentTotal = (roundedPercent * 100) / 4;
+    if (percentTotal <= 15 || percentTotal == 0) {
+      if (selection === "dh") {
         return (
           <p className="text-justify">
-            <strong className="text-TVred">{quaText.personalData}: </strong>{quaText.notes.personalinformation}
+            <strong className="text-TVred">{quaText.personalData}: </strong>
+            {quaText.notes.personalinformation}
           </p>
-        )
-      } else if (selection === 'aff') {
+        );
+      } else if (selection === "aff") {
         return (
           <p className="text-justify">
-            <strong className="text-TVred">{quaText.familyAndFinancialTies}: </strong>{quaText.notes.familyfinancialties}
+            <strong className="text-TVred">
+              {quaText.familyAndFinancialTies}:{" "}
+            </strong>
+            {quaText.notes.familyfinancialties}
           </p>
-        )
-      } else if (selection === 'hv') {
+        );
+      } else if (selection === "hv") {
         return (
           <p className="text-justify">
-            <strong className="text-TVred">{quaText.travelHistory}: </strong>{quaText.notes.travelhistory}
+            <strong className="text-TVred">{quaText.travelHistory}: </strong>
+            {quaText.notes.travelhistory}
           </p>
-        )
-      } else {
+        );
+      } else if (selection === "hd") {
         return (
           <p className="text-justify">
-            <strong className="text-TVred">{quaText.criminalHistory}: </strong>{quaText.notes.criminalhistory}
+            <strong className="text-TVred">{quaText.criminalHistory}: </strong>
+            {quaText.notes.criminalhistory}
           </p>
-        )
+        );
       }
     }
-  }
+  };
 
   const allRecommendationsValid = () => {
-    if (!userData.response || !Array.isArray(userData.response) || userData.response.length === 0) {
+    if (
+      !userData.response ||
+      !Array.isArray(userData.response) ||
+      userData.response.length === 0
+    ) {
       return false;
     }
+    const data = userData.response[0];
 
-    const dhValid = recomendation(correctCountDP, incorrectCountDP, 'dh');
-    const affValid = recomendation(correctCountAFF, incorrectCountAFF, 'aff');
-    const hvValid = recomendation(correctCountHV, incorrectCountHV, 'hv');
-    const hdValid = recomendation(correctCountHD, incorrectCountHD, 'hd');
+    const dhValid = calcIsValid(data.dh.correct, data.dh.incorrect);
+    const affValid = calcIsValid(data.aff.correct, data.aff.incorrect);
+    const hvValid = calcIsValid(data.hv.correct, data.hv.incorrect);
+    const hdValid = calcIsValid(data.hd.correct, data.hd.incorrect);
 
-    // Verifica si todas las recomendaciones son válidas
-    return dhValid && affValid && hvValid && hdValid;
-  }
+    if (dhValid || affValid || hvValid || hdValid) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
-  const allValid = allRecommendationsValid()
+  const allValid = allRecommendationsValid();
 
   return (
     <>
@@ -428,24 +445,37 @@ export default function Qualification() {
               </div>
               <div className="w-full flex flex-row gap-2 m-auto">
                 <div className="flex flex-col w-full pt-12 pb-4">
-                  <PieG correct={correctCountDP} incorrect={incorrectCountDP} category="dh" />
+                  <PieG
+                    correct={correctCountDP}
+                    incorrect={incorrectCountDP}
+                    category="dh"
+                  />
                   <p className="text-center py-6">{quaText.personalData}</p>
                 </div>
                 <div className="flex flex-col w-full pt-12 pb-4">
                   <PieG
                     correct={correctCountAFF}
-                    incorrect={incorrectCountAFF} category="aff"
+                    incorrect={incorrectCountAFF}
+                    category="aff"
                   />
                   <p className="text-center py-6">
                     {quaText.familyAndFinancialTies}
                   </p>
                 </div>
                 <div className="flex flex-col w-full pt-12 pb-4">
-                  <PieG correct={correctCountHV} incorrect={incorrectCountHV} category="hv" />
+                  <PieG
+                    correct={correctCountHV}
+                    incorrect={incorrectCountHV}
+                    category="hv"
+                  />
                   <p className="text-center py-6">{quaText.travelHistory}</p>
                 </div>
                 <div className="flex flex-col w-full pt-12 pb-4">
-                  <PieG correct={correctCountHD} incorrect={incorrectCountHD} category="hd" />
+                  <PieG
+                    correct={correctCountHD}
+                    incorrect={incorrectCountHD}
+                    category="hd"
+                  />
                   <p className="text-center py-6">{quaText.criminalHistory}</p>
                 </div>
               </div>
@@ -456,8 +486,9 @@ export default function Qualification() {
                 <p className="text-black text-4xl">
                   {quaText.totalScore}{" "}
                   <strong
-                    className={`${qualification >= 60 ? "text-green-600" : "text-red-400"
-                      } text-shadow`}
+                    className={`${
+                      qualification >= 60 ? "text-green-600" : "text-red-400"
+                    } text-shadow`}
                   >
                     {qualification.toFixed(1)}
                   </strong>
@@ -506,12 +537,10 @@ export default function Qualification() {
                         {quaText.notApprovedTitle}
                       </h2>
                       <p className="text-justify">
-                        {quaText.notApprovedMessage}{" "}
-                        {qualification.toFixed(1)}, {quaText.notApprovedMessage2}
+                        {quaText.notApprovedMessage} {qualification.toFixed(1)},{" "}
+                        {quaText.notApprovedMessage2}
                       </p>
-                      <p>
-                        {quaText.dontGetDiscouraged}
-                      </p>
+                      <p>{quaText.dontGetDiscouraged}</p>
                     </div>
                   )}
                 </div>
@@ -522,25 +551,29 @@ export default function Qualification() {
                   ) : (
                     <>
                       <div className="flex flex-col gap-3 pb-10 text-xl text-black">
-                        <h1 className="text-2xl font-bold">{quaText.notes.improvement}</h1>
-                        {recomendation(correctCountDP, incorrectCountDP, 'dh')}
-                        {recomendation(correctCountAFF, incorrectCountAFF, 'aff')}
-                        {recomendation(correctCountHV, incorrectCountHV, 'hv')}
-                        {recomendation(correctCountHD, incorrectCountHD, 'hd')}
+                        <h1 className="text-2xl font-bold">
+                          {quaText.notes.improvement}
+                        </h1>
+                        {recomendation(correctCountDP, incorrectCountDP, "dh")}
+                        {recomendation(
+                          correctCountAFF,
+                          incorrectCountAFF,
+                          "aff"
+                        )}
+                        {recomendation(correctCountHV, incorrectCountHV, "hv")}
+                        {recomendation(correctCountHD, incorrectCountHD, "hd")}
                       </div>
                     </>
                   )}
                 </div>
                 <div className="w-full m-auto">
                   <div className="text-justify flex flex-col gap-5">
-                    <h1 className="text-2xl font-bold">{quaText.importantNote}</h1>
+                    <h1 className="text-2xl font-bold">
+                      {quaText.importantNote}
+                    </h1>
                     <div className="flex flex-col gap-3">
-                      <p className="text-xl">
-                        {quaText.weightingMessage}
-                      </p>
-                      <p className="text-xl">
-                        {quaText.interviewMessage}
-                      </p>
+                      <p className="text-xl">{quaText.weightingMessage}</p>
+                      <p className="text-xl">{quaText.interviewMessage}</p>
                     </div>
                   </div>
                 </div>
