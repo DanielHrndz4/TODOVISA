@@ -35,25 +35,6 @@ export default function Qualification() {
   const pdfRef = useRef();
 
   useEffect(() => {
-    const allowedReferers = [
-      `${FRONT_URI}/vipro/estadosunidos`,
-      `${FRONT_URI}/vipro/mexico`,
-      `${FRONT_URI}/vipro/china`,
-      `${FRONT_URI}/vipro/india`,
-      `${FRONT_URI}/vipro/canada`,
-      `${FRONT_URI}/vipro/inglaterra`,
-      `${FRONT_URI}/vipro/australia`,
-    ];
-
-    const referer = document.referrer;
-
-    if (!allowedReferers.includes(referer)) {
-      navigateTo('/');
-      // Redirige a la página de inicio u otra página de tu elección
-    }
-  }, [history]);
-
-  useEffect(() => {
     const qualificationData = async () => {
       try {
         const response = await fetch(`${URI}/form_response_eeuu`, {

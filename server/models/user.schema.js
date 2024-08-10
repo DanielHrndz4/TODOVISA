@@ -55,6 +55,12 @@ const userSchema = mongoose.Schema({
     },
     vipro_aus:{
         type: Boolean
+    },
+    code_ref:{
+        type: String
+    },
+    person_ref:{
+        type: Number,
     }
 })
 

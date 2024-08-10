@@ -507,38 +507,66 @@ router.post('/update-form-eeuu', async (req, res) => {
   }
 });
 
+// SE REEMPLAZO EL CODIGO
+router.post('/signup', async (req, res) => {
+  const { name, lastname, email, password, country, tel, code_ref } = req.body;
 
-router.post('/signup', (req, res) => {
-  const { name, lastname, email, password, country, tel } = req.body;
-
-  // Crear un hash de la contraseña utilizando SHA-256
-  const hash = crypto.createHash('sha256');
-  hash.update(password);
-  const hashedPassword = hash.digest('hex');
-
-  userSchema.findOne({ email: email })
-    .then((existUser) => {
-      if (existUser) {
-        return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` });
+  try {
+    if (code_ref !== '') {
+      // Solo se ejecuta si code_ref no está vacío
+      const referrer = await userSchema.findOne({ code_ref: code_ref });
+      if (referrer) {
+        // Incrementar el campo person_ref del usuario que tiene el código de referencia
+        await userSchema.updateOne({ code_ref: code_ref }, { $inc: { person_ref: 1 } });
+      } else {
+        return res.status(400).json({ message: 'El código no pertenece a ningún usuario' });
       }
+    } 
 
-      // Crear un nuevo usuario con la contraseña hasheada
-      const newUser = new userSchema({ name, lastname, email, password: hashedPassword, country, tel });
-      newUser.save()
-        .then((user) => {
-          res.status(200).json({ message: "Usuario registrado exitosamente" });
-        })
-        .catch((error) => {
-          console.error(error.message);
-          res.status(500).json({ message: 'Error en el servidor' });
-        });
-    })
-    .catch((error) => {
-      console.error(error.message);
-      res.status(500).json({ message: 'Error en el servidor' });
+    // Generar un código de 6 dígitos único
+    let codeRef;
+    let codeExists = true;
+
+    while (codeExists) {
+      codeRef = Math.floor(100000 + Math.random() * 900000).toString();
+      const existingUser = await userSchema.findOne({ code_ref: codeRef });
+      if (!existingUser) {
+        codeExists = false;
+      }
+    }
+
+    // Crear un hash de la contraseña utilizando SHA-256
+    const hash = crypto.createHash('sha256');
+    hash.update(password);
+    const hashedPassword = hash.digest('hex');
+
+    const existingUser = await userSchema.findOne({ email: email });
+    if (existingUser) {
+      return res.status(400).json({ message: `El usuario con email: ${email} ya se encuentra registrado` });
+    }
+
+    // Crear un nuevo usuario con la contraseña hasheada y el código de referencia generado
+    const newUser = new userSchema({
+      name,
+      lastname,
+      email,
+      password: hashedPassword,
+      country,
+      tel,
+      code_ref: codeRef,
+      person_ref: 0
     });
+
+    await newUser.save();
+    res.status(200).json({ message: 'Usuario registrado exitosamente' });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Error en el servidor' });
+  }
 });
 
+// SE REEMPLAZO ESTE CODIGO
 router.post('/auth/google', async (req, res) => {
   const { name, email, country, password, tel, googleID, avatar } = req.body;
   try {
@@ -560,7 +588,31 @@ router.post('/auth/google', async (req, res) => {
       }
     } else {
       // Caso 3: El usuario no existe, se crea una nueva cuenta
-      const newUser = new userSchema({ name, email, country, password, tel, googleID, avatar });
+
+      // Generar un código de 6 dígitos único para el nuevo usuario
+      let codeRef;
+      let codeExists = true;
+
+      while (codeExists) {
+        codeRef = Math.floor(100000 + Math.random() * 900000).toString();
+        const existingUser = await userSchema.findOne({ code_ref: codeRef });
+        if (!existingUser) {
+          codeExists = false;
+        }
+      }
+
+      // Crear un nuevo usuario con el código de referencia generado y person_ref inicializado en 0
+      const newUser = new userSchema({
+        name,
+        email,
+        country,
+        password,
+        tel,
+        googleID,
+        avatar,
+        code_ref: codeRef,
+        person_ref: 0
+      });
 
       // Crear y guardar un nuevo token JWT
       const payload = { email, name, country, avatar };
@@ -580,7 +632,6 @@ router.post('/auth/google', async (req, res) => {
     return res.status(500).json({ message: 'Error en el servidor' });
   }
 });
-
 
 router.post('/logout', (req, res) => {
   const jwt = req.body.jwt;

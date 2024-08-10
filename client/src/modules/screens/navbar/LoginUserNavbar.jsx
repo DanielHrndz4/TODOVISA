@@ -35,6 +35,10 @@ import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
 import Item from "antd/es/list/Item";
 import FRONT_URI from "../../../assets/data/admin/uri.front";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
 
 const navListMenuItems = [
   {
@@ -241,11 +245,10 @@ function NavList() {
                 (langItem, index, array) => (
                   <MenuItem
                     key={index}
-                    className={`text-white font-normal hover:bg-TVBlue text-center hover:text-black hover:font-semibold py-2 ${
-                      index === array.length - 1
-                        ? "border-b-0"
-                        : "border-b-[1px]"
-                    } rounded-none py-3`}
+                    className={`text-white font-normal hover:bg-TVBlue text-center hover:text-black hover:font-semibold py-2 ${index === array.length - 1
+                      ? "border-b-0"
+                      : "border-b-[1px]"
+                      } rounded-none py-3`}
                     onClick={() => handleLang(langItem.name)}
                   >
                     <div className="flex flex-row items-center">
@@ -270,6 +273,7 @@ function NavList() {
 export default function LoginUserNavbar() {
   const [formData, setFormData] = useState([]);
   const [error, setError] = useState(null);
+  const [checkAlert, setCheckAlert] = useState(false);
   const [userPicture, setUserPicture] = useState(
     "https://ionicframework.com/docs/img/demos/avatar.svg"
   ); // Valor por defecto
@@ -314,6 +318,7 @@ export default function LoginUserNavbar() {
 
   const [openNav, setOpenNav] = React.useState(false);
   const [openAvatarMenu, setOpenAvatarMenu] = React.useState(false);
+  const [isMenuOpenRF, setIsMenuOpenRF] = useState(false);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -366,6 +371,17 @@ export default function LoginUserNavbar() {
     };
     fetchFormData();
   }, []);
+
+  const copyCode = async (code) => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCheckAlert(true);
+      setTimeout(() => setCheckAlert(false), 5000)
+    } catch (err) {
+      console.error('Error al copiar: ', err);
+    }
+  }
+
   return (
     <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVBlue">
       <div className="w-[80%] xl:w-[80%] lg:w-full m-auto flex items-center justify-between text-white">
@@ -395,6 +411,27 @@ export default function LoginUserNavbar() {
                 />
               </MenuHandler>
               <MenuList className="bg-TVBlue border-white">
+                {/* Referidos */}
+                <Menu>
+                  <MenuHandler>
+                    <MenuItem className="text-white font-nomal hover:bg-TVBlue text-center hover:text-black hover:font-semibold hover:cursor-pointer">
+                      Codigo referido
+                    </MenuItem>
+                  </MenuHandler>
+                  <MenuList className="bg-TVBlue px-2 py-4">
+                    <Menu>
+                      <div className="w-full m-auto">
+                        <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">Mi codigo</h3>
+                        <div className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer" onClick={() => copyCode('THDUCI')}>
+                          <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? 'Copiado' : 'Copiar'} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
+                          <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">THDUCI</span></div>
+                        <h4 className="text-center font-semibold text-white py-2 capitalize">Personas referidas: 0</h4>
+                        <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred">¿Como funciona el codigo de referido?</p>
+                      </div>
+                    </Menu>
+                  </MenuList>
+                </Menu>
+                {/* Formularios */}
                 <Menu>
                   <MenuHandler>
                     <MenuItem className="text-white font-nomal hover:bg-TVBlue text-center hover:text-black hover:font-semibold py-2 hover:cursor-pointer">
@@ -449,6 +486,27 @@ export default function LoginUserNavbar() {
 
         <NavList />
 
+        {/* Referidos */}
+        <Menu>
+          <MenuHandler>
+            <MenuItem className="text-white font-nomal hover:bg-TVBlue hover:text-black hover:font-semibold hover:cursor-pointer">
+              Codigo referido
+            </MenuItem>
+          </MenuHandler>
+          <MenuList className="bg-TVBlue px-2 py-4">
+            <Menu>
+              <div className="w-full m-auto">
+                <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">Mi codigo</h3>
+                <div className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer" onClick={() => copyCode('THDUCI')}>
+                  <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? 'Copiado' : 'Copiar'} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
+                  <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">THDUCI</span></div>
+                <h4 className="text-center font-semibold text-white py-2 capitalize">Personas referidas: 0</h4>
+                <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred">¿Como funciona el codigo de referido?</p>
+              </div>
+            </Menu>
+          </MenuList>
+        </Menu>
+        {/* Formularios */}
         <Menu className="lg:hidden">
           <MenuHandler>
             <MenuItem className="flex items-center gap-2 py-2 pr-4">

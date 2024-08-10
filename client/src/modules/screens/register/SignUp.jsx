@@ -37,6 +37,7 @@ export default function Register() {
     password: "",
     country: "",
     tel: "",
+    code_ref: "",
   });
 
   function Alert(props) {
@@ -136,6 +137,8 @@ export default function Register() {
       console.error('Error:', e.message);
     }
   };
+
+  console.log(formData);
   const handleLoginSuccess = (credentialResponse) => {
     try {
       const decodeToken = jwtDecode(credentialResponse?.credential);
@@ -418,6 +421,26 @@ export default function Register() {
                         value={formData.tel}
                         onChange={handleChange}
                         required
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full px-3">
+                      <Typography
+                        variant="h6"
+                        color="blue-gray"
+                        className="text-white"
+                      >
+                        Codigo de referido
+                      </Typography>
+                      <input
+                        className="appearance-none block w-full bg-transparent shadow text-white border focus:border-black border-white rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-transparent"
+                        id="grid-coderef"
+                        type="text"
+                        placeholder=""
+                        name="code_ref"
+                        value={formData.code_ref}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
