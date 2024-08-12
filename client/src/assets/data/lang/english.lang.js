@@ -1165,7 +1165,8 @@ const english = [
             "signing_out": "Signing out",
             "sign_out": "Sign out",
             "without_forms": "Without forms",
-            "forms": "Forms"
+            "forms": "Forms",
+            "code_referrer": "Referral Code"
         },
         "validation_popup": {
             "success": "Successful Registration",
@@ -1235,7 +1236,14 @@ const english = [
             "title": "Referral Code",
             "text": "The referral code allows you to invite your friends. By referring 20 people, you will receive a free form! If you already have 20 referred people, contact Todovisa right now.",
             "button": "Accept"
-        }        
+        },
+        "codeReferrer": {
+            "my_code": "My Code",
+            "copy_text": "Copy",
+            "copied_text": "Copied",
+            "referral_count": "Referred People: ",
+            "how_it_works": "How does the referral code work?"
+        }
     }
 ];
 

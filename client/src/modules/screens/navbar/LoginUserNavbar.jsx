@@ -41,56 +41,9 @@ import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import handleClickPopUpReferrer from "../../components/popup/PopUpReferrer";
 
-const navListMenuItems = [
-  {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: SquaresPlusIcon,
-  },
-  {
-    title: "About Us",
-    description: "Meet and learn about our dedication",
-    icon: UserGroupIcon,
-  },
-  {
-    title: "Blog",
-    description: "Find the perfect solution for your needs.",
-    icon: Bars4Icon,
-  },
-  {
-    title: "Services",
-    description: "Learn how we can help you achieve your goals.",
-    icon: SunIcon,
-  },
-  {
-    title: "Support",
-    description: "Reach out to us for assistance or inquiries",
-    icon: GlobeAmericasIcon,
-  },
-  {
-    title: "Contact",
-    description: "Find the perfect solution for your needs.",
-    icon: PhoneIcon,
-  },
-  {
-    title: "News",
-    description: "Read insightful articles, tips, and expert opinions.",
-    icon: NewspaperIcon,
-  },
-  {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: RectangleGroupIcon,
-  },
-  {
-    title: "Special Offers",
-    description: "Explore limited-time deals and bundles",
-    icon: TagIcon,
-  },
-];
-
 const loginNav = lang[0].navbar;
 const log_forms = lang[0].log_forms
+const code_ref = lang[0].codeReferrer
 
 const handleLogout = () => {
   const buttonText = lang[0].form;
@@ -127,41 +80,6 @@ const handleLogout = () => {
   fetchData();
 };
 
-function NavListMenu() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const renderItems = navListMenuItems.map(
-    ({ icon, title, description }, key) => (
-      <a href="#" key={key}>
-        <MenuItem className="flex items-center gap-3 rounded-lg">
-          <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-            {" "}
-            {React.createElement(icon, {
-              strokeWidth: 2,
-              className: "h-6 text-gray-900 w-6",
-            })}
-          </div>
-          <div>
-            <Typography
-              variant="h6"
-              color="white"
-              className="flex items-center text-sm font-bold"
-            >
-              {title}
-            </Typography>
-            <Typography
-              variant="paragraph"
-              className="text-xs !font-medium text-blue-gray-500"
-            >
-              {description}
-            </Typography>
-          </div>
-        </MenuItem>
-      </a>
-    )
-  );
-}
-
 const navText = lang[0].navbar;
 
 const handleLang = (lang) => {
@@ -196,7 +114,6 @@ function NavList() {
           {loginNav.about}
         </ListItem>
       </Typography>
-      <NavListMenu />
       <Typography
         as="a"
         href={`${FRONT_URI}/#services`}
@@ -419,18 +336,18 @@ export default function LoginUserNavbar() {
                 <Menu>
                   <MenuHandler>
                     <MenuItem className="text-white font-nomal hover:bg-TVBlue text-center hover:text-black hover:font-semibold hover:cursor-pointer">
-                      Codigo referido
+                    {log_forms.code_referrer}
                     </MenuItem>
                   </MenuHandler>
                   <MenuList className="bg-TVBlue px-2 py-4">
                     <Menu>
                       <div className="w-full m-auto">
-                        <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">Mi codigo</h3>
+                        <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">{code_ref.my_code}</h3>
                         <div className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer" onClick={() => copyCode(cRef)}>
-                          <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? 'Copiado' : 'Copiar'} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
+                          <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? code_ref.copied_text : code_ref.copy_text} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
                           <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">{cRef}</span></div>
-                        <h4 className={`text-center font-semibold ${pRef >= 20 ? 'text-green-600' : 'text-white'} py-2 capitalize`}>Personas referidas: {pRef}</h4>
-                        <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred" onClick={handleClickPopUpReferrer}>¿Como funciona el codigo de referido?</p>
+                        <h4 className={`text-center font-semibold ${pRef >= 20 ? 'text-green-600' : 'text-white'} py-2 capitalize`}>{code_ref.referral_count} {pRef}</h4>
+                        <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred" onClick={handleClickPopUpReferrer}>{code_ref.how_it_works}</p>
                       </div>
                     </Menu>
                   </MenuList>
@@ -494,18 +411,18 @@ export default function LoginUserNavbar() {
         <Menu>
           <MenuHandler>
             <MenuItem className="text-white font-nomal hover:bg-TVBlue hover:text-black hover:font-semibold hover:cursor-pointer">
-              Codigo referido
+              {log_forms.code_referrer}
             </MenuItem>
           </MenuHandler>
           <MenuList className="bg-TVBlue px-2 py-4">
             <Menu>
               <div className="w-full m-auto">
-                <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">Mi codigo</h3>
+                <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">{code_ref.my_code}</h3>
                 <div className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer" onClick={() => copyCode('THDUCI')}>
-                  <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? 'Copiado' : 'Copiar'} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
+                  <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? code_ref.copied_text : code_ref.copy_text} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
                   <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">THDUCI</span></div>
-                <h4 className="text-center font-semibold text-white py-2 capitalize">Personas referidas: 0</h4>
-                <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred">¿Como funciona el codigo de referido?</p>
+                <h4 className="text-center font-semibold text-white py-2 capitalize">{code_ref.referral_count} 0</h4>
+                <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred">{code_ref.how_it_works}</p>
               </div>
             </Menu>
           </MenuList>

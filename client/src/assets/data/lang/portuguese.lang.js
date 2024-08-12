@@ -1165,7 +1165,8 @@ const portuguese = [
             "signing_out": "Encerrando sessão",
             "sign_out": "Sair",
             "without_forms": "Sem formulários",
-            "forms": "Formulários"
+            "forms": "Formulários",
+            "code_referrer": "Código de Referência"
         },
         "validation_popup": {
             "success": "Registro bem-sucedido",
@@ -1235,7 +1236,14 @@ const portuguese = [
             "title": "Código de Referência",
             "text": "O código de referência permite que você convide seus amigos. Ao indicar 20 pessoas, você receberá um formulário gratuito! Se você já indicou 20 pessoas, entre em contato com a Todovisa agora mesmo.",
             "button": "Aceitar"
-        }        
+        },
+        "codeReferrer": {
+            "my_code": "Meu Código",
+            "copy_text": "Copiar",
+            "copied_text": "Copiado",
+            "referral_count": "Pessoas Referidas: ",
+            "how_it_works": "Como funciona o código de referência?"
+        }
     }
 ];
 
