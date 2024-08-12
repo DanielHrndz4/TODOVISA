@@ -39,6 +39,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
+import handleClickPopUpReferrer from "../../components/popup/PopUpReferrer";
 
 const navListMenuItems = [
   {
@@ -347,7 +348,8 @@ export default function LoginUserNavbar() {
       return <div>No user available</div>;
     }
   };
-
+  const [pRef, setPRef] = useState(0)
+  const [cRef, setCRef] = useState('')
   useEffect(() => {
     const fetchFormData = async () => {
       const userEmail = Cookies.get("user");
@@ -365,6 +367,8 @@ export default function LoginUserNavbar() {
         }
         const data = await response.json();
         setFormData(data.forms);
+        setPRef(data.personReferrer);
+        setCRef(data.codeReferrer)
       } catch (err) {
         setError("Error al cargar los formularios");
       }
@@ -422,11 +426,11 @@ export default function LoginUserNavbar() {
                     <Menu>
                       <div className="w-full m-auto">
                         <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">Mi codigo</h3>
-                        <div className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer" onClick={() => copyCode('THDUCI')}>
+                        <div className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer" onClick={() => copyCode(cRef)}>
                           <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? 'Copiado' : 'Copiar'} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
-                          <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">THDUCI</span></div>
-                        <h4 className="text-center font-semibold text-white py-2 capitalize">Personas referidas: 0</h4>
-                        <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred">¿Como funciona el codigo de referido?</p>
+                          <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">{cRef}</span></div>
+                        <h4 className={`text-center font-semibold ${pRef >= 20 ? 'text-green-600' : 'text-white'} py-2 capitalize`}>Personas referidas: {pRef}</h4>
+                        <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred" onClick={handleClickPopUpReferrer}>¿Como funciona el codigo de referido?</p>
                       </div>
                     </Menu>
                   </MenuList>

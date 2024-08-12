@@ -10,30 +10,12 @@ const FormResponseSchema = require('../models/form_response.schema');
 const ResultData = require('../models/qualification.schema');
 const cron = require('node-cron')
 const sgMail = require('@sendgrid/mail');
-
+const { generateCode, createToken } = require('../functions/Functions');
 
 require('dotenv').config();
 
-const SECRET_KEY = process.env.SECRET_KEY;
 const SENDGRID = process.env.SENDGRID_TOKEN
 sgMail.setApiKey(SENDGRID);
-
-function createToken(payload) {
-  const header = {
-    alg: 'HS256',
-    typ: 'JWT'
-  };
-
-  const base64Header = Buffer.from(JSON.stringify(header)).toString('base64').replace(/=/g, '');
-  const base64Payload = Buffer.from(JSON.stringify(payload)).toString('base64').replace(/=/g, '');
-
-  const signature = crypto.createHmac('sha256', SECRET_KEY)
-    .update(`${base64Header}.${base64Payload}`)
-    .digest('base64')
-    .replace(/=/g, '');
-
-  return `${base64Header}.${base64Payload}.${signature}`;
-}
 
 router.post('/reset_password', async (req, res) => {
   const { email } = req.body;
@@ -507,7 +489,6 @@ router.post('/update-form-eeuu', async (req, res) => {
   }
 });
 
-// SE REEMPLAZO EL CODIGO
 router.post('/signup', async (req, res) => {
   const { name, lastname, email, password, country, tel, code_ref } = req.body;
 
@@ -521,14 +502,13 @@ router.post('/signup', async (req, res) => {
       } else {
         return res.status(400).json({ message: 'El código no pertenece a ningún usuario' });
       }
-    } 
+    }
 
-    // Generar un código de 6 dígitos único
     let codeRef;
     let codeExists = true;
 
     while (codeExists) {
-      codeRef = Math.floor(100000 + Math.random() * 900000).toString();
+      codeRef = generateCode();
       const existingUser = await userSchema.findOne({ code_ref: codeRef });
       if (!existingUser) {
         codeExists = false;
@@ -589,12 +569,11 @@ router.post('/auth/google', async (req, res) => {
     } else {
       // Caso 3: El usuario no existe, se crea una nueva cuenta
 
-      // Generar un código de 6 dígitos único para el nuevo usuario
       let codeRef;
       let codeExists = true;
 
       while (codeExists) {
-        codeRef = Math.floor(100000 + Math.random() * 900000).toString();
+        codeRef = generateCode();
         const existingUser = await userSchema.findOne({ code_ref: codeRef });
         if (!existingUser) {
           codeExists = false;
@@ -1009,7 +988,7 @@ router.post('/save_qualification', async (req, res) => {
       }
     );
 
-     // Elimina la entrada en Form
+    // Elimina la entrada en Form
     //await Form.findOneAndDelete({ email: email, country: formCountry });
 
     res.status(200).json({
@@ -1028,11 +1007,15 @@ router.post('/save_qualification', async (req, res) => {
   }
 });
 
+// Codigo modificado
 router.post('/complete_forms', async (req, res) => {
   const { email } = req.body;
   try {
     const forms = await ResultData.find({ email: email });
-    res.json({ forms });
+    const user = await userSchema.findOne({ email: email })
+    const personReferrer = user.person_ref
+    const codeReferrer = user.code_ref
+    res.json({ forms, personReferrer, codeReferrer });
   } catch (err) {
     res.status(500).json({ error: 'Error al recuperar los formularios' });
   }

@@ -1233,6 +1233,11 @@ const spanish = [
             "description": "Ya existe una cuenta registrada con este email.",
             "validationCredentials": "Por favor, verifica tus credenciales e intenta nuevamente.",
             "button": "Aceptar"
+        },
+        "popupReferrer" :{
+            "title": "Código de Referidos",
+            "text": "El código de referido te sirve para invitar a tus amigos. ¡Al referir a 20 personas, obtendrás un formulario gratis! Si ya tienes las 20 personas referidas, contacta a Todovisa en este momento.",
+            "button":"Aceptar"
         }
     }
 ];

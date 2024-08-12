@@ -1230,7 +1230,12 @@ const english = [
             "description": "An account with this email already exists.",
             "validationCredentials": "Please check your credentials and try again.",
             "button": "Accept"
-        }
+        },
+        "popupReferrer": {
+            "title": "Referral Code",
+            "text": "The referral code allows you to invite your friends. By referring 20 people, you will receive a free form! If you already have 20 referred people, contact Todovisa right now.",
+            "button": "Accept"
+        }        
     }
 ];
 
