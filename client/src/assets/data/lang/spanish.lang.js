@@ -2,8 +2,7 @@ import FRONT_URI from "../admin/uri.front";
 
 const spanish = [
     {
-        "navbar":
-        {
+        "navbar": {
             "about": "Sobre nosotros",
             "service": "Servicios",
             "VIPRO": "VIPRO",
