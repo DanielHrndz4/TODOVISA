@@ -91,10 +91,8 @@ export default function FormsComplete() {
             totalQuestions = totalQuestions - 5;
         }
         const percent = (correct / totalQuestions);
-        console.log(percent);
         const roundedPercent = percent.toFixed(2);
         const percentTotal = (roundedPercent * 100) / 4
-        console.log(percentTotal)
         if (percentTotal <= 15 || percentTotal == 0) {
             if (selection === 'dh') {
                 return (

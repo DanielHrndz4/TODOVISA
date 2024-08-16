@@ -138,7 +138,6 @@ export default function Register() {
     }
   };
 
-  console.log(formData);
   const handleLoginSuccess = (credentialResponse) => {
     try {
       const decodeToken = jwtDecode(credentialResponse?.credential);

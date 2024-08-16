@@ -13,7 +13,11 @@
 
 .backgroundgradient {
   background: rgb(255, 255, 255);
-  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 50%, rgba(17, 62, 95, 1) 50%);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(17, 62, 95, 1) 50%
+  );
 }
 
 .glassmorphism {
@@ -44,21 +48,21 @@
 }
 
 @font-face {
-  font-family: 'Crawling';
-  src: url('./assets/fonts/Crawling.otf') format('truetype');
+  font-family: "Crawling";
+  src: url("./assets/fonts/Crawling.otf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'DevantHorgen';
-  src: url('./assets/fonts/DevantHorgen.ttf') format('truetype');
+  font-family: "DevantHorgen";
+  src: url("./assets/fonts/DevantHorgen.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 * {
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, ;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica;
 }
 
 html,
@@ -67,7 +71,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 
 .full-height {
   height: 100%;
@@ -119,13 +122,13 @@ body {
 }
 
 .sk-folding-cube .sk-cube:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #113E5F;
+  background-color: #113e5f;
   animation: sk-foldCubeAngle 2.4s infinite linear both;
   transform-origin: 100% 100%;
 }
@@ -155,16 +158,20 @@ body {
 }
 
 @keyframes sk-foldCubeAngle {
-  0%, 10% {
+  0%,
+  10% {
     transform: perspective(140px) rotateX(-180deg);
     opacity: 0;
   }
-  25%, 75% {
+  25%,
+  75% {
     transform: perspective(140px) rotateX(0deg);
     opacity: 1;
   }
-  90%, 100% {
+  90%,
+  100% {
     transform: perspective(140px) rotateY(180deg);
     opacity: 0;
   }
 }
+

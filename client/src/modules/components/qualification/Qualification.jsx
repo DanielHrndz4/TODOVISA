@@ -42,7 +42,6 @@ export default function Qualification() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: email }),
         });
-        console.log(response);
         if (response.ok) {
           const data = await response.json();
           const userResponse = data.responseFormUser;
@@ -235,7 +234,6 @@ export default function Qualification() {
         }),
       });
       const data = await response.json();
-      console.log(data);
       if (!data.success) {
         throw new Error(data.message);
       }
@@ -304,7 +302,6 @@ export default function Qualification() {
       totalQuestions = totalQuestions - 5;
     }
     const percent = correct / totalQuestions;
-    console.log(percent);
     const roundedPercent = percent.toFixed(2);
     const percentTotal = (roundedPercent * 100) / 4;
     if (percentTotal <= 15 || percentTotal == 0) {
