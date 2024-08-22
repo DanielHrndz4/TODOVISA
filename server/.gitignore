@@ -5,3 +5,4 @@ dist-ssr
 .env
 .vercel
 dist
+yarn.lock
