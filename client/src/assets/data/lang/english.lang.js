@@ -135,8 +135,8 @@ const english = [
         },
         "form": {
             "return": "Return to Home",
-            "title": "Visa Application Form",
-            "description": "Below you will find the visa application form that you must complete to process your request. We ask that you fill in all fields with the most accurate and up-to-date information possible. This will allow us to evaluate your application efficiently and quickly.",
+            "title": "Visa Probability Pre-Form (VIPRO)",
+            "description": "This is the Visa Probability Pre-Form (VIPRO), designed to assess your chances of obtaining a visa based on your personal profile. Please fill out all fields with the most accurate and up-to-date information possible. This will allow us to provide you with a quick and efficient preliminary assessment and help you better understand your options before proceeding with the formal application.",
             "acept": "I accept the ",
             "terms": "Terms and Conditions",
             "send_form": "Submit Form",
@@ -1094,7 +1094,7 @@ const english = [
             "button": "Get the complete guide"
         },
         "qualification": {
-            "title": "Visa Approval Form",
+            "title": "Visa Probability Pre-Form (VIPRO)",
             "applicantData": "Applicant Data",
             "name": "Name:",
             "countryOfOrigin": "Country of Origin:",

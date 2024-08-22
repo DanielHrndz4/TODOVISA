@@ -42,8 +42,6 @@ const Guide = () => {
     return btoa(value); // btoa() codifica una cadena en Base64
   }
 
-  // <a href="/payment/guide/${email}" target="_blank"></a>
-
   const swalPopup = (email) => {
     const callbackURL = `https://todovisa.com/payment/guide/${email}`;
     Swal.fire({

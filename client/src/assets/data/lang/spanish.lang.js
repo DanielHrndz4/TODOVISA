@@ -138,8 +138,8 @@ const spanish = [
         },
         "form": {
             "return": " Regresar al inicio",
-            "title": "Formulario de Solicitud de Visa",
-            "description": "A continuación, encontrará el formulario de solicitud de visa que deberá completar para procesar su solicitud. Le pedimos que llene todos los campos con la información más precisa y actualizada posible. Esto nos permitirá evaluar su solicitud de manera eficiente y rápida.",
+            "title": "Preformulario de Probabilidad de Visado (VIPRO)",
+            "description": "Este es el preformulario de Probabilidad de Visado (VIPRO), diseñado para evaluar tus posibilidades de obtener una visa en base a tu perfil personal. Te pedimos que completes todos los campos con la información más precisa y actualizada posible. Esto nos permitirá proporcionarte una evaluación preliminar eficiente y rápida, y ayudarte a entender mejor tus opciones antes de proceder con la solicitud formal.",
             "acept": "Acepto los ",
             "terms": "Términos y condiciones",
             "send_form": "Enviar formulario",
@@ -1096,7 +1096,7 @@ const spanish = [
             "button": "Adquirir guia completa"
         },
         "qualification": {
-            "title": "Formulario de aprobación de Visa",
+            "title": "Preformulario de Probabilidad de Visado (VIPRO)",
             "applicantData": "Datos del aplicante",
             "name": "Nombre:",
             "countryOfOrigin": "País de origen:",

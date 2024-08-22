@@ -6,7 +6,7 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import handleClickPopUpSignUp from "../../components/popup/PopUpSignUp";
-import MuiAlert from "@material-ui/lab/Alert";
+import MuiAlert from "@mui/lab/Alert";
 import country from "../../../assets/data/countrys.data";
 import { IPInfoContext } from 'ip-info-react';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -146,6 +146,7 @@ export default function Register() {
       console.error('Error:', error.message);
     }
   };
+  
   useEffect(() => {
     if (repeatPassword.repeatpassword !== "" || formData.password !== "") {
       if (formData.password !== repeatPassword.repeatpassword) {
