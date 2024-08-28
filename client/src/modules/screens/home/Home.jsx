@@ -15,6 +15,7 @@ import URI from "../../../assets/data/admin/uri.api";
 import GuideSection from "./GuideSection";
 import Slider from "react-slick";
 import { Helmet } from "react-helmet";
+import AppointmentSection from "./AppointmentSection";
 
 export default function Home() {
   const bannerText = lang[0].banner;
@@ -171,14 +172,14 @@ export default function Home() {
             <hr className="my-8 bg-white" />
             {/* VIPROCarrousel section */}
             <VIPROCarrousel></VIPROCarrousel>
-            <hr className="my-8 bg-white" />
+            <hr className="my-4 bg-white" />
             <GuideSection></GuideSection>
+            <hr className="mt-8 bg-white" />
+            {/* Appointment Section TODOVISA */}
+            <AppointmentSection></AppointmentSection>
             <hr className="my-8 bg-white" />
             {/* VIPRO form section */}
             <VIPRO validation={jwtToken}></VIPRO>
-            <hr className="my-8 bg-white" />
-            {/* Cite TODOVISA */}
-            <GuideSection></GuideSection>
             <hr className="mb-4 bg-white" />
             {/* Contact Us form */}
             <ContactUs></ContactUs>
