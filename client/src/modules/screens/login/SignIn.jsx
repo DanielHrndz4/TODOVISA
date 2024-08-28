@@ -38,7 +38,6 @@ export default function Login() {
   };
   const styles = {
     height: "100dvh", // Adjusted height for browsers that support dvh
-    height: "100%", // Fallback for browsers that do not support dvh
   };
   const validCredentialGoogle = async (decodeToken) => {
     const email = decodeToken.email;

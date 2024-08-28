@@ -11,6 +11,7 @@ const ResultData = require('../models/qualification.schema');
 const cron = require('node-cron')
 const sgMail = require('@sendgrid/mail');
 const { generateCode, createToken } = require('../functions/Functions');
+const scheduleSchema = require('../models/schedule.schema');
 
 require('dotenv').config();
 
@@ -1034,5 +1035,42 @@ router.post('/complete_forms_id', async (req, res) => {
 router.get('/hello', (req, res) => {
   res.status(200);
 })
+
+// NEW CODE INSERT
+router.post('/show_schedule', async (req, res) => {
+  const { date } = req.body;
+  const validSchedules = [ "9:00 - 10:00", "10:00 - 11:00", "12:00 - 1:00", "1:00 - 2:00", "2:00 - 3:00", "4:00 - 5:00" ];
+  try {
+    if (!date) { return res.status(404).json({ message: "Informacion no encontrada" }) }
+    if (date.length !== 10) { return res.status(404).json({ message: "El tamaño no es permitido" }) }
+    const availableSchedules = [];
+    for (let schedule of validSchedules) {
+      const count = await scheduleSchema.countDocuments({ date, schedule });
+      if (count < 3) {
+        availableSchedules.push(schedule);
+      }
+    }
+    if (availableSchedules.length === 0) { return res.status(200).json({ message: 'No hay horarios disponibles' }) }
+    return res.status(200).json({ availableSchedules });
+  } catch (error) {
+    return res.status(500).json({ error: 'Error del servidor' });
+  }
+});
+
+router.post('/save_schedule', async (req, res) => {
+  const { name, email, tel, message, date, schedule } = req.body;
+  if (!name || !email || !tel || !date || !schedule) { return res.status(400).json({ message: 'Todos los campos son requeridos.' }) }
+  try {
+    const appointments = await scheduleSchema.find({ date, schedule });
+    if (appointments.length >= 3) { return res.status(400).json({ message: 'La agenda está llena, prueba seleccionando otro horario.' }) }
+    const newAppointment = new scheduleSchema({ name, email, tel, message, date, schedule });
+    const savedAppointment = await newAppointment.save();
+    return res.status(201).json({ message: 'Cita guardada exitosamente.', appointment: savedAppointment });
+  } catch (error) {
+    return res.status(500).json({ error: 'Error del servidor' });
+  }
+});
+
+
 
 module.exports = router;

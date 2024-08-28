@@ -3,12 +3,7 @@ import { horarios } from "../../../assets/data/functions/schedules.func";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
-import {
-  dataInizialization,
-  filteredArrayFunc,
-  popUpTextInfo,
-  validateData,
-  validateDate,
+import { dataInizialization, filteredArrayFunc, popUpTextInfo, validateData, validateDate,
 } from "../../../assets/data/functions/appointment.func";
 import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
 import { Fade } from "react-awesome-reveal";
@@ -17,8 +12,6 @@ import Cookies from "js-cookie";
 import Alert from "../../components/alert/ShowAlert";
 import handleClickSendAppointment from "../../components/popup/PopUpSendAppointment";
 import ReactDOMServer from "react-dom/server";
-import { Link, useNavigate } from "react-router-dom";
-import FRONT_URI from "../../../assets/data/admin/uri.front";
 
 const AppointmentSection = () => {
   const [dateState, setDateState] = useState(new Date());
@@ -44,12 +37,16 @@ const AppointmentSection = () => {
     setDateState(date);
     updateInfoUser({ schedule: "" });
     setSelectedSchedule("");
-    updateInfoUser({ date: moment(date).format("dddd Do MMMM YYYY") });
+    updateInfoUser({ date: moment(date).format("DD/MM/YYYY") });
   };
 
   const callTimer = () => {
     const cTimer = setTimeout(() => {
-      setText(horarios);
+      const schedule = horarios(moment().format("DD/MM/YYYY"))
+      console.log("schedule: " + schedule)
+      // if(schedule){
+      //   setText(schedule);
+      // }
     }, 1000);
 
     return cTimer;
@@ -91,6 +88,7 @@ const AppointmentSection = () => {
       if (!validate) {
         localStorage.setItem("userInformation", JSON.stringify(infoUser));
       } else {
+
         setInfoUser(dataInizialization);
       }
       handleClickSendAppointment(htmlString, icon, validate, btn);
@@ -283,7 +281,7 @@ const AppointmentSection = () => {
                 </div>
                 <div className="w-full flex flex-col">
                   {schedule(
-                    moment(dateState).format("dddd Do MMMM YYYY").split(" ")[0]
+                    moment(dateState).format("DD/MM/YYYY").split(" ")[0]
                   )}
                 </div>
               </div>

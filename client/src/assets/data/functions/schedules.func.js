@@ -1,8 +1,23 @@
-export const horarios = [
-  "9:00 - 10:00",
-  "10:00 - 11:00",
-  "12:00 - 1:00",
-  "1:00 - 2:00",
-  "2:00 - 3:00",
-  "4:00 - 5:00",
-];
+import URI from "../admin/uri.api";
+
+export const horarios = async (date) => {
+  try {
+    const response = await fetch(`${URI}/show_schedule`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({date: date})
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log(data.availableSchedules);
+    return data.availableSchedules
+  } catch (error) {
+    console.error('Error en la solicitud:', error);
+  }
+};
