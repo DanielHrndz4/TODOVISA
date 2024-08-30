@@ -78,6 +78,6 @@ export const dataInizialization ={
   email: "",
   tel: "",
   messagge: "",
-  date: moment().format("dddd Do MMMM YYYY"),
+  date: moment().format("DD/MM/YYYY"),
   schedule: "",
 }

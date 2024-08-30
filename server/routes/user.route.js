@@ -1061,8 +1061,10 @@ router.post('/save_schedule', async (req, res) => {
   const { name, email, tel, message, date, schedule } = req.body;
   if (!name || !email || !tel || !date || !schedule) { return res.status(400).json({ message: 'Todos los campos son requeridos.' }) }
   try {
+    const userAppointments = await scheduleSchema.find({ email });
+    if (userAppointments.length >= 2) { return res.status(400).json({ message: 'No puedes tener más de dos citas activas.', appointmentsNotValid: true }) }
     const appointments = await scheduleSchema.find({ date, schedule });
-    if (appointments.length >= 3) { return res.status(400).json({ message: 'La agenda está llena, prueba seleccionando otro horario.' }) }
+    if (appointments.length >= 4) { return res.status(400).json({ message: 'La agenda está llena, prueba seleccionando otro horario.' }) }
     const newAppointment = new scheduleSchema({ name, email, tel, message, date, schedule });
     const savedAppointment = await newAppointment.save();
     return res.status(201).json({ message: 'Cita guardada exitosamente.', appointment: savedAppointment });

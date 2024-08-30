@@ -35,15 +35,16 @@ import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
 import Item from "antd/es/list/Item";
 import FRONT_URI from "../../../assets/data/admin/uri.front";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCopy } from '@fortawesome/free-solid-svg-icons';
-import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Alert from "@mui/material/Alert";
+import CheckIcon from "@mui/icons-material/Check";
 import handleClickPopUpReferrer from "../../components/popup/PopUpReferrer";
 
 const loginNav = lang[0].navbar;
-const log_forms = lang[0].log_forms
-const code_ref = lang[0].codeReferrer
+const log_forms = lang[0].log_forms;
+const code_ref = lang[0].codeReferrer;
 
 const handleLogout = () => {
   const buttonText = lang[0].form;
@@ -51,7 +52,7 @@ const handleLogout = () => {
   Swal.fire({
     title: log_forms.signing_out,
     html: buttonText.wait,
-    icon: 'info',
+    icon: "info",
     showConfirmButton: false,
     allowOutsideClick: false,
     onBeforeOpen: () => {
@@ -163,10 +164,11 @@ function NavList() {
                 (langItem, index, array) => (
                   <MenuItem
                     key={index}
-                    className={`text-white font-normal hover:bg-TVBlue text-center hover:text-black hover:font-semibold py-2 ${index === array.length - 1
-                      ? "border-b-0"
-                      : "border-b-[1px]"
-                      } rounded-none py-3`}
+                    className={`text-white font-normal hover:bg-TVBlue text-center hover:text-black hover:font-semibold py-2 ${
+                      index === array.length - 1
+                        ? "border-b-0"
+                        : "border-b-[1px]"
+                    } rounded-none py-3`}
                     onClick={() => handleLang(langItem.name)}
                   >
                     <div className="flex flex-row items-center">
@@ -265,8 +267,8 @@ export default function LoginUserNavbar() {
       return <div>No user available</div>;
     }
   };
-  const [pRef, setPRef] = useState(0)
-  const [cRef, setCRef] = useState('')
+  const [pRef, setPRef] = useState(0);
+  const [cRef, setCRef] = useState("");
   useEffect(() => {
     const fetchFormData = async () => {
       const userEmail = Cookies.get("user");
@@ -285,7 +287,7 @@ export default function LoginUserNavbar() {
         const data = await response.json();
         setFormData(data.forms);
         setPRef(data.personReferrer);
-        setCRef(data.codeReferrer)
+        setCRef(data.codeReferrer);
       } catch (err) {
         setError("Error al cargar los formularios");
       }
@@ -297,12 +299,11 @@ export default function LoginUserNavbar() {
     try {
       await navigator.clipboard.writeText(code);
       setCheckAlert(true);
-      setTimeout(() => setCheckAlert(false), 5000)
+      setTimeout(() => setCheckAlert(false), 5000);
     } catch (err) {
-      console.error('Error al copiar: ', err);
+      console.error("Error al copiar: ", err);
     }
-  }
-
+  };
   return (
     <Navbar className="min-w-full px-2 py-2 lg:px-12 lg:py-3 border-transparent rounded-none fixed top-0 left-0 right-0 z-50 bg-TVBlue">
       <div className="w-[80%] xl:w-[80%] lg:w-full m-auto flex items-center justify-between text-white">
@@ -336,20 +337,90 @@ export default function LoginUserNavbar() {
                 <Menu>
                   <MenuHandler>
                     <MenuItem className="text-white font-nomal hover:bg-TVBlue text-center hover:text-black hover:font-semibold hover:cursor-pointer">
-                    {log_forms.code_referrer}
+                      {log_forms.code_referrer}
                     </MenuItem>
                   </MenuHandler>
                   <MenuList className="bg-TVBlue px-2 py-4">
                     <Menu>
                       <div className="w-full m-auto">
-                        <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">{code_ref.my_code}</h3>
-                        <div className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer" onClick={() => copyCode(cRef)}>
-                          <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? code_ref.copied_text : code_ref.copy_text} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
-                          <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">{cRef}</span></div>
-                        <h4 className={`text-center font-semibold ${pRef >= 20 ? 'text-green-600' : 'text-white'} py-2 capitalize`}>{code_ref.referral_count} {pRef}</h4>
-                        <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred" onClick={handleClickPopUpReferrer}>{code_ref.how_it_works}</p>
+                        <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">
+                          {code_ref.my_code}
+                        </h3>
+                        <div
+                          className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer"
+                          onClick={() => copyCode(cRef)}
+                        >
+                          <h3
+                            className={`${
+                              checkAlert ? "text-green-600" : "text-white"
+                            } font-medium`}
+                          >
+                            {checkAlert
+                              ? code_ref.copied_text
+                              : code_ref.copy_text}{" "}
+                            <FontAwesomeIcon
+                              icon={faCopy}
+                              className={`${
+                                checkAlert ? "text-green-600" : "text-white"
+                              } px-1`}
+                            />
+                          </h3>
+                          <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">
+                            {cRef}
+                          </span>
+                        </div>
+                        <h4
+                          className={`text-center font-semibold ${
+                            pRef >= 20 ? "text-green-600" : "text-white"
+                          } py-2 capitalize`}
+                        >
+                          {code_ref.referral_count} {pRef}
+                        </h4>
+                        <p
+                          className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred"
+                          onClick={handleClickPopUpReferrer}
+                        >
+                          {code_ref.how_it_works}
+                        </p>
                       </div>
                     </Menu>
+                  </MenuList>
+                </Menu>
+
+                <Menu>
+                  <MenuHandler>
+                    <MenuItem className="text-white font-normal hover:bg-TVBlue text-center hover:text-black hover:font-semibold hover:cursor-pointer">
+                      Citas reservadas
+                    </MenuItem>
+                  </MenuHandler>
+                  <MenuList className="bg-TVBlue px-2 py-4">
+                    <div className="w-full flex flex-col gap-4 px-4 py-2">
+                      <div className="w-full m-auto text-white p-5 rounded-lg shadowbtn flex flex-col gap-1">
+                        <p>
+                          <strong>Nombre: Jonathan Daniel Hernandez</strong>{" "}
+                        </p>
+                        <p>
+                          <strong>Email: danielhrndz38@gmail.com</strong>{" "}
+                        </p>
+                        <p>
+                          <strong>Teléfono: 71979098</strong>{" "}
+                        </p>
+                        <p>
+                          <strong>Fecha: 11/09/02</strong>{" "}
+                        </p>
+                        <p>
+                          <strong>Horario: 1:00 - 2:00</strong>{" "}
+                        </p>
+                        <div className="flex flex-row gap-2">
+                        <p className="w-full flex items-center">
+                          <strong>Estado: Cerrada</strong>{" "}
+                        </p>
+                        <button className="bg-TVred px-8 py-1 rounded hover:bg-red-700 w-auto">
+                        <FontAwesomeIcon icon={faTrash} className="w-auto" />
+                        </button>
+                        </div>
+                      </div>
+                    </div>
                   </MenuList>
                 </Menu>
                 {/* Formularios */}
@@ -417,12 +488,36 @@ export default function LoginUserNavbar() {
           <MenuList className="bg-TVBlue px-2 py-4">
             <Menu>
               <div className="w-full m-auto">
-                <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">{code_ref.my_code}</h3>
-                <div className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer" onClick={() => copyCode('THDUCI')}>
-                  <h3 className={`${checkAlert ? 'text-green-600' : 'text-white'} font-medium`}>{checkAlert ? code_ref.copied_text : code_ref.copy_text} <FontAwesomeIcon icon={faCopy} className={`${checkAlert ? 'text-green-600' : 'text-white'} px-1`} /></h3>
-                  <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">THDUCI</span></div>
-                <h4 className="text-center font-semibold text-white py-2 capitalize">{code_ref.referral_count} 0</h4>
-                <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred">{code_ref.how_it_works}</p>
+                <h3 className="text-center font-semibold text-white text-md pb-1 uppercase">
+                  {code_ref.my_code}
+                </h3>
+                <div
+                  className="flex flex-col w-1/2 items-center justify-center m-auto my-1 gap-2 hover:cursor-pointer"
+                  onClick={() => copyCode("THDUCI")}
+                >
+                  <h3
+                    className={`${
+                      checkAlert ? "text-green-600" : "text-white"
+                    } font-medium`}
+                  >
+                    {checkAlert ? code_ref.copied_text : code_ref.copy_text}{" "}
+                    <FontAwesomeIcon
+                      icon={faCopy}
+                      className={`${
+                        checkAlert ? "text-green-600" : "text-white"
+                      } px-1`}
+                    />
+                  </h3>
+                  <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">
+                    THDUCI
+                  </span>
+                </div>
+                <h4 className="text-center font-semibold text-white py-2 capitalize">
+                  {code_ref.referral_count} 0
+                </h4>
+                <p className="text-center font-medium text-white hover:underline hover:cursor-pointer hover:text-TVred">
+                  {code_ref.how_it_works}
+                </p>
               </div>
             </Menu>
           </MenuList>

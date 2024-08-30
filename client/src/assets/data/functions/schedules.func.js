@@ -15,9 +15,31 @@ export const horarios = async (date) => {
     }
 
     const data = await response.json();
-    console.log(data.availableSchedules);
     return data.availableSchedules
   } catch (error) {
     console.error('Error en la solicitud:', error);
   }
 };
+
+export const saveDataAppointment = async (infoUser) => {
+  try {
+    const response = await fetch(`${URI}/save_schedule`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name: infoUser.name, email: infoUser.email, tel: infoUser.tel, message: infoUser.messagge, date: infoUser.date, schedule: infoUser.schedule})
+    });
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+    if(data.appointmentsNotValid){
+      return false
+    }
+    return data
+  } catch (error) {
+    console.error('Error en la solicitud:', error);
+  }
+}

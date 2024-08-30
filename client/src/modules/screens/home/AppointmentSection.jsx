@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { horarios } from "../../../assets/data/functions/schedules.func";
+import {
+  horarios,
+  saveDataAppointment,
+} from "../../../assets/data/functions/schedules.func";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
-import { dataInizialization, filteredArrayFunc, popUpTextInfo, validateData, validateDate,
+import {
+  dataInizialization,
+  filteredArrayFunc,
+  popUpTextInfo,
+  validateData,
+  validateDate,
 } from "../../../assets/data/functions/appointment.func";
 import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
 import { Fade } from "react-awesome-reveal";
@@ -42,11 +50,13 @@ const AppointmentSection = () => {
 
   const callTimer = () => {
     const cTimer = setTimeout(() => {
-      const schedule = horarios(moment().format("DD/MM/YYYY"))
-      console.log("schedule: " + schedule)
-      // if(schedule){
-      //   setText(schedule);
-      // }
+      horarios(moment().format("DD/MM/YYYY"))
+        .then((schedule) => {
+          setText(schedule);
+        })
+        .catch((error) => {
+          console.error("Error fetching schedule:", error);
+        });
     }, 1000);
 
     return cTimer;
@@ -80,18 +90,13 @@ const AppointmentSection = () => {
     if (filteredArrayFunc(Object.entries(infoUser)).length == 0) {
       const htmlString = validate
         ? ReactDOMServer.renderToString(html(popUpTextInfo.withSession))
-        : ReactDOMServer.renderToString(
-            html(popUpTextInfo.withoutSession)
-          );
+        : ReactDOMServer.renderToString(html(popUpTextInfo.withoutSession));
       const icon = validate ? "info" : "warning";
-      const btn = validate ? "Enviar" : "Iniciar sesion"
+      const btn = validate ? "Enviar" : "Iniciar sesion";
       if (!validate) {
         localStorage.setItem("userInformation", JSON.stringify(infoUser));
-      } else {
-
-        setInfoUser(dataInizialization);
       }
-      handleClickSendAppointment(htmlString, icon, validate, btn);
+      handleClickSendAppointment(htmlString, icon, validate, btn, infoUser);
     }
   };
 
