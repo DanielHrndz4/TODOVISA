@@ -1146,29 +1146,30 @@ router.post("/show_schedule", async (req, res) => {
 
 router.post("/save_schedule", async (req, res) => {
   const { name, email, tel, message, date, schedule } = req.body;
+
   if (!name || !email || !tel || !date || !schedule) {
-    return res
-      .status(400)
-      .json({ message: "Todos los campos son requeridos." });
+    return res.status(400).json({ message: "Todos los campos son requeridos." });
   }
+
   try {
+    // Verifica si el usuario ya tiene más de dos citas
     const userAppointments = await scheduleSchema.find({ email });
     if (userAppointments.length >= 2) {
-      return res
-        .status(400)
-        .json({
-          message: "No puedes tener más de dos citas activas.",
-          appointmentsNotValid: true,
-        });
+      return res.status(400).json({
+        message: "No puedes tener más de dos citas activas.",
+        appointmentsNotValid: true,
+      });
     }
+
+    // Verifica si hay disponibilidad en la agenda
     const appointments = await scheduleSchema.find({ date, schedule });
     if (appointments.length >= 4) {
-      return res
-        .status(400)
-        .json({
-          message: "La agenda está llena, prueba seleccionando otro horario.",
-        });
+      return res.status(400).json({
+        message: "La agenda está llena, prueba seleccionando otro horario.",
+      });
     }
+
+    // Guarda la nueva cita
     const newAppointment = new scheduleSchema({
       name,
       email,
@@ -1178,198 +1179,95 @@ router.post("/save_schedule", async (req, res) => {
       schedule,
     });
     const savedAppointment = await newAppointment.save();
-    const today = new Date();
-    const year = today.getFullYear();
-    const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Appointment Confirmation</title>
 
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body
-        style="
-          margin: 0;
-          font-family: 'Poppins', sans-serif;
-          background: #ffffff;
-          font-size: 14px;
-        "
-      >
-        <div
-          style="
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 30px 30px 60px;
-            background: #f4f7ff;
-            background-image: url(https://todovisa.vercel.app/img/background/bgeeuu.webp);
-            background-repeat: no-repeat;
-            background-size: 800px 452px;
-            background-position: top center;
-            font-size: 14px;
-            color: #113E5F;
-          "
-        >
-        <header style="text-align: center;">
-            <table style="margin: 0 auto;">
-              <tbody>
-                <tr>
-                  <td>
-                    <img
-                      alt="Todovisa Logo"
-                      src="https://todovisa.com/img/logo/todovisa.png"
-                      height="120px"
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </header>
-
-          <main>
-            <div
-              style="
-                margin: 0;
-                margin-top: 20px;
-                padding: 60px 30px 80px;
-                background: #ffffff;
-                border-radius: 30px;
-                text-align: center;
-              "
-            >
-              <div style="width: 100%; max-width: 100%; margin: 0 auto;">
-                <h1
-                  style="
-                    margin: 0;
-                    font-size: 24px;
-                    font-weight: 500;
-                    color: #1f1f1f;
-                  "
-                >
-                Appointment Confirmation
-                </h1>
-                <p
-                  style="
-                    margin: 0;
-                    margin-top: 17px;
-                    font-size: 16px;
-                    font-weight: 500;
-                  "
-                >
-                  Hello ${name},
-                </p>
-                <p
-                  style="
-                    margin: 0;
-                    margin-top: 17px;
-                    font-weight: 500;
-                    letter-spacing: 0.56px;
-                  "
-                >
-                <p>We are pleased to inform you that your appointment has been successfully scheduled with Todovisa.</p>
-                <p>If you need to make any changes or cancel your appointment, please notify us as soon as possible by replying to this email or contacting us directly at Todovisa.</p>
-                <p>Thank you for choosing Todovisa. We look forward to assisting you.</p>
-                <p>The Todovisa Team</p>
-                </p>
+    // Envía el correo en segundo plano
+    setImmediate(async () => {
+      const today = new Date();
+      const year = today.getFullYear();
+      const htmlContent = `
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+          <title>Appointment Confirmation</title>
+          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        </head>
+        <body style="margin: 0; font-family: 'Poppins', sans-serif; background: #ffffff; font-size: 14px;">
+          <div style="max-width: 680px; margin: 0 auto; padding: 30px 30px 60px; background: #f4f7ff; background-image: url(https://todovisa.vercel.app/img/background/bgeeuu.webp); background-repeat: no-repeat; background-size: 800px 452px; background-position: top center; font-size: 14px; color: #113E5F;">
+            <header style="text-align: center;">
+              <table style="margin: 0 auto;">
+                <tbody>
+                  <tr>
+                    <td>
+                      <img alt="Todovisa Logo" src="https://todovisa.com/img/logo/todovisa.png" height="120px" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </header>
+            <main>
+              <div style="margin: 0; margin-top: 20px; padding: 60px 30px 80px; background: #ffffff; border-radius: 30px; text-align: center;">
+                <div style="width: 100%; max-width: 100%; margin: 0 auto;">
+                  <h1 style="margin: 0; font-size: 24px; font-weight: 500; color: #1f1f1f;">Appointment Confirmation</h1>
+                  <p style="margin: 0; margin-top: 17px; font-size: 16px; font-weight: 500;">Hello ${name},</p>
+                  <p style="margin: 0; margin-top: 17px; font-weight: 500; letter-spacing: 0.56px;">
+                    <p>We are pleased to inform you that your appointment has been successfully scheduled with Todovisa.</p>
+                    <p>If you need to make any changes or cancel your appointment, please notify us as soon as possible by replying to this email or contacting us directly at Todovisa.</p>
+                    <p>Thank you for choosing Todovisa. We look forward to assisting you.</p>
+                    <p>The Todovisa Team</p>
+                  </p>
+                </div>
               </div>
-            </div>
+              <p style="max-width: 400px; margin: 0 auto; margin-top: 90px; text-align: center; font-weight: 500; color: #8c8c8c;">
+                Need help? Ask at
+                <a href="mailto:tuvisa@todovisa.com" style="color: #113E5F; text-decoration: none;">tuvisa@todovisa.com</a>
+                or visit our
+                <a href="https://www.google.com/maps/dir//67+Avenida+Sur+Local+%231,+San+Salvador/@13.6970016,-89.2252546,18z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8f6331d77b1013e3:0xbfa86a56cf477af7!2m2!1d-89.2246802!2d13.6971043?entry=ttu" target="_blank" style="color: #113E5F; text-decoration: none;">Help Center</a>
+              </p>
+            </main>
+            <footer style="width: 100%; max-width: 490px; margin: 20px auto 0; text-align: center; border-top: 1px solid #113E5F;">
+              <p style="margin: 0; margin-top: 40px; font-size: 16px; font-weight: 600; color: #434343;">Todovisa S.A de C.V</p>
+              <p style="margin: 0; margin-top: 8px; color: #434343;">67 Avenida Sur Local #1, San Salvador</p>
+              <div style="margin: 0; margin-top: 16px;">
+                <a href="https://www.facebook.com/todovisasv?mibextid=ZbWKwL&_rdr" target="_blank" style="display: inline-block;">
+                  <img width="36px" alt="Facebook" src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661502815169_682499/email-template-icon-facebook" />
+                </a>
+              </div>
+              <p style="margin: 0; margin-top: 16px; color: #434343;">Copyright © ${year} Todovisa. All rights reserved.</p>
+            </footer>
+          </div>
+        </body>
+      </html>
+      `;
 
-            <p
-              style="
-                max-width: 400px;
-                margin: 0 auto;
-                margin-top: 90px;
-                text-align: center;
-                font-weight: 500;
-                color: #8c8c8c;
-              "
-            >
-              Need help? Ask at
-              <a
-                href="mailto:tuvisa@todovisa.com"
-                style="color: #113E5F; text-decoration: none;"
-                >tuvisa@todovisa.com</a
-              >
-              or visit our
-              <a
-                href="https://www.google.com/maps/dir//67+Avenida+Sur+Local+%231,+San+Salvador/@13.6970016,-89.2252546,18z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8f6331d77b1013e3:0xbfa86a56cf477af7!2m2!1d-89.2246802!2d13.6971043?entry=ttu"
-                target="_blank"
-                style="color: #113E5F; text-decoration: none;"
-                >Help Center</a
-              >
-            </p>
-          </main>
+      const msg = {
+        to: email,
+        cc: "darwinhrndz12@gmail.com",
+        from: "tuvisa@todovisa.com",
+        subject: "Appointment Confirmation",
+        text: "Your appointment has been confirmed. Contact us for more details.",
+        html: htmlContent,
+      };
 
-          <footer
-            style="
-              width: 100%;
-              max-width: 490px;
-              margin: 20px auto 0;
-              text-align: center;
-              border-top: 1px solid #113E5F;
-            "
-          >
-            <p
-              style="
-                margin: 0;
-                margin-top: 40px;
-                font-size: 16px;
-                font-weight: 600;
-                color: #434343;
-              "
-            >
-              Todovisa S.A de C.V
-            </p>
-            <p style="margin: 0; margin-top: 8px; color: #434343;">
-               67 Avenida Sur Local #1, San Salvador
-            </p>
-            <div style="margin: 0; margin-top: 16px;">
-              <a href="https://www.facebook.com/todovisasv?mibextid=ZbWKwL&_rdr" target="_blank" style="display: inline-block;">
-                <img
-                  width="36px"
-                  alt="Facebook"
-                  src="https://archisketch-resources.s3.ap-northeast-2.amazonaws.com/vrstyler/1661502815169_682499/email-template-icon-facebook"
-                />
-              </a>
-            </div>
-            <p style="margin: 0; margin-top: 16px; color: #434343;">
-              Copyright © ${year} Todovisa. All rights reserved.
-            </p>
-          </footer>
-        </div>
-      </body>
-    </html>
-    `;
+      try {
+        await sgMail.send(msg);
+      } catch (emailError) {
+        console.error("Error sending confirmation email:", emailError);
+      }
+    });
 
-    // Actualizar el usuario con el código
-    const msg = {
-      to: email, // Reemplaza con el correo del destinatario
-      cc: "darwinhrndz12@gmail.com", // Reemplaza con el correo al que deseas enviar una copia
-      from: "tuvisa@todovisa.com", // Reemplaza con tu remitente verificado
-      subject: "Appointment Confirmation",
-      text: "Your appointment has been confirmed. Contact us for more details.",
-      html: htmlContent,
-    };
-    
-
-    await sgMail.send(msg);
-
-    return res
-      .status(201)
-      .json({
-        message: "Cita guardada exitosamente.",
-        appointment: savedAppointment,
-      });
+    return res.status(201).json({
+      message: "Cita guardada exitosamente.",
+      appointment: savedAppointment,
+    });
   } catch (error) {
+    console.error("Server error:", error);
     return res.status(500).json({ error: "Error del servidor" });
   }
 });
+
 
 router.post("/show_schedule_user", async (req, res) => {
   const { email } = req.body;
