@@ -48,18 +48,18 @@ const AppointmentSection = () => {
     updateInfoUser({ date: moment(date).format("DD/MM/YYYY") });
   };
 
-  const callTimer = () => {
-    const cTimer = setTimeout(() => {
-      horarios(moment().format("DD/MM/YYYY"))
-        .then((schedule) => {
-          setText(schedule);
-        })
-        .catch((error) => {
-          console.error("Error fetching schedule:", error);
-        });
-    }, 1000);
-
-    return cTimer;
+  const callTimer = (date, dateNotValid) => {
+      const cTimer = setTimeout(() => {
+        horarios(date, dateNotValid)
+          .then((schedule) => {
+            setText(schedule);
+          })
+          .catch((error) => {
+            console.error("Error fetching schedule:", error);
+          });
+      }, 1000);
+  
+      return cTimer;
   };
 
   const callEventSchedule = (e) => {
@@ -170,11 +170,9 @@ const AppointmentSection = () => {
 
   useEffect(() => {
     setText(["Obteniendo resultados"]);
-    const timer = callTimer();
+    const timer = callTimer(moment(dateState).format("DD/MM/YYYY"), moment(dateState).format("dddd"));
     return () => clearTimeout(timer);
   }, [dateState]);
-
-  console.log(infoUser);
 
   return (
     <div

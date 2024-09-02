@@ -1,46 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {
-  Navbar,
-  Collapse,
-  Typography,
-  Button,
-  IconButton,
-  List,
-  ListItem,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
+import { Navbar, Collapse, Typography, IconButton, List, ListItem, Menu, MenuHandler, MenuList, MenuItem,
 } from "@material-tailwind/react";
 import Swal from "sweetalert2";
-import {
-  ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
+import { Bars3Icon, XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {
-  Bars4Icon,
-  GlobeAmericasIcon,
-  NewspaperIcon,
-  PhoneIcon,
-  RectangleGroupIcon,
-  SquaresPlusIcon,
-  SunIcon,
-  TagIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/solid";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import lang from "../../../assets/data/lang.data";
 import URI from "../../../assets/data/admin/uri.api";
-import Item from "antd/es/list/Item";
 import FRONT_URI from "../../../assets/data/admin/uri.front";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import Alert from "@mui/material/Alert";
-import CheckIcon from "@mui/icons-material/Check";
 import handleClickPopUpReferrer from "../../components/popup/PopUpReferrer";
+import { deleteSchedule, showSchedule } from "../../../assets/data/functions/schedules.func";
 
 const loginNav = lang[0].navbar;
 const log_forms = lang[0].log_forms;
@@ -80,6 +53,7 @@ const handleLogout = () => {
   };
   fetchData();
 };
+
 
 const navText = lang[0].navbar;
 
@@ -194,6 +168,8 @@ export default function LoginUserNavbar() {
   const [formData, setFormData] = useState([]);
   const [error, setError] = useState(null);
   const [checkAlert, setCheckAlert] = useState(false);
+  const [showDataSchedule, setShowDataSchedule] = useState(false);
+  const [scheduleInfo, setScheduleInfo] = useState([])
   const [userPicture, setUserPicture] = useState(
     "https://ionicframework.com/docs/img/demos/avatar.svg"
   ); // Valor por defecto
@@ -214,6 +190,28 @@ export default function LoginUserNavbar() {
   useEffect(() => {
     fetchUserPicture();
   }, []);
+
+  useEffect(() => {
+    const fetchSchedule = async () => {
+      try {
+        const userCookie = Cookies.get('user');
+        if (userCookie) {
+          const userEmail = JSON.parse(userCookie).email;
+          const schedule = await showSchedule(userEmail);
+          setShowDataSchedule(schedule.showData)
+          setScheduleInfo(schedule.data)
+          console.log(schedule); 
+        } else {
+          console.error("No se encontró la cookie del usuario.");
+        }
+      } catch (error) {
+        console.error("Error al obtener el correo electrónico:", error);
+      }
+    };
+  
+    fetchSchedule();
+  }, []);
+
 
   const getCountry = (country) => {
     switch (country.toLowerCase()) {
@@ -267,8 +265,10 @@ export default function LoginUserNavbar() {
       return <div>No user available</div>;
     }
   };
+
   const [pRef, setPRef] = useState(0);
   const [cRef, setCRef] = useState("");
+
   useEffect(() => {
     const fetchFormData = async () => {
       const userEmail = Cookies.get("user");
@@ -395,31 +395,27 @@ export default function LoginUserNavbar() {
                   </MenuHandler>
                   <MenuList className="bg-TVBlue px-2 py-4">
                     <div className="w-full flex flex-col gap-4 px-4 py-2">
-                      <div className="w-full m-auto text-white p-5 rounded-lg shadowbtn flex flex-col gap-1">
-                        <p>
-                          <strong>Nombre: Jonathan Daniel Hernandez</strong>{" "}
-                        </p>
-                        <p>
-                          <strong>Email: danielhrndz38@gmail.com</strong>{" "}
-                        </p>
-                        <p>
-                          <strong>Teléfono: 71979098</strong>{" "}
-                        </p>
-                        <p>
-                          <strong>Fecha: 11/09/02</strong>{" "}
-                        </p>
-                        <p>
-                          <strong>Horario: 1:00 - 2:00</strong>{" "}
-                        </p>
-                        <div className="flex flex-row gap-2">
-                        <p className="w-full flex items-center">
-                          <strong>Estado: Cerrada</strong>{" "}
-                        </p>
-                        <button className="bg-TVred px-8 py-1 rounded hover:bg-red-700 w-auto">
-                        <FontAwesomeIcon icon={faTrash} className="w-auto" />
-                        </button>
-                        </div>
-                      </div>
+                        {showDataSchedule ? (
+                              <>
+                                {scheduleInfo.map((info)=>(
+                                <div className="w-full m-auto text-white p-5 rounded-lg shadowbtn flex flex-col gap-1">
+                                  <p><strong>Nombre: {info.name}</strong>{" "}</p>
+                                  <p><strong>Email: {info.email}</strong>{" "}</p>
+                                  <p><strong>Teléfono: {info.tel}</strong>{" "}</p>
+                                  <p><strong>Fecha: {info.date}</strong>{" "}</p>
+                                  <p><strong>Horario: {info.schedule}</strong>{" "}</p>
+                                  <div className="flex flex-row gap-2">
+                                    <p className="w-full flex items-center"><strong>Estado: Pendiente</strong>{" "}</p>
+                                    <button className="bg-TVred px-8 py-1 rounded hover:bg-red-700 w-auto cursor-pointer" onClick={()=>deleteSchedule(info._id)}>
+                                      <FontAwesomeIcon icon={faTrash} className="w-auto" />
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                              </>
+                        ) : (
+                          <p className="text-white cursor-pointer"><strong>No hay datos por mostrar</strong>{" "}</p>
+                        )}
                     </div>
                   </MenuList>
                 </Menu>
