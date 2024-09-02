@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Collapse, Typography, IconButton, List, ListItem, Menu, MenuHandler, MenuList, MenuItem,
+import {
+  Navbar,
+  Collapse,
+  Typography,
+  IconButton,
+  List,
+  ListItem,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
 import Swal from "sweetalert2";
-import { Bars3Icon, XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import lang from "../../../assets/data/lang.data";
@@ -11,13 +20,17 @@ import URI from "../../../assets/data/admin/uri.api";
 import FRONT_URI from "../../../assets/data/admin/uri.front";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import handleClickPopUpReferrer from "../../components/popup/PopUpReferrer";
-import { deleteSchedule, showSchedule } from "../../../assets/data/functions/schedules.func";
+import {
+  deleteSchedule,
+  showSchedule,
+} from "../../../assets/data/functions/schedules.func";
 
 const loginNav = lang[0].navbar;
 const log_forms = lang[0].log_forms;
 const code_ref = lang[0].codeReferrer;
+const ap = lang[0].appointment;
 
 const handleLogout = () => {
   const buttonText = lang[0].form;
@@ -53,7 +66,6 @@ const handleLogout = () => {
   };
   fetchData();
 };
-
 
 const navText = lang[0].navbar;
 
@@ -169,7 +181,7 @@ export default function LoginUserNavbar() {
   const [error, setError] = useState(null);
   const [checkAlert, setCheckAlert] = useState(false);
   const [showDataSchedule, setShowDataSchedule] = useState(false);
-  const [scheduleInfo, setScheduleInfo] = useState([])
+  const [scheduleInfo, setScheduleInfo] = useState([]);
   const [userPicture, setUserPicture] = useState(
     "https://ionicframework.com/docs/img/demos/avatar.svg"
   ); // Valor por defecto
@@ -194,13 +206,13 @@ export default function LoginUserNavbar() {
   useEffect(() => {
     const fetchSchedule = async () => {
       try {
-        const userCookie = Cookies.get('user');
+        const userCookie = Cookies.get("user");
         if (userCookie) {
           const userEmail = JSON.parse(userCookie).email;
           const schedule = await showSchedule(userEmail);
-          setShowDataSchedule(schedule.showData)
-          setScheduleInfo(schedule.data)
-          console.log(schedule); 
+          setShowDataSchedule(schedule.showData);
+          setScheduleInfo(schedule.data);
+          console.log(schedule);
         } else {
           console.error("No se encontró la cookie del usuario.");
         }
@@ -208,10 +220,9 @@ export default function LoginUserNavbar() {
         console.error("Error al obtener el correo electrónico:", error);
       }
     };
-  
+
     fetchSchedule();
   }, []);
-
 
   const getCountry = (country) => {
     switch (country.toLowerCase()) {
@@ -390,32 +401,67 @@ export default function LoginUserNavbar() {
                 <Menu>
                   <MenuHandler>
                     <MenuItem className="text-white font-normal hover:bg-TVBlue text-center hover:text-black hover:font-semibold hover:cursor-pointer">
-                      Citas reservadas
+                      {ap.reservedAppointments}
                     </MenuItem>
                   </MenuHandler>
                   <MenuList className="bg-TVBlue px-2 py-4">
                     <div className="w-full flex flex-col gap-4 px-4 py-2">
-                        {showDataSchedule ? (
-                              <>
-                                {scheduleInfo.map((info)=>(
-                                <div className="w-full m-auto text-white p-5 rounded-lg shadowbtn flex flex-col gap-1">
-                                  <p><strong>Nombre: {info.name}</strong>{" "}</p>
-                                  <p><strong>Email: {info.email}</strong>{" "}</p>
-                                  <p><strong>Teléfono: {info.tel}</strong>{" "}</p>
-                                  <p><strong>Fecha: {info.date}</strong>{" "}</p>
-                                  <p><strong>Horario: {info.schedule}</strong>{" "}</p>
-                                  <div className="flex flex-row gap-2">
-                                    <p className="w-full flex items-center"><strong>Estado: Pendiente</strong>{" "}</p>
-                                    <button className="bg-TVred px-8 py-1 rounded hover:bg-red-700 w-auto cursor-pointer" onClick={()=>deleteSchedule(info._id)}>
-                                      <FontAwesomeIcon icon={faTrash} className="w-auto" />
-                                    </button>
-                                  </div>
-                                </div>
-                              ))}
-                              </>
-                        ) : (
-                          <p className="text-white cursor-pointer"><strong>No hay datos por mostrar</strong>{" "}</p>
-                        )}
+                      {showDataSchedule ? (
+                        <>
+                          {scheduleInfo.map((info) => (
+                            <div className="w-full m-auto text-white p-5 rounded-lg shadowbtn flex flex-col gap-1">
+                              <p>
+                                <strong>
+                                  {ap.userName}
+                                  {info.name}
+                                </strong>{" "}
+                              </p>
+                              <p>
+                                <strong>
+                                  {ap.userEmail}
+                                  {info.email}
+                                </strong>{" "}
+                              </p>
+                              <p>
+                                <strong>
+                                  {ap.userPhone}
+                                  {info.tel}
+                                </strong>{" "}
+                              </p>
+                              <p>
+                                <strong>
+                                  {ap.userDate}
+                                  {info.date}
+                                </strong>{" "}
+                              </p>
+                              <p>
+                                <strong>
+                                  {ap.userSchedule}
+                                  {info.schedule}
+                                </strong>{" "}
+                              </p>
+                              <div className="flex flex-row gap-2">
+                                <p className="w-full flex items-center">
+                                  <strong>{ap.statusPending}</strong>{" "}
+                                </p>
+                                <button
+                                  className="bg-TVred px-8 py-1 rounded hover:bg-red-700 w-auto cursor-pointer"
+                                  onClick={() => deleteSchedule(info._id)}
+                                >
+                                  <FontAwesomeIcon
+                                    icon={faTrash}
+                                    className="w-auto"
+                                  />
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      ) : (
+                        <p className="text-white cursor-pointer text-center">
+                          <strong>{ap.noDataToShow}</strong>{" "}
+                        </p>
+                      )}
                     </div>
                   </MenuList>
                 </Menu>
@@ -505,7 +551,7 @@ export default function LoginUserNavbar() {
                     />
                   </h3>
                   <span className="text-white font-semibold shadowbtn mx-2 rounded-sm border-[2] py-1 px-4 bg-TVred">
-                    THDUCI
+                  {code_ref.my_code}
                   </span>
                 </div>
                 <h4 className="text-center font-semibold text-white py-2 capitalize">
@@ -516,6 +562,70 @@ export default function LoginUserNavbar() {
                 </p>
               </div>
             </Menu>
+          </MenuList>
+        </Menu>
+        <Menu>
+          <MenuHandler>
+            <MenuItem className="text-white font-normal hover:bg-TVBlue text-start hover:text-black hover:font-semibold hover:cursor-pointer">
+              {ap.reservedAppointments}
+            </MenuItem>
+          </MenuHandler>
+          <MenuList className="bg-TVBlue px-2 py-4">
+            <div className="w-full flex flex-col gap-4 px-4 py-2">
+              {showDataSchedule ? (
+                <>
+                  {scheduleInfo.map((info) => (
+                    <div className="w-full m-auto text-white p-5 rounded-lg shadowbtn flex flex-col gap-1">
+                      <p>
+                        <strong>
+                          {ap.userName}
+                          {info.name}
+                        </strong>{" "}
+                      </p>
+                      <p>
+                        <strong>
+                          {ap.userEmail}
+                          {info.email}
+                        </strong>{" "}
+                      </p>
+                      <p>
+                        <strong>
+                          {ap.userPhone}
+                          {info.tel}
+                        </strong>{" "}
+                      </p>
+                      <p>
+                        <strong>
+                          {ap.userDate}
+                          {info.date}
+                        </strong>{" "}
+                      </p>
+                      <p>
+                        <strong>
+                          {ap.userSchedule}
+                          {info.schedule}
+                        </strong>{" "}
+                      </p>
+                      <div className="flex flex-row gap-2">
+                        <p className="w-full flex items-center">
+                          <strong>{ap.statusPending}</strong>{" "}
+                        </p>
+                        <button
+                          className="bg-TVred px-8 py-1 rounded hover:bg-red-700 w-auto cursor-pointer"
+                          onClick={() => deleteSchedule(info._id)}
+                        >
+                          <FontAwesomeIcon icon={faTrash} className="w-auto" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <p className="text-white cursor-pointer text-center">
+                  <strong>{ap.noDataToShow}</strong>{" "}
+                </p>
+              )}
+            </div>
           </MenuList>
         </Menu>
         {/* Formularios */}

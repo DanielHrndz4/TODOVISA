@@ -1,6 +1,10 @@
 import Swal from "sweetalert2";
 import FRONT_URI from "../../../assets/data/admin/uri.front";
 import { saveDataAppointment } from "../../../assets/data/functions/schedules.func";
+import lang from "../../../assets/data/lang.data";
+
+// Obtener los textos de la sección de citas
+const ap = lang[0].appointment;
 
 const handleClickSendAppointment = (html, icon, boolean, btn, infoUser) => {
   Swal.fire({
@@ -15,11 +19,11 @@ const handleClickSendAppointment = (html, icon, boolean, btn, infoUser) => {
         const userAppointment = await saveDataAppointment(infoUser);
         if (!userAppointment) {
           Swal.fire({
-            title: "No puedes agendar mas citas",
-            text: "Ya tienes dos citas activas, elimina una cita para agregar otra nueva",
+            title: ap.noMoreAppointmentsTitle, // Actualiza el texto aquí
+            text: ap.noMoreAppointmentsText,  // Actualiza el texto aquí
             icon: "error",
             showConfirmButton: true,
-            confirmButtonText: "Aceptar",
+            confirmButtonText: ap.acceptButton, // Actualiza el texto aquí
             confirmButtonColor: "#B6122A",
           });
         } else {
@@ -40,7 +44,7 @@ const checkAndShowPopup = () => {
     Swal.fire({
       position: "center",
       icon: "success",
-      title: "Your work has been saved",
+      title: ap.alertSuccessMessage, // Actualiza el texto aquí
       showConfirmButton: false,
       timer: 2000,
     });

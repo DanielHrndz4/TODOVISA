@@ -20,6 +20,7 @@ import Cookies from "js-cookie";
 import Alert from "../../components/alert/ShowAlert";
 import handleClickSendAppointment from "../../components/popup/PopUpSendAppointment";
 import ReactDOMServer from "react-dom/server";
+import lang from "../../../assets/data/lang.data";
 
 const AppointmentSection = () => {
   const [dateState, setDateState] = useState(new Date());
@@ -28,6 +29,8 @@ const AppointmentSection = () => {
   const [errorAlert, setErrorAlert] = useState(false);
   const [message, setMessage] = useState("");
   const [infoUser, setInfoUser] = useState(dataInizialization);
+
+  const ap = lang[0].appointment;
 
   const updateInfoUser = (updates) => {
     setInfoUser((prevState) => ({
@@ -49,17 +52,17 @@ const AppointmentSection = () => {
   };
 
   const callTimer = (date, dateNotValid) => {
-      const cTimer = setTimeout(() => {
-        horarios(date, dateNotValid)
-          .then((schedule) => {
-            setText(schedule);
-          })
-          .catch((error) => {
-            console.error("Error fetching schedule:", error);
-          });
-      }, 1000);
-  
-      return cTimer;
+    const cTimer = setTimeout(() => {
+      horarios(date, dateNotValid)
+        .then((schedule) => {
+          setText(schedule);
+        })
+        .catch((error) => {
+          console.error("Error fetching schedule:", error);
+        });
+    }, 1000);
+
+    return cTimer;
   };
 
   const callEventSchedule = (e) => {
@@ -85,14 +88,13 @@ const AppointmentSection = () => {
 
   const bookAppointment = async (infoUser) => {
     const validate = await fetchData(Cookies.get("jwt"));
-    console.log(validate);
     setMessage(validateData(infoUser));
     if (filteredArrayFunc(Object.entries(infoUser)).length == 0) {
       const htmlString = validate
-        ? ReactDOMServer.renderToString(html(popUpTextInfo.withSession))
-        : ReactDOMServer.renderToString(html(popUpTextInfo.withoutSession));
+        ? ReactDOMServer.renderToString(html(ap.withSession))
+        : ReactDOMServer.renderToString(html(ap.withoutSession));
       const icon = validate ? "info" : "warning";
-      const btn = validate ? "Enviar" : "Iniciar sesion";
+      const btn = validate ? ap.sendButton: ap.loginButton;
       if (!validate) {
         localStorage.setItem("userInformation", JSON.stringify(infoUser));
       }
@@ -141,7 +143,7 @@ const AppointmentSection = () => {
         <table className="bg-white w-full mx-auto shadow rounded-sm">
           <thead>
             <tr>
-              <th className="px-4 py-2">Horarios Disponibles</th>
+              <th className="px-4 py-2">{ap.availableSchedulesHeader}</th>
             </tr>
           </thead>
           <tbody>
@@ -149,7 +151,7 @@ const AppointmentSection = () => {
               day === "Sunday" ? (
                 <tr>
                   <td className="py-2 px-4 bg-gray-300">
-                    <p>No se encontraron horarios disponibles</p>
+                    <p>{ap.noAvailableSchedules}</p>
                   </td>
                 </tr>
               ) : (
@@ -158,7 +160,7 @@ const AppointmentSection = () => {
             ) : (
               <tr>
                 <td className="py-2 px-4 bg-gray-300">
-                  <p>Fecha no disponible</p>
+                  <p>{ap.dateNotAvailable}</p>
                 </td>
               </tr>
             )}
@@ -170,7 +172,10 @@ const AppointmentSection = () => {
 
   useEffect(() => {
     setText(["Obteniendo resultados"]);
-    const timer = callTimer(moment(dateState).format("DD/MM/YYYY"), moment(dateState).format("dddd"));
+    const timer = callTimer(
+      moment(dateState).format("DD/MM/YYYY"),
+      moment(dateState).format("dddd")
+    );
     return () => clearTimeout(timer);
   }, [dateState]);
 
@@ -185,25 +190,25 @@ const AppointmentSection = () => {
       }}
     >
       <Fade>
-        <div className="w-full lg:w-[90%] m-auto flex flex-col py-6 glassmorphism rounded-md">
+        <div className="w-full lg:w-full xl:w-[95%] m-auto flex flex-col py-6 glassmorphism rounded-md">
           <h1 className="w-full pt-4 sm:pb-12 xl:pb-10 pb-8 text-5xl lg:text-4xl xl:text-5xl font-bold text-center text-white [text-shadow:_4px_2px_2px_rgb(0_0_0_/_0.6)]">
-            Agenda tu cita con nosotros
+            {ap.pageTitle}
           </h1>
-          <div className="flex flex-col lg:flex-row h-full">
-            <div className="w-full lg:w-[80%] flex flex-col justify-center items-center">
+          <div className="flex flex-col lg:flex-row h-full lg:px-8">
+            <div className="w-full xl:w-[90%] md:w-full flex flex-col justify-center items-center lg:px-0 sm:px-10">
               <form
                 action=""
-                className="w-full lg:w-[85%] px-8 py-10 rounded-md bg-white shadowbtn"
+                className="w-full xl:w-[85%] px-8 py-10 rounded-md bg-white shadowbtn"
               >
                 <h1 className="text-2xl font-semibold text-gray-900 pb-4 text-start">
-                  ¡Agenda tu cita fácilmente y recibe atención personalizada!
+                  {ap.formTitle}
                 </h1>
                 <Typography
                   variant="h6"
                   color="blue-gray"
                   className="text-start py-2"
                 >
-                  Nombre Completo
+                  {ap.fullNameLabel}
                 </Typography>
                 <Input
                   size="lg"
@@ -221,7 +226,7 @@ const AppointmentSection = () => {
                   color="blue-gray"
                   className="text-start py-2"
                 >
-                  Correo Electrónico
+                  {ap.emailLabel}
                 </Typography>
                 <Input
                   size="lg"
@@ -239,7 +244,7 @@ const AppointmentSection = () => {
                   color="blue-gray"
                   className="text-start py-2"
                 >
-                  Teléfono
+                  {ap.phoneLabel}
                 </Typography>
                 <Input
                   size="lg"
@@ -257,7 +262,7 @@ const AppointmentSection = () => {
                   color="blue-gray"
                   className="text-start py-2"
                 >
-                  Mensaje (Opcional)
+                  {ap.messageLabel}
                 </Typography>
                 <Textarea
                   size="lg"
@@ -274,12 +279,12 @@ const AppointmentSection = () => {
               </form>
             </div>
             <div className="w-full h-full flex flex-col justify-around items-center">
-              <div className="flex flex-col lg:flex-row w-[90%]">
+              <div className="flex flex-col xl:flex-row w-[90%]">
                 <div className="flex w-full m-auto">
                   <Calendar
                     value={dateState}
                     onChange={changeDate}
-                    className="shadowbtn flex m-auto lg:m-0 flex-col w-full my-6 lg:my-0"
+                    className="shadowbtn flex m-auto lg:mb-6 flex-col w-full my-6 lg:my-0"
                   />
                 </div>
                 <div className="w-full flex flex-col">
@@ -290,31 +295,31 @@ const AppointmentSection = () => {
               </div>
               <div className="w-[90%] bg-white mt-6 shadowbtn px-8 py-4 rounded-sm text-start flex flex-col">
                 <h1 className="text-center pb-4 border-b-[1px] border-black font-semibold text-lg">
-                  Informacion del Usuario
+                  {ap.userInfoTitle}
                 </h1>
-                <div className="flex flex-col lg:grid lg:grid-cols-2 py-4">
+                <div className="flex flex-col lg:grid lg:grid-cols-2 gap-1 py-4">
                   <p className="py-1">
-                    <strong>Nombre: </strong>
+                    <strong>{ap.userName}</strong>
                     {infoUser.name}
                   </p>
                   <p className="py-1">
-                    <strong>Fecha: </strong>
+                    <strong>{ap.userDate}</strong>
                     {infoUser.date}
                   </p>
                   <p className="py-1">
-                    <strong>Correo Electrónico: </strong>
+                    <strong>{ap.userEmail}</strong>
                     {infoUser.email}
                   </p>
                   <p className="py-1">
-                    <strong>Hora: </strong>
+                    <strong>{ap.userSchedule}</strong>
                     {infoUser.schedule}
                   </p>
                   <p className="py-1">
-                    <strong>Teléfono: </strong>
+                    <strong>{ap.userPhone}</strong>
                     {infoUser.tel}
                   </p>
                   <p className="py-1 overflow-auto whitespace-normal break-words">
-                    <strong>Mensaje: </strong>
+                    <strong>{ap.userMessage}</strong>
                     {infoUser.messagge}
                   </p>
                 </div>
@@ -331,7 +336,7 @@ const AppointmentSection = () => {
               className="py-4 px-10 rounded-sm shadowbtn bg-TVred"
               onClick={() => bookAppointment(infoUser)}
             >
-              Reservar cita
+              {ap.bookingButton}
             </Button>
           </div>
         </div>
